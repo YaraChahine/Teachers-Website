@@ -4,7 +4,7 @@
 }
 
 .form_intro form  {
-    font-size:1.2vw;
+    font-size:1em;
 }
 .form_intro h5{
 
@@ -75,7 +75,3 @@
 
 }
 
-
-.submit::-webkit-input-placeholder {
-    color: white;
-}
