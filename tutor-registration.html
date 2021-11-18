@@ -93,4 +93,67 @@
     <input type="text" name="email_address" placeholder="Please enter your email address">
     
   </form>
+    <form class="form tutor-form">
+        <br>
+      <h4>Background Information</h4>
+      <br>
+      <label for="education">Select Education Level: </label>
+      
+      <select name="education-level" id="education-level" oninput="change_tutor()" style="min-width: 200px;">
+
+        <option value="highschool-degree" selected>Highschool degree</option>
+        <option value="undergrad">College Undergraduate</option>
+        <option value="grad">College Graduate</option>
+        <option value="other">Other..</option>
+        </select>
+        <br><br>
+        <label for="school" style="display: none;" id="school-label">HighSchool Name: </label>
+        <input type="text" name="school" id="school-name" style="display: none; margin-left: 30px;" placeholder="Lebanese American University">
+        <label for="major" style="display: none;min-width: 200px;" id="major-label">Major  </label>
+        <input type="text" name="major" id="major-name" style="display: none;" placeholder="i.e Mathematics" >
+        <br> <br>
+        <div id="common" style="display: none;">
+        <label for="years" style="min-width: 200px;" id="years-label">Years of Experience  </label>
+        <input type="number" name="years" id="years"  >
+        <br><br>
+        <p style="font-weight: bold;">Please add below the names of the courses you can teach : </p>
+        <label for="course">Course 1</label>
+        <input type="text" name="course">
+        <button>+</button>
+    </div>
+      </form>
+
   </fieldset>
+  </div>
+
+
+  <script>
+     function change_tutor() {
+         var val= document.getElementById("education-level").value;
+
+         if (val=="highschool-degree"){
+             document.getElementById("school-label").style.display="inline";
+             document.getElementById("school-name").style.display="inline";
+             document.getElementById("school-label").innerHTML="High School Name "
+             document.getElementById("major-label").style.display="none";
+             document.getElementById("major-name").style.display="none";
+             document.getElementById("common").style.display="inline";
+
+
+         }
+         else{
+            document.getElementById("school-label").style.display="inline";
+             document.getElementById("school-name").style.display="inline";
+             document.getElementById("school-label").innerHTML="College Name ";
+             document.getElementById("major-label").style.display="inline";
+             document.getElementById("major-label").style.marginRight="80px";
+             document.getElementById("major-name").style.display="inline";
+             document.getElementById("common").style.display="inline";
+
+
+
+
+
+         }
+     }
+  </script>
