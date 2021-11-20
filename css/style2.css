@@ -67,13 +67,7 @@
 
 
 
-.submit-button {
-    float: right;
-    width: 50px;
-    background-color: #04c2f9;
-    color:white;
 
-}
 
 
 .tutor-form label{
@@ -105,12 +99,19 @@
 .submit-button{
     color: white;
     font-weight: bolder;
-    min-width: 130px;
+    max-width: 120px;
     font-size: 16px;
-    padding:5px;
+    padding:7px;
     border:none;
     border-radius: 4px;
+    background-color: #04c2f9;
+    float: right;
+    padding-right: 20px;
+    padding-left: 20px;
+
+    
 }
+
 
 .add-button {
     color:white;
