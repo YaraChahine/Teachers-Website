@@ -66,31 +66,79 @@
   <br><br><br><br><br><br>
 
   <div class="form_intro">
-    <h5>To apply to "Teachers", please fill the form below.</h5>
+    <h5 >To apply to "Teachers", please fill the form below.</h5>
     <p>Once the form has been approved, an email will be sent to you with your interview details.</p>
     <br>
-    <fieldset>
-      <form class="form">
+    <form>
+  <fieldset class="form">
 
-        <h4>Your Personal Information</h4>
-        <br>
-        <label for="first_name">First Name</label>
-        <input type="text" name="first_name" placeholder="Please enter your first name">
-        <label for="last_name">Last Name</label>
-        <input type="text" name="last_name" placeholder="Please enter your last name">
-        <br><br>
-        <label for="age">Age</label>
-        <input type="age" name="age" placeholder="Please enter your age">
-        <label for="gender">Please select your gender</label>
-        <select name="gender" id="gender" style="min-width: 200px;margin-left: 30px;">
-          <option value="male">Male</option>
+    <h4>Your Personal Information</h4>
+    <br>
+
+    <div class="row align-items-center">
+      <div class="col-auto">
+        <label for="first_name" class="col-form-label">First name</label>
+      </div>
+      <div class="col-auto">
+        <input type="text" id="first_name" name="first_name" class="form-control" placeholder="e.g. John">
+      </div>
+      <div class="col-auto">
+        <label for="last_name" class="col-form-label">Last name</label>
+      </div>
+      <div class="col-auto">
+        <input type="text" id="last_name" name="last_name" class="form-control" placeholder="e.g. Smith">
+      </div>
+    </div>
+
+    <div class="row align-items-center">
+      <div class="col-auto">
+        <label for="email_address" class="col-form-label">Email</label>
+      </div>
+      <div class="col-auto">
+        <input type="email" id="email_address" name="email_address" class="form-control" placeholder="e.g. john.smith@example.com">
+      </div>
+      <div class="col-auto">
+        <label for="password" class="col-form-label">Create password</label>
+      </div>
+      <div class="col-auto">
+        <input type="password" id="password" name="password" class="form-control" placeholder="Must be 8-20 characters long.">
+      </div>
+    </div>
+
+    <div class="row align-items-center">
+      <div class="col-auto">
+        <label for="age" class="col-form-label">Age</label>
+      </div>
+      <div class="col-auto">
+        <input type="number" id="age" name="age" class="form-control" placeholder="e.g. 30">
+      </div>
+      <div class="col-auto">
+        <label for="gender" class="col-form-label">Gender</label>
+      </div>
+      <div class="col-auto">
+        <select id="gender" name="gender" class="form-select">
+          <option value="male" >Male</option>
           <option value="female">Female</option>
-        </select>
-        <br><br>
-        <label for="phone_number">Phone Number</label>
-        <input type="text" name="phone_number" placeholder="Please enter your phone number">
-        <label for="email_address">Email Address</label>
-        <input type="text" name="email_address" placeholder="Please enter your email address">
+          <option value="other">Other</option>
+      </select>
+      </div>
+    </div>
+
+    <div class="row align-items-center">
+      <div class="col-auto">
+        <label for="phone_number" class="col-form-label">Phone</label>
+      </div>
+      <div class="col-auto">
+        <input type="tel" id="phone_number" name="phone_number" class="form-control" placeholder="e.g. 01 234 567">
+      </div>
+      <div class="col-auto">
+        <label for="city" class="col-form-label">City</label>
+      </div>
+      <div class="col-auto">
+        <input type="text" id="city" name="city" class="form-control" placeholder="e.g. Beirut">
+      </div>
+    </div>
+    
 
       </form>
       <form class="form tutor-form">
@@ -126,102 +174,106 @@
         <button onclick="add_course()" type="button" id="add-button" class="add-button" style="display: none;">Add
           Course</button>
         <button onclick="add_course()" type="button" id="remove-button" class="add-button rmv"
-          style="display: none; position: relative;left:270px;">Remove Course</button>
-
+          style="display: none; position: relative;left:80px;">Remove Course</button>
+          <br><br>
+          <label for="cv_file">Upload CV: </label>
+          <input type="file" name="cv_file" id="cv_file">
       </form>
-
+<br><br>
     </fieldset>
+
   </div>
   <!-- End Team Section -->
 
-<!-- ======= Footer ======= -->
-<footer id="footer" class="footer">
+  <!-- ======= Footer ======= -->
+  <br><br><br>
+  <footer id="footer" class="footer">
 
-  <div class="footer-top">
-    <div class="container">
-      <div class="row gy-4">
-        <div class="col-lg-5 col-md-12 footer-info">
-          <a href="index.html" class="logo d-flex align-items-center">
-            <img src="./img/logo.png" alt="">
-            <span>FlexStart</span>
-          </a>
-          <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies
-            darta donna mare fermentum iaculis eu non diam phasellus.</p>
-          <div class="social-links mt-3">
-            <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+    <div class="footer-top">
+      <div class="container">
+        <div class="row gy-4">
+          <div class="col-lg-5 col-md-12 footer-info">
+            <a href="index.html" class="logo d-flex align-items-center">
+              <img src="./img/logo.png" alt="">
+              <span>FlexStart</span>
+            </a>
+            <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies
+              darta donna mare fermentum iaculis eu non diam phasellus.</p>
+            <div class="social-links mt-3">
+              <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+              <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+              <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+              <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+            </div>
           </div>
+
+          <div class="col-lg-2 col-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">About us</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Services</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Privacy policy</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-2 col-6 footer-links">
+            <h4>Our Services</h4>
+            <ul>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Web Design</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Web Development</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Product Management</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Marketing</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Graphic Design</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+            <h4>Contact Us</h4>
+            <p>
+              A108 Adam Street <br>
+              New York, NY 535022<br>
+              United States <br><br>
+              <strong>Phone:</strong> +1 5589 55488 55<br>
+              <strong>Email:</strong> info@example.com<br>
+            </p>
+
+          </div>
+
         </div>
-
-        <div class="col-lg-2 col-6 footer-links">
-          <h4>Useful Links</h4>
-          <ul>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">About us</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Services</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Privacy policy</a></li>
-          </ul>
-        </div>
-
-        <div class="col-lg-2 col-6 footer-links">
-          <h4>Our Services</h4>
-          <ul>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Web Design</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Web Development</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Product Management</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Marketing</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Graphic Design</a></li>
-          </ul>
-        </div>
-
-        <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
-          <h4>Contact Us</h4>
-          <p>
-            A108 Adam Street <br>
-            New York, NY 535022<br>
-            United States <br><br>
-            <strong>Phone:</strong> +1 5589 55488 55<br>
-            <strong>Email:</strong> info@example.com<br>
-          </p>
-
-        </div>
-
       </div>
     </div>
-  </div>
 
-  <div class="container">
-    <div class="copyright">
-      &copy; Copyright <strong><span>FlexStart</span></strong>. All Rights Reserved
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>FlexStart</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/flexstart-bootstrap-startup-template/ -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
     </div>
-    <div class="credits">
-      <!-- All the links in the footer should remain intact. -->
-      <!-- You can delete the links only if you purchased the pro version. -->
-      <!-- Licensing information: https://bootstrapmade.com/license/ -->
-      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/flexstart-bootstrap-startup-template/ -->
-      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-    </div>
-  </div>
-</footer><!-- End Footer -->
+  </footer><!-- End Footer -->
 
-<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-    class="bi bi-arrow-up-short"></i></a>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
 
-<!-- Vendor JS Files -->
-<script src="./vendor/jquery/jquery-3.6.0.min.js"></script>
-<script src="./vendor/bootstrap/js/bootstrap.bundle.js"></script>
-<script src="./vendor/aos/aos.js"></script>
-<script src="./vendor/swiper/swiper-bundle.min.js"></script>
-<script src="./vendor/purecounter/purecounter.js"></script>
-<script src="./vendor/isotope-layout/isotope.pkgd.min.js"></script>
-<script src="./vendor/glightbox/js/glightbox.min.js"></script>
+  <!-- Vendor JS Files -->
+  <script src="./vendor/jquery/jquery-3.6.0.min.js"></script>
+  <script src="./vendor/bootstrap/js/bootstrap.bundle.js"></script>
+  <script src="./vendor/aos/aos.js"></script>
+  <script src="./vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="./vendor/purecounter/purecounter.js"></script>
+  <script src="./vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="./vendor/glightbox/js/glightbox.min.js"></script>
 
-<!-- Template Main JS File -->
-<script src="./js/main.js"></script>
-<script src="./js/main2.js"></script>
+  <!-- Template Main JS File -->
+  <script src="./js/main.js"></script>
+  <script src="./js/main2.js"></script>
 
   <script>
 
@@ -278,7 +330,7 @@
     coursesCounter = 2;
     const commonDiv = document.getElementById("common");
     const rmv_button = document.getElementById("remove-button");
-    const children=[];
+    const children = [];
     var label_element;
     var label_text;
     var input_element;
@@ -290,25 +342,25 @@
 
     rmv_button.onclick = function () {
       if (coursesCounter > 1) {
-        var len=children.length;
+        var len = children.length;
         commonDiv.removeChild(children.pop());
         commonDiv.removeChild(children.pop());
         commonDiv.removeChild(children.pop());
 
       }
-     //   commonDiv.removeChild(lineBr1);
-   
-        if (coursesCounter > 4) {
-          commonDiv.removeChild(label_warning);
-        }
+      //   commonDiv.removeChild(lineBr1);
 
-        coursesCounter--;
-        if (coursesCounter==1){
-          coursesCounter++;
-        }
-
+      if (coursesCounter > 4) {
+        commonDiv.removeChild(label_warning);
       }
-    
+
+      coursesCounter--;
+      if (coursesCounter == 1) {
+        coursesCounter++;
+      }
+
+    }
+
 
     const add_button = document.getElementById("add-button");
     add_button.onclick = function () {
@@ -327,9 +379,9 @@
         children.push(label_element);
         children.push(input_element);
         children.push(lineBr1);
-        commonDiv.appendChild(children[children.length-3]);
-        commonDiv.appendChild(children[children.length-2]);
-        commonDiv.appendChild(children[children.length-1]);
+        commonDiv.appendChild(children[children.length - 3]);
+        commonDiv.appendChild(children[children.length - 2]);
+        commonDiv.appendChild(children[children.length - 1]);
 
         console.log(coursesCounter);
         coursesCounter++;
