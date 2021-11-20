@@ -1,5 +1,30 @@
 change_tutor();
 
+function change(){
+  var val=document.getElementById("education").value;
+  if (val=== "college") {
+    document.getElementById("menu-label").style.display="none";
+    document.getElementById("menu-course").style.display="none";
+    document.getElementById("majors-label").style.display="inline";
+    document.getElementById("menu-majors").style.display="inline";
+    document.getElementById("course-name-id").style.display="inline";
+    document.getElementById("course-name").style.display="inline";
+
+
+  }
+  else{
+   
+    document.getElementById("menu-label").style.display="inline";
+    document.getElementById("menu-course").style.display="inline";
+    document.getElementById("majors-label").style.display="none";
+    document.getElementById("menu-majors").style.display="none";
+    document.getElementById("course-name-id").style.display="none";
+    document.getElementById("course-name").style.display="none";
+
+
+  }
+}
+
 function add_course() {
     console.log("hey");
     window.alert("eh");
