@@ -100,3 +100,42 @@
 #major-label{
     min-width: 200px;
 }
+
+
+.submit-button{
+    color: white;
+    font-weight: bolder;
+    min-width: 130px;
+    font-size: 16px;
+    padding:5px;
+    border:none;
+    border-radius: 4px;
+}
+
+.add-button {
+    color:white;
+    background-color: #04c2f9;
+    font-weight: bolder;
+    padding: 6px;
+    border:none;
+    border-radius:15px;
+    min-width: 70px;
+    box-shadow: 0px 2px 2px lightblue;
+    margin-top: 35px;
+}
+
+
+
+.add-button:hover{
+    background-color:  #42d5fd;
+}
+
+
+.rmv {
+    background-color: #ee5368;
+}
+
+.rmv:hover{
+    background-color: #e76879;
+
+}

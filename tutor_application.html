@@ -42,7 +42,7 @@
 <body>
 
   <!-- ======= Header ======= -->
-  <header id="header" class="header fixed-top header-form" >
+  <header id="header" class="header fixed-top header-form">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
       <a href="index.html" class="logo d-flex align-items-center">
@@ -66,94 +66,193 @@
   <br><br><br><br><br><br>
 
   <div class="form_intro">
-    <h5 >To apply to "Teachers", please fill the form below.</h5>
+    <h5>To apply to "Teachers", please fill the form below.</h5>
     <p>Once the form has been approved, an email will be sent to you with your interview details.</p>
     <br>
     <fieldset>
-  <form class="form">
+      <form class="form">
 
-    <h4>Your Personal Information</h4>
-    <br>
-    <label for="first_name">First Name</label>
-    <input type="text" name="first_name" placeholder="Please enter your first name">
-    <label for="last_name">Last Name</label>
-    <input type="text" name="last_name" placeholder="Please enter your last name">
-    <br><br>
-    <label for="age">Age</label>
-    <input type="age" name="age" placeholder="Please enter your age">
-    <label for="gender">Please select your gender</label>
-    <select name="gender" id="gender"  style="min-width: 200px;margin-left: 30px;" >
-        <option value="male" >Male</option>
-        <option value="female">Female</option>  
-    </select>
-        <br><br>
-    <label for="phone_number">Phone Number</label>
-    <input type="text" name="phone_number" placeholder="Please enter your phone number">
-    <label for="email_address">Email Address</label>
-    <input type="text" name="email_address" placeholder="Please enter your email address">
-    
-  </form>
-    <form class="form tutor-form">
+        <h4>Your Personal Information</h4>
         <br>
-      <h4>Background Information</h4>
-      <br>
-      <label for="education">Select Education Level: </label>
-      
-      <select name="education-level" id="education-level" oninput="change_tutor()" style="min-width: 200px;">
+        <label for="first_name">First Name</label>
+        <input type="text" name="first_name" placeholder="Please enter your first name">
+        <label for="last_name">Last Name</label>
+        <input type="text" name="last_name" placeholder="Please enter your last name">
+        <br><br>
+        <label for="age">Age</label>
+        <input type="age" name="age" placeholder="Please enter your age">
+        <label for="gender">Please select your gender</label>
+        <select name="gender" id="gender" style="min-width: 200px;margin-left: 30px;">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+        <br><br>
+        <label for="phone_number">Phone Number</label>
+        <input type="text" name="phone_number" placeholder="Please enter your phone number">
+        <label for="email_address">Email Address</label>
+        <input type="text" name="email_address" placeholder="Please enter your email address">
 
-        <option value="highschool-degree" selected>Highschool degree</option>
-        <option value="undergrad">College Undergraduate</option>
-        <option value="grad">College Graduate</option>
-        <option value="other">Other..</option>
+      </form>
+      <form class="form tutor-form">
+        <br>
+        <h4>Background Information</h4>
+        <br>
+        <label for="education">Select Education Level: </label>
+
+        <select name="education-level" id="education-level" oninput="change_tutor()" style="min-width: 200px;">
+
+          <option value="highschool-degree" selected>Highschool degree</option>
+          <option value="undergrad">College Undergraduate</option>
+          <option value="grad">College Graduate</option>
+          <option value="other">Other..</option>
         </select>
         <br><br>
         <label for="school" style="display: none;" id="school-label">HighSchool Name: </label>
-        <input type="text" name="school" id="school-name" style="display: none; margin-left: 30px;" placeholder="Lebanese American University">
-        <label for="major" style="display: none;min-width: 200px;" id="major-label">Major  </label>
-        <input type="text" name="major" id="major-name" style="display: none;" placeholder="i.e Mathematics" >
+        <input type="text" name="school" id="school-name" style="display: none; margin-left: 30px;"
+          placeholder="Lebanese American University">
+        <label for="major" style="display: none;min-width: 200px;" id="major-label">Major </label>
+        <input type="text" name="major" id="major-name" style="display: none;" placeholder="i.e Mathematics">
         <br> <br>
         <div id="common" style="display: none;">
-        <label for="years" style="min-width: 200px;" id="years-label">Years of Experience  </label>
-        <input type="number" name="years" id="years"  >
-        <br><br>
-        <p style="font-weight: bold;">Please add below the names of the courses you can teach : </p>
-        <label for="course">Course 1</label>
-        <input type="text" name="course">
-        <button>+</button>
-    </div>
+          <label for="years" style="min-width: 200px;" id="years-label">Years of Experience </label>
+          <input type="number" name="years" id="years">
+          <br><br>
+          <p style="font-weight: bold;">Please add below the names of the courses you can teach : </p>
+          <br>
+          <label for="course">Course 1</label>
+          <input type="text" name="course">
+          <br>
+        </div>
+        <button onclick="add_course()" type="button" id="add-button" class="add-button" style="display: none;">Add
+          Course</button>
+        <button onclick="add_course()" type="button" id="remove-button" class="add-button rmv"
+          style="display: none; position: relative;left:270px;">Remove Course</button>
+
       </form>
 
-  </fieldset>
+    </fieldset>
   </div>
 
 
   <script>
-     function change_tutor() {
-         var val= document.getElementById("education-level").value;
 
-         if (val=="highschool-degree"){
-             document.getElementById("school-label").style.display="inline";
-             document.getElementById("school-name").style.display="inline";
-             document.getElementById("school-label").innerHTML="High School Name "
-             document.getElementById("major-label").style.display="none";
-             document.getElementById("major-name").style.display="none";
-             document.getElementById("common").style.display="inline";
+    function add_course() {
+      console.log("hey");
+      window.alert("eh");
+      const commonDiv = document.getElementById("common");
+      common.style.display = "block";
+      commonDiv.style.backgroundColor("red");
+      const label_element = document.createElement("label");
+      const label_text = document.createTextNode(label_element);
+      const input_element = document.createElement("input");
+      const input_type = document.createAttribute("type");
+      input_type.value = "text";
+      label_text.textContent = "Course" + coursesCounter.toString;
+      label_element.appencChild(label_text);
+      input_element.appendChild(input_type);
+      commonDiv.appendChild(label_element);
+      commonDiv.appendChild(input_element);
+    }
+    function change_tutor() {
+      var val = document.getElementById("education-level").value;
+
+      if (val == "highschool-degree") {
+        document.getElementById("school-label").style.display = "inline";
+        document.getElementById("school-name").style.display = "inline";
+        document.getElementById("school-label").innerHTML = "High School Name "
+        document.getElementById("major-label").style.display = "none";
+        document.getElementById("major-name").style.display = "none";
+        document.getElementById("common").style.display = "inline";
+        document.getElementById("add-button").style.display = "inline";
+        document.getElementById("remove-button").style.display = "inline";
 
 
-         }
-         else{
-            document.getElementById("school-label").style.display="inline";
-             document.getElementById("school-name").style.display="inline";
-             document.getElementById("school-label").innerHTML="College Name ";
-             document.getElementById("major-label").style.display="inline";
-             document.getElementById("major-label").style.marginRight="80px";
-             document.getElementById("major-name").style.display="inline";
-             document.getElementById("common").style.display="inline";
+      }
+      else {
+        document.getElementById("school-label").style.display = "inline";
+        document.getElementById("school-name").style.display = "inline";
+        document.getElementById("school-label").innerHTML = "College Name ";
+        document.getElementById("major-label").style.display = "inline";
+        document.getElementById("major-label").style.marginRight = "80px";
+        document.getElementById("major-name").style.display = "inline";
+        document.getElementById("common").style.display = "inline";
+        document.getElementById("add-button").style.display = "inline";
+        document.getElementById("remove-button").style.display = "inline";
 
 
 
 
 
-         }
-     }
+
+      }
+    }
+    coursesCounter = 2;
+    const commonDiv = document.getElementById("common");
+    const rmv_button = document.getElementById("remove-button");
+    const children=[];
+    var label_element;
+    var label_text;
+    var input_element;
+    var button_add;
+    var lineBr;
+    var lineBr1;
+    var label_warning;
+    var warning_text;
+
+    rmv_button.onclick = function () {
+      if (coursesCounter > 1) {
+        var len=children.length;
+        commonDiv.removeChild(children.pop());
+        commonDiv.removeChild(children.pop());
+        commonDiv.removeChild(children.pop());
+
+      }
+     //   commonDiv.removeChild(lineBr1);
+   
+        if (coursesCounter > 4) {
+          commonDiv.removeChild(label_warning);
+        }
+
+        coursesCounter--;
+
+      }
+    
+
+    const add_button = document.getElementById("add-button");
+    add_button.onclick = function () {
+
+      if (coursesCounter <= 4) {
+        label_element = document.createElement("label");
+        label_text = document.createTextNode(label_element);
+        input_element = document.createElement("input");
+        button_add = document.createElement("button");
+        lineBr = document.createElement("br");
+        lineBr1 = document.createElement("br");
+        label_warning = document.createElement("p");
+        warning_text = document.createTextNode(label_warning);
+        label_text.textContent = "Course " + coursesCounter.toString();
+        label_element.appendChild(label_text);
+        children.push(label_element);
+        children.push(input_element);
+        children.push(lineBr1);
+        commonDiv.appendChild(children[children.length-3]);
+        commonDiv.appendChild(children[children.length-2]);
+        commonDiv.appendChild(children[children.length-1]);
+
+
+        coursesCounter++;
+      }
+      else {
+        if (coursesCounter == 5) {
+
+          warning_text.textContent = "Warning: You cannot add more than 4 courses.";
+          label_warning.appendChild(warning_text);
+          commonDiv.appendChild(label_warning);
+        }
+        else {
+          console.log("hi");
+        }
+
+      }
+    }
   </script>
