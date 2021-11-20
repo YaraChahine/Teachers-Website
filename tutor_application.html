@@ -149,7 +149,7 @@
         <br>
         <label for="education">Select Education Level: </label>
 
-        <select name="education-level" id="education-level" oninput="change_tutor()" style="min-width: 200px;">
+        <select name="education-level" id="education-level" class="form-select" oninput="change_tutor()" style="display: inline-block; width: 200px;">
 
           <option value="highschool-degree" selected>Highschool degree</option>
           <option value="undergrad">College Undergraduate</option>
@@ -181,9 +181,16 @@
           <label for="cv_file">Upload CV: </label>
           <input type="file" name="cv_file" id="cv_file">
           <br>
+          <label for="img_file">Upload a profile image: </label>
+          <input type="file" name="img_file" id="img_file">
+          <br>
+          <label for="bio">Tell us a bit about yourself: <br><small>Note: this information must be accurate and will be publicly visible</small></label>
+          <br>
+          <textarea name="bio" id="bio" rows="6" placeholder="Enter text here..."></textarea>
+          <button type="submit" class="submit-button">Submit</button>
+
         </form>
         <br>
-        <button class="submit-button">Submit</button>
 
 <br><br>
     </fieldset>

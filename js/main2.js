@@ -1,3 +1,5 @@
+change_tutor();
+
 function add_course() {
     console.log("hey");
     window.alert("eh");

@@ -1965,7 +1965,7 @@ form {
   border-radius: 4px;
   border: 1px solid #e1ecff;
 }
-form input[type=submit],button[type=submit] {
+form input[type=submit] {
   position: absolute;
   top: 0;
   right: 0;
@@ -1980,7 +1980,7 @@ form input[type=submit],button[type=submit] {
   transition: 0.3s;
   border-radius: 4px;
 }
-.footer .footer-newsletter form input[type=submit]:hover, button[type=submit] {
+.footer .footer-newsletter form input[type=submit]:hover {
   background: #5969f3;
 }
 .footer .footer-top {
