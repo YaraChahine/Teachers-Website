@@ -307,3 +307,16 @@
     margin: auto;
     margin-bottom: 30px;
 }
+
+.updates-container {
+    width: 60vw;
+    margin: auto;
+}
+
+.update-item {
+    padding: 0;
+}
+
+.update-item .card-body {
+    padding: 3em;
+}
