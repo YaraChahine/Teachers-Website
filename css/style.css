@@ -1957,13 +1957,20 @@ section {
   color: #04c2f9
 ;
 }
+
+fieldset {
+  border: 1px solid #e1ecff;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+}
+
 form {
   margin-top: 20px;
   background: #fff;
   padding: 6px 10px;
   position: relative;
   border-radius: 4px;
-  border: 1px solid #e1ecff;
 }
 form input[type=submit] {
   position: absolute;

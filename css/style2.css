@@ -34,7 +34,7 @@
     border-color: #b4b5b6;
   }
 
-  .form input,input::-webkit-input-placeholder{
+.form input,input::-webkit-input-placeholder{
     font-size: 15px;
     color: #959697;
 }
@@ -46,6 +46,7 @@
 }
 
 .form select {
+    min-width: 220px;
     margin-right: 20px;
     padding: 10px;
     background-color: #e8ebee;
@@ -74,16 +75,6 @@
 }
 
 
-
-
-
-
-.tutor-form label{
-    min-width: 200px;
-
-
-}
-
 .filter-button {
     font-size: 20px;
     padding: 3px 8px;
@@ -106,8 +97,8 @@
 
 .submit-button{
     position: absolute;
-    bottom: 10px;
-    right: 10px;
+    bottom: 30px;
+    right: 40px;
     color: white;
     font-weight: bolder;
     max-width: 120px;
@@ -118,8 +109,6 @@
     background-color: #04c2f9;
     padding-right: 20px;
     padding-left: 20px;
-
-    
 }
 
 
@@ -319,4 +308,8 @@
 
 .update-item .card-body {
     padding: 3em;
+}
+
+.border-4 {
+    border-width:4px;
 }
