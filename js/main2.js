@@ -1,4 +1,4 @@
-function change(){
+function change_student_education(){
   var val=document.getElementById("education").value;
   if (val=== "college") {
     document.getElementById("menu-label").style.display="none";
@@ -15,11 +15,10 @@ function change(){
     document.getElementById("course-name-id").style.display="none";
     document.getElementById("course-name").style.display="none";
 
-
   }
 }
 
-function change_education() {
+function change_tutor_education() {
     let val = document.getElementById("education-level").value;
 
     if (val == "highschool-degree") {
