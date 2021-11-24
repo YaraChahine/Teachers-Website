@@ -66,8 +66,8 @@
   <br><br><br><br><br><br>
 
   <div class="form_intro">
-    <h5 >To apply to "Teachers", please fill the form below.</h5>
-    <p>Once the form has been approved, an email will be sent to you with your interview details.</p>
+    <h5 >To apply to <em>Teachers</em>, please fill the form below.</h5>
+    <p>Once the form has been approved, an email will be sent to you confirming your account.</p>
     <br>
   <fieldset class="form">
     <form action="tutor_application.php" method="POST">
@@ -142,43 +142,109 @@
         <br>
         <h4>Background Information</h4>
         <br>
-        <label for="education">Select Education Level: </label>
+        <label for="education-level">Select Education Level </label>
 
-        <select name="education_level" id="education-level" class="form-select" oninput="change_tutor()" style="display: inline-block; width: 200px;">
-
+        <select name="education_level" id="education-level" class="form-select" oninput="change_education()"
+        style="display: inline-block; width: 200px;">
           <option value="highschool-degree" selected>Highschool degree</option>
           <option value="undergrad">College Undergraduate</option>
           <option value="grad">College Graduate</option>
           <option value="other">Other..</option>
         </select>
         <br><br>
-        <label for="school" style="display: none;" id="school-label">HighSchool Name: </label>
-        <input type="text" name="school" id="school-name" style="display: none; margin-left: 30px;"
-          placeholder="Lebanese American University">
-        <label for="major" style="display: none;min-width: 200px;" id="major-label">Major </label>
-        <input type="text" name="major" id="major-name" style="display: none;" placeholder="i.e Mathematics">
+        <label for="school" id="school-label">High School Name </label>
+        <input type="text" name="school" id="school" placeholder="i.e. High school">
+        <label for="field" id="field-label">Field/degree </label>
+        <input type="text" name="field" id="field" placeholder="i.e General Sciences Baccalaureate">
         <br> <br>
-        <div id="common" style="display: none;">
+        <div id="common">
           <label for="years" style="min-width: 200px;" id="years-label">Years of Experience </label>
           <input type="number" name="years" id="years">
           <br><br>
-          <p style="font-weight: bold;">Please add below the names of the courses you can teach : </p>
+        </div>
+          <p style="font-weight: bold;">Please add below the courses you can teach (at least one is required): </p>
           <br>
-          <label for="course">Course 1</label>
-          <input type="text" name="course">
-          <label for="course-level">Level</label>
-          <select name="course-level" id="course-level" class="form-select" style="display: inline-block; width: 200px;">
+          <label>Course 1</label>
+          <input type="text" name="course1-input" id="course1-input" style="display: none;">
+          <select name="course1-select" id="course1-select" class="form-select" style="display: inline-block; width: 200px;">
+            <option value="Math">Math</option>
+            <option value="Physics">Physics</option>
+            <option value="Chemistry">Chemistry</option>
+            <option value="Biology">Biology</option>
+            <option value="Arabic">Arabic</option>
+            <option value="French">French</option>
+            <option value="English">English</option>
+          </select>
+          <label for="course1-level">Level</label>
+          <select name="course1-level" id="course1-level" class="form-select" oninput="change_level()" 
+          style="display: inline-block; width: 200px;">
             <option value="primary" selected>Primary school</option>
             <option value="middle">Middle school</option>
             <option value="high">High school</option>
             <option value="college">College</option>
           </select>
           <br>
-        </div>
-        <button onclick="add_course()" type="button" id="add-button" class="add-button" style="display: none;">Add
-          Course</button>
-        <button onclick="add_course()" type="button" id="remove-button" class="add-button rmv"
-          style="display: none; position: relative;left:80px;">Remove Course</button>
+          <label>Course 2</label>
+          <input type="text" name="course2-input" id="course2-input" style="display: none;">
+          <select name="course2-select" id="course2-select" class="form-select" style="display: inline-block; width: 200px;">
+            <option value="Math">Math</option>
+            <option value="Physics">Physics</option>
+            <option value="Chemistry">Chemistry</option>
+            <option value="Biology">Biology</option>
+            <option value="Arabic">Arabic</option>
+            <option value="French">French</option>
+            <option value="English">English</option>
+          </select>
+          <label for="course2-level">Level</label>
+          <select name="course2-level" id="course2-level" class="form-select" oninput="change_level()" 
+          style="display: inline-block; width: 200px;">
+            <option value="primary" selected>Primary school</option>
+            <option value="middle">Middle school</option>
+            <option value="high">High school</option>
+            <option value="college">College</option>
+          </select>
+          <br>
+          <label>Course 3</label>
+          <input type="text" name="course3-input" id="course3-input" style="display: none;">
+          <select name="course3-select" id="course3-select" class="form-select" style="display: inline-block; width: 200px;">
+            <option value="Math">Math</option>
+            <option value="Physics">Physics</option>
+            <option value="Chemistry">Chemistry</option>
+            <option value="Biology">Biology</option>
+            <option value="Arabic">Arabic</option>
+            <option value="French">French</option>
+            <option value="English">English</option>
+          </select>
+          <label for="course3-level">Level</label>
+          <select name="course3-level" id="course3-level" class="form-select" oninput="change_level()" 
+          style="display: inline-block; width: 200px;">
+            <option value="primary" selected>Primary school</option>
+            <option value="middle">Middle school</option>
+            <option value="high">High school</option>
+            <option value="college">College</option>
+          </select>
+          <br>
+          <label>Course 4</label>
+          <input type="text" name="course4-input" id="course4-input" style="display: none;">
+          <select name="course4-select" id="course4-select" class="form-select" style="display: inline-block; width: 200px;">
+            <option value="Math">Math</option>
+            <option value="Physics">Physics</option>
+            <option value="Chemistry">Chemistry</option>
+            <option value="Biology">Biology</option>
+            <option value="Arabic">Arabic</option>
+            <option value="French">French</option>
+            <option value="English">English</option>
+          </select>
+          <label for="course4-level">Level</label>
+          <select name="course4-level" id="course4-level" class="form-select" oninput="change_level()" 
+          style="display: inline-block; width: 200px;">
+            <option value="primary" selected>Primary school</option>
+            <option value="middle">Middle school</option>
+            <option value="high">High school</option>
+            <option value="college">College</option>
+          </select>
+          <br>
+        
           <br><br>
           <label for="cv_file">Upload CV: </label>
           <input type="file" name="cv_file" id="cv_file">
