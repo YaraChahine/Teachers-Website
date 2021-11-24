@@ -69,8 +69,8 @@
     <h5 >To apply to "Teachers", please fill the form below.</h5>
     <p>Once the form has been approved, an email will be sent to you with your interview details.</p>
     <br>
-    <form>
   <fieldset class="form">
+    <form action="tutor_application.php" method="POST">
 
     <h4>Your Personal Information</h4>
     <br>
@@ -138,15 +138,13 @@
         <input type="text" id="city" name="city" class="form-control" placeholder="e.g. Beirut">
       </div>
     </div>
-    
-    </fieldset>   
-    <fieldset class="form tutor-form"> 
+  
         <br>
         <h4>Background Information</h4>
         <br>
         <label for="education">Select Education Level: </label>
 
-        <select name="education-level" id="education-level" class="form-select" oninput="change_tutor()" style="display: inline-block; width: 200px;">
+        <select name="education_level" id="education-level" class="form-select" oninput="change_tutor()" style="display: inline-block; width: 200px;">
 
           <option value="highschool-degree" selected>Highschool degree</option>
           <option value="undergrad">College Undergraduate</option>
@@ -192,9 +190,10 @@
           <br>
           <textarea name="bio" id="bio" rows="6" placeholder="Enter text here..."></textarea>
           <button type="submit" class="submit-button">Submit</button>
+                  </form>
+
         </fieldset>
 
-        </form>
         <br>
 
     <br><br>
