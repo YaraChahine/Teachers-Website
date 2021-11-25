@@ -317,3 +317,11 @@
 .modal form .row > div{
     margin: 0.7em 0;
 }
+
+
+
+.register {
+    text-decoration: none;
+    color: white;
+    font-weight: 300;
+}
