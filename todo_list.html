@@ -67,24 +67,29 @@
 
     <br><br><br><br><br><br>
 
-    <div class="list-container">
-        <div id="myDIV" class="list-header">
+    <div class="intro">
+    <p>"What do you today can improve all your tomorrows" -Ralph Martson</p>
+    </div>
+    <img class="blue-pattern2" src="img/bluepattern1.png">
+
+<div class="list-container">
+            <div id="myDIV" class="list-header">
             <h2>My To Do List</h2>
             <input type="text" id="myInput" placeholder="Title...">
             <span onclick="newElement()" class="addBtn">Add</span>
         </div>
 
         <ul id="myUL" class="myUL">
-            <li>Hit the gym</li>
-            <li class="checked">Pay bills</li>
-            <li>Meet George</li>
-            <li>Buy eggs</li>
-
-            <li>Read a book</li>
-
-            <li>Organize office</li>
+            <li class="list-item">Hit the gym</li>
+            <li class="list-item"> class="checked">Pay bills</li>
+            <li class="list-item">Meet George</li>
+            <li class="list-item">Buy eggs</li>
+            <li  class="list-item">Read a book</li>
+            <li  class="list-item">Organize office</li>
         </ul>
     </div>
+
+    <img class="blue-pattern" src="img/bluepattern1.png">
 
 
     <footer id="footer" class="footer">
@@ -164,8 +169,6 @@
             class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
-
-    <script src="js/main2.js"></script>
     <script src="./vendor/jquery/jquery-3.6.0.min.js"></script>
     <script src="./vendor/bootstrap/js/bootstrap.bundle.js"></script>
     <script src="./vendor/aos/aos.js"></script>
@@ -178,61 +181,65 @@
 
 
 
+
+
     <script>
-        var myNodelist = document.getElementsByTagName("LI");
-var i;
-for (i = 0; i < myNodelist.length; i++) {
-  var span = document.createElement("SPAN");
-  var txt = document.createTextNode("\u00D7");
-  span.className = "close";
-  span.appendChild(txt);
-  myNodelist[i].appendChild(span);
-}
+        // Create a "close" button and append it to each list item
+        var myNodelist = document.getElementsByClassName("list-item");
+        var i;
+        for (i = 0; i < myNodelist.length; i++) {
+            var span = document.createElement("SPAN");
+            var txt = document.createTextNode("\u00D7");
+            span.className = "close";
+            span.appendChild(txt);
+            myNodelist[i].appendChild(span);
+        }
 
-// Click on a close button to hide the current list item
-var close = document.getElementsByClassName("close");
-var i;
-for (i = 0; i < close.length; i++) {
-  close[i].onclick = function() {
-    var div = this.parentElement;
-    div.style.display = "none";
-  }
-}
+        // Click on a close button to hide the current list item
+        var close = document.getElementsByClassName("close");
+        var i;
+        for (i = 0; i < close.length; i++) {
+            close[i].onclick = function () {
+                var div = this.parentElement;
+                div.style.display = "none";
+            }
+        }
 
-// Add a "checked" symbol when clicking on a list item
-var list = document.querySelector("ul");
-list.addEventListener(click, function(ev) {
-  if (ev.target.tagName === "li") {
-    ev.target.classList.toggle("checked");
-  }
-}, false);
+        // Add a "checked" symbol when clicking on a list item
+      
 
-// Create a new list item when clicking on the "Add" button
-function newElement() {
-  var li = document.createElement("li");
-  var inputValue = document.getElementById("myInput").value;
-  var t = document.createTextNode(inputValue);
-  li.appendChild(t);
-  if (inputValue === '') {
-    alert("You must write something!");
-  } else {
-    document.getElementById("myUL").appendChild(li);
-  }
-  document.getElementById("myInput").value = "";
+        var list = document.getElementById("myUL");
+        list.addEventListener('click', function (ev) {
+            if (ev.target.tagName === 'LI') {
+                ev.target.classList.toggle('checked');
+            }
+        }, false);
+        // Create a new list item when clicking on the "Add" button
+        function newElement() {
+            var li = document.createElement("li");
+            var inputValue = document.getElementById("myInput").value;
+            var t = document.createTextNode(inputValue);
+            li.appendChild(t);
+            if (inputValue === '') {
+                alert("You must write something!");
+            } else {
+                document.getElementById("myUL").appendChild(li);
+            }
+            document.getElementById("myInput").value = "";
 
-  var span = document.createElement("SPAN");
-  var txt = document.createTextNode("\u00D7");
-  span.className = "close";
-  span.appendChild(txt);
-  li.appendChild(span);
+            var span = document.createElement("SPAN");
+            var txt = document.createTextNode("\u00D7");
+            span.className = "close";
+            span.appendChild(txt);
+            li.appendChild(span);
 
-  for (i = 0; i < close.length; i++) {
-    close[i].onclick = function() {
-      var div = this.parentElement;
-      div.style.display = "none";
-    }
-  }
-} 
+            for (i = 0; i < close.length; i++) {
+                close[i].onclick = function () {
+                    var div = this.parentElement;
+                    div.style.display = "none";
+                }
+            }
+        }
     </script>
 </body>
 
