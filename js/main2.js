@@ -84,3 +84,33 @@ function change_level() {
 
 }
 
+
+
+function loadBookingData(button) {
+
+  let row = $(button.parentElement.parentElement);
+  console.log($(this).find("div"));
+  let student = +row.find("[name='student']").text();
+  let tutor = +row.find("[name='tutor']").text();
+  let course = +row.find("[name='course']").text();
+  let date = row.find("[name='date']").text();
+  let days = row.find("[name='days']").text();
+
+  dateArr = date.split("/");
+  date = dateArr[2] + "-" + dateArr[1] + "-" + dateArr[0];
+
+  daysArr = days.split(" ");
+
+  $("#editform").find("[name='student']").val(student);
+  $("#editform").find("[name='tutor']").val(tutor);
+  $("#editform").find("[name='course']").val(course);
+  $("#editform").find("[name='date']").val(date);
+
+  $("#editform").find("[type='checkbox']").prop( "checked", false );
+  daysArr.forEach(day => {
+    $("#editform").find(`[name='${day}']`).prop( "checked", true );
+  });
+
+  console.log(row);
+
+}
