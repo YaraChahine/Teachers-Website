@@ -80,13 +80,13 @@
         <label for="first_name" class="col-form-label">First name</label>
       </div>
       <div class="col-auto">
-        <input type="text" id="first_name" name="first_name" class="form-control" placeholder="e.g. John" required>
+        <input type="text" id="first_name" name="first_name" class="form-control" placeholder="e.g. John" >
       </div>
       <div class="col-auto">
         <label for="last_name" class="col-form-label">Last name</label>
       </div>
       <div class="col-auto">
-        <input type="text" id="last_name" name="last_name" class="form-control" placeholder="e.g. Smith" required>
+        <input type="text" id="last_name" name="last_name" class="form-control" placeholder="e.g. Smith" >
       </div>
     </div>
 
@@ -95,13 +95,13 @@
         <label for="email_address" class="col-form-label">Email</label>
       </div>
       <div class="col-auto">
-        <input type="email" id="email_address" name="email_address" class="form-control" placeholder="e.g. john.smith@example.com" required>
+        <input type="email" id="email_address" name="email_address" class="form-control" placeholder="e.g. john.smith@example.com" >
       </div>
       <div class="col-auto">
         <label for="password" class="col-form-label">Create password</label>
       </div>
       <div class="col-auto">
-        <input type="password" id="password" name="password" class="form-control" placeholder="Must be 8-20 characters long." required>
+        <input type="password" id="password" name="password" class="form-control" placeholder="Must be 8-20 characters long." >
       </div>
     </div>
 
@@ -110,13 +110,13 @@
         <label for="age" class="col-form-label">Age</label>
       </div>
       <div class="col-auto">
-        <input type="number" id="age" name="age" class="form-control" placeholder="e.g. 30" required>
+        <input type="number" id="age" name="age" class="form-control" placeholder="e.g. 30" >
       </div>
       <div class="col-auto">
         <label for="gender" class="col-form-label">Gender</label>
       </div>
       <div class="col-auto">
-        <select id="gender" name="gender" class="form-select" required>
+        <select id="gender" name="gender" class="form-select" >
           <option value="male" >Male</option>
           <option value="female">Female</option>
           <option value="other">Other</option>
@@ -129,13 +129,13 @@
         <label for="phone_number" class="col-form-label">Phone</label>
       </div>
       <div class="col-auto">
-        <input type="tel" id="phone_number" name="phone_number" class="form-control" placeholder="e.g. 01 234 567" required>
+        <input type="tel" id="phone_number" name="phone_number" class="form-control" placeholder="e.g. 01 234 567" >
       </div>
       <div class="col-auto">
         <label for="city" class="col-form-label">City</label>
       </div>
       <div class="col-auto">
-        <input type="text" id="city" name="city" class="form-control" placeholder="e.g. Beirut" required>
+        <input type="text" id="city" name="city" class="form-control" placeholder="e.g. Beirut" >
       </div>
     </div>
   
@@ -165,8 +165,8 @@
           <p style="font-weight: bold;">Please add below the courses you can teach (at least one is required): </p>
           <br>
           <label>Course 1</label>
-          <input type="text" name="course1-input" id="course1-input" style="display: none;">
-          <select name="course1-select" id="course1-select" class="form-select" style="display: inline-block; width: 200px;">
+          <input type="text" name="course1-input" id="course1-input">
+          <!-- <select name="course1-select" id="course1-select" class="form-select" style="display: inline-block; width: 200px;">
             <option value="Math">Math</option>
             <option value="Physics">Physics</option>
             <option value="Chemistry">Chemistry</option>
@@ -174,7 +174,7 @@
             <option value="Arabic">Arabic</option>
             <option value="French">French</option>
             <option value="English">English</option>
-          </select>
+          </select> -->
           <label for="course1-level">Level</label>
           <select name="course1-level" id="course1-level" class="form-select" oninput="change_level()" 
           style="display: inline-block; width: 200px;">
@@ -185,8 +185,8 @@
           </select>
           <br>
           <label>Course 2</label>
-          <input type="text" name="course2-input" id="course2-input" style="display: none;">
-          <select name="course2-select" id="course2-select" class="form-select" style="display: inline-block; width: 200px;">
+          <input type="text" name="course2-input" id="course2-input">
+          <!-- <select name="course2-select" id="course2-select" class="form-select" style="display: inline-block; width: 200px;">
             <option value="Math">Math</option>
             <option value="Physics">Physics</option>
             <option value="Chemistry">Chemistry</option>
@@ -194,7 +194,7 @@
             <option value="Arabic">Arabic</option>
             <option value="French">French</option>
             <option value="English">English</option>
-          </select>
+          </select> -->
           <label for="course2-level">Level</label>
           <select name="course2-level" id="course2-level" class="form-select" oninput="change_level()" 
           style="display: inline-block; width: 200px;">
@@ -205,8 +205,8 @@
           </select>
           <br>
           <label>Course 3</label>
-          <input type="text" name="course3-input" id="course3-input" style="display: none;">
-          <select name="course3-select" id="course3-select" class="form-select" style="display: inline-block; width: 200px;">
+          <input type="text" name="course3-input" id="course3-input" >
+          <!-- <select name="course3-select" id="course3-select" class="form-select" style="display: inline-block; width: 200px;">
             <option value="Math">Math</option>
             <option value="Physics">Physics</option>
             <option value="Chemistry">Chemistry</option>
@@ -214,7 +214,7 @@
             <option value="Arabic">Arabic</option>
             <option value="French">French</option>
             <option value="English">English</option>
-          </select>
+          </select> -->
           <label for="course3-level">Level</label>
           <select name="course3-level" id="course3-level" class="form-select" oninput="change_level()" 
           style="display: inline-block; width: 200px;">
@@ -225,8 +225,8 @@
           </select>
           <br>
           <label>Course 4</label>
-          <input type="text" name="course4-input" id="course4-input" style="display: none;">
-          <select name="course4-select" id="course4-select" class="form-select" style="display: inline-block; width: 200px;">
+          <input type="text" name="course4-input" id="course4-input" >
+          <!-- <select name="course4-select" id="course4-select" class="form-select" style="display: inline-block; width: 200px;">
             <option value="Math">Math</option>
             <option value="Physics">Physics</option>
             <option value="Chemistry">Chemistry</option>
@@ -234,7 +234,7 @@
             <option value="Arabic">Arabic</option>
             <option value="French">French</option>
             <option value="English">English</option>
-          </select>
+          </select> -->
           <label for="course4-level">Level</label>
           <select name="course4-level" id="course4-level" class="form-select" oninput="change_level()" 
           style="display: inline-block; width: 200px;">
@@ -247,10 +247,10 @@
         
           <br><br>
           <label for="cv_file">Upload CV: </label>
-          <input type="file" name="cv_file" id="cv_file" required>
+          <input type="file" name="cv_file" id="cv_file" >
           <br>
           <label for="img_file">Upload a profile image: </label>
-          <input type="file" name="img_file" id="img_file" required>
+          <input type="file" name="img_file" id="img_file" >
           <br><br>
           <label for="bio">Tell us a bit about yourself: <br><small>Note: this information must be accurate and will be publicly visible</small></label>
           <br>
