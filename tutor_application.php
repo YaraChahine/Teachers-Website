@@ -1,4 +1,8 @@
 <?php
+
+include("connection.php");
+
+
 if(isset($_POST["first_name"]) && $_POST["first_name"]!=""){
     $first_name = $_POST["first_name"];
 }else{
@@ -99,6 +103,12 @@ if(isset($_POST["bio"]) && $_POST["bio"]!=""){
 }
 
 
-die($password)
-// print_r($_POST);
+$mysql = $connection->prepare("INSERT INTO pending_tutors(first_name,last_name,email,password,age,gender,phone_number,city,education_level_tutor,educational_institution_name,field,years_of_experience,course_1,course_level_1,course_2,course_level_2,course_3,course_level_3,course_4,course_level_4,cv,image,description) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+$mysql->bind_param("ssssissssssisssssssssss",$first_name,$last_name,$email,$password,$age,$gender,$phone_number,$city,$education_level_tutor,$educational_institution_name,$field,$years_of_experience,$course_1,$course_level_1,$course_2,$course_level_2,$course_3,$course_level_3,$course_4,$course_level_4,$cv_file,$img_file,$bio);
+$mysql->execute();
+$mysql->close();
+$connection->close();
+
+// header("Location:tutor_application.html");
+ print_r($first_name);
 ?>
