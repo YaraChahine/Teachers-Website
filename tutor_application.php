@@ -3,18 +3,24 @@
 include("connection.php");
 
 
-if(isset($_POST["first_name"]) && $_POST["first_name"]!=""){
+if(isset($_POST["first_name"]) && $_POST["first_name"]!="" && ctype_alpha($_POST["first_name"])){
     $first_name = $_POST["first_name"];
+}else if(isset($_POST["first_name"]) && $_POST["first_name"]!="" && !ctype_alpha($_POST["first_name"])){
+    die("First name should only contains alphabets.");
 }else{
     die("Nice try Dr. :D 1");
 }
-if(isset($_POST["last_name"]) && $_POST["last_name"]!=""){
+if(isset($_POST["last_name"]) && $_POST["last_name"]!="" && ctype_alpha($_POST["last_name"])){
     $last_name = $_POST["last_name"];
+}else if(isset($_POST["last_name"]) && $_POST["last_name"]!="" && !ctype_alpha($_POST["last_name"])){
+    die("Last name should only contains alphabets.");
 }else{
     die("Nice try Dr. :D 2");
 }
-if(isset($_POST["email_address"]) && $_POST["email_address"]!=""){
+if(isset($_POST["email_address"]) && $_POST["email_address"]!="" && filter_var($_POST["email_address"], FILTER_VALIDATE_EMAIL)){
     $email_address = $_POST["email_address"];
+}else if(isset($_POST["email_address"]) && $_POST["email_address"]!="" && !filter_var($_POST["email_address"], FILTER_VALIDATE_EMAIL)){
+    die("Incorrect email format.");
 }else{
     die("Nice try Dr. :D 3");
 }
@@ -148,27 +154,29 @@ else {
     }
 }
 
-if (array_key_exists("cv_file", $_FILES) && isset($_FILES["cv_file"]) && $_FILES["cv_file"]["error"] != UPLOAD_ERR_NO_FILE) {
+// if (array_key_exists("cv_file", $_FILES) && isset($_FILES["cv_file"]) && $_FILES["cv_file"]["error"] != UPLOAD_ERR_NO_FILE) {
+    if(isset($_POST["cv_file"]) && $_POST["cv_file"]!=""){
 
     $cv_file = "hi.pdf";
 
 } else {
-    die("Nice try Dr. :D ");
+    die("Nice try Dr. :D 25");
 }
 
-if (array_key_exists("img_file", $_FILES) && isset($_FILES["img_file"]) && $_FILES["img_file"]["error"] != UPLOAD_ERR_NO_FILE) {
+// if (array_key_exists("img_file", $_FILES) && isset($_FILES["img_file"]) && $_FILES["img_file"]["error"] != UPLOAD_ERR_NO_FILE) {
+    if(isset($_POST["img_file"]) && $_POST["img_file"]!=""){
 
     $img_file = "hi.png";
 
 } else {
-    die("Nice try Dr. :D ");
+    die("Nice try Dr. :D 26");
 }
 
 
 if(isset($_POST["bio"]) && $_POST["bio"]!=""){
     $bio = $_POST["bio"];
 }else{
-    die("Nice try Dr. :D ");
+    die("Nice try Dr. :D 27");
 }
 
 $mysql = $connection->prepare("INSERT INTO pending_tutors(first_name,last_name,email,password,age,gender,phone_number,city,education_level_tutor,educational_institution_name,field,years_of_experience,course_1,course_level_1,course_2,course_level_2,course_3,course_level_3,course_4,course_level_4,cv,image,description) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
