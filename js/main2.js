@@ -115,6 +115,14 @@ function loadBookingData(button) {
 
 }
 
+function sortBookingsBy(column) {
+  let name = $(column).attr("name");
+  let page = $("[data-page]").data("page");
+  console.log(name);
+  console.log(page);
+  //send php get request: select from bookings table, sort by col, limit according to page
+}
+
 
 
 
