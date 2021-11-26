@@ -65,9 +65,110 @@
     </header><!-- End Header -->
 
 
+    <!-- CHANGE PAGE NUMBER HERE -->
+    <div class="container" data-page="1">
 
+        <br><br><br><br><br> 
 
+        <div class="m-5 d-flex justify-content-between">
+            <div></div>
+            <ul class="pagination">
+              <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              <li class="page-item active"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+            <a class="btn btn-primary p-0" data-bs-toggle="modal" data-bs-target="#add-modal"><i class="bi bi-plus fs-1 lh-1"></i></a>
 
+        </div>
+
+        <div class="table-responsive m-5">
+        
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="user_id">User ID</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="tutor_id">Tutor ID</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="tutor_first">First Name</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="tutor_last">Last Name</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="email">Email</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="age">Age</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="gender">Gender</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="phone">Phone</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="city">City</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="level">Education Level</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="school">Institution Name</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="field">Field</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="years">Years of Experience</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="years">Can teach</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>2</td>
+                    <td>7</td>
+                    <td>John</td>
+                    <td>A</td>
+                    <td>john@a.com</td>
+                    <td>23</td>
+                    <td>Male</td>
+                    <td>1234567</td>
+                    <td>Beirut</td>
+                    <td>College Undergraduate</td>
+                    <td>School1</td>
+                    <td>Math</td>
+                    <td>3</td>
+                    <td>Math<br>Physics<br>Chemistry</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>8</td>
+                    <td>John</td>
+                    <td>B</td>
+                    <td>john@b.com</td>
+                    <td>26</td>
+                    <td>Female</td>
+                    <td>2345678</td>
+                    <td>Beirut</td>
+                    <td>College Graduate</td>
+                    <td>School2</td>
+                    <td>Biology</td>
+                    <td>3</td>
+                    <td>Biology<br>Chemistry</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>17</td>
+                    <td>John</td>
+                    <td>C</td>
+                    <td>john@d.com</td>
+                    <td>20</td>
+                    <td>Male</td>
+                    <td>3456789</td>
+                    <td>Beirut</td>
+                    <td>High school</td>
+                    <td>School3</td>
+                    <td>Math</td>
+                    <td>3</td>
+                    <td>General Science</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <br><br><br><br>
     
     <footer id="footer" class="footer">
 
@@ -153,7 +254,10 @@
     <script src="./vendor/purecounter/purecounter.js"></script>
     <script src="./vendor/isotope-layout/isotope.pkgd.min.js"></script>
     <script src="./vendor/glightbox/js/glightbox.min.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="./js/main.js"></script>
+    <script src="./js/main2.js"></script>
+
 </body>
-
-
 </html>

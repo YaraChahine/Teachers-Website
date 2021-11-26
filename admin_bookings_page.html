@@ -64,11 +64,14 @@
         </div>
     </header><!-- End Header -->
 
-    <div class="container">
+
+    <!-- CHANGE PAGE NUMBER HERE -->
+    <div class="container" data-page="1">
 
         <br><br><br><br><br> 
 
-        <nav class="m-5 d-flex justify-content-center">
+        <div class="m-5 d-flex justify-content-between">
+            <div></div>
             <ul class="pagination">
               <li class="page-item">
                 <a class="page-link" href="#" aria-label="Previous">
@@ -84,22 +87,24 @@
                 </a>
               </li>
             </ul>
-          </nav>
+            <a class="btn btn-primary p-0" data-bs-toggle="modal" data-bs-target="#add-modal"><i class="bi bi-plus fs-1 lh-1"></i></a>
+
+        </div>
 
         <div class="table-responsive m-5">
         
             <table class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                    <th scope="col">Booking ID</th>
-                    <th scope="col">Student ID</th>
-                    <th scope="col">Student Name</th>
-                    <th scope="col">Tutor ID</th>
-                    <th scope="col">Tutor Name</th>
-                    <th scope="col">Course ID</th>
-                    <th scope="col">Course Name</th>
-                    <th scope="col">Sessions start date</th>
-                    <th scope="col">Session days</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="booking">Booking ID</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="student_id">Student ID</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="student_name">Student Name</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="tutor_id">Tutor ID</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="tutor_name">Tutor Name</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="course_id">Course ID</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="course_name">Course Name</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="date">Sessions start date</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="days">Session days</th>
                     <th scope="col">Edit</th>
                 </tr>
                 </thead>
@@ -228,6 +233,9 @@
                         </div>
                     </div>
                 </form>
+                <form action="" class="d-flex justify-content-center pb-0"> <!-- delete booking php -->
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Delete Booking</button>
+                </form>
             </div>
             <div class="modal-footer">
                 <form action="">
@@ -240,6 +248,89 @@
       </div>
 
     <!-- End Edit Modal -->
+
+
+    <!-- Add Modal -->
+
+    <div class="modal modal-large fade" id="add-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-body p-5">
+                <h2 class="text-center">Add booking</h1>
+                <form action="">
+                    <div class="row">
+                        <div class="col-4">
+                            Student ID
+                        </div>
+                        <div class="col-8">
+                            <input class="form-control" type="number" name="student">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            Tutor ID
+                        </div>
+                        <div class="col-8">
+                            <input class="form-control" type="number" name="tutor">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            Course ID
+                        </div>
+                        <div class="col-8">
+                            <input class="form-control" type="number" name="course">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            Session start date
+                        </div>
+                        <div class="col-8">
+                            <input class="form-control" type="date" name="date">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            Session days
+                        </div>
+                        <div class="col-8 d-flex flex-column align-items-start m-0">
+                            <div>
+                                <input class="" type="checkbox" name="Mon">&ThickSpace; Monday
+                            </div>
+                            <div>
+                                <input class="" type="checkbox" name="Tue">&ThickSpace; Tuesday
+                            </div>
+                            <div>
+                                <input class="" type="checkbox" name="Wed">&ThickSpace; Wednesday
+                            </div>
+                            <div>
+                                <input class="" type="checkbox" name="Thu">&ThickSpace; Thursday
+                            </div>
+                            <div>
+                                <input class="" type="checkbox" name="Fri">&ThickSpace; Friday
+                            </div>
+                            <div>
+                                <input class="" type="checkbox" name="Sat">&ThickSpace; Saturday
+                            </div>
+                            <div>
+                                <input class="" type="checkbox" name="Sun">&ThickSpace; Sunday
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <form action="">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="$('#editform').submit()">Confirm</button>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- End Add Modal -->
 
     <br><br><br><br>
     
