@@ -388,8 +388,17 @@
     box-shadow: 3px 3px 7px lightgray;
 }
 
+
 .buttons-flex button:nth-child(1){
 
     background-color: #06c0f3;
     color: white;
+}
+
+.buttons-flex button:hover {
+    background-color: #dbedf1;
+}
+.buttons-flex button:nth-child(1):hover{
+
+    background-color: #0fa1c9;
 }
