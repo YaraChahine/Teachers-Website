@@ -325,3 +325,71 @@
     color: white;
     font-weight: 300;
 }
+
+
+
+.timer{
+    max-width: 50%;
+    margin: auto;
+
+    margin-bottom:100px;
+    text-align: center;
+    margin-top: -30px;
+    height:500px;
+
+}
+
+.form-time input{
+    width: 10%;
+    margin-right: 30px;
+    border-radius: 9px;
+    padding: 2px;
+    padding-left: 25px;
+    border-style: none;
+    background-color: #e3eaf5;
+}
+
+.timer h1{
+    color: #013289;
+    font-size: 70px;
+    font-weight: bolder;
+}
+
+.inpt {
+    width: 30%;
+}
+
+
+.timer p {
+    margin-top: 90px;
+    color: #04c2f9;
+    font-size: 120px;
+}
+
+.buttons-flex {
+    display: flex;
+    flex-direction: row;
+    max-width:80%;
+    margin:auto;
+    justify-content: center;
+    margin-top:60px;
+}
+
+.buttons-flex button {
+    margin-right: 40px;
+    width: 20%;
+    border-radius: 20px;
+    padding: 10px;
+    background-color: white;
+    color: #04c2f9;
+    font-weight: 900;
+    font-size: 20px;
+    border-style: none;
+    box-shadow: 3px 3px 7px lightgray;
+}
+
+.buttons-flex button:nth-child(1){
+
+    background-color: #06c0f3;
+    color: white;
+}
