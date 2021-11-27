@@ -50,7 +50,11 @@ function change_level() {
 
   let level2 = document.getElementById("course2-level").value;
 
-  if (level2 == "college") {
+  if (level2 == "none") {
+    document.getElementById("course2-input").style.display="none";
+    document.getElementById("course2-select").style.display="none";
+  }
+  else if (level2 == "college") {
     document.getElementById("course2-input").style.display="inline-block";
     document.getElementById("course2-select").style.display="none";
   }
@@ -61,7 +65,11 @@ function change_level() {
 
   let level3 = document.getElementById("course3-level").value;
 
-  if (level3 == "college") {
+  if (level3 == "none") {
+    document.getElementById("course3-input").style.display="none";
+    document.getElementById("course3-select").style.display="none";
+  }
+  else if (level3 == "college") {
     document.getElementById("course3-input").style.display="inline-block";
     document.getElementById("course3-select").style.display="none";
   }
@@ -73,7 +81,11 @@ function change_level() {
 
   let level4 = document.getElementById("course4-level").value;
 
-  if (level4 == "college") {
+  if (level4 == "none") {
+    document.getElementById("course4-input").style.display="none";
+    document.getElementById("course4-select").style.display="none";
+  }
+  else if (level4 == "college") {
     document.getElementById("course4-input").style.display="inline-block";
     document.getElementById("course4-select").style.display="none";
   }

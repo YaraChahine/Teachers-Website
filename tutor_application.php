@@ -59,10 +59,8 @@ if(isset($_POST["city"]) && $_POST["city"]!="" && preg_match ("/^[a-zA-z]*$/",$_
 }else{
     die("Nice try Dr. :D 8");
 }
-if(isset($_POST["education_level"]) && $_POST["education_level"]!="" && (strcmp(($_POST["education_level"]),"Highschool degree")==0 || strcmp(($_POST["education_level"]),"College Undergraduate")==0 || strcmp(($_POST["education_level"]),"College Graduate")==0 || strcmp(($_POST["education_level"]),"Other..")==0)){
+if(isset($_POST["education_level"]) && $_POST["education_level"]!="" && preg_match("/^[0-9]*$/", $_POST["education_level"]) && $_POST["education_level"]>=0 &&  $_POST["education_level"]<=3){
     $education_level_tutor = $_POST["education_level"];
-}else if(isset($_POST["education_level"]) && $_POST["education_level"]!="" && strcmp(($_POST["education_level"]),"Highschool degree")!=0 && strcmp(($_POST["education_level"]),"College Undergraduate")!=0 && strcmp(($_POST["education_level"]),"College Graduate")!=0 && strcmp(($_POST["education_level"]),"Other..")!=0){
-    die("No other choices");
 }else{
     die("Nice try Dr. :D 9");
 }
@@ -111,7 +109,10 @@ if(isset($_POST["course2-level"]) && $_POST["course2-level"]!=""){
 }else{
     die("Nice try Dr. :D 16");
 }
-if ($course_level_2 == "college") {
+if ($course_level_2 == "none") {
+    $course_2 = "none";
+}
+else if ($course_level_2 == "college") {
     if(isset($_POST["course2-input"]) && $_POST["course2-input"]!=""){
         $course_2 = $_POST["course2-input"];
     }else{
@@ -132,7 +133,10 @@ if(isset($_POST["course3-level"]) && $_POST["course3-level"]!=""){
 }else{
     die("Nice try Dr. :D 19");
 }
-if ($course_level_3 == "college") {
+if ($course_level_3 == "none") {
+    $course_3 = "none";
+}
+else if ($course_level_3 == "college") {
     if(isset($_POST["course3-input"]) && $_POST["course3-input"]!=""){
         $course_3 = $_POST["course3-input"];
     }else{
@@ -153,7 +157,10 @@ if(isset($_POST["course4-level"]) && $_POST["course4-level"]!=""){
 }else{
     die("Nice try Dr. :D 22");
 }
-if ($course_level_4 == "college") {
+if ($course_level_4 == "none") {
+    $course_4 = "none";
+}
+else if ($course_level_4 == "college") {
     if(isset($_POST["course4-input"]) && $_POST["course4-input"]!=""){
         $course_4 = $_POST["course4-input"];
     }else{
@@ -170,40 +177,54 @@ else {
 
   
 
-//  if (array_key_exists("cv_file", $_FILES) && isset($_FILES["cv_file"]) && $_FILES["cv_file"]["error"] != UPLOAD_ERR_NO_FILE) {
-    if(isset($_POST["cv_file"]) && $_POST["cv_file"]!=""){
+ if (isset($_FILES["cv_file"]) && $_FILES["cv_file"]["error"] != UPLOAD_ERR_NO_FILE) {
+    
+    $cv_file = (str_replace(".", "", microtime(true)));
+    $ext = pathinfo($_FILES["cv_file"]["name"], PATHINFO_EXTENSION);
+    $cv_file = $cv_file . "." . $ext;
 
-    $cv_file = "hi.pdf";
-    // }
+    $tempname = $_FILES["cv_file"]["tmp_name"];
+    
+    $folder = __DIR__ ."\\pending\\".$cv_file;
+    
+    $mime = mime_content_type($tempname); //make sure file uploaded is pdf
+    
+    if ((strcasecmp($mime, "application/pdf") == 0)) {
+        if (!move_uploaded_file($tempname, $folder))  {
+            die("Error in saving pdf file to server, try again");
+        }
+    }
+    else {
+        die("Invalid pdf file.");
+    }
+
 } else {
     die("Nice try Dr. :D 25");
 }
 
 
-// && isset($_FILES["img_file"]) && $_FILES["img_file"]["error"] != UPLOAD_ERR_NO_FILE
-if (array_key_exists("img_file", $_FILES) ) {
+if (isset($_FILES["img_file"]) && $_FILES["img_file"]["error"] != UPLOAD_ERR_NO_FILE) {
+    $img_file = (str_replace(".", "", microtime(true)));
+    $ext = pathinfo($_FILES["img_file"]["name"], PATHINFO_EXTENSION);
+    $img_file = $img_file . "." . $ext;
 
-    $img_file = (str_replace(".", "", microtime(true))); //make file name unix time with microseconds
-	$ext = pathinfo($_FILES["img_file"]["name"], PATHINFO_EXTENSION);
-	$img_file = $img_file . "." . $ext;
-    echo("$img_file");
-	$tempname = $_FILES["img_file"]["tmp_name"];
-    $folder = __DIR__ ."\\profile_images\\".$img_file;
-	
-	$mime = mime_content_type($tempname);
+    $tempname = $_FILES["img_file"]["tmp_name"];
+    
+    $folder = __DIR__ ."\\pending\\".$img_file;
+    
+    $mime = mime_content_type($tempname);
 	$type = substr($mime, 0, strpos($mime, "/")); //make sure file uploaded is image
-	
-	if ((strcasecmp($type, "img_file") == 0)) {
-		if (!move_uploaded_file($tempname, $folder))  {
-			exit();
-		}
-	}
-	else {
-		exit();
-	}
-
+    
+    if ((strcasecmp($type, "image") == 0)) {
+        if (!move_uploaded_file($tempname, $folder))  {
+            die("Error in saving image file to server, try again");
+        }
+    }
+    else {
+        die("Invalid image file.");
+    }
 } else {
-	$image_filename = "default-user-image.png";
+    die("Nice try Dr. :D 26");
 }
 
 
@@ -217,16 +238,13 @@ if(isset($_POST["bio"]) && $_POST["bio"]!=""){
 }
 
 $mysql = $connection->prepare("INSERT INTO pending_tutors(first_name,last_name,email,password,age,gender,phone_number,city,education_level_tutor,educational_institution_name,field,years_of_experience,course_1,course_level_1,course_2,course_level_2,course_3,course_level_3,course_4,course_level_4,cv,image,description) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-$mysql->bind_param("ssssdssssssdsssssssssss",$first_name,$last_name,$email_address,$password,$age,$gender,$phone_number,$city,$education_level_tutor,$educational_institution_name,$field,$years_of_experience,$course_1,$course_level_1,$course_2,$course_level_2,$course_3,$course_level_3,$course_4,$course_level_4,$cv_file,$img_file,$bio);
-if ($mysql->execute()) {
-    die("worked");
-}
-else {
-    die("didnt work");
+$mysql->bind_param("ssssdsssdssdsssssssssss",$first_name,$last_name,$email_address,$password,$age,$gender,$phone_number,$city,$education_level_tutor,$educational_institution_name,$field,$years_of_experience,$course_1,$course_level_1,$course_2,$course_level_2,$course_3,$course_level_3,$course_4,$course_level_4,$cv_file,$img_file,$bio);
+if (!$mysql->execute()){
+    echo ("\n");
+    echo($mysql->error);
 }
 $mysql->close();
 $connection->close();
 
 // header("Location:tutor_application.html");
- print_r($first_name);
 ?>
