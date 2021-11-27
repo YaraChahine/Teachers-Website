@@ -1,9 +1,9 @@
 <?php
 session_start();
-if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    header("location: index.html");
-    exit;
-}
+// if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+//     header("location: index.html");
+//     exit;
+// }
 include("connection.php");
 
 $email = "";
@@ -41,7 +41,11 @@ $row = $results->fetch_assoc();
     $_SESSION["loggedin"] = true;
     $_SESSION["user_id"] = $row['user_id'];
     $_SESSION["user_type"] = $row['user_type'];
-
-    header('Location: index.html');
-   }
+    if(strcmp($row['user_type'],"1")==0){
+        header('Location: admin_page.html');
+    }
+    else{
+        header('Location: index.html');
+    }
+}
 ?>
