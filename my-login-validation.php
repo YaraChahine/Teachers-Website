@@ -41,29 +41,7 @@ $row = $results->fetch_assoc();
     $_SESSION["loggedin"] = true;
     $_SESSION["user_id"] = $row['user_id'];
     $_SESSION["user_type"] = $row['user_type'];
-    if(!empty($_POST["remember"])){  
-    setcookie ("email",$email,time()+ (10 * 365 * 24 * 60 * 60));  
-    setcookie ("password",$password,time()+ (10 * 365 * 24 * 60 * 60));
-   }  else  {  
-    if(isset($_COOKIE["email"])){  
-     setcookie ("email",""); 
-    }  
-    if(isset($_COOKIE["password"]))   {  
-     setcookie ("password","");  
-}  
-   }
-if(!empty($_POST["remember"])){
-    setcookie("email",$_POST["email"],time()+ (10 * 365 * 24 * 60 * 60));
-    setcookie("password",$_POST["password"],time()+ (10 * 365 * 24 * 60 * 60));
-    }else {
-    if(isset($_COOKIE["email"])) {
-    setcookie ("email","");
-    }
-    if(isset($_COOKIE["password"])) {
-    setcookie ("password","");
-    }
-    }
-    header('Location: index.html');
 
-}
+    header('Location: index.html');
+   }
 ?>
