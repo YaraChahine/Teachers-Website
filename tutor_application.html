@@ -70,7 +70,7 @@
     <p>Once the form has been approved, an email will be sent to you confirming your account.</p>
     <br>
   <fieldset class="form">
-    <form action="tutor_application.php" method="POST">
+    <form action="tutor_application.php" method="POST" enctype="multipart/form-data">
 
     <h4>Your Personal Information</h4>
     <br>
@@ -101,7 +101,7 @@
         <label for="password" class="col-form-label">Create password</label>
       </div>
       <div class="col-auto">
-        <input type="password" id="password" name="password" class="form-control" placeholder="Must be 8-20 characters long." >
+        <input type="tet" id="password" name="password" class="form-control" placeholder="Must be 8-20 characters long." >
       </div>
     </div>
 
@@ -117,9 +117,9 @@
       </div>
       <div class="col-auto">
         <select id="gender" name="gender" class="form-select" >
-          <option value="male" >Male</option>
-          <option value="female">Female</option>
-          <option value="other">Other</option>
+          <option value="Male" >Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
       </select>
       </div>
     </div>
@@ -146,10 +146,10 @@
 
         <select name="education_level" id="education-level" class="form-select" oninput="change_tutor_education()"
         style="display: inline-block; width: 200px;">
-          <option value="highschool-degree" selected>Highschool degree</option>
-          <option value="undergrad">College Undergraduate</option>
-          <option value="grad">College Graduate</option>
-          <option value="other">Other..</option>
+          <option value="0" selected>Highschool degree</option>
+          <option value="1">College Undergraduate</option>
+          <option value="2">College Graduate</option>
+          <option value="3">Other..</option>
         </select>
         <br><br>
         <label for="school" id="school-label">High School Name </label>
@@ -186,7 +186,7 @@
           <br>
           <label>Course 2</label>
           <input type="text" name="course2-input" id="course2-input" style="display: none;">
-          <select name="course2-select" id="course2-select" class="form-select" style="display: inline-block; width: 200px;">
+          <select name="course2-select" id="course2-select" class="form-select" style="display: none; width: 200px;">
             <option value="Math">Math</option>
             <option value="Physics">Physics</option>
             <option value="Chemistry">Chemistry</option>
@@ -198,7 +198,8 @@
           <label for="course2-level">Level</label>
           <select name="course2-level" id="course2-level" class="form-select" oninput="change_level()" 
           style="display: inline-block; width: 200px;">
-            <option value="primary" selected>Primary school</option>
+            <option value="none" selected>--None--</option>
+            <option value="primary">Primary school</option>
             <option value="middle">Middle school</option>
             <option value="high">High school</option>
             <option value="college">College</option>
@@ -206,7 +207,7 @@
           <br>
           <label>Course 3</label>
           <input type="text" name="course3-input" id="course3-input" style="display: none;">
-          <select name="course3-select" id="course3-select" class="form-select" style="display: inline-block; width: 200px;">
+          <select name="course3-select" id="course3-select" class="form-select" style="display: none; width: 200px;">
             <option value="Math">Math</option>
             <option value="Physics">Physics</option>
             <option value="Chemistry">Chemistry</option>
@@ -218,7 +219,8 @@
           <label for="course3-level">Level</label>
           <select name="course3-level" id="course3-level" class="form-select" oninput="change_level()" 
           style="display: inline-block; width: 200px;">
-            <option value="primary" selected>Primary school</option>
+            <option value="none" selected>--None--</option>
+            <option value="primary">Primary school</option>
             <option value="middle">Middle school</option>
             <option value="high">High school</option>
             <option value="college">College</option>
@@ -226,7 +228,7 @@
           <br>
           <label>Course 4</label>
           <input type="text" name="course4-input" id="course4-input" style="display: none;">
-          <select name="course4-select" id="course4-select" class="form-select" style="display: inline-block; width: 200px;">
+          <select name="course4-select" id="course4-select" class="form-select" style="display: none; width: 200px;">
             <option value="Math">Math</option>
             <option value="Physics">Physics</option>
             <option value="Chemistry">Chemistry</option>
@@ -238,7 +240,8 @@
           <label for="course4-level">Level</label>
           <select name="course4-level" id="course4-level" class="form-select" oninput="change_level()" 
           style="display: inline-block; width: 200px;">
-            <option value="primary" selected>Primary school</option>
+            <option value="none" selected>--None--</option>
+            <option value="primary">Primary school</option>
             <option value="middle">Middle school</option>
             <option value="high">High school</option>
             <option value="college">College</option>
@@ -256,7 +259,7 @@
           <br>
           <textarea name="bio" id="bio" rows="6" placeholder="Enter text here..."></textarea>
           <button type="submit" class="submit-button">Submit</button>
-                  </form>
+        </form>
 
         </fieldset>
 
