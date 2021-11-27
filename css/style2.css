@@ -401,3 +401,8 @@
 
     background-color: #0fa1c9;
 }
+
+#footer h4 {
+    margin: 0;
+    padding: 0;
+}
