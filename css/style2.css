@@ -406,3 +406,19 @@
     margin: 0;
     padding: 0;
 }
+
+
+.consultation-btn{
+    padding-top: 50px;
+    height: 50px;
+    width: 300px;
+}
+
+.ok-btn{
+    height:38px;
+    width: 70px;
+}
+
+.tutors-parent hr:last-child{
+display: none;
+}

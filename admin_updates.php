@@ -1,3 +1,10 @@
+<?php
+
+include("connection.php");
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -74,12 +81,26 @@
 
         <div class="list-group thin-container" id="myList" role="tablist">
             
-            <div class="list-group-item card update-item">
+            <div class="list-group-item card update-item  tutors-parent">
                 <h5 class="card-header">Tutor Application</h5>
+               <?php $query_tutors_application = "SELECT temp_user_id ,first_name, last_name,email,phone_number FROM  pending_tutors";
+                $stmt = $connection->prepare($query_tutors_application);
+                $stmt->execute();
+                $results_tutors = $stmt->get_result();
+                ?>
+
+
                 <div class="card-body">
-                  <h5 class="card-title">John Smith</h5>
-                  <p class="card-text">john@smith.com - 03 444 555</p>
-                  <a href="admin_application.html" class="btn btn-primary">View update</a>
+                  
+              <?php 
+                      while($row = $results_tutors->fetch_assoc()){
+                    ?>
+                   
+                  <h5 class="card-title"><?php echo($row["first_name"]." ".$row["last_name"]); ?></h5>
+                  <p class="card-text"><?php echo($row["email"]." - ".$row["phone_number"]); ?></p>
+                  <a href="admin_application.php?id=<?php echo($row["temp_user_id"]);?>" class="btn btn-primary" data-id=<?php echo($row["temp_user_id"]); ?> >View update</a>
+                  <hr>                 
+                  <?php } ?> 
                 </div>
             </div>
 

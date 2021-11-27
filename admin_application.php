@@ -1,3 +1,11 @@
+<?php
+
+include("connection.php");
+$id = $_GET["id"];
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,6 +49,9 @@
 
 <body>
 
+
+
+
     <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top header-form">
         <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
@@ -71,56 +82,63 @@
     <div class="container thin-container">
         <div class="card">
             <h5 class="card-header user-select-none">
-              <a href="admin_updates.html" class="btn btn-secondary">&lt Back</a>
+              <a href="admin_updates.php" class="btn btn-secondary">&lt Back</a>
               <span>&ThickSpace; Tutor Application</span>
             </h5>
             <div class="card-body p-5">
+            <?php $query_tutors_application = "SELECT * FROM  pending_tutors where temp_user_id=$id";
+                $stmt = $connection->prepare($query_tutors_application);
+                $stmt->execute();
+                $results_tutors = $stmt->get_result(); 
+                $row = $results_tutors->fetch_assoc() ?>
+                 
+                   
                 <img src="img/default-user-image.png" class="rounded-circle w-25 d-block my-5 mx-auto" alt="Image">
-                <h5 class="card-title"> <strong>John</strong> is applying to become a tutor at <em>Teachers and is awaiting your response.</em></h5>
+                <h5 class="card-title"> <strong><?php echo($row["first_name"]); ?> </strong> is applying to become a tutor at <em>Teachers and is awaiting your response.</em></h5>
                 <div class="w-75 my-5 mx-auto">
                     <div class="row">
                         <p class="col-4"><strong>Full name</strong></p>
-                        <p class="col-8">John Smith</p>
+                        <p class="col-8"><?php echo($row["first_name"]." ".$row["last_name"]); ?></p>
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Email</strong></p>
-                        <p class="col-8">john@smith.com</p>
+                        <p class="col-8"><?php echo($row["email"]); ?></p>
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Phone number</strong></p>
-                        <p class="col-8">03 444 555</p>
+                        <p class="col-8"><?php echo($row["phone_number"]); ?></p>
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Age</strong></p>
-                        <p class="col-8">28</p>
+                        <p class="col-8"><?php echo($row["age"]); ?></p>
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Gender</strong></p>
-                        <p class="col-8">Male</p>
+                        <p class="col-8"><?php echo($row["gender"]); ?></p>
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>City</strong></p>
-                        <p class="col-8">Beirut</p>
+                        <p class="col-8"><?php echo($row["city"]); ?></p>
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Education level</strong></p>
-                        <p class="col-8">College Undergraduate</p>
+                        <p class="col-8"><?php echo($row["education_level_tutor"]); ?></p>
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>College Name</strong></p>
-                        <p class="col-8">Lebanese American University</p>
+                        <p class="col-8"><?php echo($row["educational_institution_name"]); ?></p>
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Major</strong></p>
-                        <p class="col-8">Physics</p>
+                        <p class="col-8"><?php echo($row["field"]); ?></p>
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Years of Experience</strong></p>
-                        <p class="col-8">4</p>
+                        <p class="col-8"><?php echo($row["years_of_experience"]); ?></p>
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Courses taught</strong></p>
-                        <p class="col-8">Physics - High school<br>Mathematics - High school<br>Calculus 3 - College</p>
+                        <p class="col-8"><?php echo($row["course_1"]." - ".$row["course_level_1"]); ?> <br><?php echo($row["course_2"]." - ".$row["course_level_2"]);?> <br> <?php echo($row["course_3"]." - ".$row["course_level_3"]) ?>;</p>
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>CV</strong></p>
@@ -128,7 +146,7 @@
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Bio paragraph</strong></p>
-                        <p class="col-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, ratione maiores adipisci consequuntur ad consectetur veritatis eaque quasi excepturi non, recusandae similique magni reiciendis nulla fugit magnam eligendi tempora suscipit.</p>
+                        <p class="col-8"><?php echo($row["description"]); ?> </p>
                     </div>
                 </div>
                 <div class="d-flex justify-content-center">
