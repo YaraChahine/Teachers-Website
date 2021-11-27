@@ -418,3 +418,7 @@
     height:38px;
     width: 70px;
 }
+
+.tutors-parent hr:last-child{
+display: none;
+}

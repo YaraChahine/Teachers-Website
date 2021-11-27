@@ -98,7 +98,7 @@ include("connection.php");
                    
                   <h5 class="card-title"><?php echo($row["first_name"]." ".$row["last_name"]); ?></h5>
                   <p class="card-text"><?php echo($row["email"]." - ".$row["phone_number"]); ?></p>
-                  <a href="admin_application.html" class="btn btn-primary">View update</a>
+                  <a href="admin_application.php?id=<?php echo($row["temp_user_id"]);?>" class="btn btn-primary" data-id=<?php echo($row["temp_user_id"]); ?> >View update</a>
                   <hr>                 
                   <?php } ?> 
                 </div>
