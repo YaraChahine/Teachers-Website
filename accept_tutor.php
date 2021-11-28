@@ -35,7 +35,8 @@ $stmt->bind_param("s", $row["email"]);
 $stmt->execute();
 $results = $stmt->get_result(); 
 $tutor_id= $results->fetch_assoc();
-echo($tutor_id["user_id"]);
+
+
 //tutor_ID 	user_id 
 	// gender
     // years_of_experience 
@@ -47,7 +48,7 @@ echo($tutor_id["user_id"]);
     //                        	description
 $mysql = $connection->prepare("INSERT INTO tutors ( user_id, gender,years_of_experience,education_level ,major,	age ,city,college_name ,cv ,profile_image ,description)
  VALUES (?, ?, ?, ?,?,?,?,?,?,?,?);");
-$mysql->bind_param("issssssssss", $tutor_id["user_id"], $row["gender"], $row["years_of_experience"], $row["education_level"], $row["major"],$row["age"],$row["city"],$row["college_name"], $row["cv"],$row["profile_image"],$row["description"]);
+$mysql->bind_param("issssssssss", $tutor_id["user_id"], $row["gender"], $row["years_of_experience"], $row["education_level_tutor"], $row["field"],$row["age"],$row["city"],$row["educational_institution_name"], $row["cv"],$row["image"],$row["description"]);
 if($mysql->execute()){
     die("working");
 }
