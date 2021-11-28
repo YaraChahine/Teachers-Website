@@ -36,36 +36,21 @@ $stmt->execute();
 $results = $stmt->get_result(); 
 $tutor_id= $results->fetch_assoc();
 
-
-//tutor_ID 	user_id 
-	// gender
-    // years_of_experience 
-    // 	education_level
-    //      	major 	age 
-    //          	city
-    //               	college_name
-    //                    	cv 	profile_image 
-    //                        	description
+//adding to tutors table
 $mysql = $connection->prepare("INSERT INTO tutors ( user_id, gender,years_of_experience,education_level ,major,	age ,city,college_name ,cv ,profile_image ,description)
  VALUES (?, ?, ?, ?,?,?,?,?,?,?,?);");
 $mysql->bind_param("issssssssss", $tutor_id["user_id"], $row["gender"], $row["years_of_experience"], $row["education_level_tutor"], $row["field"],$row["age"],$row["city"],$row["educational_institution_name"], $row["cv"],$row["image"],$row["description"]);
-if($mysql->execute()){
-    die("working");
-}
-else{
-    die("not working");
-}
-
-// $sql = "INSERT INTO tutors ( user_id, gender,years_of_experience,education_level ,major,	age ,city,college_name ,cv ,profile_image ,description)
-//  VALUES ('19','dd','dd','dd','dd','dd','dd','dd','dd','dd',dd' );";
-
-// if ($connection->query($sql) === TRUE) {
-//     echo "New record created successfully";
-//   } else {
-//     echo "Error: " . $sql . "<br>" . $connection->error;
-//   }
+($mysql->execute());
 
 
+
+//removing from pending tutors 
+$query= "DELETE FROM pending_tutors where temp_user_id= ?;";
+$stmt = $connection->prepare($query);
+$stmt->bind_param("s", $row["temp_user_id"]);
+$stmt->execute();
+
+header('Location: admin_updates.php');
 
 
 

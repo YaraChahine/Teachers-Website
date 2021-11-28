@@ -1,3 +1,16 @@
+<?php
+include("connection.php");
+session_start();
+$id = $_SESSION["user_id"];
+
+$query= "SELECT first_name FROM  users where user_id=?";
+$stmt = $connection->prepare($query);
+$stmt->bind_param("i", $id);
+
+$stmt->execute();
+$results = $stmt->get_result();
+$row = $results->fetch_assoc();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -56,7 +69,7 @@
                     <li><a class="nav-link scrollto" href="#about">To-do List</a></li>
                     <li><a class="nav-link scrollto" href="#team">Timer</a></li>
                     <li><a class="nav-link scrollto" href="#contact">Pomodoro Clock</a></li>
-                    <li><a class="getstarted scrollto" href="#about">Log out</a></li>
+                    <li><a class="getstarted scrollto" href="logout.php">Log out</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
@@ -66,7 +79,7 @@
 
     <br><br><br><br><br><br>
     <div class="greeting">
-        <h1>Hello, <span id="user-name">Reem!</span></h1>
+        <h1>Hello, <span id="user-name"> <?php echo($row["first_name"]);?></span></h1>
         <p>What would you like to do today?</p>
     </div>
 
@@ -78,7 +91,7 @@
                 <p>Calendar</p>
             </div>
         </a>
-        <a href="todo_list.html">
+        <a href="todolist2.php">
             <div class="grid-item item2">
                 <img src="img/tasktodo.png">
                 <p>To-do List</p>

@@ -47,7 +47,7 @@ if (isset($_POST["login"])){
             header('Location: admin_page.html');
         }
         else{
-            header('Location: profile.html');
+            header('Location: profile.php');
         }
     }
 }
