@@ -21,7 +21,7 @@ body {
     width: 100%;
     background: #fff;
     margin: 0px auto;
-    padding: 10px;
+    padding: 20px;
     border-radius: 5px;
     box-shadow: 0 4px 8px 0 #ccc, 0 6px 20px 0 #ccc;
   }
@@ -156,4 +156,11 @@ body {
     font-style: italic;
     font-weight: 200;
     font-size: 30px;
+  }
+
+
+  .intro h1 {
+    color: #013289;    font-size: 60px;
+    font-weight: bolder;
+
   }

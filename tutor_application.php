@@ -273,5 +273,5 @@ if(empty($row1)) {
     $connection->close();
     
 
-// header("Location:tutor_application.html");
+ header("Location: index.html");
 ?>

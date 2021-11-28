@@ -78,9 +78,11 @@ $id = $_SESSION["user_id"];
     <br><br><br><br><br>
 
     <div class="intro">
+    <h1>To-Do List</h1>
+
     <p>"What you do today can improve all your tomorrows" -Ralph Martson</p>
     </div>
-    <!--img class="blue-pattern2" src="img/bluepattern1.png"-->
+    <!-- <img class="blue-pattern2" src="img/bluepattern1.png"> -->
     <div class="main-section">
        <div class="add-section">
           <form action="add_task.php" method="POST" autocomplete="off">
@@ -89,13 +91,13 @@ $id = $_SESSION["user_id"];
                      name="title" 
                      style="border-color: #ff6666"
                      placeholder="This field is required" />
-              <button type="submit">Add &nbsp; <span>&#43;</span></button>
+              <button type="submit">Add </button>
 
              <?php }else{ ?>
               <input type="text" 
                      name="title" 
                      placeholder="What do you need to do?" />
-              <button type="submit">Add &nbsp; <span>&#43;</span></button>
+              <button type="submit">Add </button>
              <?php } ?>
           </form>
        </div>
@@ -183,5 +185,42 @@ $id = $_SESSION["user_id"];
             });
         });
     </script>
+    <footer id="footer" class="footer">
+
+<div class="footer-top">
+  <div class="container">
+    <div class="row gy-4">
+      <div class="col-lg-6 col-md-12 footer-info">
+        <a href="index.html" class="logo d-flex align-items-center">
+          <img src="./img/logo.png" alt="">
+          <span>Teachers</span>
+        </a>
+        <p>We offer top quality tutors, in every field, for every student, at the best prices, <br>
+          because your education is our priority.</p>
+        <div class="social-links mt-3">
+            <a href="https://www.facebook.com/Teachers.leb/" class="facebook"><i class="bi bi-facebook"></i></a>
+            <a href="https://www.instagram.com/teachers.lb/" class="instagram"><i class="bi bi-instagram"></i></a>
+        </div>
+      </div>
+
+      <div class="d-block col-1 d-lg-none"></div>
+      <div class="col-lg-3 col-5 footer-links">
+        <br> <br class="d-block d-md-none">
+        <h4><i class="bi bi-envelope"></i>&ThickSpace; Email us</h4> <br>
+        elie.daccache7777@gmail.com
+      </div>
+
+      <div class="col-lg-3 col-5 footer-contact text-center text-md-start">
+        <h4>
+          <i class="bi bi-telephone"></i>&ThickSpace; Give us a call <br>
+          <i class="bi bi-whatsapp"></i>&ThickSpace; Contact us on WhatsApp</h4> <br>
+        +961 71 777 498
+      </div>
+      <div class="d-block col-1 d-lg-none"></div>
+
+    </div>
+  </div>
+</div>
+</footer><!-- End Footer -->
 </body>
 </html>
