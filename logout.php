@@ -4,5 +4,6 @@
 session_start();
  
 // Destroying session
+session_unset();
 session_destroy();
 ?>
