@@ -166,12 +166,12 @@ $id = $_GET["id"];
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-body p-5">
-              Are you sure you want to accept <strong>John Smith</strong> as a tutor? John will become a registered tutor at <em>Teachers</em>.
+              Are you sure you want to accept <strong><?php echo($row["first_name"]." ".$row["last_name"]); ?> </strong> as a tutor? John will become a registered tutor at <em>Teachers</em>.
             </div>
             <div class="modal-footer">
-                <form action="">
+                <form action="accept_tutor.php?id=<?php echo($row["temp_user_id"]); ?>"> 
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="submit">Confirm</button>
+                    <a href="accept_tutor.php?id=<?php echo($row["temp_user_id"]); ?>"><button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="submit">Confirm</button></a>
                 </form>
             </div>
           </div>
@@ -191,7 +191,7 @@ $id = $_GET["id"];
             <div class="modal-footer">
                 <form action="">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="submit">Confirm</button>
+                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="submit"> Confirm</button>
                 </form>
             </div>
           </div>

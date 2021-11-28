@@ -42,12 +42,12 @@ if (isset($_POST["login"])){
     }else {  
         $_SESSION["loggedin"] = true;
         $_SESSION["user_id"] = $row['user_id'];
-        $_SESSION["user_type"] = $row['user_type'];
-        if(strcmp($row['user_type'],"1")==0){
+        $_SESSION["type"] = $row['type'];
+        if(strcmp($row['type'],"1")==0){
             header('Location: admin_page.html');
         }
         else{
-            header('Location: index.html');
+            header('Location: profile.html');
         }
     }
 }
