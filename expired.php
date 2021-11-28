@@ -1,3 +1,10 @@
+<?php
+
+session_start();
+$email = $_SESSION["email"];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +27,7 @@
 						<div class="card-body">
 							<h4 class="card-title">We're sorry, your verification code has expired.</h4>
 							<form action="login.php" method="POST">
-								<input type="hidden" name="email" value=" insert php code here to get email from session ">
+								<input type="hidden" name="email" value="<?php echo($email); ?>">
 								<div class="form-group m-0">
 									<button type="submit" name="forgot" class="btn btn-primary btn-block">
 										Resend code
