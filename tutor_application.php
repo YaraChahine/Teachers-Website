@@ -236,15 +236,42 @@ if(isset($_POST["bio"]) && $_POST["bio"]!=""){
 }else{
     die("Nice try Dr. :D 27");
 }
-
-$mysql = $connection->prepare("INSERT INTO pending_tutors(first_name,last_name,email,password,age,gender,phone_number,city,education_level_tutor,educational_institution_name,field,years_of_experience,course_1,course_level_1,course_2,course_level_2,course_3,course_level_3,course_4,course_level_4,cv,image,description) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-$mysql->bind_param("ssssdsssdssdsssssssssss",$first_name,$last_name,$email_address,$password,$age,$gender,$phone_number,$city,$education_level_tutor,$educational_institution_name,$field,$years_of_experience,$course_1,$course_level_1,$course_2,$course_level_2,$course_3,$course_level_3,$course_4,$course_level_4,$cv_file,$img_file,$bio);
-if (!$mysql->execute()){
-    echo ("\n");
-    echo($mysql->error);
-}
-$mysql->close();
-$connection->close();
+$mysql1 = $connection->prepare("SELECT * FROM users WHERE email = ?");
+$mysql1->bind_param("s", $email_address);
+$mysql1->execute();
+$results1 = $mysql1->get_result();
+$row1 = $results1->fetch_assoc();
+if(empty($row1)) {
+    $mysql2 = $connection->prepare("SELECT * FROM pending_tutors WHERE email = ?");
+    $mysql2->bind_param("s", $email_address);
+    $mysql2->execute();
+    $results2 = $mysql2->get_result();
+    $row2 = $results2->fetch_assoc();
+  }else {  
+   die("Email already exists");
+  }
+   if(empty($row2)) {
+    $mysql3 = $connection->prepare("SELECT * FROM pending_students WHERE email = ?");
+    $mysql3->bind_param("s", $email_address);
+    $mysql3->execute();
+    $results3 = $mysql3->get_result();
+    $row3 = $results3->fetch_assoc();
+}else {  
+    die("Email already exists");
+   }
+   if(empty($row3)) {
+    $mysql = $connection->prepare("INSERT INTO pending_tutors(first_name,last_name,email,password,age,gender,phone_number,city,education_level_tutor,educational_institution_name,field,years_of_experience,course_1,course_level_1,course_2,course_level_2,course_3,course_level_3,course_4,course_level_4,cv,image,description) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+    $mysql->bind_param("ssssdsssdssdsssssssssss",$first_name,$last_name,$email_address,$password,$age,$gender,$phone_number,$city,$education_level_tutor,$educational_institution_name,$field,$years_of_experience,$course_1,$course_level_1,$course_2,$course_level_2,$course_3,$course_level_3,$course_4,$course_level_4,$cv_file,$img_file,$bio);
+   }else {  
+        die("Email already exists");
+       }
+    if (!$mysql->execute()){
+        echo ("\n");
+        echo($mysql->error);
+    }
+    $mysql->close();
+    $connection->close();
+    
 
 // header("Location:tutor_application.html");
 ?>

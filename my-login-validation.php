@@ -33,11 +33,11 @@ $password = "";
  $mysql->bind_param("ss", $email, $password);
  $mysql->execute();
  $results = $mysql->get_result();
-$row = $results->fetch_assoc();
+ $row = $results->fetch_assoc();
 
    if(empty($row)) {
      header('Location: login.html');
-   }else {
+   }else {  
     $_SESSION["loggedin"] = true;
     $_SESSION["user_id"] = $row['user_id'];
     $_SESSION["user_type"] = $row['user_type'];
