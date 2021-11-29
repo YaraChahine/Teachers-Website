@@ -100,25 +100,75 @@
           <div class="row my-1 p-0">
             <div class="col-11"></div>
             <div class="col-1 d-flex justify-content-around p-0">
-              <button class="filter-button"data-bs-toggle="collapse" data-bs-target="#filter-panel"><i class="bi bi-x"></i></button>
-              <button class="filter-button" data-bs-toggle="collapse" data-bs-target="#filter-panel"><i class="bi bi-filter" ></i></button>
+              <button class="filter-button" onclick="clear_filters()"><i class="bi bi-x"></i></button>
+              <button class="filter-button" onclick="filter()"><i class="bi bi-filter" ></i></button>
             </div>
           </div>
 
-          <div class="collapse container my-1" id="filter-panel">
-            <div class="card card-body d-flex flex-row justify-content-around">
-              <div class="p-3">
-                
+          <div class="collapse show container my-1" id="filter-panel">
+            <form action="tutors_page.php">
+              <div class="thin-container row card card-body d-flex flex-row justify-content-around p-5">
+                <div class="col-12 col-md-6 p-3">
+                  <span>Age</span>
+                  <select name="age" id="age" onchange="this.form.submit()" class="form-select w-auto d-inline-block m-2">
+                    <option value="all">All</option>
+                    <option value="18-25">18-25</option>
+                    <option value="26-35">26-35</option>
+                    <option value="36-49">36-49</option>
+                    <option value="50">50+</option>
+                  </select>
+                  <br>
+                  <span>Gender</span>
+                  <select name="gender" id="gender" onchange="this.form.submit()" class="form-select w-auto d-inline-block m-2">
+                    <option value="all">All</option>
+                    <option value="m">Male</option>
+                    <option value="f">Female</option>
+                    <option value="o">Other</option>
+                  </select>
+                  <br>
+                  <span>City</span>
+                  <input type="text" name="city" id="city" placeholder="Beirut" class="form-control w-auto d-inline-block m-2">
+                </div>
+                <div class="col-12 col-md-6 p-3">
+                  <span>Education level</span>
+                  <select name="education" id="education" onchange="this.form.submit()" class="form-select w-auto d-inline-block m-2">
+                    <option value="all">All</option>
+                    <option value="0">High school</option>
+                    <option value="1">College - undergraduate</option>
+                    <option value="2">College - graduate</option>
+                    <option value="3">Other</option>
+                  </select>
+                  <br>
+                  <span>Field/degree</span>
+                  <input type="text" name="field" id="field" placeholder="Computer Engineering" class="form-control w-auto d-inline-block m-2">
+                  <br>
+                  <span>Years of experience</span>
+                  <select name="years" id="years" onchange="this.form.submit()" class="form-select w-auto d-inline-block m-2">
+                    <option value="all">All</option>
+                    <option value="0-3">0-3</option>
+                    <option value="4-6">4-6</option>
+                    <option value="7-9">7-9</option>
+                    <option value="10">10+</option>
+                  </select>
+                </div>
               </div>
-              <div class="p-3">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi rem qui obcaecati itaque consequatur, minima laboriosam ea dolores quibusdam ratione laudantium, suscipit vitae! Rerum eos minus distinctio, fuga vero ullam.
-              </div>
-              <div class="p-3">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repudiandae ipsum itaque, iste adipisci accusantium temporibus eveniet a voluptatum reprehenderit fugit, magnam odio quam delectus, error libero expedita voluptate nam saepe?
-              </div>
-            </div>
+            </form>
           </div>
 
+          <?php 
+
+          if ($_GET["age"] == "all" && $_GET["gender"] == "all" && $_GET["city"] == "" && $_GET["education"] == "all" 
+          && $_GET["field"] == "" && $_GET["years"] == "all" && $_GET["levels"] == "all" && $_GET["course"] == "") {
+            $query = "SELECT * FROM users JOIN tutors ON `users`.`user_id` = `tutors`.`user_id` WHERE 
+            age LIKE '%' AND
+            gender LIKE '%' AND
+            city LIKE '%' AND
+            education LIKE '%' AND
+            field LIKE '%' AND
+            years LIKE '%'";
+          }
+
+          ?>
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch my-5" data-aos="fade-up" data-aos-delay="100">
             <div class="member">
               <div class="member-img">

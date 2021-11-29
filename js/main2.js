@@ -96,7 +96,13 @@ function change_level() {
 
 }
 
+function filter() {
+  $('#filter-panel').collapse('toggle');
+}
 
+function clear_filters() {
+  $('#filter-panel').collapse('hide');
+}
 
 function loadBookingData(button) {
 
