@@ -1,3 +1,11 @@
+<?php
+
+include("connection.php");
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -114,7 +122,83 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
+                <!--  $query_tutors_application = "SELECT users.user_id ,tutors.tutor_id, first_name,last_name,email,age,gender,phone_number,city,education_level,college_name,major,years_of_experience,course_name FROM  users JOIN tutors JOIN courses JOIN tutor_courses where users.user_id=tutors.user_id LIMIT 10 OFFSET 80"; -->
+                <?php 
+                if (isset($_GET['page_no']) && $_GET['page_no']!="") {
+                  $page_no = $_GET['page_no'];
+                  } else {
+                      $page_no = 1;
+                      }
+                
+
+                      $query = "SELECT COUNT(*) As total_records FROM users";
+                      $stmt1 = $connection->prepare($query);
+                      $stmt1->execute();
+                      $results_tutors = $stmt1->get_result();
+                      $total_records = $results_tutors->fetch_assoc();
+
+
+
+
+                $records_per_page = 5;
+                $offset = ($page_no-1) * $records_per_page;
+                $previous_page = $page_no - 1;
+                $next_page = $page_no + 1;
+                $query = "SELECT COUNT(*) As total_records FROM users";
+                $stmt1 = $connection->prepare($query);
+                $stmt1->execute();
+                $results_tutors = $stmt1->get_result();
+                $total_records = $results_tutors->fetch_assoc();
+                $no_of_pages = ceil($total_records["total_records"] / $records_per_page);
+                $second_last = $no_of_pages - 1;
+
+                $query_tutors_application = "SELECT * FROM users LIMIT $records_per_page OFFSET $offset";
+                $stmt = $connection->prepare($query_tutors_application);
+                $stmt->execute();
+                $results_tutors = $stmt->get_result();
+                ?>
+              <div class="pagContainer">
+                <ul class="pagination">
+                  <li class="page-item" <?php if($page_no <= 1){ echo "class='disabled'"; } ?>>
+                    <a class="page-link"aria-label="Previous" <?php if($page_no > 1){
+                          echo "href='?page_no=$previous_page'";
+                      } ?>><span aria-hidden="true">&laquo;</span></a>
+                  </li>
+                      <?php  	 
+                        for ($counter = 1; $counter <= $no_of_pages; $counter++){
+                        if ($counter == $page_no) {
+                          echo "<li class='page-item'><a class='page-link' >$counter</a></li>";	
+                        }else{
+                          echo "<li class='page-item'><a class='page-link' href='?page_no=$counter'>$counter</a></li>";
+                            }
+                          
+                        }?>
+                  <li class="page-item"<?php if($page_no >= $no_of_pages){
+                      echo "class='disabled'";
+                  } ?>>
+                    <a class="page-link"<?php if($page_no < $no_of_pages) {
+                    echo "href='?page_no=$next_page'";
+                    } ?>><span aria-hidden="true">&raquo;</span></a>
+                      </li>
+                </ul>
+
+                </div>
+                <?php
+
+
+                while($row = $results_tutors->fetch_assoc()){
+                  echo "<tr>
+                 <td>".$row['user_id']."</td>
+                 <td>".$row['first_name']."</td>
+                 <td>".$row['last_name']."</td>
+                 <td>".$row['email']."</td>
+                 <td>".$row['phone_number']."</td>
+
+
+                 </tr>";
+                      }
+                ?>
+                <!-- <tr>
                     <td>2</td>
                     <td>7</td>
                     <td>John</td>
@@ -161,7 +245,7 @@
                     <td>Math</td>
                     <td>3</td>
                     <td>General Science</td>
-                </tr>
+                </tr> -->
                 </tbody>
             </table>
         </div>

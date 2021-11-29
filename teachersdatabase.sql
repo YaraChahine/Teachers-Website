@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 28, 2021 at 08:57 AM
+-- Generation Time: Nov 29, 2021 at 02:03 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -62,6 +62,18 @@ CREATE TABLE `courses` (
   `course_level` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `courses`
+--
+
+INSERT INTO `courses` (`course_id`, `course_name`, `course_level`) VALUES
+(1, 'math', '1'),
+(5, 'physics', '1'),
+(6, 'chemistry', '1'),
+(7, 'eng', '2'),
+(8, 'ar', '1'),
+(9, 'es', '4');
+
 -- --------------------------------------------------------
 
 --
@@ -101,7 +113,7 @@ CREATE TABLE `pending_tutors` (
   `last_name` varchar(250) NOT NULL,
   `email` varchar(250) NOT NULL,
   `password` varchar(250) NOT NULL,
-  `age` int(11) NOT NULL,
+  `year_born` int(11) NOT NULL,
   `gender` varchar(250) NOT NULL,
   `phone_number` varchar(250) NOT NULL,
   `city` varchar(250) NOT NULL,
@@ -126,7 +138,7 @@ CREATE TABLE `pending_tutors` (
 -- Dumping data for table `pending_tutors`
 --
 
-INSERT INTO `pending_tutors` (`temp_user_id`, `first_name`, `last_name`, `email`, `password`, `age`, `gender`, `phone_number`, `city`, `education_level_tutor`, `educational_institution_name`, `field`, `years_of_experience`, `course_1`, `course_level_1`, `course_2`, `course_level_2`, `course_3`, `course_level_3`, `course_4`, `course_level_4`, `cv`, `image`, `description`) VALUES
+INSERT INTO `pending_tutors` (`temp_user_id`, `first_name`, `last_name`, `email`, `password`, `year_born`, `gender`, `phone_number`, `city`, `education_level_tutor`, `educational_institution_name`, `field`, `years_of_experience`, `course_1`, `course_level_1`, `course_2`, `course_level_2`, `course_3`, `course_level_3`, `course_4`, `course_level_4`, `cv`, `image`, `description`) VALUES
 (1, 'ali', 'ali', 'ali', 'ali', 0, 'ali', 'ali', 'ali', 'ali', 'ali', 'ali', 0, 'ali', 'ali', 'ali', 'ali', 'ali', 'ali', 'ali', 'ali', 'a', 'a', 'ali'),
 (3, '', '', '', '', 0, '', '', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', ''),
 (4, 'grss', 'sg', 'ali.knayber@lau.edu', '9834876dcfb05cb167a5c24953eba58c4ac89b1adf57f28f2f9d09af107ee8f0', 30, 'male', '1121111', 'wDSA', 'highschool-degree', 'grss sg', 'gs', 4, 'hi', 'college', 'asdw', 'college', 'Math', 'high', 'Chemistry', 'middle', 'hi.pdf', 'hi.png', 'bgku'),
@@ -182,6 +194,13 @@ CREATE TABLE `temp_codes` (
   `created` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `temp_codes`
+--
+
+INSERT INTO `temp_codes` (`code_id`, `user_id`, `code`, `created`) VALUES
+(1, 1, '293384', '1638094923');
+
 -- --------------------------------------------------------
 
 --
@@ -209,13 +228,75 @@ CREATE TABLE `tutors` (
   `years_of_experience` varchar(250) NOT NULL,
   `education_level` varchar(250) NOT NULL,
   `major` varchar(250) NOT NULL,
-  `age` varchar(250) NOT NULL,
+  `year_born` int(11) NOT NULL,
   `city` varchar(250) NOT NULL,
   `college_name` varchar(250) NOT NULL,
   `cv` varchar(250) NOT NULL,
   `profile_image` varchar(250) NOT NULL,
   `description` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tutors`
+--
+
+INSERT INTO `tutors` (`tutor_ID`, `user_id`, `gender`, `years_of_experience`, `education_level`, `major`, `year_born`, `city`, `college_name`, `cv`, `profile_image`, `description`) VALUES
+(1, 10, 'ali', '0', 'ali', 'ali', 0, 'ali', 'ali', 'a', 'a', 'ali'),
+(2, 11, 'male', '10', 'good', 'cs', 12, 'beirut', 'lau', 'pdf', 'image', 'hi'),
+(3, 12, 'male', '10', 'good', 'cs', 12, 'beirut', 'lau', 'pdf', 'image', 'hi'),
+(4, 13, 'male', '10', 'good', 'cs', 12, 'beirut', 'lau', 'pdf', 'image', 'hi'),
+(5, 14, 'male', '10', 'good', 'cs', 12, 'beirut', 'lau', 'pdf', 'image', 'hi'),
+(6, 15, 'male', '10', 'good', 'cs', 12, 'beirut', 'lau', 'pdf', 'image', 'hi'),
+(7, 16, 'male', '10', 'ok', 'cs', 12, 'beirut', 'lau', 'pdf', 'image', 'hi'),
+(8, 17, 'male', '10', 'good', 'cs', 12, 'beirut', 'lau', 'pdf', 'image', 'hi'),
+(9, 18, 'male', '10', 'good', 'cs', 12, 'beirut', 'lau', 'pdf', 'image', 'hi'),
+(10, 19, 'male', '10', 'good', 'cs', 12, 'beirut', 'lau', 'pdf', 'image', 'hi'),
+(11, 20, 'male', '10', 'good', 'cs', 12, 'beirut', 'lau', 'pdf', 'image', 'hi'),
+(12, 21, 'male', '10', 'good', 'cs', 12, 'beirut', 'lau', 'pdf', 'image', 'hi'),
+(13, 22, 'male', '10', 'good', 'cs', 12, 'beirut', 'lau', 'pdf', 'image', 'hi'),
+(14, 23, 'male', '10', 'good', 'cs', 12, 'beirut', 'lau', 'pdf', 'image', 'hi'),
+(15, 24, 'male', '10', 'good', 'cs', 12, 'beirut', 'lau', 'pdf', 'image', 'hi'),
+(16, 25, 'male', '10', 'good', 'cs', 12, 'beirut', 'lau', 'pdf', 'image', 'hi'),
+(17, 26, 'male', '10', 'good', 'cs', 12, 'beirut', 'lau', 'pdf', 'image', 'hi'),
+(18, 27, 'male', '10', 'good', 'cs', 12, 'beirut', 'lau', 'pdf', 'image', 'hi'),
+(19, 28, 'male', '10', 'good', 'cs', 12, 'beirut', 'lau', 'pdf', 'image', 'hi'),
+(20, 29, 'male', '10', 'good', 'cs', 12, 'beirut', 'lau', 'pdf', 'image', 'hi'),
+(21, 21, 'male', '10', 'good', 'cs', 30, 'beirut', 'lau', 'pdf', 'image', 'hi'),
+(22, 22, 'male', '10', 'good', 'cs', 31, 'beirut', 'lau', 'pdf', 'image', 'hi');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tutor_courses`
+--
+
+CREATE TABLE `tutor_courses` (
+  `id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `tutor_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tutor_courses`
+--
+
+INSERT INTO `tutor_courses` (`id`, `course_id`, `tutor_id`) VALUES
+(1, 8, 10),
+(4, 1, 1),
+(5, 1, 2),
+(7, 1, 1),
+(8, 1, 2),
+(10, 1, 1),
+(11, 1, 2),
+(12, 1, 4),
+(13, 8, 15),
+(14, 8, 6),
+(15, 1, 18),
+(16, 7, 19),
+(17, 5, 3),
+(18, 5, 16),
+(19, 7, 12),
+(20, 6, 7);
 
 -- --------------------------------------------------------
 
@@ -239,8 +320,40 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`user_id`, `type`, `first_name`, `last_name`, `email`, `phone_number`, `password`) VALUES
 (1, 1, 'ali', 'knayber', 'ali.knayber@lau.edu', '76622141', '4f15e62e98d0eb3f530af0c46bd319235df916c2dda16824bb7d92dd07275196'),
-(2, 2, 'alis', 'ad', 'ali.knayber1@edu.edu', '3232', '4f15e62e98d0eb3f530af0c46bd319235df916c2dda16824bb7d92dd07275196'),
-(3, 3, 'adsas', 'ads', 'ali.knayber3@edu.edu', '3232', '12');
+(2, 2, 'sarah', 'abdallah', 'sarah.abdallah@edu.edu', '3232', '4f15e62e98d0eb3f530af0c46bd319235df916c2dda16824bb7d92dd07275196'),
+(3, 3, 'yara', 'chahine', 'yara.chahine@edu.edu', '3232', '12'),
+(10, 2, 'reem', 'zubdeh', 'reem.zubdeh@lau.edu', '87686', 'reem'),
+(11, 2, 'tutor1', 'tutor1', 'tutor1', 'tutor1', 'tutor1'),
+(12, 2, 'tutor2', 'tutor2', 'tutor2', 'tutor2', 'tutor2'),
+(13, 2, 'tutor3', 'tutor3', 'tutor3', 'tutor3', 'tutor3'),
+(14, 2, 'tutor4', 'tutor4', 'tutor4tutor4', 'tutor4', 'tutor4tutor4'),
+(15, 2, 'tutor5', 'tutor5', 'tutor5', 'tutor5', 'tutor5'),
+(16, 2, 'tutor6', 'tutor6', 'tutor6', 'tutor6', 'tutor6'),
+(17, 2, 'tutor7', 'sdada', 'dafaefgFSCAF', '1213241355', 'sdfas'),
+(18, 2, 'tutor8', 'tutor8', 'tutor8', 'tutor8', 'tutor8'),
+(19, 2, 'tutor9', 'tutor9', 'tutor9', 'tutor9', 'tutor9'),
+(20, 2, 'tutor10', 'tutor10', 'tutor10', 'tutor10', 'tutor10'),
+(21, 2, 'tutor1', 'tutor1', 'tutor1', 'tutor1', 'tutor1'),
+(22, 2, 'tutor2', 'tutor2', 'tutor2', 'tutor2', 'tutor2'),
+(23, 2, 'tutor3', 'tutor3', 'tutor3', 'tutor3', 'tutor3'),
+(24, 2, 'tutor4', 'tutor4', 'tutor4tutor4', 'tutor4', 'tutor4tutor4'),
+(25, 2, 'tutor5', 'tutor5', 'tutor5', 'tutor5', 'tutor5'),
+(26, 2, 'tutor6', 'tutor6', 'tutor6', 'tutor6', 'tutor6'),
+(27, 2, 'tutor7', 'sdada', 'dafaefgFSCAF', '1213241355', 'sdfas'),
+(28, 2, 'tutor8', 'tutor8', 'tutor8', 'tutor8', 'tutor8'),
+(29, 2, 'tutor9', 'tutor9', 'tutor9', 'tutor9', 'tutor9'),
+(30, 2, 'tutor10', 'tutor10', 'tutor10', 'tutor10', 'tutor10'),
+(31, 2, 'tutor1', 'tutor1', 'tutor1', 'tutor1', 'tutor1'),
+(32, 2, 'tutor2', 'tutor2', 'tutor2', 'tutor2', 'tutor2'),
+(33, 2, 'tutor3', 'tutor3', 'tutor3', 'tutor3', 'tutor3'),
+(34, 2, 'tutor4', 'tutor4', 'tutor4tutor4', 'tutor4', 'tutor4tutor4'),
+(35, 2, 'tutor5', 'tutor5', 'tutor5', 'tutor5', 'tutor5'),
+(36, 2, 'tutor6', 'tutor6', 'tutor6', 'tutor6', 'tutor6'),
+(37, 2, 'tutor7', 'sdada', 'dafaefgFSCAF', '1213241355', 'sdfas'),
+(38, 2, 'tutor8', 'tutor8', 'tutor8', 'tutor8', 'tutor8'),
+(39, 2, 'tutor9', 'tutor9', 'tutor9', 'tutor9', 'tutor9'),
+(40, 2, 'tutor10', 'tutor10', 'tutor10', 'tutor10', 'tutor10'),
+(41, 3, 'cz', 'weddc', 'xzc', 'cxz', '');
 
 -- --------------------------------------------------------
 
@@ -329,6 +442,14 @@ ALTER TABLE `tutors`
   ADD KEY `user_id` (`user_id`);
 
 --
+-- Indexes for table `tutor_courses`
+--
+ALTER TABLE `tutor_courses`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK1` (`course_id`),
+  ADD KEY `FK2` (`tutor_id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -361,7 +482,7 @@ ALTER TABLE `calendar`
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `course_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `course_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `pending_students`
@@ -385,7 +506,7 @@ ALTER TABLE `students`
 -- AUTO_INCREMENT for table `temp_codes`
 --
 ALTER TABLE `temp_codes`
-  MODIFY `code_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `code_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `to_do_list`
@@ -397,13 +518,19 @@ ALTER TABLE `to_do_list`
 -- AUTO_INCREMENT for table `tutors`
 --
 ALTER TABLE `tutors`
-  MODIFY `tutor_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `tutor_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT for table `tutor_courses`
+--
+ALTER TABLE `tutor_courses`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- Constraints for dumped tables
@@ -446,6 +573,14 @@ ALTER TABLE `to_do_list`
 --
 ALTER TABLE `tutors`
   ADD CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+
+--
+-- Constraints for table `tutor_courses`
+--
+ALTER TABLE `tutor_courses`
+  ADD CONSTRAINT `FK` FOREIGN KEY (`course_id`) REFERENCES `courses` (`course_id`),
+  ADD CONSTRAINT `FK1` FOREIGN KEY (`course_id`) REFERENCES `courses` (`course_id`),
+  ADD CONSTRAINT `FK2` FOREIGN KEY (`tutor_id`) REFERENCES `tutors` (`tutor_ID`);
 
 --
 -- Constraints for table `users`
