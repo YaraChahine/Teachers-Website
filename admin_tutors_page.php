@@ -138,12 +138,12 @@ include("connection.php");
 
 
 
-                $adjacents = "2";
-                $records_per_page =1;
+                $next_to = "2";
+                $records_per_page =10;
                 $offset = ($page_no-1) * $records_per_page;
                 $previous_page = $page_no - 1;
                 $next_page = $page_no + 1;
-                $query = "SELECT COUNT(*) As total_records FROM users";
+                $query = "SELECT COUNT(*) As total_records from users INNER JOIN tutors on users.user_id=tutors.user_id INNER JOIN tutor_courses on tutors.tutor_ID=tutor_courses.tutor_id INNER JOIN courses on tutor_courses.course_id=courses.course_id";
                 $stmt1 = $connection->prepare($query);
                 $stmt1->execute();
                 $results_tutors = $stmt1->get_result();
@@ -151,7 +151,9 @@ include("connection.php");
                 $no_of_pages = ceil($total_records["total_records"] / $records_per_page);
                 $before_last = $no_of_pages - 1;
 
-                $query_tutors_application = "SELECT * FROM users LIMIT $records_per_page OFFSET $offset";
+                $query_tutors_application = "SELECT users.user_id,tutors.tutor_ID,users.first_name,users.last_name,users.email,year(CURRENT_DATE)- tutors.year_born as age,tutors.gender,users.phone_number, tutors.city, tutors.education_level, tutors.college_name,tutors.major,tutors.years_of_experience,courses.course_name from users INNER JOIN tutors on users.user_id=tutors.user_id INNER JOIN tutor_courses on tutors.tutor_ID=tutor_courses.tutor_id INNER JOIN courses on tutor_courses.course_id=courses.course_id LIMIT $records_per_page OFFSET $offset";
+                // $query_tutors_application = "SELECT * from users LIMIT $records_per_page OFFSET $offset";
+
                 $stmt = $connection->prepare($query_tutors_application);
                 $stmt->execute();
                 $results_tutors = $stmt->get_result();
@@ -190,8 +192,8 @@ include("connection.php");
                             echo "<li class='page-item'><a class='page-link' href='?page_no=2'>2</a></li>";
                             echo "<li class='page-item'><a class='page-link' >...</a></li>";
                             for (
-                                 $counter = $page_no - $adjacents;
-                                 $counter <= $page_no + $adjacents;
+                                 $counter = $page_no - $next_to;
+                                 $counter <= $page_no + $next_to;
                                  $counter++
                                  ) {		
                                  if ($counter == $page_no) {
@@ -237,11 +239,19 @@ include("connection.php");
                 while($row = $results_tutors->fetch_assoc()){
                   echo "<tr>
                  <td>".$row['user_id']."</td>
+                 <td>".$row['tutor_ID']."</td>
                  <td>".$row['first_name']."</td>
                  <td>".$row['last_name']."</td>
                  <td>".$row['email']."</td>
+                 <td>".$row['age']."</td>
+                 <td>".$row['gender']."</td>
                  <td>".$row['phone_number']."</td>
-
+                 <td>".$row['city']."</td>
+                 <td>".$row['education_level']."</td>
+                 <td>".$row['college_name']."</td>
+                 <td>".$row['major']."</td>
+                 <td>".$row['years_of_experience']."</td>
+                 <td>".$row['course_name']."</td>
 
                  </tr>";
                       }
