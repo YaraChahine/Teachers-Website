@@ -174,8 +174,8 @@
              var interval=1000;
 
        console.log(hours, minutes, seconds);
-             hrs = hours * 60 * 60;
-             mins = minutes * 60;
+             hrs = hours * 60 *60;
+             mins = minutes*60 ;
              time = hrs + mins + seconds;
             console.log(time);
             // Set the date we're counting down to
@@ -185,7 +185,8 @@
                 if(time>=0){
 
                 var hours = Math.floor(time / (60 * 60));
-                var minutes = Math.floor(time / 60);
+                var t=time-(hours*60*60);
+                var minutes = Math.floor(t / 60);
                 var seconds = time % 60;
 
                 document.getElementById("demo").innerHTML = hours + "h "
