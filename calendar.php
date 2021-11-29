@@ -194,6 +194,7 @@
                                         <option value="3">Urgent</option>
                                         <option value="4">Top priority</option>
                                     </select>
+                                    <input type="hidden" name="" id="events_backend" value="<?php echo "blah" ?>" ></input>
                                     <div class="d-flex justify-content-evenly w-100 my-4">
                                         <button type="button" class="button" id="cancel-button">Cancel</button>
                                         <button type="button" class="button button-white" id="ok-button">OK</button>

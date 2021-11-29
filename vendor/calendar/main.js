@@ -219,6 +219,7 @@
             event["year"]===year) {
                 events.push(event);
             }
+            //jquery ajax here
     }
     return events;
     }

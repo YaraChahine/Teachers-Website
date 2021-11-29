@@ -1,3 +1,120 @@
+<?php 
+
+include("connection.php");
+
+$currentYear = date("Y");
+$age = "";
+$ageQ = "";
+if (isset($_GET["age"])) $age = $_GET["age"]; 
+switch ($age) {
+  case "18-25":
+      $ageQ = $currentYear-25 . " AND " . $currentYear-18;
+      break;
+  case "26-35":
+      $ageQ = $currentYear-35 . " AND " . $currentYear-26;
+      break;
+  case "36-49":
+      $ageQ = $currentYear-49 . " AND " . $currentYear-36;
+      break;
+  case "50":
+      $ageQ = $currentYear-60 . " AND " . $currentYear-50;
+      break;
+  default:
+      $ageQ = $currentYear-60 . " AND " . $currentYear-18;
+}
+
+$gender = "";
+$genderQ = "";
+if (isset($_GET["gender"])) $gender = $_GET["gender"];
+switch ($gender) {
+  case "m":
+      $genderQ = "Male";
+      break;
+  case "f":
+      $genderQ = "Female";
+      break;
+  case "o":
+      $genderQ = "Other";
+      break;
+  default:
+      $genderQ = "%";
+}
+
+$city = "";
+$cityQ = "%";
+if (isset($_GET["city"])) $city = trim($_GET["city"]);
+if ($city != "") $cityQ = $city;
+
+$education = "";
+$educationQ = "";
+if (isset($_GET["education"])) $education = $_GET["education"];
+switch ($education) {
+  case "0":
+      $educationQ = "0";
+      break;
+  case "1":
+      $educationQ = "1";
+      break;
+  case "2":
+      $educationQ = "2";
+      break;
+  case "3":
+      $educationQ = "3";
+      break;
+  default:
+      $educationQ = "%";
+}
+
+$field = "";
+$fieldQ = "%";
+if (isset($_GET["field"])) $field = trim($_GET["field"]);
+if ($field != "") $fieldQ = $field;
+
+$years = "";
+$yearsQ = "";
+if (isset($_GET["years"])) $years = $_GET["years"]; 
+switch ($age) {
+  case "0-3":
+      $yearsQ = "0 AND 3";
+      break;
+  case "4-6":
+      $yearsQ = "4 AND 6";
+      break;
+  case "7-9":
+      $yearsQ = "7 AND 9";
+      break;
+  case "10":
+      $yearsQ = "10 AND 9999";
+      break;
+  default:
+      $yearsQ = "0 AND 9999";
+}
+
+$query = "
+SELECT 
+tutor_id, first_name, last_name, email, phone_number, gender, years_of_experience,
+education_level, major, year_born, city, college_name, profile_image, description
+FROM users JOIN tutors ON `users`.`user_id` = `tutors`.`user_id` WHERE
+year_born BETWEEN ". $ageQ . " 
+AND
+gender LIKE '". $genderQ . "' 
+AND
+city LIKE '". $cityQ . "' 
+AND
+education_level LIKE '". $educationQ . "' 
+AND
+major LIKE '". $fieldQ . "' 
+AND
+years_of_experience BETWEEN ". $yearsQ . ";";
+
+$stmt = $connection->prepare($query);
+$stmt->execute();
+$res = $stmt->get_result();
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -108,120 +225,125 @@
                 <div class="col-12 col-md-6 p-3">
                   <span>Age</span>
                   <select name="age" id="age" onchange="this.form.submit()" class="form-select w-auto d-inline-block m-2">
-                    <option value="all">All</option>
-                    <option value="18-25">18-25</option>
-                    <option value="26-35">26-35</option>
-                    <option value="36-49">36-49</option>
-                    <option value="50">50+</option>
+                    <option value="all" <?php if ($age == "all" || $age == "") { ?> selected <?php }?> >All</option>
+                    <option value="18-25" <?php if ($age == "18-25") { ?> selected <?php }?> >18-25</option>
+                    <option value="26-35" <?php if ($age == "26-35") { ?> selected <?php }?> >26-35</option>
+                    <option value="36-49" <?php if ($age == "36-49") { ?> selected <?php }?> >36-49</option>
+                    <option value="50" <?php if ($age == "50") { ?> selected <?php }?> >50+</option>
                   </select>
                   <br>
                   <span>Gender</span>
                   <select name="gender" id="gender" onchange="this.form.submit()" class="form-select w-auto d-inline-block m-2">
-                    <option value="all">All</option>
-                    <option value="m">Male</option>
-                    <option value="f">Female</option>
-                    <option value="o">Other</option>
+                    <option value="all" <?php if ($gender == "all" || $gender == "") { ?> selected <?php }?> >All</option>
+                    <option value="m" <?php if ($gender == "m") { ?> selected <?php }?> >Male</option>
+                    <option value="f" <?php if ($gender == "f") { ?> selected <?php }?> >Female</option>
+                    <option value="o" <?php if ($gender == "o") { ?> selected <?php }?> >Other</option>
                   </select>
                   <br>
                   <span>City</span>
-                  <input type="text" name="city" id="city" placeholder="Beirut" class="form-control w-auto d-inline-block m-2">
+                  <input type="text" name="city" id="city" placeholder="Beirut" onchange="this.form.submit()"
+                  value="<?php echo $city ?>" class="form-control w-auto d-inline-block m-2">
                 </div>
                 <div class="col-12 col-md-6 p-3">
                   <span>Education level</span>
                   <select name="education" id="education" onchange="this.form.submit()" class="form-select w-auto d-inline-block m-2">
-                    <option value="all">All</option>
-                    <option value="0">High school</option>
-                    <option value="1">College - undergraduate</option>
-                    <option value="2">College - graduate</option>
-                    <option value="3">Other</option>
+                    <option value="all" <?php if ($education == "all" || $education == "") { ?> selected <?php }?> >All</option>
+                    <option value="0" <?php if ($education == "0") { ?> selected <?php }?> >High school</option>
+                    <option value="1" <?php if ($education == "1") { ?> selected <?php }?> >College - undergraduate</option>
+                    <option value="2" <?php if ($education == "2") { ?> selected <?php }?> >College - graduate</option>
+                    <option value="3" <?php if ($education == "3") { ?> selected <?php }?> >Other</option>
                   </select>
                   <br>
                   <span>Field/degree</span>
-                  <input type="text" name="field" id="field" placeholder="Computer Engineering" class="form-control w-auto d-inline-block m-2">
+                  <input type="text" name="field" id="field" placeholder="Computer Engineering" onchange="this.form.submit()"
+                  value="<?php echo $field ?>" class="form-control w-auto d-inline-block m-2">
                   <br>
                   <span>Years of experience</span>
                   <select name="years" id="years" onchange="this.form.submit()" class="form-select w-auto d-inline-block m-2">
-                    <option value="all">All</option>
-                    <option value="0-3">0-3</option>
-                    <option value="4-6">4-6</option>
-                    <option value="7-9">7-9</option>
-                    <option value="10">10+</option>
+                    <option value="all" <?php if ($years == "all" || $years = "") { ?> selected <?php }?> >All</option>
+                    <option value="0-3" <?php if ($years == "0-3") { ?> selected <?php }?> >0-3</option>
+                    <option value="4-6" <?php if ($years == "4-6") { ?> selected <?php }?> >4-6</option>
+                    <option value="7-9" <?php if ($years == "7-9") { ?> selected <?php }?> >7-9</option>
+                    <option value="10" <?php if ($years == "10") { ?> selected <?php }?> >10+</option>
                   </select>
                 </div>
               </div>
             </form>
           </div>
 
-          <?php 
+          
 
-          $currentYear = date("Y");
-          $ageQ = "";
-          $age = "";
-          if (isset($_GET["age"])) $age = $_GET["age"]; 
-          switch ($age) {
-            case "18-25":
-                $ageQ = $currentYear-18 . " AND " . $currentYear-25;
-                break;
-            case "26-35":
-                $ageQ = $currentYear-26 . " AND " . $currentYear-35;
-                break;
-            case "36-49":
-                $ageQ = $currentYear-36 . " AND " . $currentYear-49;
-                break;
-            case "50":
-                $ageQ = $currentYear-50 . " AND " . $currentYear-60;
-                break;
-            default:
-                $ageQ = $currentYear-18 . " AND " . $currentYear-60;
-          }
+          <?php
+          while($r = $res->fetch_assoc()) { 
+            
+            $id = $r["tutor_id"];
+            $name = $r["first_name"] ." ". $r["last_name"];
+            $email = $r["email"];
+            $phone = "+" . $r["phone_number"];
+            $gender = $r["gender"];
+            $years = $r["years_of_experience"];
+            $education = "";
+                switch ($r["education_level"]) {
+                  case "0":
+                      $education = "High school degree";
+                      break;
+                  case "1":
+                      $education = "Undergraduate degree";
+                      break;
+                  case "2":
+                      $education = "Graduate degree";
+                      break;
+                  case "3":
+                      $education = "Degree";
+                      break;
+                }
+            $field = $r["major"];
+            $age = date("Y") - $r["year_born"];
+            $city = $r["city"];
+            $school = $r["college_name"];
+            $image = "/tutor_image/" . $r["profile_image"];
+            $description = $r["description"];
+            $courses = "";
 
-          $gender = "";
-          if (isset($_GET["gender"]) $gender = $_GET["gender"];
-          $genderQ = "";
-          switch ($_GET["gender"]) {
-            case "m":
-                $genderQ = "Male";
-                break;
-            case "f":
-                $genderQ = "Female";
-                break;
-            case "o":
-                $genderQ = "Other";
-                break;
-            default:
-                $genderQ = "%";
-          }
+                $query = "SELECT * FROM `tutor_courses` JOIN `courses` ON `tutor_courses`.`course_id` = `courses`.`course_id`
+                WHERE `tutor_id` = ?";
+                $stmt = $connection->prepare($query);
+                $stmt->bind_param("d", $id);
+                $stmt->execute();
+                $res = $stmt->get_result();
+                while ($r = $res->fetch_assoc()) {
+                  $courses .= $r["course_name"] ." - " .$r["course_level"] . "<br>";
+                }
+            
+            ?>
 
-          $city = "";
-          if (isset($_GET["city"]) $city = $_GET["city"];
-          $genderQ = "";
-          switch ($city) {
-            case "":
-                $cityQ = "%";
-                break;
-            case "f":
-                $genderQ = "Female";
-                break;
-            case "o":
-                $genderQ = "Other";
-                break;
-            default:
-                $genderQ = "%";
-          }
+              <div class="col-lg-3 col-md-6 d-flex align-items-stretch my-5" data-aos="fade-up" data-aos-delay="10">
+                <div class="member">
+                  <div class="member-img">
+                    <img src="<?php echo $image ?>" class="img-fluid" alt="">
+                  </div>
+                  <div class="member-info">
+                    <h4><?php echo $name ?></h4>
+                    <span><?php echo $email ?></span>
+                    <span><?php echo $phone ?></span>
+                    <span><?php echo $city ?></span>
+                    <p>
+                    <?php echo $age ?> years old - <?php echo $gender ?> <br>
+                    <?php echo $years ?> years of experience <br>
+                    <?php echo $education ?> at <?php echo $school ?> <br>
+                    Main field of study: <?php echo $field ?> <br>
+                    Teaches the following courses: <br>
+                    <?php echo $courses ?> <br>
+                    <?php echo $description ?>
+                    </p>
+                  </div>
+                </div>
+              </div>
 
-          if ($_GET["age"] == "all" && $_GET["gender"] == "all" && $_GET["city"] == "" && $_GET["education"] == "all" 
-          && $_GET["field"] == "" && $_GET["years"] == "all" && $_GET["levels"] == "all" && $_GET["course"] == "") {
-            $query = "
-            SELECT * FROM users JOIN tutors ON `users`.`user_id` = `tutors`.`user_id` WHERE
-            age BETWEEN ". $ageQ . "
-            gender LIKE ". $genderQ . "
-            city LIKE '%' AND
-            education LIKE '%' AND
-            field LIKE '%' AND
-            years LIKE '%'";
-          }
 
-          ?>
+
+          <?php }?>
+
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch my-5" data-aos="fade-up" data-aos-delay="100">
             <div class="member">
               <div class="member-img">
