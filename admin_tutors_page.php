@@ -60,11 +60,10 @@ include("connection.php");
 
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a class="nav-link scrollto active" href="#hero">Calendar</a></li>
-                    <li><a class="nav-link scrollto" href="#about">To-do List</a></li>
-                    <li><a class="nav-link scrollto" href="#team">Timer</a></li>
-                    <li><a class="nav-link scrollto" href="#contact">Pomodoro Clock</a></li>
-                    <li><a class="getstarted scrollto" href="#about">Log out</a></li>
+                <li><a class="nav-link scrollto active" href="admin_page.html">Main Page</a></li>
+                    <li><a class="nav-link scrollto" href="admin_updates.php">My updates</a></li>
+                    <li><a class="nav-link scrollto" href="admin_page.html">Remove a member</a></li>
+                    <li><a class="getstarted scrollto" href="logout.php">Log out</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
