@@ -115,7 +115,7 @@ if (isset($_GET["id"])) {
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Age</strong></p>
-                        <p class="col-8"><?php echo(intval(date("Y")) - $row["yearborn"]); ?></p>
+                        <p class="col-8"><?php echo(intval(date("Y")) - $row["year_born"]); ?></p>
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Gender</strong></p>
@@ -127,7 +127,24 @@ if (isset($_GET["id"])) {
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Education level</strong></p>
-                        <p class="col-8"><?php echo($row["education_level_tutor"]); ?></p>
+                        <p class="col-8">
+                          <?php 
+                          switch ($row["education_level_tutor"]) {
+                            case "0":
+                                echo "High school";
+                                break;
+                            case "1":
+                                echo "College - Undergraduate";
+                                break;
+                            case "2":
+                                echo "College - Graduate";
+                                break;
+                            case "3":
+                                echo "Other";
+                                break;
+                          }
+                          ?>
+                        </p>
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>College Name</strong></p>
@@ -143,7 +160,9 @@ if (isset($_GET["id"])) {
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Courses taught</strong></p>
-                        <p class="col-8"><?php echo($row["course_1"]." - ".$row["course_level_1"]); ?> <br><?php echo($row["course_2"]." - ".$row["course_level_2"]);?> <br> <?php echo($row["course_3"]." - ".$row["course_level_3"]) ?>;</p>
+                        <p class="col-8">
+                          <?php echo($row["course_1"]." - ".$row["course_level_1"]); ?> <br><?php echo($row["course_2"]." - ".$row["course_level_2"]);?> <br> <?php echo($row["course_3"]." - ".$row["course_level_3"]) ?>;
+                        </p>
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>CV</strong></p>
