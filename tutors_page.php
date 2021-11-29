@@ -192,6 +192,23 @@
                 $genderQ = "%";
           }
 
+          $city = "";
+          if (isset($_GET["city"]) $city = $_GET["city"];
+          $genderQ = "";
+          switch ($city) {
+            case "":
+                $cityQ = "%";
+                break;
+            case "f":
+                $genderQ = "Female";
+                break;
+            case "o":
+                $genderQ = "Other";
+                break;
+            default:
+                $genderQ = "%";
+          }
+
           if ($_GET["age"] == "all" && $_GET["gender"] == "all" && $_GET["city"] == "" && $_GET["education"] == "all" 
           && $_GET["field"] == "" && $_GET["years"] == "all" && $_GET["levels"] == "all" && $_GET["course"] == "") {
             $query = "
