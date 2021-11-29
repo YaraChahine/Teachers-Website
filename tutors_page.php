@@ -154,32 +154,31 @@
 
           <?php 
 
-          $currentYear = intval(date("Y"));
-
+          $currentYear = date("Y");
           $ageQ = "";
-          switch ($_GET["age"]) {
-            case "all":
-                $ageQ = $currentYear-18 . " AND " $currentYear-60;
-                break;
+          $age = "";
+          if (isset($_GET["age"])) $age = $_GET["age"]; 
+          switch ($age) {
             case "18-25":
-                $ageQ = $currentYear-18 . " AND " $currentYear-25;
+                $ageQ = $currentYear-18 . " AND " . $currentYear-25;
                 break;
             case "26-35":
-                $ageQ = $currentYear-26 . " AND " $currentYear-35;
+                $ageQ = $currentYear-26 . " AND " . $currentYear-35;
                 break;
             case "36-49":
-                $ageQ = $currentYear-36 . " AND " $currentYear-49;
+                $ageQ = $currentYear-36 . " AND " . $currentYear-49;
                 break;
             case "50":
-                $ageQ = $currentYear-50 . " AND " $currentYear-60;
+                $ageQ = $currentYear-50 . " AND " . $currentYear-60;
                 break;
+            default:
+                $ageQ = $currentYear-18 . " AND " . $currentYear-60;
           }
 
+          $gender = "";
+          if (isset($_GET["gender"]) $gender = $_GET["gender"];
           $genderQ = "";
           switch ($_GET["gender"]) {
-            case "all":
-                $genderQ = "%";
-                break;
             case "m":
                 $genderQ = "Male";
                 break;
@@ -189,6 +188,8 @@
             case "o":
                 $genderQ = "Other";
                 break;
+            default:
+                $genderQ = "%";
           }
 
           if ($_GET["age"] == "all" && $_GET["gender"] == "all" && $_GET["city"] == "" && $_GET["education"] == "all" 
