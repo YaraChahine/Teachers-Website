@@ -65,10 +65,11 @@ $row = $results->fetch_assoc();
 
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a class="nav-link scrollto active" href="#hero">Calendar</a></li>
-                    <li><a class="nav-link scrollto" href="#about">To-do List</a></li>
-                    <li><a class="nav-link scrollto" href="#team">Timer</a></li>
-                    <li><a class="nav-link scrollto" href="#contact">Pomodoro Clock</a></li>
+                    <li><a class="nav-link scrollto active" href="profile.php">Home</a></li>
+                    <li><a class="nav-link scrollto" href="todolist2.php">To-do List</a></li>
+                    <li><a class="nav-link scrollto" href="calendar.html">Calendar</a></li>
+                    <li><a class="nav-link scrollto" href="timer.html">Timer</a></li>
+                    <li><a class="nav-link scrollto" href="pomodoro.html">Pomodoro Clock</a></li>
                     <li><a class="getstarted scrollto" href="logout.php">Log out</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>

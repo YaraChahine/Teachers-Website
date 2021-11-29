@@ -59,8 +59,8 @@ include("connection.php");
 
             <nav id="navbar" class="navbar">
                 <ul>
-                <li><a class="nav-link scrollto active" href="admin_page.html">Main Page</a></li>
-                    <li><a class="nav-link scrollto" href="admin_updates.php">My updates</a></li>
+                <li><a class="nav-link scrollto " href="admin_page.html">Main Page</a></li>
+                    <li><a class="nav-link scrollto active" href="admin_updates.php">My updates</a></li>
                     <li><a class="nav-link scrollto" href="admin_page.html">Remove a member</a></li>
                     <li><a class="getstarted scrollto" href="logout.php">Log out</a></li>
                 </ul>
