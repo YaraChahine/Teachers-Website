@@ -154,11 +154,49 @@
 
           <?php 
 
+          $currentYear = intval(date("Y"));
+
+          $ageQ = "";
+          switch ($_GET["age"]) {
+            case "all":
+                $ageQ = $currentYear-18 . " AND " $currentYear-60;
+                break;
+            case "18-25":
+                $ageQ = $currentYear-18 . " AND " $currentYear-25;
+                break;
+            case "26-35":
+                $ageQ = $currentYear-26 . " AND " $currentYear-35;
+                break;
+            case "36-49":
+                $ageQ = $currentYear-36 . " AND " $currentYear-49;
+                break;
+            case "50":
+                $ageQ = $currentYear-50 . " AND " $currentYear-60;
+                break;
+          }
+
+          $genderQ = "";
+          switch ($_GET["gender"]) {
+            case "all":
+                $genderQ = "%";
+                break;
+            case "m":
+                $genderQ = "Male";
+                break;
+            case "f":
+                $genderQ = "Female";
+                break;
+            case "o":
+                $genderQ = "Other";
+                break;
+          }
+
           if ($_GET["age"] == "all" && $_GET["gender"] == "all" && $_GET["city"] == "" && $_GET["education"] == "all" 
           && $_GET["field"] == "" && $_GET["years"] == "all" && $_GET["levels"] == "all" && $_GET["course"] == "") {
-            $query = "SELECT * FROM users JOIN tutors ON `users`.`user_id` = `tutors`.`user_id` WHERE 
-            age LIKE '%' AND
-            gender LIKE '%' AND
+            $query = "
+            SELECT * FROM users JOIN tutors ON `users`.`user_id` = `tutors`.`user_id` WHERE
+            age BETWEEN ". $ageQ . "
+            gender LIKE ". $genderQ . "
             city LIKE '%' AND
             education LIKE '%' AND
             field LIKE '%' AND

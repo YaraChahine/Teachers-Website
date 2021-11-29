@@ -1,7 +1,9 @@
 <?php
 
 include("connection.php");
-$id = $_GET["id"];
+if (isset($_GET["id"])) {
+  $id = $_GET["id"];
+} else die ("no tutor application selected");
 
 
 ?>
@@ -85,12 +87,16 @@ $id = $_GET["id"];
               <span>&ThickSpace; Tutor Application</span>
             </h5>
             <div class="card-body p-5">
-            <?php $query_tutors_application = "SELECT * FROM  pending_tutors where temp_user_id=$id";
+            <?php $query_tutors_application = "SELECT * FROM  pending_tutors where temp_user_id=?";
                 $stmt = $connection->prepare($query_tutors_application);
+                $stmt->bind_param("d", $id);
                 $stmt->execute();
                 $results_tutors = $stmt->get_result(); 
-                $row = $results_tutors->fetch_assoc() ?>
-                 
+                $row = $results_tutors->fetch_assoc();
+                if (empty($row)) {
+                    die ("invalid id");
+                }
+                ?>
                    
                 <img src="img/default-user-image.png" class="rounded-circle w-25 d-block my-5 mx-auto" alt="Image">
                 <h5 class="card-title"> <strong><?php echo($row["first_name"]); ?> </strong> is applying to become a tutor at <em>Teachers and is awaiting your response.</em></h5>
@@ -109,7 +115,7 @@ $id = $_GET["id"];
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Age</strong></p>
-                        <p class="col-8"><?php echo($row["age"]); ?></p>
+                        <p class="col-8"><?php echo(intval(date("Y")) - $row["yearborn"]); ?></p>
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Gender</strong></p>
@@ -165,7 +171,8 @@ $id = $_GET["id"];
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-body p-5">
-              Are you sure you want to accept <strong><?php echo($row["first_name"]." ".$row["last_name"]); ?> </strong> as a tutor? John will become a registered tutor at <em>Teachers</em>.
+              Are you sure you want to accept <strong><?php echo($row["first_name"]." ".$row["last_name"]); ?> </strong> as a tutor? 
+              <?php echo($row["first_name"]); ?> will become a registered tutor at <em>Teachers</em>.
             </div>
             <div class="modal-footer">
                 <form action="accept_tutor.php?id=<?php echo($row["temp_user_id"]); ?>"> 
@@ -185,7 +192,7 @@ $id = $_GET["id"];
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-body p-5">
-                Are you sure you want to reject <strong>John Smith</strong>'s tutor application?
+                Are you sure you want to reject <strong><?php echo($row["first_name"]." ".$row["last_name"]); ?></strong>'s tutor application?
             </div>
             <div class="modal-footer">
                 <form action="">
