@@ -164,3 +164,9 @@ body {
     font-weight: bolder;
 
   }
+
+
+  .add-intro{
+    border-radius: 35px;
+    background-color: red;
+  }
