@@ -49,24 +49,38 @@ if(isset($_POST["password"]) && $_POST["password"] != "" && preg_match('@[A-Z]@'
 
 if(isset($_POST["education"]) && $_POST["education"] != "" ){
     $education_level_student = $_POST["education"];
+    if ($education_level_student == "college") {
+        if(isset($_POST["course-name"]) && $_POST["course-name"]!=""){ //for education level = college
+            $course_choice = $_POST["course-name"];
+        }else{
+            die("We're not stupid 👀 7");
+        }
+    }
+    else {
+        if(isset($_POST["menu-course"]) && $_POST["menu-course"]!=""){ //for education levels != college
+            $course_choice = $_POST["menu-course"];
+        }else{
+            die("We're not stupid 👀 8");
+        }
+    }    
 }else{
     die("We're not stupid 👀 6");
 }
 
-if ($education_level_student == "college") {
-    if(isset($_POST["course-name"]) && $_POST["course-name"]!=""){ //for education level = college
-        $course_choice = $_POST["course-name"];
-    }else{
-        die("We're not stupid 👀 7");
-    }
-}
-else {
-    if(isset($_POST["menu-course"]) && $_POST["menu-course"]!=""){ //for education levels != college
-        $course_choice = $_POST["menu-course"];
-    }else{
-        die("We're not stupid 👀 8");
-    }
-}
+// if ($education_level_student == "college") {
+//     if(isset($_POST["course-name"]) && $_POST["course-name"]!=""){ //for education level = college
+//         $course_choice = $_POST["course-name"];
+//     }else{
+//         die("We're not stupid 👀 7");
+//     }
+// }
+// else {
+//     if(isset($_POST["menu-course"]) && $_POST["menu-course"]!=""){ //for education levels != college
+//         $course_choice = $_POST["menu-course"];
+//     }else{
+//         die("We're not stupid 👀 8");
+//     }
+// }
 
 
 //Tutor Details
@@ -80,9 +94,17 @@ if(isset($_POST["tutor"]) && $_POST["tutor"] != "" && preg_match("/^[0-9]*$/", $
 //Session Details
 
 
-if(isset($_POST["date"]) && $_POST["date"] != "" && preg_match("/^(0[1-9]|1[0-2])\\\\(0[1-9]|[1-2][0-9]|3[0-1])\\\\([2-9][0-9][2-9][1-9])$/", $_POST["date"])){
+// if(isset($_POST["date"]) && $_POST["date"] != "" && preg_match("/^(0[1-9]|1[0-2])\\\\(0[1-9]|[1-2][0-9]|3[0-1])\\\\([2-9][0-9][2-9][1-9])$/", $_POST["date"])){
+//     $date = $_POST["date"];
+// }else if(isset($_POST["date"]) && $_POST["date"] != "" && !preg_match("/^(0[1-9]|1[0-2])\\\\(0[1-9]|[1-2][0-9]|3[0-1])\\\\([2-9][0-9][2-9][1-9])$/", $_POST["date"])){
+//     die("Enter correct date format");
+// }else{
+//     die("We're not stupid 👀 10");
+// }
+
+if(isset($_POST["date"]) && $_POST["date"] != "" ){
     $date = $_POST["date"];
-}else if(isset($_POST["date"]) && $_POST["date"] != "" && !preg_match("/^(0[1-9]|1[0-2])\\\\(0[1-9]|[1-2][0-9]|3[0-1])\\\\([2-9][0-9][2-9][1-9])$/", $_POST["date"])){
+}else if(isset($_POST["date"]) && $_POST["date"] != "" ){
     die("Enter correct date format");
 }else{
     die("We're not stupid 👀 10");
