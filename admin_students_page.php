@@ -1,3 +1,11 @@
+<?php
+
+include("connection.php");
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -105,7 +113,162 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
+
+
+                <?php 
+                if (isset($_GET['page_no']) && $_GET['page_no']!="") {
+                  $page_no = $_GET['page_no'];
+                  } else {
+                      $page_no = 1;
+                      }
+                
+
+                      $query = "SELECT COUNT(*) As total_records FROM tutors";
+                      $stmt1 = $connection->prepare($query);
+                      $stmt1->execute();
+                      $results_tutors = $stmt1->get_result();
+                      $total_records = $results_tutors->fetch_assoc();
+
+
+
+                $next_to = "2";
+                $records_per_page =3;
+                $offset = ($page_no-1) * $records_per_page;
+                $previous_page = $page_no - 1;
+                $next_page = $page_no + 1;
+                $stmt1 = $connection->prepare($query);
+                $stmt1->execute();
+                $results_tutors = $stmt1->get_result();
+                $total_records = $results_tutors->fetch_assoc();
+                $no_of_pages = ceil($total_records["total_records"] / $records_per_page);
+                $before_last = $no_of_pages - 1;
+
+                $query_tutors_application = "SELECT tutor_ID from tutors LIMIT $records_per_page OFFSET $offset";
+                $stmt = $connection->prepare($query_tutors_application);
+                $stmt->execute();
+                $results_tutors = $stmt->get_result();
+
+
+                ?>
+              <div class="pagContainer">
+                <ul class="pagination">
+                  <li class="page-item" <?php if($page_no <= 1){ echo "class='disabled'"; } ?>>
+                    <a class="page-link"aria-label="Previous" <?php if($page_no > 1){
+                          echo "href='?page_no=$previous_page'";
+                      } ?>><span aria-hidden="true">&laquo;</span></a>
+                  </li>
+                      <?php  	if ($no_of_pages <= 10){
+                        for ($counter = 1; $counter <= $no_of_pages; $counter++){
+                        if ($counter == $page_no) {
+                          echo "<li class='page-item'><a class='page-link' >$counter</a></li>";	
+                        }else{
+                          echo "<li class='page-item'><a class='page-link' href='?page_no=$counter'>$counter</a></li>";
+                            }
+                        }
+                        }
+                        else if ($no_of_pages > 10){
+                          if($page_no <= 4) {			
+                            for ($counter = 1; $counter < 8; $counter++){		 
+                             if ($counter == $page_no) {
+                                echo "<li class='page-item'><a class='page-link'>$counter</a></li>";	
+                               }else{
+                                      echo "<li class='page-item' ><a class='page-link' href='?page_no=$counter'>$counter</a></li>";
+                                           }
+                           }
+                           echo "<li class='page-item'><a class='page-link'>...</a></li>";
+                           echo "<li class='page-item'><a class='page-link' href='?page_no=$before_last'>$before_last</a></li>";
+                           echo "<li class='page-item'><a class='page-link' href='?page_no=$no_of_pages'>$no_of_pages</a></li>";
+                           }
+                           elseif($page_no > 4 && $page_no < $no_of_pages - 4) {		 
+                            echo "<li class='page-item'><a class='page-link' href='?page_no=1'>1</a></li>";
+                            echo "<li class='page-item'><a class='page-link' href='?page_no=2'>2</a></li>";
+                            echo "<li class='page-item'><a class='page-link' >...</a></li>";
+                            for (
+                                 $counter = $page_no - $next_to;
+                                 $counter <= $page_no + $next_to;
+                                 $counter++
+                                 ) {		
+                                 if ($counter == $page_no) {
+                              echo "<li class='page-item'><a class='page-link'>$counter</a></li>";	
+                              }else{
+                                    echo "<li class='page-item'><a class='page-link' href='?page_no=$counter'>$counter</a></li>";
+                                      }                  
+                                   }
+                            echo "<li class='page-item'><a class='page-link'>...</a></li>";
+                            echo "<li class='page-item'><a class='page-link' href='?page_no=$before_last'>$before_last</a></li>";
+                            echo "<li class='page-item'><a class='page-link' href='?page_no=$no_of_pages'>$no_of_pages</a></li>";
+                            }
+                            else {
+                              echo "<li class='page-item'><a class='page-link' href='?page_no=1'>1</a></li>";
+                              echo "<li class='page-item'><a class='page-link' href='?page_no=2'>2</a></li>";
+                              echo "<li class='page-item'><a class='page-link' >...</a></li>";
+                              for (
+                                   $counter = $no_of_pages - 6;
+                                   $counter <= $no_of_pages;
+                                   $counter++
+                                   ) {
+                                   if ($counter == $page_no) {
+                                echo "<li class='page-item'><a class='page-link'>$counter</a></li>";	
+                                }else{
+                                      echo "<li class='page-item'><a class='page-link' href='?page_no=$counter'>$counter</a></li>";
+                                }                   
+                                   }
+                              }
+                          }?>
+                  <li class="page-item"<?php if($page_no >= $no_of_pages){
+                      echo "class='disabled'";
+                  } ?>>
+                    <a class="page-link"<?php if($page_no < $no_of_pages) {
+                    echo "href='?page_no=$next_page'";
+                    } ?>><span aria-hidden="true">&raquo;</span></a>
+                      </li>
+                </ul>
+
+                </div>
+                <?php
+
+                while($row = $results_tutors->fetch_assoc()){
+                  $array = [];
+                  $all_courses = "";
+                  $allInfo = $connection->prepare("SELECT users.user_id,tutors.tutor_ID,users.first_name,users.last_name,users.email,year(CURRENT_DATE)-tutors.year_born as age,tutors.gender,users.phone_number, tutors.city, tutors.education_level, tutors.college_name,tutors.major,tutors.years_of_experience,courses.course_name,courses.course_id from users INNER JOIN tutors on users.user_id=tutors.user_id INNER JOIN tutor_courses on tutors.tutor_ID=tutor_courses.tutor_id INNER JOIN courses on tutor_courses.course_id=courses.course_id where tutor_courses.tutor_id=?");
+                  $allInfo->bind_param("d", $row['tutor_ID']);
+                  $allInfo->execute();
+                  $results = $allInfo->get_result();
+
+                  $courses = $connection->prepare("SELECT course_name from tutors INNER JOIN tutor_courses on tutors.tutor_ID=tutor_courses.tutor_id INNER JOIN courses on tutor_courses.course_id=courses.course_id where tutor_courses.tutor_id=?");
+                  $courses->bind_param("d", $row['tutor_ID']);
+                  $courses->execute();
+                  $results_courses2 = $courses->get_result();
+                  while($row = $results_courses2->fetch_assoc()){
+                    $all_courses.=$row['course_name'] . " ";
+                  }
+
+                    while($row2 = $results->fetch_assoc()){
+                      if (!in_array($row2['tutor_ID'], $array)) {
+                        array_push($array, $row2['tutor_ID']);
+                        echo "<tr>
+                        <td>".$row2['user_id']."</td>
+                        <td>".$row2['tutor_ID']."</td>
+                        <td>".$row2['first_name']."</td>
+                        <td>".$row2['last_name']."</td>
+                        <td>".$row2['email']."</td>
+                        <td>".$row2['age']."</td>
+                        <td>".$row2['gender']."</td>
+                        <td>".$row2['phone_number']."</td>
+                        <td>".$row2['city']."</td>
+                        <td>".$row2['education_level']."</td>
+                        <td>".$row2['college_name']."</td>
+                        <td>".$row2['major']."</td>
+                        <td>".$row2['years_of_experience']."</td>
+                        <td>".$all_courses."</td>
+                        </tr>";
+                    }
+                  }
+              
+                }
+                ?>
+
+                <!-- <tr>
                     <td>2</td>
                     <td>7</td>
                     <td>John</td>
@@ -140,7 +303,7 @@
                     <td>john@d.com</td>
                     <td>4567890</td>
                     <td>75,000</td>
-                </tr>
+                </tr> -->
                 </tbody>
             </table>
         </div>
