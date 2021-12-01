@@ -139,11 +139,10 @@ include("connection.php");
 
 
                 $next_to = "2";
-                $records_per_page =5;
+                $records_per_page =3;
                 $offset = ($page_no-1) * $records_per_page;
                 $previous_page = $page_no - 1;
                 $next_page = $page_no + 1;
-                // $query = "SELECT COUNT(*) As total_records from users INNER JOIN tutors on users.user_id=tutors.user_id INNER JOIN tutor_courses on tutors.tutor_ID=tutor_courses.tutor_id INNER JOIN courses on tutor_courses.course_id=courses.course_id";
                 $stmt1 = $connection->prepare($query);
                 $stmt1->execute();
                 $results_tutors = $stmt1->get_result();
@@ -238,44 +237,38 @@ include("connection.php");
                 while($row = $results_tutors->fetch_assoc()){
                   $array = [];
                   $all_courses = "";
-                  $stmt4 = $connection->prepare("SELECT users.user_id,tutors.tutor_ID,users.first_name,users.last_name,users.email,year(CURRENT_DATE)-tutors.year_born as age,tutors.gender,users.phone_number, tutors.city, tutors.education_level, tutors.college_name,tutors.major,tutors.years_of_experience,courses.course_name,courses.course_id from users INNER JOIN tutors on users.user_id=tutors.user_id INNER JOIN tutor_courses on tutors.tutor_ID=tutor_courses.tutor_id INNER JOIN courses on tutor_courses.course_id=courses.course_id where tutor_courses.tutor_id=?");
-                  $stmt4->bind_param("d", $row['tutor_ID']);
-                  $stmt4->execute();
-                  $results_courses = $stmt4->get_result();
+                  $allInfo = $connection->prepare("SELECT users.user_id,tutors.tutor_ID,users.first_name,users.last_name,users.email,year(CURRENT_DATE)-tutors.year_born as age,tutors.gender,users.phone_number, tutors.city, tutors.education_level, tutors.college_name,tutors.major,tutors.years_of_experience,courses.course_name,courses.course_id from users INNER JOIN tutors on users.user_id=tutors.user_id INNER JOIN tutor_courses on tutors.tutor_ID=tutor_courses.tutor_id INNER JOIN courses on tutor_courses.course_id=courses.course_id where tutor_courses.tutor_id=?");
+                  $allInfo->bind_param("d", $row['tutor_ID']);
+                  $allInfo->execute();
+                  $results = $allInfo->get_result();
 
+                  $courses = $connection->prepare("SELECT course_name from tutors INNER JOIN tutor_courses on tutors.tutor_ID=tutor_courses.tutor_id INNER JOIN courses on tutor_courses.course_id=courses.course_id where tutor_courses.tutor_id=?");
+                  $courses->bind_param("d", $row['tutor_ID']);
+                  $courses->execute();
+                  $results_courses2 = $courses->get_result();
+                  while($row = $results_courses2->fetch_assoc()){
+                    $all_courses.=$row['course_name'] . " ";
+                  }
 
-                  // $stmt5 = $connection->prepare("SELECT * from  where tutor_courses.tutor_id=?");
-                  // $stmt5->bind_param("d", $row['tutor_ID']);
-                  // $stmt5->execute();
-                  // $results_courses2 = $stmt5->get_result();
-
-                    $stmt5 = $connection->prepare("SELECT * from tutors INNER JOIN tutor_courses on tutors.tutor_ID=tutor_courses.tutor_id INNER JOIN courses on tutor_courses.course_id=courses.course_id where tutor_courses.tutor_id=?");
-                    $stmt5->bind_param("d", $row['tutor_ID']);
-                    $stmt5->execute();
-                    $results_courses2 = $stmt5->get_result();
-                    while($row2 = $results_courses2->fetch_assoc()){
-                      $all_courses.=$row2['course_name'] . " ";
-                    }
-
-                      while($row4 = $results_courses->fetch_assoc()){
-                        if (!in_array($row4['tutor_ID'], $array)) {
-                          array_push($array, $row4['tutor_ID']);
-                      echo "<tr>
-                      <td>".$row4['user_id']."</td>
-                     <td>".$row4['tutor_ID']."</td>
-                     <td>".$row4['first_name']."</td>
-                     <td>".$row4['last_name']."</td>
-                     <td>".$row4['email']."</td>
-                     <td>".$row4['age']."</td>
-                     <td>".$row4['gender']."</td>
-                     <td>".$row4['phone_number']."</td>
-                     <td>".$row4['city']."</td>
-                     <td>".$row4['education_level']."</td>
-                     <td>".$row4['college_name']."</td>
-                     <td>".$row4['major']."</td>
-                     <td>".$row4['years_of_experience']."</td>
-                     <td>".$all_courses."</td>
-                     </tr>";
+                    while($row2 = $results->fetch_assoc()){
+                      if (!in_array($row2['tutor_ID'], $array)) {
+                        array_push($array, $row2['tutor_ID']);
+                        echo "<tr>
+                        <td>".$row2['user_id']."</td>
+                        <td>".$row2['tutor_ID']."</td>
+                        <td>".$row2['first_name']."</td>
+                        <td>".$row2['last_name']."</td>
+                        <td>".$row2['email']."</td>
+                        <td>".$row2['age']."</td>
+                        <td>".$row2['gender']."</td>
+                        <td>".$row2['phone_number']."</td>
+                        <td>".$row2['city']."</td>
+                        <td>".$row2['education_level']."</td>
+                        <td>".$row2['college_name']."</td>
+                        <td>".$row2['major']."</td>
+                        <td>".$row2['years_of_experience']."</td>
+                        <td>".$all_courses."</td>
+                        </tr>";
                     }
                   }
               
