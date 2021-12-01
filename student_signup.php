@@ -163,8 +163,7 @@ if ($_POST["Sunday"]!="" && $_POST["Saturday"]!="" && $_POST["Friday"]!="" && $_
 }       
 
 
-$days_of_session = "";
-$days_of_sessionArray = array(); //add them to an array 
+$days_of_sessionArray = []; //create an array to add them into it and then loop and add the days that were checked into the string
 array_push($days_of_sessionArray, $monday);
 array_push($days_of_sessionArray, $tuesday);
 array_push($days_of_sessionArray, $wednesday);
@@ -172,6 +171,9 @@ array_push($days_of_sessionArray, $thursday);
 array_push($days_of_sessionArray, $friday);
 array_push($days_of_sessionArray, $saturday);
 array_push($days_of_sessionArray, $sunday);
+
+
+$days_of_session = "";
 
 foreach($days_of_sessionArray as $item) {
     if ($item == Yes ){
@@ -223,7 +225,7 @@ if(isset($_POST["price"]) && $_POST["pricer"] !="" && preg_match("/^[0-9]*$ - ^[
        }
        if(empty($row3)) {
         $mysql = $connection->prepare("INSERT INTO pending_students(first_name,last_name,phone_number,email,password,education_level_student,course,preferred_tutor, starting_date,days_of_sessions,price) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
-        $mysql->bind_param("ssssdsssdssdsssssssssss",$first_name,$last_name,$phone_number,$email_address,$password,$education_level_student,$course_choice,$tutor, $date,$days_of_session,$price);
+        $mysql->bind_param("ssssssssdss",$first_name,$last_name,$phone_number,$email_address,$password,$education_level_student,$course_choice,$tutor, $date,$days_of_session,$price);
        }else {  
             die("Email already exists");
            }
