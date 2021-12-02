@@ -273,6 +273,5 @@ if(empty($row1)) {
     $mysql->close();
     $connection->close();
     
-
  header("Location: index.html");
 ?>
