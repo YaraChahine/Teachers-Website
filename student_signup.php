@@ -49,21 +49,27 @@ if(isset($_POST["password"]) && $_POST["password"] != "" && preg_match('@[A-Z]@'
 
 if(isset($_POST["education"]) && $_POST["education"] != "" ){
     $education_level_student = $_POST["education"];
+
     if ($education_level_student == "college") {
         if(isset($_POST["course-name"]) && $_POST["course-name"]!=""){ //for education level = college
             $course_choice = $_POST["course-name"];
-        }else{
-            die("We're not stupid 👀 7");
+        }
+        else{
+            if(isset($_POST["menu-course"]) && $_POST["menu-course"]!=""){ //for education levels != college
+                        $course_choice = $_POST["menu-course"];
+                    }else{
+                        die("We're not stupid 👀 8");
+                    }
+            
         }
     }
-    else {
-        if(isset($_POST["menu-course"]) && $_POST["menu-course"]!=""){ //for education levels != college
-            $course_choice = $_POST["menu-course"];
-        }else{
-            die("We're not stupid 👀 8");
-        }
-    }    
-}else{
+    // else{
+    //     die("We're not stupid 👀ok");
+    // }
+   
+}
+
+else{
     die("We're not stupid 👀 6");
 }
 
@@ -114,72 +120,71 @@ if(isset($_POST["date"]) && $_POST["date"] != "" ){
 
 //come back to do the dates
 
+$days_of_session = "";
+
 if(isset($_POST["Monday"]) && $_POST["Monday"]!=""){
     $monday = $_POST["Monday"];
-}else{
-    die("We're not stupid 👀 11");
+    $days_of_session = $monday + " ";
 }
 
 
 if(isset($_POST["Tuesday"]) && $_POST["Tuesday"]!=""){
     $tuesday = $_POST["Tuesday"];
-}else{
-    die("We're not stupid 👀 12");
+    $days_of_session = $tuesday + " ";
 }
 
 if(isset($_POST["Wednesday"]) && $_POST["Wednesday"]!=""){
     $wednesday = $_POST["Wednesday"];
-}else{
-    die("We're not stupid 👀 13");
+    $days_of_session = $wednesday + " ";
 }
+
 
 if(isset($_POST["Thursday"]) && $_POST["Thursday"]!=""){
     $thursday = $_POST["Thursday"];
-}else{
-    die("We're not stupid 👀 14");
+    $days_of_session = $thursday + " ";
 }
 
 
 if(isset($_POST["Friday"]) && $_POST["Friday"]!=""){
     $friday = $_POST["Friday"];
-}else{
-    die("We're not stupid 👀 15");
+    $days_of_session = $friday + " ";
 }
+
 
 if(isset($_POST["Saturday"]) && $_POST["Saturday"]!=""){
     $saturday = $_POST["Saturday"];
-}else{
-    die("We're not stupid 👀 16");
-}
-if(isset($_POST["Sunday"]) && $_POST["Sunday"]!=""){
-    $sunday = $_POST["Sunday"];
-}else{
-    die("We're not stupid 👀 17");
+    $days_of_session = $saturday + " ";
 }
 
-if ($_POST["Sunday"]!="" && $_POST["Saturday"]!="" && $_POST["Friday"]!="" && $_POST["Thursday"]!="" &&$_POST["Tuesday"]!="" &&$_POST["Monday"]!=""){
+if(isset($_POST["Sunday"]) && $_POST["Sunday"]!=""){
+    $sunday = $_POST["Sunday"];
+    $days_of_session = $sunday + " ";
+}
+
+
+if ($_POST["Sunday"]="" && $_POST["Saturday"]="" && $_POST["Friday"]="" && $_POST["Thursday"]="" && $_POST["Tuesday"]="" &&$_POST["Monday"]=""){
     //Blank string, add error to $errors array.        
     $errors['nodate'] = "Please let us know your prefered tutoring dates!";
 }       
 
 
-$days_of_sessionArray = []; //create an array to add them into it and then loop and add the days that were checked into the string
-array_push($days_of_sessionArray, $monday);
-array_push($days_of_sessionArray, $tuesday);
-array_push($days_of_sessionArray, $wednesday);
-array_push($days_of_sessionArray, $thursday);
-array_push($days_of_sessionArray, $friday);
-array_push($days_of_sessionArray, $saturday);
-array_push($days_of_sessionArray, $sunday);
+// $days_of_sessionArray = []; //create an array to add them into it and then loop and add the days that were checked into the string
+// array_push($days_of_sessionArray, $monday);
+// array_push($days_of_sessionArray, $tuesday);
+// array_push($days_of_sessionArray, $wednesday);
+// array_push($days_of_sessionArray, $thursday);
+// array_push($days_of_sessionArray, $friday);
+// array_push($days_of_sessionArray, $saturday);
+// array_push($days_of_sessionArray, $sunday);
 
 
 $days_of_session = "";
 
-foreach($days_of_sessionArray as $item) {
-    if ($item == Yes ){
-         $days_of_session = $item + '';
-    }
-}
+// foreach($days_of_sessionArray as $item) {
+//     if ($item == Yes ){
+//          $days_of_session = $item + '';
+//     }
+// }
 
 // // Or 
 // $cart = array();
@@ -188,9 +193,9 @@ foreach($days_of_sessionArray as $item) {
 
 
 
-if(isset($_POST["price"]) && $_POST["pricer"] !="" && preg_match("/^[0-9]*$ - ^[0-9]*$/", $_POST["price"])){
+if(isset($_POST["price"]) && $_POST["price"] !="" && preg_match("/^[0-9]*$/", $_POST["price"])){
     $price = $_POST["price"]; //check variable is set and not null && make sure input is composed of only numbers
-}else if(isset($_POST["price"]) && $_POST["price"] !="" && !preg_match("/^[0-9]*$ - ^[0-9]*$/", $_POST["price"])){
+}else if(isset($_POST["price"]) && $_POST["price"] !="" && !preg_match("/^[0-9]*$/", $_POST["price"])){
     die("Price option should be composed of numbers."); //if input is not composed of only numbers it wont be accepted
 }else{
     die("We're not stupid 👀 18");
@@ -224,8 +229,8 @@ if(isset($_POST["price"]) && $_POST["pricer"] !="" && preg_match("/^[0-9]*$ - ^[
         die("Email already exists");
        }
        if(empty($row3)) {
-        $mysql = $connection->prepare("INSERT INTO pending_students(first_name,last_name,phone_number,email,password,education_level_student,course,preferred_tutor, starting_date,days_of_sessions,price) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
-        $mysql->bind_param("ssssssssdss",$first_name,$last_name,$phone_number,$email_address,$password,$education_level_student,$course_choice,$tutor, $date,$days_of_session,$price);
+        $mysql = $connection->prepare("INSERT INTO pending_students(first_name,last_name,phone_number,email,password,education_level_student,course,preferred_tutor,starting_date,days_of_sessions,price) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+        $mysql->bind_param("ssssssssdss",$first_name,$last_name,$phone_number,$email_address,$password,$education_level_student,$course_choice,$tutor,$date,$days_of_session,$price);
        }else {  
             die("Email already exists");
            }
