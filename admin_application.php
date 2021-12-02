@@ -195,7 +195,7 @@ if (isset($_GET["id"])) {
             </div>
             <div class="modal-footer">
                 <form action="accept_tutor.php?id=<?php echo($row["temp_user_id"]); ?>"> 
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <a href="reject_tutor.php?id=<?php echo($row["temp_user_id"]); ?>"> <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                     <a href="accept_tutor.php?id=<?php echo($row["temp_user_id"]); ?>"><button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="submit">Confirm</button></a>
                 </form>
             </div>
