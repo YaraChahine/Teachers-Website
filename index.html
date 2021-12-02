@@ -52,9 +52,10 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="index.html">Home</a></li>  
+          <li><a class="nav-link scrollto active" href="index.html">Home</a></li>
           <li><a class="nav-link scrollto" href="tutors_page.php">Our tutors</a></li>
-          <li class="dropdown"><a href="#" style="display: none;"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+          <li class="dropdown"><a href="#" style="display: none;"><span>Drop Down</span> <i
+                class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="#">Drop Down 1</a></li>
               <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
@@ -134,8 +135,8 @@
                 requests or needs.
               </p>
               <div class="text-center text-lg-start">
-                <a class="btn btn-primary p-0 btn-read-more d-inline-flex align-items-center justify-content-center align-self-center consultation-btn" data-bs-toggle="modal" data-bs-target="#add-modal"
-                  >
+                <a class="btn btn-primary p-0 btn-read-more d-inline-flex align-items-center justify-content-center align-self-center consultation-btn"
+                  data-bs-toggle="modal" data-bs-target="#add-modal">
                   <span>Request Free consultation</span>
                   <i class="bi bi-arrow-right"></i>
                 </a>
@@ -157,69 +158,84 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-body p-5">
-              <h2 class="text-center">Consultation Request</h1>
-              <form action="consultation.php", method="post">
-                  <div class="row">
-                      <div class="col-4">
-                          First name
-                      </div>
-                      <div class="col-8">
-                          <input class="form-control" type="text" name="first">
-                      </div>
+            <h2 class="text-center">Consultation Request</h1>
+              <form action="consultation.php" method="post">
+                <div class="row">
+                  <div class="col-4">
+                    First name
                   </div>
-                  <div class="row">
-                      <div class="col-4">
-                          Last name
-                      </div>
-                      <div class="col-8">
-                          <input class="form-control" type="text" name="last">
-                      </div>
+                  <div class="col-8">
+                    <input class="form-control" type="text" name="first" required>
                   </div>
-                  <div class="row">
-                      <div class="col-4">
-                          Email address
-                      </div>
-                      <div class="col-8">
-                          <input class="form-control" type="email" name="email">
-                      </div>
+                </div>
+                <div class="row">
+                  <div class="col-4">
+                    Last name
                   </div>
-                  <div class="row">
-                      <div class="col-4">
-                          Phone number
-                      </div>
-                      <div class="col-8">
-                          <input class="form-control" type="text" name="phone">
-                      </div>
+                  <div class="col-8">
+                    <input class="form-control" type="text" name="last" required>
                   </div>
-              
-              </form>
-          </div>
-          <div class="modal-footer">
-              <form action="">
+                </div>
+                <div class="row">
+                  <div class="col-4">
+                    Email address
+                  </div>
+                  <div class="col-8">
+                    <input class="form-control" type="email" name="email" required>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-4">
+                    Phone number
+                  </div>
+                  <div class="col-8">
+                    <input class="form-control" type="text" name="phone" required>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-4">
+                    Phone number
+                  </div>
+                  <div class="col-8">
+                    <input class="form-control" type="text" name="information" required>
+                  </div>
+                </div>
+                <br><br>
+                <div class="modal-footer">
+                  <br>
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                  <button type="submit" class="btn btn-primary p-0 ok-btn"  data-bs-toggle="modal" data-bs-target="#msg-modal" data-bs-dismiss="modal" onclick="$('#editform').submit()">Confirm</button>
+                  <button type="submit" class="btn btn-primary p-0 ok-btn"  >Confirm</button>
+                </div>
               </form>
+
           </div>
         </div>
       </div>
+
+
     </div>
 
-    <div class="modal modal-large fade" id="msg-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-body p-5">
-              <h3 class="text-center">Your request has been sent! You will be contacted soon to set the consultation session details.</h3>
-             
-          </div>
-          <div class="modal-footer">
-              <form action="">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                  <button type="button" class="btn btn-primary p-0 ok-btn"  data-bs-toggle="modal"  data-bs-dismiss="modal" onclick="$('#editform').submit()">OK</button>
-              </form>
-          </div>
-        </div>
-      </div>
-    </div>
+
+    <div class="modal modal-large fade" id="edit-modal" data-bs-backdrop="static" data-bs-keyboard="false"
+    tabindex="-1">
+     <div class="modal-dialog">
+       <div class="modal-content">
+         <div class="modal-body p-5">
+           <h2 class="text-center">Your request has been submitted! You will be contacted soon to set the consultation
+             details.</h1>
+         </div>
+         <div class="modal-footer">
+           <form action="">
+             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+             <button type="button" class="btn btn-primary p-0 ok-btn" data-bs-toggle="modal"
+               data-bs-target="#msg-modal" data-bs-dismiss="modal" onclick="$('#editform').submit()">OK</button>
+           </form>
+         </div>
+       </div>
+     </div>
+   </div>
+
+
 
     <!-- ======= Values Section ======= -->
     <section id="values" class="values">
@@ -288,7 +304,7 @@
               <div>
                 <p>Over</p>
                 <span data-purecounter-start="0" data-purecounter-end="200" data-purecounter-duration="1"
-                  class="purecounter"></span> 
+                  class="purecounter"></span>
                 <p>Learning students</p>
               </div>
             </div>
@@ -473,11 +489,12 @@
                     class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
                 </div>
                 <p>
-                  
+
                 </p>
                 <div class="profile mt-auto">
                   <img src="./img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                  <p> Math was never my favored subject at school, and in college, it only got harder. It made me doubt my
+                  <p> Math was never my favored subject at school, and in college, it only got harder. It made me doubt
+                    my
                     intelligence,
                     but with "Teachers", I discovered that it only took a good tutor to become better at math. Everyone
                     has their own learning style, it is just a matter of finding a tutor that accomodates it</p>
@@ -516,7 +533,7 @@
                   My son, Ali, was failing his software engineering course, but "Teachers" came to the rescue! After
                   only a few sessions, his grades improved drastically, and he became much more confident in his
                   academic performance!
-                 !
+                  !
                 </p>
                 <div class="profile mt-auto">
                   <img src="./img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
@@ -545,7 +562,7 @@
               </div>
             </div><!-- End testimonial item -->
 
-            <div class="swiper-slide" >
+            <div class="swiper-slide">
               <div class="testimonial-item">
                 <div class="stars">
                   <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
@@ -585,7 +602,8 @@
         <div class="d-flex flex-column">
           <p class="w-75 mx-auto my-0 text-center">Here at Teachers, we pick the best of the best for our students.
             Our team of proficient and hard working tutors are always happy to assist and deliver high quality
-            educational sessions. Take a look at our tutors to see who suits you best according to all your learning needs.</p>
+            educational sessions. Take a look at our tutors to see who suits you best according to all your learning
+            needs.</p>
           <div class="btn text-center text-lg-start row my-5">
             <a href="tutors_page.php"
               class="btn-browse d-inline-flex align-items-center justify-content-center align-self-center">
@@ -615,8 +633,8 @@
             <p>We offer top quality tutors, in every field, for every student, at the best prices, <br>
               because your education is our priority.</p>
             <div class="social-links mt-3">
-                <a href="https://www.facebook.com/Teachers.leb/" class="facebook"><i class="bi bi-facebook"></i></a>
-                <a href="https://www.instagram.com/teachers.lb/" class="instagram"><i class="bi bi-instagram"></i></a>
+              <a href="https://www.facebook.com/Teachers.leb/" class="facebook"><i class="bi bi-facebook"></i></a>
+              <a href="https://www.instagram.com/teachers.lb/" class="instagram"><i class="bi bi-instagram"></i></a>
             </div>
           </div>
 
@@ -630,7 +648,8 @@
           <div class="col-lg-3 col-5 footer-contact text-center text-md-start">
             <h4>
               <i class="bi bi-telephone"></i>&ThickSpace; Give us a call <br>
-              <i class="bi bi-whatsapp"></i>&ThickSpace; Contact us on WhatsApp</h4> <br>
+              <i class="bi bi-whatsapp"></i>&ThickSpace; Contact us on WhatsApp
+            </h4> <br>
             +961 71 777 498
           </div>
           <div class="d-block col-1 d-lg-none"></div>

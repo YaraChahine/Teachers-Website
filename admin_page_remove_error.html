@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,7 +39,7 @@
   ======================================================== -->
 </head>
 
-<body  onload="remove-form.reset();">
+<body onload="remove-form.reset();">
 
     <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top header-form">
@@ -55,7 +54,8 @@
                 <ul>
                     <li><a class="nav-link scrollto active" href="admin_page.html">Main Page</a></li>
                     <li><a class="nav-link scrollto" href="admin_updates.php">My updates</a></li>
-                    <li> <a  style="cursor: pointer ;" class="nav-link scrollto rmov" data-bs-toggle="modal" data-bs-target="#remove-modal" >
+                    <li> <a style="cursor: pointer ;" class="nav-link scrollto rmov" data-bs-toggle="modal"
+                            data-bs-target="#remove-modal">
                             <span>Remove Member</span>
                         </a></li>
                     <li><a class="getstarted scrollto" href="logout.php">Log out</a></li>
@@ -66,14 +66,16 @@
         </div>
     </header><!-- End Header -->
 
-    
+
     <!-- Free consultation-->
-    <div class="modal modal-large fade" id="remove-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+    <div class="modal modal-large fade" id="remove-modal" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body p-5">
                     <h2 class="text-center">Remove Member form</h1>
-                        <p style="color:red;margin-left:30px;">Caution: Removing a member will delete them permanently from the database.</p>
+                        <p style="color:red;margin-left:30px;">Caution: Removing a member will delete them permanently
+                            from the database.</p>
                         <form action="delete_member.php" method="post" id="remove-form">
                             <div class="row">
                                 <div class="col-4">
@@ -112,22 +114,25 @@
                                     User type
                                 </div>
                                 <div class="col-8">
-                                    <select class="form-control" autocomplete="off" name="select"> 
-                                        <option value="none"  disabled hidden selected >Select an Option</option>
+                                    <select class="form-control" autocomplete="off" name="select">
+                                        <option value="none" disabled hidden selected>Select an Option</option>
                                         <option value="tutor" name="type">Tutor</option>
                                         <option value="student" name="type">Student</option>
 
 
-                                    </select> 
+                                    </select>
                                 </div>
                             </div>
                             <br><br>
-                                   
+
                             <div class="modal-footer">
 
                                 <br>
-                                <a href="admin_page.html"><button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button></a>
-                                <button type="submit" class="btn btn-primary p-0 ok-btn" style="border-color:red; background-color:red;">Delete</button>
+                                <a href="admin_page.html">
+                                    <button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                </a>
+                                <button type="submit" class="btn btn-primary p-0 ok-btn"
+                                    style="border-color:red; background-color:red;">Delete</button>
                             </div>
                         </form>
 
@@ -138,8 +143,39 @@
 
     </div>
 
+<style>
+    body {
+        position: relative;
+        z-index: 0;
+    }
+    .error {
+        width:30%;
+        height:400px;
+        box-shadow: 4px 4px 50px rgb(141, 134, 134);
+        text-align: center;
+        padding: 10px;
+        padding-top: 80px;
+        padding-right: 20px;
+        padding-left: 20px;
+        margin-left: 35%;
+        background-color: white;
+        opacity: 1;
+        position: fixed;
+        z-index: 1;
+    }
 
+    .ok {
+        margin-top: 25px;
+        
+    }
+</style>
     <br><br><br><br><br><br>
+    <div class="error">
+        <h5>The user you entered does not exist in the database. Please make sure the information you entered about the
+            user is correct.</h5>
+            <hr>
+            <a href="admin_page.html"><button class="btn btn-primary p-0 ok-btn ok" >OK</button></a>
+    </div>
     <div class="greeting">
         <h1>Hello, Admin!</h1>
         <p>What would you like to do today?</p>
