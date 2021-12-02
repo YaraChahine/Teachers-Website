@@ -3,7 +3,6 @@
 include("connection.php");
 $id = $_GET["id"];
 
-echo("testttt");
 
 $query = "SELECT * FROM  pending_tutors where temp_user_id=$id";
 $stmt = $connection->prepare($query);

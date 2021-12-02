@@ -194,8 +194,8 @@ if (isset($_GET["id"])) {
               <?php echo($row["first_name"]); ?> will become a registered tutor at <em>Teachers</em>.
             </div>
             <div class="modal-footer">
-                <form action="accept_tutor.php?id=<?php echo($row["temp_user_id"]); ?>"> 
-                <a href="reject_tutor.php?id=<?php echo($row["temp_user_id"]); ?>"> <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <form> 
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                     <a href="accept_tutor.php?id=<?php echo($row["temp_user_id"]); ?>"><button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="submit">Confirm</button></a>
                 </form>
             </div>
@@ -215,8 +215,8 @@ if (isset($_GET["id"])) {
             </div>
             <div class="modal-footer">
                 <form action="">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="submit"> Confirm</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button></a>
+                    <a href="reject_tutor.php?id=<?php echo($row["temp_user_id"]); ?>"><button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="submit"> Confirm</button>
                 </form>
             </div>
           </div>

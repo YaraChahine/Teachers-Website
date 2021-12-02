@@ -104,8 +104,8 @@ include("connection.php");
             </div>
 
             <div class="list-group-item card update-item">
-                <h5 class="card-header">Consultation</h5>
-                <?php $query = "SELECT  first_name, last_name,email,phone_number FROM  consultation";
+                <h5 class="card-header">Consultation Requests</h5>
+                <?php $query = "SELECT  id,first_name, last_name,email,phone_number,information FROM  consultation";
                 $stmt = $connection->prepare($query);
                 $stmt->execute();
                 $results = $stmt->get_result();
@@ -120,7 +120,7 @@ include("connection.php");
                 <div class="card-body">
                   <h5 class="card-title"><?php echo($row["first_name"]." ".$row["last_name"]); ?></h5>
                   <p class="card-text"><?php echo($row["email"]." - ".$row["phone_number"]); ?></p>
-                  <a href="admin_consultation.html" class="btn btn-primary">View update</a>
+                  <a href="admin_consultation.php?id=<?php echo($row["id"]);?>"class="btn btn-primary">View update</a>
                 </div>
                 <hr>
                 <?php } ?>

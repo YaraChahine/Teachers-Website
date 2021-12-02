@@ -1,3 +1,12 @@
+<?php
+
+include("connection.php");
+if (isset($_GET["id"])) {
+  $id = $_GET["id"];
+} else die ("no tutor application selected");
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -74,35 +83,34 @@
               <span>&ThickSpace; Consultation</span>
             </h5>
             <div class="card-body p-5">
-                <h5 class="card-title"> <strong>John</strong> is requesting a consultation.</em></h5>
+            <?php $query= "SELECT * FROM  consultation where id=?";
+                $stmt = $connection->prepare($query);
+                $stmt->bind_param("d", $id);
+                $stmt->execute();
+                $results = $stmt->get_result(); 
+                $row = $results->fetch_assoc();
+                if (empty($row)) {
+                    die ("invalid id");
+                }
+                ?>
+                <h5 class="card-title"> <strong><?php echo($row["first_name"]); ?></strong> is requesting a consultation.</em></h5>
                 <div class="w-75 my-5 mx-auto">
                     <div class="row">
                         <p class="col-4"><strong>Full name</strong></p>
-                        <p class="col-8">John Doe</p>
+                        <p class="col-8"><?php echo($row["first_name"]." ".$row["last_name"]); ?></p>
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Email</strong></p>
-                        <p class="col-8">john@doe.com</p>
+                        <p class="col-8"><?php echo($row["email"]);?></p>
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Phone number</strong></p>
-                        <p class="col-8">01 123 123</p>
+                        <p class="col-8"><?php echo($row["phone_number"]);?></p>
                     </div>
-                    <div class="row">
-                        <p class="col-4"><strong>City</strong></p>
-                        <p class="col-8"><em>N/A</em></p>
-                    </div>
-                    <div class="row">
-                        <p class="col-4"><strong>Education level</strong></p>
-                        <p class="col-8"><em>N/A</em></p>
-                    </div>
-                    <div class="row">
-                        <p class="col-4"><strong>Courses interested in</strong></p>
-                        <p class="col-8"><em>N/A</em></p>
-                    </div>
+        
                     <div class="row">
                         <p class="col-4"><strong>Additional information</strong></p>
-                        <p class="col-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, ratione maiores adipisci consequuntur ad consectetur veritatis eaque quasi excepturi non, recusandae similique magni reiciendis nulla fugit magnam eligendi tempora suscipit.</p>
+                        <p c<?php echo($row["information"]);?>lass="col-8"></p>
                     </div>
                 </div>
                 <div class="d-flex justify-content-center">
@@ -121,13 +129,13 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-body p-5">
-              Are you sure you want to acknowledge <strong>John Doe</strong>'s consultation request? This form will no longer be available.
-              <br><em>You should only do this after contacting John.</em>
+              Are you sure you want to acknowledge <strong><?php echo($row["first_name"]." ".$row["last_name"]);?></strong>'s consultation request? This form will no longer be available.
+              <br><em>You should only do this after contacting <?php echo($row["first_name"]);?>.</em>
             </div>
             <div class="modal-footer">
                 <form action="">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="submit">Confirm</button>
+                    <a href="acknowledge_consultation.php?id=<?php echo($row["id"]); ?>"><button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="submit">Confirm</button>
                 </form>
             </div>
           </div>
