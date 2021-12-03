@@ -46,12 +46,14 @@ if (empty($student_row)){
     $stmt = $connection->prepare($query);
     $stmt->bind_param("s", $row["temp_student_id"]);
     $stmt->execute();
+
+    header('Location: admin_updates.php');
   
 
 }
 // else already exists
 else{
-    die(" Student account already exists");
+    die("Student account already exists");
 }
 
 
