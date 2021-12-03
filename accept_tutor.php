@@ -38,7 +38,7 @@ $tutor_id= $results->fetch_assoc();
 //adding to tutors table
 $mysql = $connection->prepare("INSERT INTO tutors ( user_id, gender,years_of_experience,education_level ,major,	year_born ,city,college_name ,cv ,profile_image ,description)
  VALUES (?, ?, ?, ?,?,?,?,?,?,?,?);");
-$mysql->bind_param("issssssssss", $tutor_id["user_id"], $row["gender"], $row["years_of_experience"], $row["education_level_tutor"], $row["field"],$row["year_born"],$row["city"],$row["educational_institution_name"], $row["cv"],$row["image"],$row["description"]);
+$mysql->bind_param("issssisssss", $tutor_id["user_id"], $row["gender"], $row["years_of_experience"], $row["education_level_tutor"], $row["field"],$row["year_born"],$row["city"],$row["educational_institution_name"], $row["cv"],$row["image"],$row["description"]);
 ($mysql->execute());
 
 

@@ -106,14 +106,14 @@ if(isset($_POST["date"]) && $_POST["date"] != "" && preg_match("/$/", $_POST["da
 
 $days_of_session = "";
 
-if(isset($_POST["monday"]) && $_POST["monday"]!=""){
-    $monday = $_POST["monday"];
+if(isset($_POST["Monday"]) && $_POST["Monday"]!=""){
+    $monday = $_POST["Monday"];
     $days_of_session = $monday + " ";
 }
 
 
-if(isset($_POST["tuesday"]) && $_POST["tuesday"]!=""){
-    $tuesday = $_POST["tuesday"];
+if(isset($_POST["Tuesday"]) && $_POST["Tuesday"]!=""){
+    $tuesday = $_POST["Tuesday"];
     $days_of_session = $tuesday + " ";
 }
 
@@ -227,6 +227,6 @@ if(isset($_POST["price"]) && $_POST["price"] !="" && preg_match("/^[0-9]*$/", $_
         $connection->close();
         
         
-     header("Location: index.html"); //not profile since they need to be accepted first by the admin
+     header("Location: index.html");
 
 ?>

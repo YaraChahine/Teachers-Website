@@ -46,6 +46,9 @@ if (isset($_POST["login"])){
         if(strcmp($row['type'],"1")==0){
             header('Location: admin_page.php');
         }
+        elseif (strcmp($row['type'],"2")==0) {
+            header('Location: profile_tutor.php');
+        }
         else{
             header('Location: profile.php');
         }
