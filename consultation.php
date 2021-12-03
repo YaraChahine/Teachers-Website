@@ -18,13 +18,20 @@ $stmt = $connection->prepare($query);
 $stmt->bind_param("sssss", $firstname, $lastname, $email,$phone,$information);
 $stmt->execute();
 
-$to_email = 'yarachahine77@gmail.com';
-$subject = 'Testing PHP Mail';
-$message = 'This mail is sent using the PHP mail function';
-$headers = 'From: yara.ch@yahoo.com';
-mail($to_email,$subject,$message,$headers);
 
-header("Location: success.html");
+
+$to_email = "yara.chahine@lau.edu";
+$subject = "Teachers Consultation Request";
+$body = "Hello Admin! A new consultation request from $firstname $lastname is waiting for you.";
+$headers = "From: yarachahine77@gmail.com";
+ 
+if (mail($to_email, $subject, $body, $headers)) {
+    echo "Email successfully sent to $to_email...";
+} else {
+    echo "Email sending failed...";
+}
+
+//header("Location: success.html");
 
 
 

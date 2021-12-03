@@ -114,7 +114,7 @@ if (isset($_GET["id"])) {
         
                     <div class="row">
                         <p class="col-4"><strong>Additional information</strong></p>
-                        <p c<?php echo($row["information"]);?>lass="col-8"></p>
+                        <p class="col-8"><?php echo($row["information"]);?></p>
                     </div>
                 </div>
                 <div class="d-flex justify-content-center">

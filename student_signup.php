@@ -62,8 +62,8 @@ if ($education_level_student == "college") {
     }
 }
 elseif($education_level_student != "college") {
-    if(isset($_POST["menu-course"]) && $_POST["menu-course"]!=""){ //for education levels != college
-        $course_choice = $_POST["menu-course"];
+    if(isset($_POST["course"]) && $_POST["course"]!=""){ //for education levels != college
+        $course_choice = $_POST["course"];
     }else{
         die("We're not stupid 👀 8");
     }
@@ -106,47 +106,47 @@ if(isset($_POST["date"]) && $_POST["date"] != "" && preg_match("/$/", $_POST["da
 
 $days_of_session = "";
 
-if(isset($_POST["Monday"]) && $_POST["Monday"]!=""){
-    $monday = $_POST["Monday"];
+if(isset($_POST["monday"]) && $_POST["monday"]!=""){
+    $monday = $_POST["monday"];
     $days_of_session = $monday + " ";
 }
 
 
-if(isset($_POST["Tuesday"]) && $_POST["Tuesday"]!=""){
-    $tuesday = $_POST["Tuesday"];
+if(isset($_POST["tuesday"]) && $_POST["tuesday"]!=""){
+    $tuesday = $_POST["tuesday"];
     $days_of_session = $tuesday + " ";
 }
 
-if(isset($_POST["Wednesday"]) && $_POST["Wednesday"]!=""){
-    $wednesday = $_POST["Wednesday"];
+if(isset($_POST["wednesday"]) && $_POST["wednesday"]!=""){
+    $wednesday = $_POST["wednesday"];
     $days_of_session = $wednesday + " ";
 }
 
 
-if(isset($_POST["Thursday"]) && $_POST["Thursday"]!=""){
-    $thursday = $_POST["Thursday"];
+if(isset($_POST["thursday"]) && $_POST["thursday"]!=""){
+    $thursday = $_POST["thursday"];
     $days_of_session = $thursday + " ";
 }
 
 
-if(isset($_POST["Friday"]) && $_POST["Friday"]!=""){
-    $friday = $_POST["Friday"];
+if(isset($_POST["friday"]) && $_POST["friday"]!=""){
+    $friday = $_POST["friday"];
     $days_of_session = $friday + " ";
 }
 
 
-if(isset($_POST["Saturday"]) && $_POST["Saturday"]!=""){
-    $saturday = $_POST["Saturday"];
+if(isset($_POST["saturday"]) && $_POST["saturday"]!=""){
+    $saturday = $_POST["saturday"];
     $days_of_session = $saturday + " ";
 }
 
-if(isset($_POST["Sunday"]) && $_POST["Sunday"]!=""){
-    $sunday = $_POST["Sunday"];
+if(isset($_POST["sunday"]) && $_POST["sunday"]!=""){
+    $sunday = $_POST["sunday"];
     $days_of_session = $sunday + " ";
 }
 
 
-if ($_POST["Sunday"]="" && $_POST["Saturday"]="" && $_POST["Friday"]="" && $_POST["Thursday"]="" && $_POST["Tuesday"]="" &&$_POST["Monday"]=""){
+if ($_POST["sunday"]="" && $_POST["saturday"]="" && $_POST["friday"]="" && $_POST["thursday"]="" && $_POST["tuesday"]="" &&$_POST["monday"]=""){
     //Blank string, add error to $errors array.        
     $errors['nodate'] = "Please let us know your prefered tutoring dates!";
 }       

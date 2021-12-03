@@ -34,11 +34,11 @@ $stmt = $connection->prepare($query);
 $stmt->execute();
 
 echo("here");
-header('Location: admin_page_remove_success.html');
+header('Location: admin_page_remove_success.php');
 }
 else
 {
-    header('Location: admin_page_remove_error.html');
+    header('Location: admin_page_remove_error.php');
 }
 
 ?>

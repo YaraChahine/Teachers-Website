@@ -34,6 +34,7 @@ if(isset($_POST["password"]) && $_POST["password"]!="" && preg_match('@[A-Z]@', 
 if(isset($_POST["age"]) && $_POST["age"]!="" && preg_match("/^[0-9]*$/", $_POST["age"]) && $_POST["age"]>17 &&  $_POST["age"]<61){
     $currentYear = intval(date("Y"));
     $year_born = $currentYear - $_POST["age"];
+    
 }else if(isset($_POST["age"]) && $_POST["age"]!="" && (!preg_match("/^[0-9]*$/", $_POST["age"]) || $_POST["age"]>60 || $_POST["age"]<18)){
     die("Phone number should contain numbers only. Required age:18-60");
 }else{
@@ -262,8 +263,15 @@ if(empty($row1)) {
    }
    if(empty($row3)) {
     $mysql = $connection->prepare("INSERT INTO pending_tutors(first_name,last_name,email,password,year_born,gender,phone_number,city,education_level_tutor,educational_institution_name,field,years_of_experience,course_1,course_level_1,course_2,course_level_2,course_3,course_level_3,course_4,course_level_4,cv,image,description) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-    $mysql->bind_param("ssssdsssdssdsssssssssss",$first_name,$last_name,$email_address,$password,$year_born,$gender,$phone_number,$city,$education_level_tutor,$educational_institution_name,$field,$years_of_experience,$course_1,$course_level_1,$course_2,$course_level_2,$course_3,$course_level_3,$course_4,$course_level_4,$cv_file,$img_file,$bio);
-   }else {  
+    $mysql->bind_param("ssssdssssssdsssssssssss",$first_name,$last_name,$email_address,$password,$year_born,$gender,$phone_number,$city,$education_level_tutor,$educational_institution_name,$field,$years_of_experience,$course_1,$course_level_1,$course_2,$course_level_2,$course_3,$course_level_3,$course_4,$course_level_4,$cv_file,$img_file,$bio);
+    $to_email = "ali.knayber@lau.edu";
+    $subject = "Teachers Tutor Application";
+    $body = "Hello Admin! A new Tutor Application from $first_name $last_name!!! is waiting for you.";
+    $headers = "From: yarachahine77@gmail.com";
+    
+    mail($to_email, $subject, $body, $headers);
+
+}else {  
         die("Email already exists");
        }
     if (!$mysql->execute()){

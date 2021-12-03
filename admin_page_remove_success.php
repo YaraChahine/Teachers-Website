@@ -180,7 +180,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
     <div class="error">
         <h5>The user has been successfully deleted from the database!</h5>
             <hr>
-            <a href="admin_page.html"><button class="btn btn-primary p-0 ok-btn ok" >OK</button></a>
+            <a href="admin_page.php"><button class="btn btn-primary p-0 ok-btn ok" >OK</button></a>
     </div>
     <div class="greeting">
         <h1>Hello, Admin!</h1>
