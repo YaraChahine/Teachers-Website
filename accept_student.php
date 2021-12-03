@@ -23,7 +23,7 @@ $tutor_row = $results->fetch_assoc();
 
 if (empty($student_row)){
 
-    $mysql = $connection->prepare("INSERT INTO users (type, first_name, last_name,email, phone_number, password) VALUES (2, ?,?,?,?,?);");
+    $mysql = $connection->prepare("INSERT INTO users (type, first_name, last_name,email, phone_number, password) VALUES (1, ?,?,?,?,?);");
     $mysql->bind_param("sssss", $row["first_name"], $row["last_name"], $row["email"], $row["phone_number"], $row["password"]);
     $mysql->execute();
 
