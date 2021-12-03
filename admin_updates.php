@@ -104,20 +104,55 @@ include("connection.php");
             </div>
 
             <div class="list-group-item card update-item">
-                <h5 class="card-header">Consultation</h5>
+                <h5 class="card-header">Consultation Requests</h5>
+                <?php $query = "SELECT  id,first_name, last_name,email_address,phone_number, information FROM  consultations";
+                $stmt = $connection->prepare($query);
+                $stmt->execute();
+                $results = $stmt->get_result();
+                ?>
+
+
                 <div class="card-body">
-                  <h5 class="card-title">John Doe</h5>
-                  <p class="card-text">john@doe.com - 01 123 123</p>
-                  <a href="admin_consultation.html" class="btn btn-primary">View update</a>
+                  
+              <?php 
+                      while($row = $results->fetch_assoc()){
+                    ?>
+                <div class="card-body">
+                  <h5 class="card-title"><?php echo($row["first_name"]." ".$row["last_name"]); ?></h5>
+                  <p class="card-text"><?php echo($row["email"]." - ".$row["phone_number"]); ?></p>
+                  <a href="admin_consultation.php?id=<?php echo($row["id"]);?>"class="btn btn-primary">View update</a>
                 </div>
+                <hr>
+                <?php } ?>
             </div>
 
             <div class="list-group-item card update-item">
                 <h5 class="card-header">Student Signup</h5>
+
+                <?php $query_student_signup = "SELECT temp_student_id, first_name, last_name, email, phone_number FROM  pending_students";
+                $stmt = $connection->prepare($query_student_signup);
+                $stmt->execute();
+                $results_students = $stmt->get_result();
+                ?>
+
+
+                <div class="card-body">    
+                  <?php
+                    while($row = $results_students->fetch_assoc()){
+                  ?>
+                   
+                  <h5 class="card-title"><?php echo($row["first_name"]." ".$row["last_name"]); ?></h5>
+                  <p class="card-text"><?php echo($row["email"]." - ".$row["phone_number"]); ?></p>
+                  <a href="admin_application.php?id=<?php echo($row["temp_student_id"]);?>" class="btn btn-primary" data-id=<?php echo($row["temp_student_id"]); ?> >View update</a>
+                  <hr>                 
+                  <?php } ?> 
+                    </div>
+                    
+
                 <div class="card-body">
                   <h5 class="card-title">Alice Smith</h5>
                   <p class="card-text">alice@smith.com - 03 000 888</p>
-                  <a href="admin_signup.html" class="btn btn-primary">View update</a>
+                  <a href="admin_signup.php" class="btn btn-primary">View update</a>
                 </div>
             </div>
 
@@ -126,7 +161,7 @@ include("connection.php");
                 <div class="card-body">
                   <h5 class="card-title">Bob Smith</h5>
                   <p class="card-text">bob@smith.com - 71 222 666</p>
-                  <a href="admin_student_add.html" class="btn btn-primary">View update</a>
+                  <a href="admin_student_add.php" class="btn btn-primary">View update</a>
                 </div>
             </div>
 
@@ -135,7 +170,7 @@ include("connection.php");
                 <div class="card-body">
                   <h5 class="card-title">William Jones</h5>
                   <p class="card-text">william@jones.com - 70 000 789</p>
-                  <a href="admin_consultation.html" class="btn btn-primary">View update</a>
+                  <a href="admin_consultation.php" class="btn btn-primary">View update</a>
                 </div>
             </div>
 
@@ -144,7 +179,7 @@ include("connection.php");
                 <div class="card-body">
                   <h5 class="card-title">Emma Williams</h5>
                   <p class="card-text">emma@williams.com - 81 234 567</p>
-                  <a href="admin_edit.html" class="btn btn-primary">View update</a>
+                  <a href="admin_edit.php" class="btn btn-primary">View update</a>
                 </div>
             </div>
 

@@ -1,6 +1,9 @@
 <?php
 
 session_start();
+
+if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0){
+
 $email = $_SESSION["email"];
 
 ?>
@@ -48,3 +51,5 @@ $email = $_SESSION["email"];
 	<script src="js/my-login.js"></script>
 </body>
 </html>
+
+<?php } else {header("Location: index.html");} ?>

@@ -231,21 +231,36 @@ CREATE TABLE `temp_codes` (
 --
 
 INSERT INTO `temp_codes` (`code_id`, `user_id`, `code`, `created`) VALUES
-(1, 1, '293384', '1638094923');
+(1, 1, '412824', '1638086707');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `to_do_list`
+-- Table structure for table `todo`
 --
 
-CREATE TABLE `to_do_list` (
-  `item_id_todolist` int(11) NOT NULL,
+CREATE TABLE `todo` (
+  `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `item_name_todolist` varchar(250) NOT NULL,
-  `flag` tinyint(1) NOT NULL,
-  `line_through` tinyint(1) NOT NULL
+  `title` text NOT NULL DEFAULT current_timestamp(),
+  `date_time` datetime NOT NULL,
+  `checked` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `todo`
+--
+
+INSERT INTO `todo` (`id`, `user_id`, `title`, `date_time`, `checked`) VALUES
+(1, 1, 'finish to do list', '2021-11-28 12:58:38', 1),
+(3, 1, 'finish to do list', '2021-11-28 12:58:38', 0),
+(16, 3, 'eat', '0000-00-00 00:00:00', 0),
+(17, 3, 'hhn', '0000-00-00 00:00:00', 0),
+(18, 31, 'test', '0000-00-00 00:00:00', 0),
+(19, 30, 'test', '0000-00-00 00:00:00', 0),
+(25, 30, 'Finishe exaams', '0000-00-00 00:00:00', 0),
+(26, 7, 'test', '2021-11-28 15:00:03', 0),
+(28, 32, 'finish studying', '0000-00-00 00:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -260,7 +275,7 @@ CREATE TABLE `tutors` (
   `years_of_experience` varchar(250) NOT NULL,
   `education_level` varchar(250) NOT NULL,
   `major` varchar(250) NOT NULL,
-  `year_born` int(11) NOT NULL,
+  `age` varchar(250) NOT NULL,
   `city` varchar(250) NOT NULL,
   `college_name` varchar(250) NOT NULL,
   `cv` varchar(250) NOT NULL,
@@ -504,11 +519,10 @@ ALTER TABLE `temp_codes`
   ADD KEY `FOREIGN_KEY` (`user_id`);
 
 --
--- Indexes for table `to_do_list`
+-- Indexes for table `todo`
 --
-ALTER TABLE `to_do_list`
-  ADD PRIMARY KEY (`item_id_todolist`),
-  ADD KEY `Foregin_Key` (`user_id`);
+ALTER TABLE `todo`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tutors`
@@ -571,7 +585,7 @@ ALTER TABLE `consultations`
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `course_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `course_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `new_tutor_requests`
@@ -604,10 +618,10 @@ ALTER TABLE `temp_codes`
   MODIFY `code_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `to_do_list`
+-- AUTO_INCREMENT for table `todo`
 --
-ALTER TABLE `to_do_list`
-  MODIFY `item_id_todolist` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `todo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `tutors`
@@ -674,12 +688,6 @@ ALTER TABLE `students`
 --
 ALTER TABLE `temp_codes`
   ADD CONSTRAINT `temp_codes_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
-
---
--- Constraints for table `to_do_list`
---
-ALTER TABLE `to_do_list`
-  ADD CONSTRAINT `Foregin_Key` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
 --
 -- Constraints for table `tutors`

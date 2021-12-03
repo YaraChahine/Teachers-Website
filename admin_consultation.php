@@ -1,3 +1,16 @@
+<?php
+
+include("connection.php");
+session_start();
+
+if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
+{
+if (isset($_GET["id"])) {
+  $id = $_GET["id"];
+} else die ("no tutor application selected");
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,7 +43,6 @@
     <!-- Template Main CSS File -->
     <link href="./css/style.css" rel="stylesheet">
     <link href="./css/style2.css" rel="stylesheet">
-    <link href="./css/todolist.css" rel="stylesheet">
 
     <!-- =======================================================
   * Template Name: FlexStart - v1.7.0
@@ -53,47 +65,93 @@
 
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a class="nav-link scrollto active" href="#hero">Calendar</a></li>
-                    <li><a class="nav-link scrollto" href="#about">To-do List</a></li>
-                    <li><a class="nav-link scrollto" href="#team">Timer</a></li>
-                    <li><a class="nav-link scrollto" href="#contact">Pomodoro Clock</a></li>
-                    <li><a class="getstarted scrollto" href="#about">Log out</a></li>
+                  <li><a class="nav-link scrollto active" href="admin_page.php">Main Page</a></li>
+                  <li><a class="nav-link scrollto" href="admin_updates.php">My updates</a></li>
+                  <li><a class="nav-link scrollto" href="admin_page.php">Remove a member</a></li>
+                  <li><a class="getstarted scrollto" href="logout.php">Log out</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
 
         </div>
     </header><!-- End Header -->
+    
+    <br><br><br><br><br>
 
-    <br><br><br><br><br><br>
+    <!-- Update Card  -->
 
-    <div class="intro">
-    <p>"What you do today can improve all your tomorrows" -Ralph Martson</p>
-    </div>
-    <img class="blue-pattern2" src="img/bluepattern1.png">
-
-<div class="list-container">
-            <div id="myDIV" class="list-header">
-            <h2>My To Do List</h2>
-            <input type="text" id="myInput" placeholder="Title...">
-            <span onclick="newElement()" class="addBtn">Add</span>
+    <div class="container thin-container">
+        <div class="card">
+            <h5 class="card-header user-select-none">
+              <a href="admin_updates.html" class="btn btn-secondary">&lt Back</a>
+              <span>&ThickSpace; Consultation</span>
+            </h5>
+            <div class="card-body p-5">
+            <?php $query= "SELECT * FROM  consultations where id=?";
+                $stmt = $connection->prepare($query);
+                $stmt->bind_param("d", $id);
+                $stmt->execute();
+                $results = $stmt->get_result(); 
+                $row = $results->fetch_assoc();
+                if (empty($row)) {
+                    die ("invalid id");
+                }
+                ?>
+                <h5 class="card-title"> <strong><?php echo($row["first_name"]); ?></strong> is requesting a consultation.</em></h5>
+                <div class="w-75 my-5 mx-auto">
+                    <div class="row">
+                        <p class="col-4"><strong>Full name</strong></p>
+                        <p class="col-8"><?php echo($row["first_name"]." ".$row["last_name"]); ?></p>
+                    </div>
+                    <div class="row">
+                        <p class="col-4"><strong>Email</strong></p>
+                        <p class="col-8"><?php echo($row["email_address"]);?></p>
+                    </div>
+                    <div class="row">
+                        <p class="col-4"><strong>Phone number</strong></p>
+                        <p class="col-8"><?php echo($row["phone_number"]);?></p>
+                    </div>
+        
+                    <div class="row">
+                        <p class="col-4"><strong>Additional information</strong></p>
+                        <p class="col-8"><?php echo($row["information"]);?></p>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <a class="m-3 btn btn-warning" data-bs-toggle="modal" data-bs-target="#ack-modal">Acknowledge</a>
+                </div>
+            </div>
         </div>
-
-        <ul id="myUL" class="myUL">
-            <li class="list-item">Hit the gym</li>
-            <li class="list-item"> =Pay bills</li>
-            <li class="list-item">Meet George</li>
-            <li class="list-item">Buy eggs</li>
-            <li  class="list-item">Read a book</li>
-            <li  class="list-item">Organize office</li>
-        </ul>
     </div>
 
-    <img class="blue-pattern" src="img/bluepattern1.png">
+    <!-- End Update Card -->
+    <br><br><br><br><br>
 
+    <!-- Acknowledge Modal -->
 
+    <div class="modal fade" id="ack-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-body p-5">
+              Are you sure you want to acknowledge <strong><?php echo($row["first_name"]." ".$row["last_name"]);?></strong>'s consultation request? This form will no longer be available.
+              <br><em>You should only do this after contacting <?php echo($row["first_name"]);?>.</em>
+            </div>
+            <div class="modal-footer">
+                <form action="">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <a href="acknowledge_consultation.php?id=<?php echo($row["id"]); ?>"><button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="submit">Confirm</button>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- End Acknowledge Modal -->
+
+    
+    
     <!-- ======= Footer ======= -->
-<footer id="footer" class="footer">
+  <footer id="footer" class="footer">
 
     <div class="footer-top">
       <div class="container">
@@ -110,14 +168,14 @@
                 <a href="https://www.instagram.com/teachers.lb/" class="instagram"><i class="bi bi-instagram"></i></a>
             </div>
           </div>
-  
+
           <div class="d-block col-1 d-lg-none"></div>
           <div class="col-lg-3 col-5 footer-links">
             <br> <br class="d-block d-md-none">
             <h4><i class="bi bi-envelope"></i>&ThickSpace; Email us</h4> <br>
             elie.daccache7777@gmail.com
           </div>
-  
+
           <div class="col-lg-3 col-5 footer-contact text-center text-md-start">
             <h4>
               <i class="bi bi-telephone"></i>&ThickSpace; Give us a call <br>
@@ -125,7 +183,7 @@
             +961 71 777 498
           </div>
           <div class="d-block col-1 d-lg-none"></div>
-  
+
         </div>
       </div>
     </div>
@@ -142,71 +200,10 @@
     <script src="./vendor/purecounter/purecounter.js"></script>
     <script src="./vendor/isotope-layout/isotope.pkgd.min.js"></script>
     <script src="./vendor/glightbox/js/glightbox.min.js"></script>
-
-
-
-
-
-
-
-    <script>
-        // Create a "close" button and append it to each list item
-        var myNodelist = document.getElementsByClassName("list-item");
-        var i;
-        for (i = 0; i < myNodelist.length; i++) {
-            var span = document.createElement("SPAN");
-            var txt = document.createTextNode("\u00D7");
-            span.className = "close";
-            span.appendChild(txt);
-            myNodelist[i].appendChild(span);
-        }
-
-        // Click on a close button to hide the current list item
-        var close = document.getElementsByClassName("close");
-        var i;
-        for (i = 0; i < close.length; i++) {
-            close[i].onclick = function () {
-                var div = this.parentElement;
-                div.style.display = "none";
-            }
-        }
-
-        // Add a "checked" symbol when clicking on a list item
-      
-
-        var list = document.getElementById("myUL");
-        list.addEventListener('click', function (ev) {
-            if (ev.target.tagName === 'LI') {
-                ev.target.classList.toggle('checked');
-            }
-        }, false);
-        // Create a new list item when clicking on the "Add" button
-        function newElement() {
-            var li = document.createElement("li");
-            var inputValue = document.getElementById("myInput").value;
-            var t = document.createTextNode(inputValue);
-            li.appendChild(t);
-            if (inputValue === '') {
-                alert("You must write something!");
-            } else {
-                document.getElementById("myUL").appendChild(li);
-            }
-            document.getElementById("myInput").value = "";
-
-            var span = document.createElement("SPAN");
-            var txt = document.createTextNode("\u00D7");
-            span.className = "close";
-            span.appendChild(txt);
-            li.appendChild(span);
-
-            for (i = 0; i < close.length; i++) {
-                close[i].onclick = function () {
-                    var div = this.parentElement;
-                    div.style.display = "none";
-                }
-            }
-        }
-    </script>
 </body>
 
+
 </html>
+
+
+<?php } else {header("Location: index.html");} ?>

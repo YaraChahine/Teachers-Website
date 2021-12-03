@@ -1,10 +1,12 @@
 <?php
 
 include("connection.php");
+session_start();
 
+if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
+{
 
-
-?>
+  ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -60,9 +62,9 @@ include("connection.php");
 
             <nav id="navbar" class="navbar">
                 <ul>
-                <li><a class="nav-link scrollto active" href="admin_page.html">Main Page</a></li>
+                <li><a class="nav-link scrollto active" href="admin_page.php">Main Page</a></li>
                     <li><a class="nav-link scrollto" href="admin_updates.php">My updates</a></li>
-                    <li><a class="nav-link scrollto" href="admin_page.html">Remove a member</a></li>
+                    <li><a class="nav-link scrollto" href="admin_page.php">Remove a member</a></li>
                     <li><a class="getstarted scrollto" href="logout.php">Log out</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
@@ -130,7 +132,7 @@ include("connection.php");
                       }
                 
 
-                      $query = "SELECT COUNT(*) As total_records FROM users";
+                      $query = "SELECT COUNT(*) As total_records FROM tutors";
                       $stmt1 = $connection->prepare($query);
                       $stmt1->execute();
                       $results_tutors = $stmt1->get_result();
@@ -139,11 +141,10 @@ include("connection.php");
 
 
                 $next_to = "2";
-                $records_per_page =10;
+                $records_per_page =3;
                 $offset = ($page_no-1) * $records_per_page;
                 $previous_page = $page_no - 1;
                 $next_page = $page_no + 1;
-                $query = "SELECT COUNT(*) As total_records from users INNER JOIN tutors on users.user_id=tutors.user_id INNER JOIN tutor_courses on tutors.tutor_ID=tutor_courses.tutor_id INNER JOIN courses on tutor_courses.course_id=courses.course_id";
                 $stmt1 = $connection->prepare($query);
                 $stmt1->execute();
                 $results_tutors = $stmt1->get_result();
@@ -151,12 +152,12 @@ include("connection.php");
                 $no_of_pages = ceil($total_records["total_records"] / $records_per_page);
                 $before_last = $no_of_pages - 1;
 
-                $query_tutors_application = "SELECT users.user_id,tutors.tutor_ID,users.first_name,users.last_name,users.email,year(CURRENT_DATE)- tutors.year_born as age,tutors.gender,users.phone_number, tutors.city, tutors.education_level, tutors.college_name,tutors.major,tutors.years_of_experience,courses.course_name from users INNER JOIN tutors on users.user_id=tutors.user_id INNER JOIN tutor_courses on tutors.tutor_ID=tutor_courses.tutor_id INNER JOIN courses on tutor_courses.course_id=courses.course_id LIMIT $records_per_page OFFSET $offset";
-                // $query_tutors_application = "SELECT * from users LIMIT $records_per_page OFFSET $offset";
-
+                $query_tutors_application = "SELECT tutor_ID from tutors LIMIT $records_per_page OFFSET $offset";
                 $stmt = $connection->prepare($query_tutors_application);
                 $stmt->execute();
                 $results_tutors = $stmt->get_result();
+
+
                 ?>
               <div class="pagContainer">
                 <ul class="pagination">
@@ -235,26 +236,45 @@ include("connection.php");
                 </div>
                 <?php
 
-
                 while($row = $results_tutors->fetch_assoc()){
-                  echo "<tr>
-                 <td>".$row['user_id']."</td>
-                 <td>".$row['tutor_ID']."</td>
-                 <td>".$row['first_name']."</td>
-                 <td>".$row['last_name']."</td>
-                 <td>".$row['email']."</td>
-                 <td>".$row['age']."</td>
-                 <td>".$row['gender']."</td>
-                 <td>".$row['phone_number']."</td>
-                 <td>".$row['city']."</td>
-                 <td>".$row['education_level']."</td>
-                 <td>".$row['college_name']."</td>
-                 <td>".$row['major']."</td>
-                 <td>".$row['years_of_experience']."</td>
-                 <td>".$row['course_name']."</td>
+                  $array = [];
+                  $all_courses = "";
+                  $allInfo = $connection->prepare("SELECT users.user_id,tutors.tutor_ID,users.first_name,users.last_name,users.email,year(CURRENT_DATE)-tutors.year_born as age,tutors.gender,users.phone_number, tutors.city, tutors.education_level, tutors.college_name,tutors.major,tutors.years_of_experience,courses.course_name,courses.course_id from users INNER JOIN tutors on users.user_id=tutors.user_id INNER JOIN tutor_courses on tutors.tutor_ID=tutor_courses.tutor_id INNER JOIN courses on tutor_courses.course_id=courses.course_id where tutor_courses.tutor_id=?");
+                  $allInfo->bind_param("d", $row['tutor_ID']);
+                  $allInfo->execute();
+                  $results = $allInfo->get_result();
 
-                 </tr>";
-                      }
+                  $courses = $connection->prepare("SELECT course_name from tutors INNER JOIN tutor_courses on tutors.tutor_ID=tutor_courses.tutor_id INNER JOIN courses on tutor_courses.course_id=courses.course_id where tutor_courses.tutor_id=?");
+                  $courses->bind_param("d", $row['tutor_ID']);
+                  $courses->execute();
+                  $results_courses2 = $courses->get_result();
+                  while($row = $results_courses2->fetch_assoc()){
+                    $all_courses.=$row['course_name'] . " ";
+                  }
+
+                    while($row2 = $results->fetch_assoc()){
+                      if (!in_array($row2['tutor_ID'], $array)) {
+                        array_push($array, $row2['tutor_ID']);
+                        echo "<tr>
+                        <td>".$row2['user_id']."</td>
+                        <td>".$row2['tutor_ID']."</td>
+                        <td>".$row2['first_name']."</td>
+                        <td>".$row2['last_name']."</td>
+                        <td>".$row2['email']."</td>
+                        <td>".$row2['age']."</td>
+                        <td>".$row2['gender']."</td>
+                        <td>".$row2['phone_number']."</td>
+                        <td>".$row2['city']."</td>
+                        <td>".$row2['education_level']."</td>
+                        <td>".$row2['college_name']."</td>
+                        <td>".$row2['major']."</td>
+                        <td>".$row2['years_of_experience']."</td>
+                        <td>".$all_courses."</td>
+                        </tr>";
+                    }
+                  }
+              
+                }
                 ?>
                 <!-- <tr>
                     <td>2</td>
@@ -369,3 +389,5 @@ include("connection.php");
 
 </body>
 </html>
+
+<?php } else {header("Location: index.html");} ?>

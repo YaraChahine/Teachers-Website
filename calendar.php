@@ -1,3 +1,15 @@
+<?php
+
+include("connection.php");
+session_start();
+
+if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0 || strcmp($_SESSION["type"],"3")==0)
+{
+
+    ?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -57,9 +69,9 @@
                 <ul>
                     <li><a class="nav-link scrollto " href="profile.php">Home</a></li>
                     <li><a class="nav-link scrollto" href="todolist2.php">To-do List</a></li>
-                    <li><a class="nav-link scrollto active" href="calendar.html">Calendar</a></li>
-                    <li><a class="nav-link scrollto " href="timer.html">Timer</a></li>
-                    <li><a class="nav-link scrollto" href="pomodoro.html">Pomodoro Clock</a></li>
+                    <li><a class="nav-link scrollto active" href="calendar.php">Calendar</a></li>
+                    <li><a class="nav-link scrollto " href="timer.php">Timer</a></li>
+                    <li><a class="nav-link scrollto" href="pomodoro.php">Pomodoro Clock</a></li>
                     <li><a class="getstarted scrollto" href="logout.php">Log out</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
@@ -267,3 +279,6 @@
 
 
 </html>
+
+
+<?php } else {header("Location: index.html");} ?>

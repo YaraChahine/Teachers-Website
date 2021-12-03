@@ -1,3 +1,14 @@
+<?php
+
+include("connection.php");
+session_start();
+
+if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
+{
+
+  ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,9 +63,9 @@
 
             <nav id="navbar" class="navbar">
                 <ul>
-                  <li><a class="nav-link scrollto active" href="admin_page.html">Main Page</a></li>
+                  <li><a class="nav-link scrollto active" href="admin_page.php">Main Page</a></li>
                   <li><a class="nav-link scrollto" href="admin_updates.php">My updates</a></li>
-                  <li><a class="nav-link scrollto" href="admin_page.html">Remove a member</a></li>
+                  <li><a class="nav-link scrollto" href="admin_page.php">Remove a member</a></li>
                   <li><a class="getstarted scrollto" href="logout.php">Log out</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
@@ -71,42 +82,47 @@
         <div class="card">
             <h5 class="card-header user-select-none">
               <a href="admin_updates.html" class="btn btn-secondary">&lt Back</a>
-              <span>&ThickSpace; Consultation</span>
+              <span>&ThickSpace; Student Signup</span>
             </h5>
             <div class="card-body p-5">
-                <h5 class="card-title"> <strong>John</strong> is requesting a consultation.</em></h5>
+                <h5 class="card-title"> <strong>Alice</strong> has signed up to become a student at <em>Teachers and is awaiting your response.</em></h5>
                 <div class="w-75 my-5 mx-auto">
                     <div class="row">
                         <p class="col-4"><strong>Full name</strong></p>
-                        <p class="col-8">John Doe</p>
+                        <p class="col-8">Alice Smith</p>
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Email</strong></p>
-                        <p class="col-8">john@doe.com</p>
+                        <p class="col-8">alice@smith.com</p>
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Phone number</strong></p>
-                        <p class="col-8">01 123 123</p>
+                        <p class="col-8">03 000 888</p>
                     </div>
                     <div class="row">
-                        <p class="col-4"><strong>City</strong></p>
-                        <p class="col-8"><em>N/A</em></p>
+                        <p class="col-4"><strong>Course requested</strong></p>
+                        <p class="col-8">Middle school - English</p>
                     </div>
                     <div class="row">
-                        <p class="col-4"><strong>Education level</strong></p>
-                        <p class="col-8"><em>N/A</em></p>
+                        <p class="col-4"><strong>Preferred tutor</strong></p>
+                        <p class="col-8">Yara Chahine</p>
                     </div>
                     <div class="row">
-                        <p class="col-4"><strong>Courses interested in</strong></p>
-                        <p class="col-8"><em>N/A</em></p>
+                        <p class="col-4"><strong>Session start</strong></p>
+                        <p class="col-8">14/01/2022</p>
                     </div>
                     <div class="row">
-                        <p class="col-4"><strong>Additional information</strong></p>
-                        <p class="col-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, ratione maiores adipisci consequuntur ad consectetur veritatis eaque quasi excepturi non, recusandae similique magni reiciendis nulla fugit magnam eligendi tempora suscipit.</p>
+                        <p class="col-4"><strong>Session days</strong></p>
+                        <p class="col-8">Monday<br>Wednesday<br>Saturday</p>
+                    </div>
+                    <div class="row">
+                        <p class="col-4"><strong>Preferred price range</strong></p>
+                        <p class="col-8">60 000</p>
                     </div>
                 </div>
                 <div class="d-flex justify-content-center">
-                    <a class="m-3 btn btn-warning" data-bs-toggle="modal" data-bs-target="#ack-modal">Acknowledge</a>
+                    <a class="m-3 btn btn-danger" data-bs-toggle="modal" data-bs-target="#reject-modal">Reject</a>
+                    <a class="m-3 btn btn-primary" data-bs-toggle="modal" data-bs-target="#accept-modal">Accept</a>
                 </div>
             </div>
         </div>
@@ -115,14 +131,13 @@
     <!-- End Update Card -->
     <br><br><br><br><br>
 
-    <!-- Acknowledge Modal -->
+    <!-- Accept Modal -->
 
-    <div class="modal fade" id="ack-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+    <div class="modal fade" id="accept-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-body p-5">
-              Are you sure you want to acknowledge <strong>John Doe</strong>'s consultation request? This form will no longer be available.
-              <br><em>You should only do this after contacting John.</em>
+              Are you sure you want to accept <strong>Alice Smith</strong> as a student? Alice will be linked with their selected tutor at <em>Teachers</em>.
             </div>
             <div class="modal-footer">
                 <form action="">
@@ -134,7 +149,27 @@
         </div>
       </div>
 
-    <!-- End Acknowledge Modal -->
+    <!-- End Acccept Modal -->
+    
+    <!-- Reject Modal -->
+
+    <div class="modal fade" id="reject-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-body p-5">
+                Are you sure you want to reject <strong>Alice Smith</strong>'s student signup?
+            </div>
+            <div class="modal-footer">
+                <form action="">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="submit">Confirm</button>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- End Reject Modal -->
 
     
     
@@ -192,3 +227,5 @@
 
 
 </html>
+
+<?php } else {header("Location: index.html");} ?>

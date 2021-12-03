@@ -44,7 +44,7 @@ if (isset($_POST["login"])){
         $_SESSION["user_id"] = $row['user_id'];
         $_SESSION["type"] = $row['type'];
         if(strcmp($row['type'],"1")==0){
-            header('Location: admin_page.html');
+            header('Location: admin_page.php');
         }
         else{
             header('Location: profile.php');
