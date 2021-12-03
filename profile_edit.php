@@ -2,7 +2,7 @@
 
 include("connection.php");
 session_start();
-if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"3"==0)
+if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"3")==0)
 {
  
  ?>
