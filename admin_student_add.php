@@ -1,3 +1,12 @@
+<?php
+
+include("connection.php");
+session_start();
+
+if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
+{
+
+  ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -215,3 +224,6 @@
 
 
 </html>
+
+
+<?php } else {header("Location: index.html");} ?>

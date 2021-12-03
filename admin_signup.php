@@ -1,3 +1,14 @@
+<?php
+
+include("connection.php");
+session_start();
+
+if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
+{
+
+  ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,9 +63,9 @@
 
             <nav id="navbar" class="navbar">
                 <ul>
-                  <li><a class="nav-link scrollto active" href="admin_page.html">Main Page</a></li>
+                  <li><a class="nav-link scrollto active" href="admin_page.php">Main Page</a></li>
                   <li><a class="nav-link scrollto" href="admin_updates.php">My updates</a></li>
-                  <li><a class="nav-link scrollto" href="admin_page.html">Remove a member</a></li>
+                  <li><a class="nav-link scrollto" href="admin_page.php">Remove a member</a></li>
                   <li><a class="getstarted scrollto" href="logout.php">Log out</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
@@ -71,63 +82,42 @@
         <div class="card">
             <h5 class="card-header user-select-none">
               <a href="admin_updates.html" class="btn btn-secondary">&lt Back</a>
-              <span>&ThickSpace; Tutor Profile Edit</span>
+              <span>&ThickSpace; Student Signup</span>
             </h5>
             <div class="card-body p-5">
-                <img src="img/default-user-image.png" class="rounded-circle w-25 d-block my-5 mx-auto border border-primary border-4" alt="Image">
-                <h5 class="card-title"> <strong>Emma</strong> has made changes to <span id="his-her-their">her</span> profile and is awaiting your approval. Fields changed appear in blue.</h5>
+                <h5 class="card-title"> <strong>Alice</strong> has signed up to become a student at <em>Teachers and is awaiting your response.</em></h5>
                 <div class="w-75 my-5 mx-auto">
                     <div class="row">
                         <p class="col-4"><strong>Full name</strong></p>
-                        <p class="col-8">Emma Williams</p>
+                        <p class="col-8">Alice Smith</p>
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Email</strong></p>
-                        <p class="col-8">emma@williams.com</p>
+                        <p class="col-8">alice@smith.com</p>
                     </div>
                     <div class="row">
-                        <p class="col-4 text-primary"><strong>Phone number</strong></p>
-                        <p class="col-8">81 678 876</p>
+                        <p class="col-4"><strong>Phone number</strong></p>
+                        <p class="col-8">03 000 888</p>
                     </div>
                     <div class="row">
-                        <p class="col-4"><strong>Age</strong></p>
-                        <p class="col-8">34</p>
+                        <p class="col-4"><strong>Course requested</strong></p>
+                        <p class="col-8">Middle school - English</p>
                     </div>
                     <div class="row">
-                        <p class="col-4"><strong>Gender</strong></p>
-                        <p class="col-8">Female</p>
+                        <p class="col-4"><strong>Preferred tutor</strong></p>
+                        <p class="col-8">Yara Chahine</p>
                     </div>
                     <div class="row">
-                        <p class="col-4 text-primary"><strong>City</strong></p>
-                        <p class="col-8">Beirut</p>
+                        <p class="col-4"><strong>Session start</strong></p>
+                        <p class="col-8">14/01/2022</p>
                     </div>
                     <div class="row">
-                        <p class="col-4"><strong>Education level</strong></p>
-                        <p class="col-8">College Undergraduate</p>
+                        <p class="col-4"><strong>Session days</strong></p>
+                        <p class="col-8">Monday<br>Wednesday<br>Saturday</p>
                     </div>
                     <div class="row">
-                        <p class="col-4"><strong>College Name</strong></p>
-                        <p class="col-8">Lebanese American University</p>
-                    </div>
-                    <div class="row">
-                        <p class="col-4"><strong>Major</strong></p>
-                        <p class="col-8">Chemistry</p>
-                    </div>
-                    <div class="row">
-                        <p class="col-4"><strong>Years of Experience</strong></p>
-                        <p class="col-8">6</p>
-                    </div>
-                    <div class="row ">
-                        <p class="col-4 text-primary"><strong>Courses taught</strong></p>
-                        <p class="col-8">Chemistry - Middle school<br>Chemistry - High school</p>
-                    </div>
-                    <div class="row">
-                        <p class="col-4 text-primary"><strong>CV</strong></p>
-                        <p class="col-8"><a href="">Click to download PDF</a></p>
-                    </div>
-                    <div class="row">
-                        <p class="col-4"><strong>Bio paragraph</strong></p>
-                        <p class="col-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, ratione maiores adipisci consequuntur ad consectetur veritatis eaque quasi excepturi non, recusandae similique magni reiciendis nulla fugit magnam eligendi tempora suscipit.</p>
+                        <p class="col-4"><strong>Preferred price range</strong></p>
+                        <p class="col-8">60 000</p>
                     </div>
                 </div>
                 <div class="d-flex justify-content-center">
@@ -147,7 +137,7 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-body p-5">
-              Are you sure you want to accept <strong>Emma Williams</strong>'s profile edits? These changes will be publicly visible on the website.
+              Are you sure you want to accept <strong>Alice Smith</strong> as a student? Alice will be linked with their selected tutor at <em>Teachers</em>.
             </div>
             <div class="modal-footer">
                 <form action="">
@@ -167,7 +157,7 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-body p-5">
-                Are you sure you want to reject <strong>Emma Williams</strong>'s profile edits?
+                Are you sure you want to reject <strong>Alice Smith</strong>'s student signup?
             </div>
             <div class="modal-footer">
                 <form action="">
@@ -237,3 +227,5 @@
 
 
 </html>
+
+<?php } else {header("Location: index.html");} ?>

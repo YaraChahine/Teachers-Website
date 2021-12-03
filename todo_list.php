@@ -1,3 +1,10 @@
+<?php
+include("connection.php");
+session_start();
+if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0 || strcmp($_SESSION["type"],"3")==0)
+{
+
+    ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,6 +37,7 @@
     <!-- Template Main CSS File -->
     <link href="./css/style.css" rel="stylesheet">
     <link href="./css/style2.css" rel="stylesheet">
+    <link href="./css/todolist.css" rel="stylesheet">
 
     <!-- =======================================================
   * Template Name: FlexStart - v1.7.0
@@ -52,12 +60,11 @@
 
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a class="nav-link scrollto " href="profile.php">Home</a></li>
-                    <li><a class="nav-link scrollto" href="todolist2.php">To-do List</a></li>
-                    <li><a class="nav-link scrollto" href="calendar.html">Calendar</a></li>
-                    <li><a class="nav-link scrollto active" href="timer.html">Timer</a></li>
-                    <li><a class="nav-link scrollto" href="pomodoro.html">Pomodoro Clock</a></li>
-                    <li><a class="getstarted scrollto" href="logout.php">Log out</a></li>
+                    <li><a class="nav-link scrollto active" href="#hero">Calendar</a></li>
+                    <li><a class="nav-link scrollto" href="#about">To-do List</a></li>
+                    <li><a class="nav-link scrollto" href="#team">Timer</a></li>
+                    <li><a class="nav-link scrollto" href="#contact">Pomodoro Clock</a></li>
+                    <li><a class="getstarted scrollto" href="#about">Log out</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
@@ -67,28 +74,32 @@
 
     <br><br><br><br><br><br>
 
+    <div class="intro">
+    <p>"What you do today can improve all your tomorrows" -Ralph Martson</p>
+    </div>
+    <img class="blue-pattern2" src="img/bluepattern1.png">
 
-
-    <div class="timer">
-        <h1>Timer</h1>
-        <form class="  form-time">
-            <label for="hours">Hours:</label>
-            <input class="inpt" type="number" min="0" max="24" name="hours" size="3" id="hrs" value="0" >
-            <label for="minutes">Minutes: </label>
-            <input type="number" step="1" min="0" max="60" name="minutes" id="minutes" value="0" >
-            <label for="seconds">Seconds:</label>
-            <input type="number" step="5" min="0" max="60" name="seconds" id="seconds" value="0">
-            <p id="demo">0h 0m 0s</p>
-            <div class="buttons-flex">
-            <button type="button" onclick="start()" class="start-btn">Start</button>
-            <button type="button" onclick="pause()">||</button>
-            <button type="button" onclick="resume()" >&#9655;</button>
+<div class="list-container">
+            <div id="myDIV" class="list-header">
+            <h2>My To Do List</h2>
+            <input type="text" id="myInput" placeholder="Title...">
+            <span onclick="newElement()" class="addBtn">Add</span>
         </div>
-        </form>
+
+        <ul id="myUL" class="myUL">
+            <li class="list-item">Hit the gym</li>
+            <li class="list-item"> =Pay bills</li>
+            <li class="list-item">Meet George</li>
+            <li class="list-item">Buy eggs</li>
+            <li  class="list-item">Read a book</li>
+            <li  class="list-item">Organize office</li>
+        </ul>
     </div>
 
+    <img class="blue-pattern" src="img/bluepattern1.png">
 
-<!-- ======= Footer ======= -->
+
+    <!-- ======= Footer ======= -->
 <footer id="footer" class="footer">
 
     <div class="footer-top">
@@ -141,88 +152,70 @@
 
 
 
+
+
+
+
     <script>
-            var hours   ;
-            var minutes ;
-            var seconds ;
-            var hrs     ;
-            var mins    ;
-            var time    ;
-            var t;
-
-        function start() {
-             hours = parseInt(document.getElementById("hrs").value);//.toString();
-             minutes = parseInt(document.getElementById("minutes").value);//toString();
-             seconds = parseInt(document.getElementById("seconds").value);//toString();
-            if (hours>24 || hours<0){
-                window.alert("Caution : Please enter an Hour value between 0 and 24. ");
-                return;
-            }
-            else{
-                if(minutes>60 || minutes<0){
-                    window.alert("Caution : Please enter a Minutes value between 0 and 60. ");
-                    return;
-                }
-                else{
-                    if(seconds>60 || seconds<0){
-                        window.alert("Caution : Please enter a Seconds value between 0 and 24. ");
-                        return;
-                    }
-                }
-            }
-
-             var interval=1000;
-
-       console.log(hours, minutes, seconds);
-             hrs = hours * 60 *60;
-             mins = minutes*60 ;
-             time = hrs + mins + seconds;
-            console.log(time);
-            // Set the date we're counting down to
-            clearInterval(t);
-            t=setInterval(updateCountdown, interval);
-            function updateCountdown() {
-                if(time>=0){
-
-                var hours = Math.floor(time / (60 * 60));
-                var t=time-(hours*60*60);
-                var minutes = Math.floor(t / 60);
-                var seconds = time % 60;
-
-                document.getElementById("demo").innerHTML = hours + "h "
-                    + minutes + "m " + seconds + "s ";
-                time--;
-                }
-
-            }}
-
-
-        
-
-
-        function pause(){
-            clearInterval(t);
+        // Create a "close" button and append it to each list item
+        var myNodelist = document.getElementsByClassName("list-item");
+        var i;
+        for (i = 0; i < myNodelist.length; i++) {
+            var span = document.createElement("SPAN");
+            var txt = document.createTextNode("\u00D7");
+            span.className = "close";
+            span.appendChild(txt);
+            myNodelist[i].appendChild(span);
         }
-        function resume(){
-            clearInterval(t);
-            t=setInterval(updateCountdown, 1000);
-            function updateCountdown() {
-                if(time>=0){
 
-                var hours = Math.floor(time / (60 * 60));
-                var minutes = Math.floor(time / 60);
-                var seconds = time % 60;
-
-                document.getElementById("demo").innerHTML = hours + "h "
-                    + minutes + "m " + seconds + "s ";
-                time--;
-                if (time<0){
-                    clearInterval(t);
-                }}
-
+        // Click on a close button to hide the current list item
+        var close = document.getElementsByClassName("close");
+        var i;
+        for (i = 0; i < close.length; i++) {
+            close[i].onclick = function () {
+                var div = this.parentElement;
+                div.style.display = "none";
+            }
         }
-    }
+
+        // Add a "checked" symbol when clicking on a list item
+      
+
+        var list = document.getElementById("myUL");
+        list.addEventListener('click', function (ev) {
+            if (ev.target.tagName === 'LI') {
+                ev.target.classList.toggle('checked');
+            }
+        }, false);
+        // Create a new list item when clicking on the "Add" button
+        function newElement() {
+            var li = document.createElement("li");
+            var inputValue = document.getElementById("myInput").value;
+            var t = document.createTextNode(inputValue);
+            li.appendChild(t);
+            if (inputValue === '') {
+                alert("You must write something!");
+            } else {
+                document.getElementById("myUL").appendChild(li);
+            }
+            document.getElementById("myInput").value = "";
+
+            var span = document.createElement("SPAN");
+            var txt = document.createTextNode("\u00D7");
+            span.className = "close";
+            span.appendChild(txt);
+            li.appendChild(span);
+
+            for (i = 0; i < close.length; i++) {
+                close[i].onclick = function () {
+                    var div = this.parentElement;
+                    div.style.display = "none";
+                }
+            }
+        }
     </script>
 </body>
 
 </html>
+
+<?php } else {header("Location: index.html");} ?>

@@ -1,6 +1,8 @@
 <?php
 include("connection.php");
 session_start();
+if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0 || strcmp($_SESSION["type"],"3")==0)
+{
 $id = $_SESSION["user_id"];
 
 $query= "SELECT first_name FROM  users where user_id = ?";
@@ -67,9 +69,9 @@ $row = $results->fetch_assoc();
                 <ul>
                     <li><a class="nav-link scrollto active" href="profile.php">Home</a></li>
                     <li><a class="nav-link scrollto" href="todolist2.php">To-do List</a></li>
-                    <li><a class="nav-link scrollto" href="calendar.html">Calendar</a></li>
-                    <li><a class="nav-link scrollto" href="timer.html">Timer</a></li>
-                    <li><a class="nav-link scrollto" href="pomodoro.html">Pomodoro Clock</a></li>
+                    <li><a class="nav-link scrollto" href="calendar.php">Calendar</a></li>
+                    <li><a class="nav-link scrollto" href="timer.php">Timer</a></li>
+                    <li><a class="nav-link scrollto" href="pomodoro.php">Pomodoro Clock</a></li>
                     <li><a class="getstarted scrollto" href="logout.php">Log out</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
@@ -93,7 +95,7 @@ $row = $results->fetch_assoc();
 
     <br><br>
     <div class="grid-container">
-        <a href="calendar.html">
+        <a href="calendar.php">
             <div class="grid-item item1">
                 <img src="img/calendarIllustration.jpg">
                 <p>Calendar</p>
@@ -105,13 +107,13 @@ $row = $results->fetch_assoc();
                 <p>To-do List</p>
             </div>
         </a>
-        <a href="pomodoro.html">
+        <a href="pomodoro.php">
             <div class="grid-item item3">
                 <img src="img/pomodoro2.jpg">
                 <p>Pomodoro Clock</p>
             </div>
         </a>
-        <a href="timer.html">
+        <a href="timer.php">
             <div class="grid-item item4">
                 <img src="img/timer3.png">
                 <br><br>
@@ -119,14 +121,14 @@ $row = $results->fetch_assoc();
             </div>
         </a>
 
-        <a href="profile_edit.html">
+        <a href="profile_edit.php">
             <div class="grid-item item5">
                 <img src="img/edit.jpg">
                 <br><br><br>
                 <p>Edit Profile Info</p>
             </div>
         </a>
-        <a href="request_new_tutor_course.html">
+        <a href="request_new_tutor_course.php">
             <div class="grid-item item6">
                 <img src="img/request.png">
                 <p>Request a new tutor/Add Course</p>
@@ -194,3 +196,6 @@ $row = $results->fetch_assoc();
 
 
 </html>
+
+
+<?php } else {header("Location: index.html");} ?>

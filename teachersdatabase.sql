@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 02, 2021 at 01:38 AM
+-- Generation Time: Dec 03, 2021 at 04:53 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -61,7 +61,8 @@ CREATE TABLE `consultations` (
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
   `email_address` varchar(255) NOT NULL,
-  `phone_number` varchar(255) NOT NULL
+  `phone_number` varchar(255) NOT NULL,
+  `information` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------

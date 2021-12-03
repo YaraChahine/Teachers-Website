@@ -1,3 +1,12 @@
+<?php
+
+include("connection.php");
+session_start();
+
+if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
+{
+    ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,7 +61,7 @@
 
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a class="nav-link scrollto active" href="admin_page.html">Main Page</a></li>
+                    <li><a class="nav-link scrollto active" href="admin_page.php">Main Page</a></li>
                     <li><a class="nav-link scrollto" href="admin_updates.php">My updates</a></li>
                     <li> <a style="cursor: pointer ;" class="nav-link scrollto rmov" data-bs-toggle="modal"
                             data-bs-target="#remove-modal">
@@ -273,3 +282,5 @@
 
 
 </html>
+
+<?php } else {header("Location: index.html");} ?>
