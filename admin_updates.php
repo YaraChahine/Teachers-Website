@@ -107,7 +107,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
 
             <div class="list-group-item card update-item">
                 <h5 class="card-header">Consultation Requests</h5>
-                <?php $query = "SELECT  id,first_name, last_name,email,phone_number,information FROM  consultation";
+                <?php $query = "SELECT  id,first_name, last_name,email_address,phone_number FROM  consultations";
                 $stmt = $connection->prepare($query);
                 $stmt->execute();
                 $results = $stmt->get_result();
@@ -148,6 +148,8 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
                   <a href="admin_application.php?id=<?php echo($row["temp_student_id"]);?>" class="btn btn-primary" data-id=<?php echo($row["temp_student_id"]); ?> >View update</a>
                   <hr>                 
                   <?php } ?> 
+                    </div>
+                    
 
                 <div class="card-body">
                   <h5 class="card-title">Alice Smith</h5>
