@@ -4,7 +4,7 @@ include("connection.php");
 $id = $_GET["id"];
 
 
-$query = "DELETE FROM  consultation where id=$id";
+$query = "DELETE FROM  consultations where id=$id";
 $stmt = $connection->prepare($query);
 $stmt->execute();
 

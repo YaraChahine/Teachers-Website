@@ -61,9 +61,9 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
 
             <nav id="navbar" class="navbar">
                 <ul>
-                <li><a class="nav-link scrollto " href="admin_page.html">Main Page</a></li>
+                <li><a class="nav-link scrollto " href="admin_page.php">Main Page</a></li>
                     <li><a class="nav-link scrollto active" href="admin_updates.php">My updates</a></li>
-                    <li><a class="nav-link scrollto" href="admin_page.html">Remove a member</a></li>
+                    <li><a class="nav-link scrollto" href="admin_page.php">Remove a member</a></li>
                     <li><a class="getstarted scrollto" href="logout.php">Log out</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
@@ -107,7 +107,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
 
             <div class="list-group-item card update-item">
                 <h5 class="card-header">Consultation Requests</h5>
-                <?php $query = "SELECT  id,first_name, last_name,email_address,phone_number FROM  consultations";
+                <?php $query = "SELECT  id,first_name, last_name,email_address,phone_number,information FROM  consultations";
                 $stmt = $connection->prepare($query);
                 $stmt->execute();
                 $results = $stmt->get_result();
@@ -121,7 +121,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
                     ?>
                 <div class="card-body">
                   <h5 class="card-title"><?php echo($row["first_name"]." ".$row["last_name"]); ?></h5>
-                  <p class="card-text"><?php echo($row["email"]." - ".$row["phone_number"]); ?></p>
+                  <p class="card-text"><?php echo($row["email_address"]." - ".$row["phone_number"]); ?></p>
                   <a href="admin_consultation.php?id=<?php echo($row["id"]);?>"class="btn btn-primary">View update</a>
                 </div>
                 <hr>

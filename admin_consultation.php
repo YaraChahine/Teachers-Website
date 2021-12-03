@@ -87,7 +87,7 @@ if (isset($_GET["id"])) {
               <span>&ThickSpace; Consultation</span>
             </h5>
             <div class="card-body p-5">
-            <?php $query= "SELECT * FROM  consultation where id=?";
+            <?php $query= "SELECT * FROM  consultations where id=?";
                 $stmt = $connection->prepare($query);
                 $stmt->bind_param("d", $id);
                 $stmt->execute();
@@ -105,7 +105,7 @@ if (isset($_GET["id"])) {
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Email</strong></p>
-                        <p class="col-8"><?php echo($row["email"]);?></p>
+                        <p class="col-8"><?php echo($row["email_address"]);?></p>
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Phone number</strong></p>
