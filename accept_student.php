@@ -1,7 +1,7 @@
 <?php
 
 include("connection.php");
-$id = $_GET["id"]
+$id = $_GET["id"];
 
 $query = "SELECT * FROM pending_students where temp_student_id = $id";
 $stmt = $connection->prepare($query);
