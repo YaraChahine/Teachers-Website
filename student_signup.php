@@ -227,6 +227,6 @@ if(isset($_POST["price"]) && $_POST["price"] !="" && preg_match("/^[0-9]*$/", $_
         $connection->close();
         
         
-     header("Location: index.html");
+     header("Location: index.html"); //not profile since they need to be accepted first by the admin
 
 ?>

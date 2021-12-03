@@ -1,12 +1,10 @@
 <?php
 
 include("connection.php");
-session_start();
 
-if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
-{
 
-  ?>
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -61,9 +59,9 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
 
             <nav id="navbar" class="navbar">
                 <ul>
-                <li><a class="nav-link scrollto " href="admin_page.php">Main Page</a></li>
+                <li><a class="nav-link scrollto " href="admin_page.html">Main Page</a></li>
                     <li><a class="nav-link scrollto active" href="admin_updates.php">My updates</a></li>
-                    <li><a class="nav-link scrollto" href="admin_page.php">Remove a member</a></li>
+                    <li><a class="nav-link scrollto" href="admin_page.html">Remove a member</a></li>
                     <li><a class="getstarted scrollto" href="logout.php">Log out</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
@@ -107,7 +105,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
 
             <div class="list-group-item card update-item">
                 <h5 class="card-header">Consultation Requests</h5>
-                <?php $query = "SELECT  id,first_name, last_name,email_address,phone_number,information FROM  consultations";
+                <?php $query = "SELECT  id,first_name, last_name,email_address,phone_number, information FROM  consultations";
                 $stmt = $connection->prepare($query);
                 $stmt->execute();
                 $results = $stmt->get_result();
@@ -121,7 +119,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
                     ?>
                 <div class="card-body">
                   <h5 class="card-title"><?php echo($row["first_name"]." ".$row["last_name"]); ?></h5>
-                  <p class="card-text"><?php echo($row["email_address"]." - ".$row["phone_number"]); ?></p>
+                  <p class="card-text"><?php echo($row["email"]." - ".$row["phone_number"]); ?></p>
                   <a href="admin_consultation.php?id=<?php echo($row["id"]);?>"class="btn btn-primary">View update</a>
                 </div>
                 <hr>
@@ -154,7 +152,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
                 <div class="card-body">
                   <h5 class="card-title">Alice Smith</h5>
                   <p class="card-text">alice@smith.com - 03 000 888</p>
-                  <a href="admin_signup.html" class="btn btn-primary">View update</a>
+                  <a href="admin_signup.php" class="btn btn-primary">View update</a>
                 </div>
             </div>
 
@@ -163,7 +161,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
                 <div class="card-body">
                   <h5 class="card-title">Bob Smith</h5>
                   <p class="card-text">bob@smith.com - 71 222 666</p>
-                  <a href="admin_student_add.html" class="btn btn-primary">View update</a>
+                  <a href="admin_student_add.php" class="btn btn-primary">View update</a>
                 </div>
             </div>
 
@@ -172,7 +170,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
                 <div class="card-body">
                   <h5 class="card-title">William Jones</h5>
                   <p class="card-text">william@jones.com - 70 000 789</p>
-                  <a href="admin_consultation.html" class="btn btn-primary">View update</a>
+                  <a href="admin_consultation.php" class="btn btn-primary">View update</a>
                 </div>
             </div>
 
@@ -181,7 +179,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
                 <div class="card-body">
                   <h5 class="card-title">Emma Williams</h5>
                   <p class="card-text">emma@williams.com - 81 234 567</p>
-                  <a href="admin_edit.html" class="btn btn-primary">View update</a>
+                  <a href="admin_edit.php" class="btn btn-primary">View update</a>
                 </div>
             </div>
 
@@ -245,5 +243,3 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
 
 
 </html>
-
-<?php } else {header("Location: index.html");} ?>
