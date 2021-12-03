@@ -3,7 +3,7 @@ include("connection.php");
 session_start();
 $id = $_SESSION["user_id"];
 
-$query= "SELECT first_name FROM  users where user_id=?";
+$query= "SELECT first_name FROM  users where user_id = ?";
 $stmt = $connection->prepare($query);
 $stmt->bind_param("i", $id);
 
@@ -80,7 +80,14 @@ $row = $results->fetch_assoc();
 
     <br><br><br><br><br><br>
     <div class="greeting">
-        <h1>Hello, <span id="user-name"> <?php echo($row["first_name"]);?></span></h1>
+        <h1>Hello, <span id="user-name"> 
+          <?php 
+          // if (isset($_POST["first_name"])){
+            echo($row["first_name"]);
+          // }
+          ?>
+        </span>
+      </h1>
         <p>What would you like to do today?</p>
     </div>
 
