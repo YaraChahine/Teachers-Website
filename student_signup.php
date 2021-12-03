@@ -195,7 +195,7 @@ if(isset($_POST["price"]) && $_POST["price"] !="" && preg_match("/^[0-9]*$/", $_
     $results1 = $mysql1->get_result();
     $row1 = $results1->fetch_assoc();
     if(empty($row1)) {
-        $mysql2 = $connection->prepare("SELECT * FROM pending_students WHERE email = ?");
+        $mysql2 = $connection->prepare("SELECT * FROM pending_tutors WHERE email = ?");
         $mysql2->bind_param("s", $email_address);
         $mysql2->execute();
         $results2 = $mysql2->get_result();
