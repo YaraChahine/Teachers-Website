@@ -130,7 +130,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0){
                             <div class="modal-footer">
 
                                 <br>
-                                <a href="admin_page.html"><button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button></a>
+                                <a href="admin_page.php"><button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button></a>
                                 <button type="submit" class="btn btn-primary p-0 ok-btn" style="border-color:red; background-color:red;">Delete</button>
                             </div>
                         </form>
