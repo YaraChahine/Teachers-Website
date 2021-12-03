@@ -128,6 +128,25 @@ include("connection.php");
 
             <div class="list-group-item card update-item">
                 <h5 class="card-header">Student Signup</h5>
+
+                <?php $query_student_signup = "SELECT temp_student_id, first_name, last_name, email, phone_number FROM  pending_students";
+                $stmt = $connection->prepare($query_student_signup);
+                $stmt->execute();
+                $results_students = $stmt->get_result();
+                ?>
+
+
+                <div class="card-body">    
+                  <?php
+                    while($row = $results_students->fetch_assoc()){
+                  ?>
+                   
+                  <h5 class="card-title"><?php echo($row["first_name"]." ".$row["last_name"]); ?></h5>
+                  <p class="card-text"><?php echo($row["email"]." - ".$row["phone_number"]); ?></p>
+                  <a href="admin_application.php?id=<?php echo($row["temp_student_id"]);?>" class="btn btn-primary" data-id=<?php echo($row["temp_student_id"]); ?> >View update</a>
+                  <hr>                 
+                  <?php } ?> 
+
                 <div class="card-body">
                   <h5 class="card-title">Alice Smith</h5>
                   <p class="card-text">alice@smith.com - 03 000 888</p>
