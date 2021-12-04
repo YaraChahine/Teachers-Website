@@ -244,43 +244,39 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
     <br><br><br><br><br>
 
     <!-- Accept Modal -->
-
     <div class="modal fade" id="accept-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-body p-5">
-              Are you sure you want to accept <strong>Alice Smith</strong> as a student? Alice will be linked with their selected tutor at <em>Teachers</em>.
+              Are you sure you want to accept <strong><?php echo($row["first_name"]." ".$row["last_name"]); ?></strong> as a student? <?php echo($row["first_name"]);?> will be linked with their selected tutor at <em>Teachers</em>.
             </div>
             <div class="modal-footer">
                 <form action="">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="submit">Confirm</button>
+                    <a href="accept_student.php?id=<?php echo($row["temp_student_id"]); ?>"><button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="submit">Confirm</button></a>
                 </form>
             </div>
           </div>
         </div>
       </div>
-
     <!-- End Acccept Modal -->
     
     <!-- Reject Modal -->
-
     <div class="modal fade" id="reject-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-body p-5">
-                Are you sure you want to reject <strong>Alice Smith</strong>'s student signup?
+                Are you sure you want to reject <strong><?php echo($row["first_name"]." ".$row["last_name"]); ?></strong>'s student signup?
             </div>
             <div class="modal-footer">
                 <form action="">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="submit">Confirm</button>
-                </form>
+                    <a href="reject_student.php?id=<?php echo($row["temp_student_id"]); ?>"><button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="submit"> Confirm</button>
+                  </form>
             </div>
           </div>
         </div>
       </div>
-
     <!-- End Reject Modal -->
 
     

@@ -29,16 +29,19 @@ if (empty($student_row)){
 
     //before adding to students table we must get the user_id
 
-    $query = "SELECT user_id FROM users where email = ?;";
+
+    $query= "SELECT user_id FROM users where email= ?;";
     $stmt = $connection->prepare($query);
     $stmt->bind_param("s", $row["email"]);
     $stmt->execute();
-    $results = $stmt->get_results();
-    $student_id = $results->fetch_assoc();
+    $results = $stmt->get_result(); 
+    $student_id= $results->fetch_assoc();
+
 
     //now we can add to students table
-    $mysql = $connection->prepare("INSERT INTO students (user_id, price_range) VALUES (?,?);");
-    $mysql->bind_param("is", $student_id["user_id"], $row["price_range"]);
+    $mysql = $connection->prepare("INSERT INTO students (user_id, price_range)
+     VALUES (?, ?);");
+    $mysql->bind_param("dd", $student_id["user_id"], $row["price_range"]);
     ($mysql->execute());
 
     //since they are officially students, now we must remove them from pending_students
