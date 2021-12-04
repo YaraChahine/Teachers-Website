@@ -5,7 +5,9 @@ session_start();
 
 if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
 {
-
+  if (isset($_GET["id"])) {
+    $id = $_GET["id"];
+    } else die ("no student or application selected");
   ?>
 
 
@@ -85,7 +87,117 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
               <span>&ThickSpace; Student Signup</span>
             </h5>
             <div class="card-body p-5">
-                <h5 class="card-title"> <strong>Alice</strong> has signed up to become a student at <em>Teachers and is awaiting your response.</em></h5>
+            <?php $query_students_application = "SELECT * FROM  pending_students where temp_student_id=?";
+                $stmt = $connection->prepare($query_students_application);
+                $stmt->bind_param("d", $id);
+                $stmt->execute();
+                $results_tutors = $stmt->get_result(); 
+                $row = $results_tutors->fetch_assoc();
+                if (empty($row)) {
+                    die ("invalid id");
+                }
+                ?>
+                   
+                <img src="img/default-user-image.png" class="rounded-circle w-25 d-block my-5 mx-auto" alt="Image">
+                <h5 class="card-title"> <strong><?php echo($row["first_name"]); ?> </strong> is applying to become a tutor at <em>Teachers and is awaiting your response.</em></h5>
+                <div class="w-75 my-5 mx-auto">
+                    <div class="row">
+                        <p class="col-4"><strong>Full name</strong></p>
+                        <p class="col-8"><?php echo($row["first_name"]." ".$row["last_name"]); ?></p>
+                    </div>
+                    <div class="row">
+                        <p class="col-4"><strong>Email</strong></p>
+                        <p class="col-8"><?php echo($row["email"]); ?></p>
+                    </div>
+                    <div class="row">
+                        <p class="col-4"><strong>Phone number</strong></p>
+                        <p class="col-8"><?php echo($row["phone_number"]); ?></p>
+                    </div>
+                    <div class="row">
+                        <p class="col-4"><strong>Education level</strong></p>
+                        <p class="col-8">
+                          <?php 
+                          switch ($row["education_level_student"]) {
+                            case "0":
+                                echo "Primary School";
+                                break;
+                            case "1":
+                                echo "Middle School";
+                                break;
+                            case "2":
+                                echo "Highschool";
+                                break;
+                            case "3":
+                                echo "College";
+                                break;
+                          }
+                          echo(" - ");
+                          echo $row["course"];
+
+                          ?>
+                        </p>
+                    </div>
+                    <div class="row">
+                        <p class="col-4"><strong>Preferred Tutor</strong></p>
+                        <p class="col-8"><?php 
+                              $queryTutor = "SELECT * FROM tutors INNER JOIN users on users.user_id=tutors.user_id where tutor_id=?";
+                              $stmt2 = $connection->prepare($queryTutor);
+                              $stmt2->bind_param("d", $row["preferred_tutor"]);
+                              $stmt2->execute();
+                              $results = $stmt2->get_result();
+                              while($row2 = $results->fetch_assoc()){
+                              echo($row2["first_name"] . " " . $row2["last_name"]); }?></p>
+
+                    </div>
+                    <div class="row">
+                        <p class="col-4"><strong>Session start</strong></p>
+                        <p class="col-8"><?php 
+                        echo($row["starting_date"]);?></p>
+                    </div>
+                     <div class="row">
+                        <p class="col-4"><strong>Session days</strong></p>
+                        <p class="col-8"><?php 
+                         $correct_dates ="";
+                         if (substr($row['days_of_sessions'], 0,1)==1){
+                            $correct_dates .= "Mon ";
+                         }
+                         if (substr($row['days_of_sessions'],1,-5)==1){
+                            $correct_dates .= "Tue ";
+                        }
+                        if (substr($row['days_of_sessions'],2,-4)==1){
+                            $correct_dates .= "Wed ";
+                         }
+                         if (substr($row['days_of_sessions'],3,-3)==1){
+                            $correct_dates .= "Thu ";
+                         }
+                         if (substr($row['days_of_sessions'],4,-2)==1){
+                            $correct_dates .= "Fri ";
+                         }
+                         if (substr($row['days_of_sessions'],5,-1)==1){
+                            $correct_dates .= "Sat ";
+                         }
+                         if (substr($row['days_of_sessions'],6)==1){
+                            $correct_dates .= "Sun ";
+                         }
+                        echo($correct_dates);?></p>
+                    </div>             
+                    <div class="row">
+                        <p class="col-4"><strong>Preferred price range</strong></p>
+                        <p class="col-8"><?php echo($row["price"]); ?></p>
+                    </div>
+
+
+                </div>
+                <div class="d-flex justify-content-center">
+                    <a class="m-3 btn btn-danger" data-bs-toggle="modal" data-bs-target="#reject-modal">Reject</a>
+                    <a class="m-3 btn btn-primary" data-bs-toggle="modal" data-bs-target="#accept-modal">Accept</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+                <!-- <h5 class="card-title"> <strong>Alice</strong> has signed up to become a student at <em>Teachers and is awaiting your response.</em></h5>
                 <div class="w-75 my-5 mx-auto">
                     <div class="row">
                         <p class="col-4"><strong>Full name</strong></p>
@@ -126,7 +238,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- End Update Card -->
     <br><br><br><br><br>

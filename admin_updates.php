@@ -143,7 +143,7 @@ include("connection.php");
                    
                   <h5 class="card-title"><?php echo($row["first_name"]." ".$row["last_name"]); ?></h5>
                   <p class="card-text"><?php echo($row["email"]." - ".$row["phone_number"]); ?></p>
-                  <a href="admin_application.php?id=<?php echo($row["temp_student_id"]);?>" class="btn btn-primary" data-id=<?php echo($row["temp_student_id"]); ?> >View update</a>
+                  <a href="admin_signup.php?id=<?php echo($row["temp_student_id"]);?>" class="btn btn-primary" data-id=<?php echo($row["temp_student_id"]); ?> >View update</a>
                   <hr>                 
                   <?php } ?> 
                     </div>
