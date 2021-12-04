@@ -97,11 +97,7 @@ if (empty($student_row)){
         $results = $stmt2->get_result(); 
         $course_id = $results->fetch_assoc();
     
-       $query3= "INSERT into tutor_courses(course_id, tutor_id) values(?,?);";
-        $stmt2 = $connection->prepare($query3);
-        $stmt2->bind_param("ii", $course_id["course_id"], $row["preferred_tutor"]);
-        $stmt2->execute();
-
+    
         $query3= "INSERT into bookings(student_id,tutor_id,course_id,starting_date,days_of_sessions) values(?,?,?,?,?);";
         $stmt2 = $connection->prepare($query3);
         $stmt2->bind_param("iiiss",$student_ID["student_id"],$row["preferred_tutor"], $course_id["course_id"], $row["starting_date"], $row["days_of_sessions"]);
