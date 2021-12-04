@@ -11,22 +11,6 @@ $results = $stmt->get_result();
 $row = $results->fetch_assoc();
 
 
-$query= "SELECT * FROM courses where course_name=? and course_level=?;";
-$stmt = $connection->prepare($query);
-$stmt->bind_param("ss", $row["course_1"], $row["course_level_1"]);
-$stmt->execute();
-$results = $stmt->get_result(); 
-$courses_row = $results->fetch_assoc();
-
-if(empty($courses_row)){
-    
-    $query= "INSERT into courses(course_name,course_level) values(?,?);";
-    $stmt = $connection->prepare($query);
-    $stmt->bind_param("ss", $row["course_1"], $row["course_level_1"]);
-    $stmt->execute();
-    $results = $stmt->get_result(); 
-    $courses_row = $results->fetch_assoc();
-}
 //We should check if tutor already in database;
 $query= "SELECT * FROM users where email= ?;";
 $stmt = $connection->prepare($query);
@@ -57,7 +41,194 @@ $mysql->bind_param("issssisssss", $tutor_id["user_id"], $row["gender"], $row["ye
 ($mysql->execute());
 
 
+$query_id="SELECT tutor_ID from tutors where user_id=?;";
+$stmt = $connection->prepare($query_id);
+$stmt->bind_param("i", $tutor_id["user_id"]);
+$stmt->execute();
+$results = $stmt->get_result(); 
+$tutor_id = $results->fetch_assoc();
 
+
+
+$query= "SELECT * FROM courses where course_name=? and course_level=?;";
+$stmt = $connection->prepare($query);
+$stmt->bind_param("ss", $row["course_1"], $row["course_level_1"]);
+$stmt->execute();
+$results = $stmt->get_result(); 
+$courses_row = $results->fetch_assoc();
+
+if(empty($courses_row)){
+    
+    $query= "INSERT into courses(course_name,course_level) values(?,?);";
+    $stmt = $connection->prepare($query);
+    $stmt->bind_param("ss", $row["course_1"], $row["course_level_1"]);
+    $stmt->execute();
+
+    $query2= "SELECT course_id from courses where course_name=?; ";
+    $stmt2 = $connection->prepare($query2);
+    $stmt2->bind_param("s", $row["course_1"]);
+    $stmt2->execute();
+    $results = $stmt2->get_result(); 
+    $course_id = $results->fetch_assoc();
+
+
+    $query3= "INSERT into tutor_courses(course_id, tutor_id) values(?,?);";
+    $stmt2 = $connection->prepare($query3);
+    $stmt2->bind_param("ii", $course_id["course_id"], $tutor_id["tutor_ID"]);
+    $stmt2->execute();
+
+}
+else
+{
+    
+    $query2= "SELECT course_id from courses where course_name=?; ";
+    $stmt2 = $connection->prepare($query);
+    $stmt2->bind_param("s", $row["course_1"]);
+    $stmt2->execute();
+    $results = $stmt2->get_result(); 
+    $course_id = $results->fetch_assoc();
+
+
+    $query3= "INSERT into tutor_courses(course_id, tutor_id) values(?,?);";
+    $stmt2 = $connection->prepare($query3);
+    $stmt2->bind_param("ii", $course_id["course_id"], $tutor_id["tutor_ID"]);
+    $stmt2->execute();
+}
+
+if ((strcasecmp($row["course_2"], "none") != 0)){
+    $query= "SELECT * FROM courses where course_name=? and course_level=?;";
+    $stmt = $connection->prepare($query);
+    $stmt->bind_param("ss", $row["course_2"], $row["course_level_2"]);
+    $stmt->execute();
+    $results = $stmt->get_result(); 
+    $courses_row = $results->fetch_assoc();
+    if (empty($courses_row)){
+        $query= "INSERT into courses(course_name,course_level) values(?,?);";
+        $stmt = $connection->prepare($query);
+        $stmt->bind_param("ss", $row["course_2"], $row["course_level_2"]);
+        $stmt->execute();
+        
+        $query2= "SELECT course_id from courses where course_name=?; ";
+        $stmt2 = $connection->prepare($query2);
+        $stmt2->bind_param("s", $row["course_2"]);
+        $stmt2->execute();
+        $results = $stmt2->get_result(); 
+        $course_id = $results->fetch_assoc();
+
+
+        $query3= "INSERT into tutor_courses(course_id, tutor_id) values(?,?);";
+        $stmt2 = $connection->prepare($query3);
+        $stmt2->bind_param("ii", $course_id["course_id"], $tutor_id["tutor_ID"]);
+        $stmt2->execute();
+    }
+    else
+    {
+        
+    $query2= "SELECT course_id from courses where course_name=?; ";
+    $stmt2 = $connection->prepare($query2);
+    $stmt2->bind_param("s", $row["course_2"]);
+    $stmt2->execute();
+    $results = $stmt2->get_result(); 
+    $course_id = $results->fetch_assoc();
+
+
+    $query3= "INSERT into tutor_courses(course_id, tutor_id) values(?,?);";
+    $stmt2 = $connection->prepare($query3);
+    $stmt2->bind_param("ii", $course_id["course_id"], $tutor_id["tutor_ID"]);
+    $stmt2->execute();
+    }
+
+}
+if ((strcasecmp($row["course_3"], "none") != 0)){
+    $query= "SELECT * FROM courses where course_name=? and course_level=?;";
+    $stmt = $connection->prepare($query);
+    $stmt->bind_param("ss", $row["course_3"], $row["course_level_3"]);
+    $stmt->execute();
+    $results = $stmt->get_result(); 
+    $courses_row = $results->fetch_assoc();
+    if (empty($courses_row)){
+        $query= "INSERT into courses(course_name,course_level) values(?,?);";
+        $stmt = $connection->prepare($query);
+        $stmt->bind_param("ss", $row["course_3"], $row["course_level_3"]);
+        $stmt->execute();
+        
+        $query2= "SELECT course_id from courses where course_name=?; ";
+        $stmt2 = $connection->prepare($query2);
+        $stmt2->bind_param("s", $row["course_3"]);
+        $stmt2->execute();
+        $results = $stmt2->get_result(); 
+        $course_id = $results->fetch_assoc();
+
+
+        $query3= "INSERT into tutor_courses(course_id, tutor_id) values(?,?);";
+        $stmt2 = $connection->prepare($query3);
+        $stmt2->bind_param("ii", $course_id["course_id"], $tutor_id["tutor_ID"]);
+        $stmt2->execute();
+    }
+    else
+    {
+        
+        $query2= "SELECT course_id from courses where course_name=?; ";
+        $stmt2 = $connection->prepare($query2);
+        $stmt2->bind_param("s", $row["course_3"]);
+        $stmt2->execute();
+        $results = $stmt2->get_result(); 
+        $course_id = $results->fetch_assoc();
+
+
+        $query3= "INSERT into tutor_courses(course_id, tutor_id) values(?,?);";
+        $stmt2 = $connection->prepare($query3);
+        $stmt2->bind_param("ii", $course_id["course_id"], $tutor_id["tutor_ID"]);
+        $stmt2->execute();
+    }
+
+}
+
+if ((strcasecmp($row["course_4"], "none") != 0)){
+    $query= "SELECT * FROM courses where course_name=? and course_level=?;";
+    $stmt = $connection->prepare($query);
+    $stmt->bind_param("ss", $row["course_4"], $row["course_level_4"]);
+    $stmt->execute();
+    $results = $stmt->get_result(); 
+    $courses_row = $results->fetch_assoc();
+    if (empty($courses_row)){
+        $query= "INSERT into courses(course_name,course_level) values(?,?);";
+        $stmt = $connection->prepare($query);
+        $stmt->bind_param("ss", $row["course_4"], $row["course_level_4"]);
+        $stmt->execute();
+
+            
+        $query2= "SELECT course_id from courses where course_name=?; ";
+        $stmt2 = $connection->prepare($query2);
+        $stmt2->bind_param("s", $row["course_4"]);
+        $stmt2->execute();
+        $results = $stmt2->get_result(); 
+        $course_id = $results->fetch_assoc();
+
+
+        $query3= "INSERT into tutor_courses(course_id, tutor_id) values(?,?);";
+        $stmt2 = $connection->prepare($query3);
+        $stmt2->bind_param("ii", $course_id["course_id"], $tutor_id["tutor_ID"]);
+        $stmt2->execute();
+    }
+    else
+    {
+        
+    $query2= "SELECT course_id from courses where course_name=?; ";
+    $stmt2 = $connection->prepare($query2);
+    $stmt2->bind_param("s", $row["course_4"]);
+    $stmt2->execute();
+    $results = $stmt2->get_result(); 
+    $course_id = $results->fetch_assoc();
+
+
+    $query3= "INSERT into tutor_courses(course_id, tutor_id) values(?,?);";
+    $stmt2 = $connection->prepare($query3);
+    $stmt2->bind_param("ii", $course_id["course_id"], $tutor_id["tutor_ID"]);
+    $stmt2->execute();
+    }
+
+}
 //removing from pending tutors 
 $query= "DELETE FROM pending_tutors where temp_user_id= ?;";
 $stmt = $connection->prepare($query);
