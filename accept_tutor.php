@@ -11,7 +11,22 @@ $results = $stmt->get_result();
 $row = $results->fetch_assoc();
 
 
+$query= "SELECT * FROM courses where course_name=? and course_level=?;";
+$stmt = $connection->prepare($query);
+$stmt->bind_param("ss", $row["course_1"], $row["course_level_1"]);
+$stmt->execute();
+$results = $stmt->get_result(); 
+$courses_row = $results->fetch_assoc();
 
+if(empty($courses_row)){
+    
+    $query= "INSERT into courses(course_name,course_level) values(?,?);";
+    $stmt = $connection->prepare($query);
+    $stmt->bind_param("ss", $row["course_1"], $row["course_level_1"]);
+    $stmt->execute();
+    $results = $stmt->get_result(); 
+    $courses_row = $results->fetch_assoc();
+}
 //We should check if tutor already in database;
 $query= "SELECT * FROM users where email= ?;";
 $stmt = $connection->prepare($query);

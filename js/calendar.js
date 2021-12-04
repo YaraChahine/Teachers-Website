@@ -177,7 +177,7 @@
 
         $.ajax({
         type: "POST",
-        url: "/calendar_add.php",
+        url: "calendar_add.php",
         data: {
             "item_name_calendar" : name,
             "importance" : flag,
