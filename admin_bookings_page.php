@@ -286,54 +286,6 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
               
                 }
                 ?>
-                <!-- <tr> -->
-                    <!-- <td name="id">1</td>
-                    <td name="student">2</td>
-                    <td>Ali Knayber</td>
-                    <td name="tutor">2</td>
-                    <td>Yara Chahine</td>
-                    <td name="course">14</td>
-                    <td>Discrete II - College</td>
-                    <td name="date">24/11/2021</td>
-                    <td name="days">Mon Tue Wed Thu Fri Sat Sun</td>
-                    <td> <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="loadBookingData(this)">Edit</a></td>
-                </tr>
-                <tr>
-                    <td name="id">2</td>
-                    <td name="student">7</td>
-                    <td>John A</td>
-                    <td name="tutor">5</td>
-                    <td>John B</td>
-                    <td name="course">12</td>
-                    <td>Calculus III - College</td>
-                    <td name="date">24/12/2021</td>
-                    <td name="days">Mon Tue Wed</td>
-                    <td> <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="loadBookingData(this)">Edit</a></td>
-                </tr>
-                <tr>
-                    <td name="id">3</td>
-                    <td name="student">9</td>
-                    <td>John C</td>
-                    <td name="tutor">12</td>
-                    <td>John D</td>
-                    <td name="course">11</td>
-                    <td>Organic Chemistry - College</td>
-                    <td name="date">12/01/2022</td>
-                    <td name="days">Tue Fri Sat</td>
-                    <td> <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="loadBookingData(this)">Edit</a></td>
-                </tr>
-                <tr>
-                    <td name="id">4</td>
-                    <td name="student">18</td>
-                    <td>John E</td>
-                    <td name="tutor">22</td>
-                    <td>John F</td>
-                    <td name="course">10</td>
-                    <td>Physics - Middle School</td>
-                    <td name="date">31/01/2022</td>
-                    <td name="days">Wed Thu</td>
-                    <td> <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="loadBookingData(this)">Edit</a></td>
-                </tr> -->
                 
                 </tbody>
             </table>
