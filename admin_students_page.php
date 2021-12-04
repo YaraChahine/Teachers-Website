@@ -244,6 +244,42 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
                 }
                 ?>
 
+                <!-- <tr>
+                    <td>2</td>
+                    <td>7</td>
+                    <td>John</td>
+                    <td>A</td>
+                    <td>john@a.com</td>
+                    <td>1234567</td>
+                    <td>50,000</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>9</td>
+                    <td>John</td>
+                    <td>B</td>
+                    <td>john@b.com</td>
+                    <td>2345678</td>
+                    <td>60,000</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>13</td>
+                    <td>John</td>
+                    <td>C</td>
+                    <td>john@c.com</td>
+                    <td>3456789</td>
+                    <td>40,000</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>23</td>
+                    <td>John</td>
+                    <td>D</td>
+                    <td>john@d.com</td>
+                    <td>4567890</td>
+                    <td>75,000</td>
+                </tr> -->
                 </tbody>
             </table>
         </div>

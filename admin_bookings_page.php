@@ -144,8 +144,8 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
                 $no_of_pages = ceil($total_records["total_records"] / $records_per_page);
                 $before_last = $no_of_pages - 1;
 
-                $query_students_application = "SELECT bookings.booking_number,bookings.student_id,users.first_name,users.last_name,bookings.course_id,bookings.starting_date,bookings.days_of_sessions from bookings INNER JOIN students on bookings.student_id=students.student_id INNER JOIN users on users.user_id=students.user_id INNER JOIN tutors on tutors.user_id=users.user_id ";
-                $stmt = $connection->prepare($query_students_application);
+                $query_bookings = "SELECT bookings.booking_number,students.student_id,bookings.tutor_id,bookings.course_id,users.first_name,users.last_name,bookings.starting_date,bookings.days_of_sessions from bookings INNER JOIN students on bookings.student_id=students.student_id INNER JOIN users on users.user_id=students.user_id LIMIT $records_per_page OFFSET $offset";
+                $stmt = $connection->prepare($query_bookings);
                 $stmt->execute();
                 $results_students = $stmt->get_result();
 
@@ -230,15 +230,57 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
                 <?php
 
                   while($row = $results_students->fetch_assoc()){
-                        echo "<tr>
-                        <td>".$row['user_id']."</td>
-                        <td>".$row['student_id']."</td>
-                        <td>".$row['first_name']."</td>
-                        <td>".$row['last_name']."</td>
-                        <td>".$row['email']."</td>
-                        <td>".$row['phone_number']."</td>
-                        <td>".$row['price_range']."</td>
+                    $tutors_info = "";
+                    $correct_dates = "";
+                    $query_tutors = "SELECT users.first_name,users.last_name from tutors INNER JOIN users on tutors.tutor_ID=users.user_id where tutors.tutor_ID = ?";
+                    $stmt2 = $connection->prepare($query_tutors);
+                    $stmt2->bind_param("d", $row['tutor_id']);
+                    $stmt2->execute();
+                    $results_tutors = $stmt2->get_result();
+                    while($row2 = $results_tutors->fetch_assoc()){
+                        $tutors_info .= $row2["first_name"] ." " .$row2["last_name"];
+                        $courses_info = "";
+                        $query_courses = "SELECT courses.course_name from courses where courses.course_ID = ?";
+                        $stmt3 = $connection->prepare($query_courses);
+                        $stmt3->bind_param("d", $row['course_id']);
+                        $stmt3->execute();
+                        $results_tutors = $stmt3->get_result();
+                        while($row3 = $results_tutors->fetch_assoc()){
+                            $courses_info .= $row3["course_name"];
+                        }
+                    }
+                        if (substr($row['days_of_sessions'], 0,1)==1){
+                            $correct_dates .= "Mon ";
+                         }
+                         if (substr($row['days_of_sessions'],1,-5)==1){
+                            $correct_dates .= "Tue ";
+                        }
+                        if (substr($row['days_of_sessions'],2,-4)==1){
+                            $correct_dates .= "Wed ";
+                         }
+                         if (substr($row['days_of_sessions'],3,-3)==1){
+                            $correct_dates .= "Thu ";
+                         }
+                         if (substr($row['days_of_sessions'],4,-2)==1){
+                            $correct_dates .= "Fri ";
+                         }
+                         if (substr($row['days_of_sessions'],5,-1)==1){
+                            $correct_dates .= "Sat ";
+                         }
+                         if (substr($row['days_of_sessions'],6)==1){
+                            $correct_dates .= "Sun ";
+                         }
 
+                        echo "<tr>
+                        <td>".$row['booking_number']."</td>
+                        <td>".$row['student_id']."</td>
+                        <td>".$row['first_name']. " ".$row['last_name']."</td>
+                        <td>".$row['tutor_id']."</td>
+                        <td>".$tutors_info."</td>
+                        <td>".$row['course_id']."</td>
+                        <td>".$courses_info."</td>
+                        <td>".$row['starting_date']."</td>
+                        <td>".$correct_dates."</td>
                         </tr>";
        
               
