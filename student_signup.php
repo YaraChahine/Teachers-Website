@@ -3,7 +3,13 @@
 include("connection.php");
 
 //Personal Information
-
+// if(isset($_POST["first_name"]) && $_POST["first_name"]!="" && preg_match ("/^[a-zA-z]*$/",$_POST["first_name"])){
+//     $first_name = $_POST["first_name"];
+// }else if(isset($_POST["first_name"]) && $_POST["first_name"]!="" && !preg_match ("/^[a-zA-z]*$/",$_POST["first_name"])){
+//     die("First name should only contains alphabets.");
+// }else{
+//     die("Nice try Dr. :D 1");
+// }
 if (isset($_POST["first_name"]) && $_POST["first_name"] != "" && preg_match("/^[a-zA-z]*$/", $_POST["first_name"])){
     $first_name = $_POST["first_name"]; //check variable is set and not null && make sure input is composed of only alphabets
 }else if (isset($_POST["first_name"]) && $_POST["first_name"] != "" && !preg_match("/^[a-zA-z]*$/", $_POST["first_name"])) {
@@ -106,43 +112,63 @@ if(isset($_POST["date"]) && $_POST["date"] != "" && preg_match("/$/", $_POST["da
 
 $days_of_session = "";
 
-if(isset($_POST["Monday"]) && $_POST["Monday"]!=""){
-    $monday = $_POST["Monday"];
-    $days_of_session = $monday + " ";
+if(isset($_POST["monday"]) && $_POST["monday"]!=""){
+    $days_of_session .= 1;
+}
+else{
+    $days_of_session .= 0;
+
 }
 
 
-if(isset($_POST["Tuesday"]) && $_POST["Tuesday"]!=""){
-    $tuesday = $_POST["Tuesday"];
-    $days_of_session = $tuesday + " ";
+if(isset($_POST["tuesday"]) && $_POST["tuesday"]!=""){
+    $days_of_session .= 1;
+}
+else{
+    $days_of_session .= 0;
+
 }
 
 if(isset($_POST["wednesday"]) && $_POST["wednesday"]!=""){
-    $wednesday = $_POST["wednesday"];
-    $days_of_session = $wednesday + " ";
+    $days_of_session .= 1;
+}
+else{
+    $days_of_session .= 0;
+
 }
 
 
 if(isset($_POST["thursday"]) && $_POST["thursday"]!=""){
-    $thursday = $_POST["thursday"];
-    $days_of_session = $thursday + " ";
+    $days_of_session .= 1;
+}
+else{
+    $days_of_session .= 0;
+
 }
 
-
 if(isset($_POST["friday"]) && $_POST["friday"]!=""){
-    $friday = $_POST["friday"];
-    $days_of_session = $friday + " ";
+    $days_of_session .= 1;
+}
+else{
+    $days_of_session .= 0;
+
 }
 
 
 if(isset($_POST["saturday"]) && $_POST["saturday"]!=""){
-    $saturday = $_POST["saturday"];
-    $days_of_session = $saturday + " ";
+    $days_of_session .= 1;
+}
+else{
+    $days_of_session .= 0;
+
 }
 
 if(isset($_POST["sunday"]) && $_POST["sunday"]!=""){
-    $sunday = $_POST["sunday"];
-    $days_of_session = $sunday + " ";
+    $days_of_session .= 1;
+}
+else{
+    $days_of_session .= 0;
+
 }
 
 
@@ -150,32 +176,6 @@ if ($_POST["sunday"]="" && $_POST["saturday"]="" && $_POST["friday"]="" && $_POS
     //Blank string, add error to $errors array.        
     $errors['nodate'] = "Please let us know your prefered tutoring dates!";
 }       
-
-
-$days_of_sessionArray = []; //create an array to add them into it and then loop and add the days that were checked into the string
-array_push($days_of_sessionArray, $monday);
-array_push($days_of_sessionArray, $tuesday);
-array_push($days_of_sessionArray, $wednesday);
-array_push($days_of_sessionArray, $thursday);
-array_push($days_of_sessionArray, $friday);
-array_push($days_of_sessionArray, $saturday);
-array_push($days_of_sessionArray, $sunday);
-
-
-$days_of_session = "";
-
-foreach($days_of_sessionArray as $item) {
-    if ($item == Yes ){
-         $days_of_session = $item + '';
-    }
-}
-
-// // Or 
-// $cart = array();
-// array_push($cart, 13, 14);
-
-
-
 
 if(isset($_POST["price"]) && $_POST["price"] !="" && preg_match("/^[0-9]*$/", $_POST["price"])){
     $price = $_POST["price"]; //check variable is set and not null && make sure input is composed of only numbers
@@ -195,7 +195,7 @@ if(isset($_POST["price"]) && $_POST["price"] !="" && preg_match("/^[0-9]*$/", $_
     $results1 = $mysql1->get_result();
     $row1 = $results1->fetch_assoc();
     if(empty($row1)) {
-        $mysql2 = $connection->prepare("SELECT * FROM pending_tutors WHERE email = ?");
+        $mysql2 = $connection->prepare("SELECT * FROM pending_students WHERE email = ?");
         $mysql2->bind_param("s", $email_address);
         $mysql2->execute();
         $results2 = $mysql2->get_result();
@@ -204,7 +204,7 @@ if(isset($_POST["price"]) && $_POST["price"] !="" && preg_match("/^[0-9]*$/", $_
        die("Email already exists");
       }
        if(empty($row2)) {
-        $mysql3 = $connection->prepare("SELECT * FROM pending_students WHERE email = ?");
+        $mysql3 = $connection->prepare("SELECT * FROM pending_tutors WHERE email = ?");
         $mysql3->bind_param("s", $email_address);
         $mysql3->execute();
         $results3 = $mysql3->get_result();
