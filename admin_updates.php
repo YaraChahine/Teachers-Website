@@ -119,7 +119,7 @@ include("connection.php");
                     ?>
                 <div class="card-body">
                   <h5 class="card-title"><?php echo($row["first_name"]." ".$row["last_name"]); ?></h5>
-                  <p class="card-text"><?php echo($row["email"]." - ".$row["phone_number"]); ?></p>
+                  <p class="card-text"><?php echo($row["email_address"]." - ".$row["phone_number"]); ?></p>
                   <a href="admin_consultation.php?id=<?php echo($row["id"]);?>"class="btn btn-primary">View update</a>
                 </div>
                 <hr>
@@ -165,15 +165,7 @@ include("connection.php");
                 </div>
             </div>
 
-            <div class="list-group-item card update-item">
-                <h5 class="card-header">Consultation</h5>
-                <div class="card-body">
-                  <h5 class="card-title">William Jones</h5>
-                  <p class="card-text">william@jones.com - 70 000 789</p>
-                  <a href="admin_consultation.php" class="btn btn-primary">View update</a>
-                </div>
-            </div>
-
+        
             <div class="list-group-item card update-item">
                 <h5 class="card-header">Tutor Profile Edit</h5>
                 <div class="card-body">
