@@ -159,10 +159,8 @@
 
     // Adds a json event to event_data
     function new_event_json(name, flag, date, day) {
-        let id = 1;
-        //insert the event with post request to php then select to get the id
+        
         var event = {
-            "id" : id,
             "occasion": name,
             "flag": flag,
             "year": date.getFullYear(),
@@ -170,6 +168,23 @@
             "day": day
         };
         event_data["events"].push(event);
+
+        let iso = "" + event.year + "-"
+        if (event.month < 10) iso += "0" + event.month + "-";
+        else iso += event.month + "-";
+        if (event.day < 10) iso += "0" + event.day;
+        else iso += event.day;
+
+        $.ajax({
+        type: "POST",
+        url: "/calendar_add.php",
+        data: {
+            "item_name_calendar" : name,
+            "importance" : flag,
+            "date" : iso
+        }
+        });
+
     }
 
     // Display all events of the selected date in card views
@@ -212,6 +227,7 @@
     // Checks if a specific date has any events
     function check_events(day, month, year) {
     var events = [];
+    console.log(event_data);
     for(var i=0; i<event_data["events"].length; i++) {
         var event = event_data["events"][i];
         if(event["day"]===day &&
@@ -227,87 +243,8 @@
     
 
     // Given data for events in JSON format
-    var event_data = {
-    "events": [
-    {
-        "occasion": " Repeated Test Event ",
-        "flag": 1,
-        "year": 2021,
-        "month": 11,
-        "day": 10
-    },
-    {
-        "occasion": " Repeated Test Event ",
-        "flag": 3,
-        "year": 2021,
-        "month": 11,
-        "day": 10
-    },
-        {
-        "occasion": " Repeated Test Event ",
-        "flag": 2,
-        "year": 2021,
-        "month": 11,
-        "day": 10
-    },
-    {
-        "occasion": " Repeated Test Event ",
-        "flag": 4,
-        "year": 2021,
-        "month": 11,
-        "day": 10
-    },
-        {
-        "occasion": " Repeated Test Event ",
-        "flag": 0,
-        "year": 2021,
-        "month": 11,
-        "day": 10
-    },
-    {
-        "occasion": " Repeated Test Event ",
-        "flag": 0,
-        "year": 2021,
-        "month": 11,
-        "day": 10
-    },
-        {
-        "occasion": " Repeated Test Event ",
-        "flag": 1,
-        "year": 2021,
-        "month": 11,
-        "day": 10
-    },
-    {
-        "occasion": " Repeated Test Event ",
-        "flag": 2,
-        "year": 2021,
-        "month": 11,
-        "day": 10
-    },
-        {
-        "occasion": " Repeated Test Event ",
-        "flag": 3,
-        "year": 2021,
-        "month": 11,
-        "day": 10
-    },
-    {
-        "occasion": " Repeated Test Event ",
-        "flag": 4,
-        "year": 2021,
-        "month": 11,
-        "day": 10
-    },
-    {
-        "occasion": " Test Event",
-        "flag": 1,
-        "year": 2021,
-        "month": 11,
-        "day": 11
-    }
-    ]
-    };
+    let event_data_json = $("#fetched_events").val();
+    let event_data = JSON.parse(event_data_json);
 
     const months = [ 
     "January", 

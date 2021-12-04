@@ -10189,5 +10189,6 @@ form .form-label {
     border-radius: 5px;
 }
 .error-input {
-    border-color: #04c2f9;
+    border: #dc3545ff solid 2px !important;
+    outline: #dc354573 solid 3px !important;
 }

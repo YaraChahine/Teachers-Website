@@ -3,10 +3,30 @@
 include("connection.php");
 session_start();
 
-if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0 || strcmp($_SESSION["type"],"3")==0)
-{
 
-    ?>
+if (isset($_SESSION["user_id"]) && $_SESSION["user_id"] != "" && strcmp($_SESSION["type"],"2")==0 || strcmp($_SESSION["type"],"3")==0)
+{
+$id = $_SESSION["user_id"];
+
+$query = "SELECT * FROM calendar WHERE user_id = ?";
+$stmt = $connection->prepare($query);
+$stmt->bind_param("d", $id);
+$stmt->execute();
+$res = $stmt->get_result();
+$json = [];
+while ($row = $res->fetch_assoc()) {
+    $event["occasion"] = $row["item_name_calendar"];
+    $event["flag"] = $row["importance"];
+    $date = explode("-", $row["date"]);
+    $event["year"] = $date[0];
+    $event["month"] = $date[1];
+    $event["day"] = $date[2];
+    $json[] = $event;
+}
+
+$results = htmlentities("{\"events\" : " . json_encode($json, JSON_NUMERIC_CHECK) ."}");
+
+?>
 
 
 
@@ -55,6 +75,8 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0 || strcmp($_S
 </head>
 
 <body>
+
+    <input type="hidden" id="fetched_events" value="<?php echo $results ?>" ></input>
 
     <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top header-form">
@@ -109,7 +131,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0 || strcmp($_S
                                             <td class="month">Aug</td>
                                             <td class="month">Sep</td>
                                             <td class="month">Oct</td>
-                                            <td class="month active-month">Nov</td>
+                                            <td class="month">Nov</td>
                                             <td class="month">Dec</td>
                                         </tr>
                                     </tbody>
@@ -187,18 +209,17 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0 || strcmp($_S
                         </div>
                         <div class="events-container">
                             <div class="event-card">
-                                <div class="event-name">fdgsdf:</div>
-                                <div class="event-count">3 Invited</div>
+                                <div class="event-name"></div>
+                                <div class="event-count"></div>
                             </div>
                         </div>
                         <div class="dialog" id="dialog" style="display: none;">
                             <h2 class="dialog-header"> Add New Event </h2>
-                            <form class="form" id="form">
+                            <form class="form" id="form" data-user=" <?php echo $id ?>">
                                 <div class="form-container">
                                     <label class="form-label" id="valueFromMyButton" for="name">Event name</label>
                                     <input name="name" class="input" type="text" id="name" maxlength="36">
                                     <label class="form-label" id="valueFromMyButton" for="flag">Flag</label>
-                                    <!-- <input class="input" type="number" id="flag" min="0" max="1000000" maxlength="7"> -->
                                     <select name="" class="input" id="flag">
                                         <option value="0" selected>Casual</option>
                                         <option value="1">Normal</option>
@@ -206,7 +227,6 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0 || strcmp($_S
                                         <option value="3">Urgent</option>
                                         <option value="4">Top priority</option>
                                     </select>
-                                    <input type="hidden" name="" id="events_backend" value="<?php echo "blah" ?>" ></input>
                                     <div class="d-flex justify-content-evenly w-100 my-4">
                                         <button type="button" class="button" id="cancel-button">Cancel</button>
                                         <button type="button" class="button button-white" id="ok-button">OK</button>
@@ -274,7 +294,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0 || strcmp($_S
     <script src="./vendor/purecounter/purecounter.js"></script>
     <script src="./vendor/isotope-layout/isotope.pkgd.min.js"></script>
     <script src="./vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="./vendor/calendar/main.js"></script>
+    <script src="./js/calendar.js"></script>
 </body>
 
 
