@@ -1,12 +1,12 @@
 <?php
 
 include("connection.php");
-
+$msg="Name should only contain letters";
 
 if(isset($_POST["first_name"]) && $_POST["first_name"]!="" && preg_match ("/^[a-zA-z]*$/",$_POST["first_name"])){
     $first_name = $_POST["first_name"];
-}else if(isset($_POST["first_name"]) && $_POST["first_name"]!="" && !preg_match ("/^[a-zA-z]*$/",$_POST["first_name"])){
-    die("First name should only contains alphabets.");
+}else if(isset($_POST["first_name"]) && $_POST["first_name"]==""  || !preg_match ("/^[a-zA-z]*$/",$_POST["first_name"])){
+    header( "Location: tutor_validation_message.php?x=".$msg );
 }else{
     die("Nice try Dr. :D 1");
 }

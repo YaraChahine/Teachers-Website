@@ -214,7 +214,7 @@ if(isset($_POST["price"]) && $_POST["price"] !="" && preg_match("/^[0-9]*$/", $_
        }
        if(empty($row3)) {
         $mysql = $connection->prepare("INSERT INTO pending_students(first_name,last_name,phone_number,email,password,education_level_student,course,preferred_tutor,starting_date,days_of_sessions,price) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
-        $mysql->bind_param("ssssssssdss",$first_name,$last_name,$phone_number,$email_address,$password,$education_level_student,$course_choice,$tutor,$date,$days_of_session,$price);
+        $mysql->bind_param("sssssssdssd",$first_name,$last_name,$phone_number,$email_address,$password,$education_level_student,$course_choice,$tutor,$date,$days_of_session,$price);
        }else {  
             die("Email already exists");
            }
