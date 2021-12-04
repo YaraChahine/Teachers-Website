@@ -1,18 +1,14 @@
 <?php
+
 include("connection.php");
 session_start();
 if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0)
 {
-$id = $_SESSION["user_id"];
+ 
+ ?>
 
-$query= "SELECT first_name FROM  users where user_id = ?";
-$stmt = $connection->prepare($query);
-$stmt->bind_param("i", $id);
 
-$stmt->execute();
-$results = $stmt->get_result();
-$row = $results->fetch_assoc();
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -67,10 +63,9 @@ $row = $results->fetch_assoc();
 
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a class="nav-link scrollto active" href="profile.php">Home</a></li>
+                <li><a class="nav-link scrollto " href="profile.php">Home</a></li>
                     <li><a class="nav-link scrollto" href="todolist2.php">To-do List</a></li>
-                    <li><a class="nav-link scrollto" href="calendar.php">Calendar</a></li>
-                    <li><a class="nav-link scrollto" href="timer.php">Timer</a></li>
+                    <li><a class="nav-link scrollto active" href="timer.php">Timer</a></li>
                     <li><a class="nav-link scrollto" href="pomodoro.php">Pomodoro Clock</a></li>
                     <li><a class="getstarted scrollto" href="logout.php">Log out</a></li>
                 </ul>
@@ -81,70 +76,88 @@ $row = $results->fetch_assoc();
     </header><!-- End Header -->
 
     <br><br><br><br><br><br>
-    <div class="greeting">
-        <h1>Hello, <span id="user-name"> 
-          <?php 
-          // if (isset($_POST["first_name"])){
-            echo($row["first_name"]);
-          // }
-          ?>
-        </span>
-      </h1>
-        <p>What would you like to do today?</p>
+    <h5 class="flex-msg">Your profile information will only be available to "Teachers" consultants to be able to contact you. Please keep
+        it up to date.</h5>
+
+    <div class="flex-container">
+        <div class="flex-item">
+        </div>
+        <div class="flex-item">
+            <img src="img/charbel.png">
+        </div>
+        <div class="flex-item">
+            <p>Charbel72</p>
+            <p>First name: <span>Charbel</span> </p>
+            <p>Last name: <span>Daoud</span> </p>
+            <p> Phone number: <span>71 813401</span></p>
+            <p>Email: <span>charbel.daoud@lau.edu.lb</span> </p>
+        </div>
+        <div class="flex-item">
+            <button type="button" style="width:100px;"class="btn btn-primary p-0 ok-btn"  data-bs-toggle="modal" data-bs-target="#edit-modal" data-bs-dismiss="modal" onclick="$('#editform').submit()">Edit Info</button>
+        </div>
+
     </div>
 
-    <br><br>
-    <div class="grid-container">
-        <a href="calendar.php">
-            <div class="grid-item item1">
-                <img src="img/calendarIllustration.jpg">
-                <p>Calendar</p>
-            </div>
-        </a>
-        <a href="todolist2.php">
-            <div class="grid-item item2">
-                <img src="img/tasktodo.png">
-                <p>To-do List</p>
-            </div>
-        </a>
-        <a href="pomodoro.php">
-            <div class="grid-item item3">
-                <img src="img/pomodoro2.jpg">
-                <p>Pomodoro Clock</p>
-            </div>
-        </a>
-        <a href="timer.php">
-            <div class="grid-item item4-tutor" > 
-                <img src="img/timer3.png">
-                <br><br>
-                <p>Timer</p>
-            </div>
-        </a>
 
-        <a href="profile_edit_tutor.php">
-            <div class="grid-item item5-tutor" >
-                <img src="img/edit.jpg">
-                <br><br><br>
-                <p>Edit Profile Info</p>
-            </div>
-        </a>
-     
+
+
+    <div class="modal modal-large fade" id="edit-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body p-5">
+              <h2 class="text-center">Edit Profile Info</h1>
+              <form action="">
+                  <div class="row">
+                      <div class="col-4">
+                          First name
+                      </div>
+                      <div class="col-8">
+                          <input class="form-control" type="text" name="first">
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-4">
+                          Last name
+                      </div>
+                      <div class="col-8">
+                          <input class="form-control" type="text" name="last">
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-4">
+                        Phone number
+                      </div>
+                      <div class="col-8">
+                          <input class="form-control" type="email" name="email">
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-4">
+                        Email address
+                      </div>
+                      <div class="col-8">
+                          <input class="form-control" type="text" name="phone">
+                      </div>
+                  </div>
+              
+              </form>
+          </div>
+          <div class="modal-footer">
+              <form action="">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-primary p-0 ok-btn"  data-bs-toggle="modal" data-bs-target="#msg-modal" data-bs-dismiss="modal" onclick="$('#editform').submit()">Save</button>
+              </form>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <style>
-        .item4-tutor {
-            grid-column : 1 / span 2;
-    
-            
-        }
-    </style>
 
-
-    
 
 
 
 
+    
     <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
 
