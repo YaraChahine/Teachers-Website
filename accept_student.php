@@ -18,7 +18,6 @@ $stmt->bind_param("s", $row["email"]);
 $stmt->execute();
 $results = $stmt->get_result(); 
 $tutor_row = $results->fetch_assoc();
-
 //if not then add student into users table
 
 if (empty($student_row)){
@@ -37,11 +36,10 @@ if (empty($student_row)){
     $results = $stmt->get_result(); 
     $student_id= $results->fetch_assoc();
 
-
     //now we can add to students table
     $mysql = $connection->prepare("INSERT INTO students (user_id, price_range)
      VALUES (?, ?);");
-    $mysql->bind_param("dd", $student_id["user_id"], $row["price_range"]);
+    $mysql->bind_param("dd", $student_id["user_id"], $row["price"]);
     ($mysql->execute());
 
     //since they are officially students, now we must remove them from pending_students
