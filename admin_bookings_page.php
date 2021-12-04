@@ -144,7 +144,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
                 $no_of_pages = ceil($total_records["total_records"] / $records_per_page);
                 $before_last = $no_of_pages - 1;
 
-                $query_students_application = "SELECT users.user_id,students.student_id,users.first_name,users.last_name,users.email,users.phone_number,students.price_range from users INNER JOIN students on users.user_id=students.user_id LIMIT $records_per_page OFFSET $offset";
+                $query_students_application = "SELECT bookings.booking_number,bookings.student_id,users.first_name,users.last_name,bookings.course_id,bookings.starting_date,bookings.days_of_sessions from bookings INNER JOIN students on bookings.student_id=students.student_id INNER JOIN users on users.user_id=students.user_id INNER JOIN tutors on tutors.user_id=users.user_id ";
                 $stmt = $connection->prepare($query_students_application);
                 $stmt->execute();
                 $results_students = $stmt->get_result();
