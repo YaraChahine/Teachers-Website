@@ -177,7 +177,7 @@
 
         $.ajax({
         type: "POST",
-        url: "calendar_add.php",
+        url: "/calendar.php",
         data: {
             "item_name_calendar" : name,
             "importance" : flag,
@@ -203,31 +203,44 @@
     }
     else {
         // Go through and add each event as a card to the events container
-        for(var i=0; i<events.length; i++) {
-            var event_card = $("<div class='event-card'></div>");
-            var event_name = $("<div class='event-name'>"+events[i]["occasion"]+":</div>");
-            var event_count = $("<div class='event-flag'>"+flags[events[i]["flag"]]+"</div>");
-            var del = $("<a class='btn delete' role='button' href='#' onclick='delete_event(" + events[i]["id"] + ")'> <i class='bi bi-calendar-x-fill'></i> </a>");
-            if(events[i]["cancelled"]===true) {
-                $(event_card).css({
-                    "border-left": "10px solid #FF1744"
-                });
-                event_count = $("<div class='event-cancelled'>Cancelled</div>");
-            }
-            $(event_card).append(event_name).append(event_count).append(del);
+        for(let i=0; i<events.length; i++) {
+            let event_card = $("<div class='event-card'></div>");
+            let event_name = $("<div class='event-name'>"+events[i]["occasion"]+":</div>");
+            let event_flag = $("<div class='event-flag'>"+flags[events[i]["flag"]]+"</div>");
+            let del = $("<a class='btn delete' role='button' href='#' onclick='delete_event(" + events[i]["id"] + ")'> <i class='bi bi-calendar-x-fill'></i> </a>");
+            $(event_card).append(event_name).append(event_flag).append(del);
             $(".events-container").append(event_card);
         }
     }
     }
 
-    function delete_event(event) {
-        console.log(event);
+    function delete_event(id) {
+        let deleted;
+        for (let i = 0; i < event_data.events.length; i++) {
+            if (event_data.events[i].id == id) {
+                deleted = i;
+                break;
+            }
+        }
+        console.log(deleted);
+        console.log(id);
+        event_data.events.splice(deleted, 1);
+        init_calendar(new Date());
+
+        $.ajax({
+            type: "POST",
+            url: "/calendar.php",
+            data: {
+                "delete" : true,
+                "id" : id
+            }
+            });
+
     }
 
     // Checks if a specific date has any events
     function check_events(day, month, year) {
     var events = [];
-    console.log(event_data);
     for(var i=0; i<event_data["events"].length; i++) {
         var event = event_data["events"][i];
         if(event["day"]===day &&
@@ -235,7 +248,6 @@
             event["year"]===year) {
                 events.push(event);
             }
-            //jquery ajax here
     }
     return events;
     }

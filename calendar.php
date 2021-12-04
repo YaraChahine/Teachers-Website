@@ -8,6 +8,40 @@ if (isset($_SESSION["user_id"]) && $_SESSION["user_id"] != "" && strcmp($_SESSIO
 {
 $id = $_SESSION["user_id"];
 
+if (!empty($_POST)) {
+
+    if (isset($_POST["delete"]) && isset($_POST["id"]) && $_POST["id"] != "") {
+        $event_id = $_POST["id"];
+        $query= "DELETE FROM calendar WHERE user_id= ? AND item_id_calendar = ?;";
+        $stmt = $connection->prepare($query);
+        $stmt->bind_param("dd", $id, $event_id);
+        $stmt->execute();
+    }
+
+    else  {
+        if (isset($_POST["item_name_calendar"]))$name = trim($_POST["item_name_calendar"]);
+        if (isset($_POST["importance"]))$imp = +$_POST["importance"];
+        if (isset($_POST["date"]))$date = trim($_POST["date"]);
+
+        $date_arr  = explode('-', $date);
+
+        $valid = $name != "" &&
+        $imp != "" && is_int($imp) && $imp >= 0 && $imp <= 4 &&
+        $date != "" && checkdate($date_arr[1], $date_arr[2], $date_arr[0]);
+
+        if ($valid) {
+            $query = "INSERT INTO calendar (user_id, item_name_calendar, importance, date) VALUES (?,?,?,?)";
+            $stmt = $connection->prepare($query);
+            $stmt->bind_param("dsss", $id, $name, $imp, $date);
+            $stmt->execute();
+        }
+        else {
+            die ("invalid input");
+        }
+    }
+
+}
+
 $query = "SELECT * FROM calendar WHERE user_id = ?";
 $stmt = $connection->prepare($query);
 $stmt->bind_param("d", $id);
@@ -15,6 +49,7 @@ $stmt->execute();
 $res = $stmt->get_result();
 $json = [];
 while ($row = $res->fetch_assoc()) {
+    $event["id"] = $row["item_id_calendar"];
     $event["occasion"] = $row["item_name_calendar"];
     $event["flag"] = $row["importance"];
     $date = explode("-", $row["date"]);
