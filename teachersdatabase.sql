@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 05, 2021 at 01:18 AM
+-- Generation Time: Dec 05, 2021 at 01:28 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -219,7 +219,7 @@ INSERT INTO `students` (`student_id`, `user_id`, `price_range`) VALUES
 (6, 58, 50000),
 (7, 58, 50000),
 (8, 58, 50000),
-(9, 61, 50000),
+(9, 61, 80000),
 (10, 62, 50000),
 (11, 62, 50000),
 (12, 64, 50000),
@@ -252,12 +252,19 @@ INSERT INTO `temp_codes` (`code_id`, `user_id`, `code`, `created`) VALUES
 --
 
 CREATE TABLE `to_do_list` (
-  `item_id_todolist` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `item_name_todolist` varchar(250) NOT NULL,
-  `flag` tinyint(1) NOT NULL,
-  `line_through` tinyint(1) NOT NULL
+  `title` varchar(250) NOT NULL,
+  `date_time` datetime(1) NOT NULL DEFAULT current_timestamp(1),
+  `checked` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `to_do_list`
+--
+
+INSERT INTO `to_do_list` (`id`, `user_id`, `title`, `date_time`, `checked`) VALUES
+(2, 61, 'sleep', '2021-12-05 13:23:13.0', 0);
 
 -- --------------------------------------------------------
 
@@ -392,7 +399,7 @@ INSERT INTO `users` (`user_id`, `type`, `first_name`, `last_name`, `email`, `pho
 (58, 3, 'Rami', 'Allouch', 'rami@gmail.com', '71813401', 'f56ab1549f0cb9e2acb9c81fe0bc2dd9583e623a0b1659cdad409402e0b8a75b'),
 (59, 3, 'Rami', 'Allouch', 'rami@gmail.com', '71813401', 'f56ab1549f0cb9e2acb9c81fe0bc2dd9583e623a0b1659cdad409402e0b8a75b'),
 (60, 3, 'Rami', 'Allouch', 'rami@gmail.com', '71813401', 'f56ab1549f0cb9e2acb9c81fe0bc2dd9583e623a0b1659cdad409402e0b8a75b'),
-(61, 3, 'JouJou', 'Haidar', 'joujou@gmail.com', '71813401', '8baf11304b9085eef194aca1ca651dc062c255309f4efb0195e067c37a691152'),
+(61, 3, 'JouJou', 'Haidar', 'jojouh@gmail.com', '71813402', '8baf11304b9085eef194aca1ca651dc062c255309f4efb0195e067c37a691152'),
 (62, 3, 'hadi', 'atallah', 'hadi@gmail.com', '71813401', '40671281b75167b6a127349dbd7dd31ee76c533b2829eca591907425784c0369'),
 (63, 3, 'hadi', 'atallah', 'hadi@gmail.com', '71813401', '40671281b75167b6a127349dbd7dd31ee76c533b2829eca591907425784c0369'),
 (64, 3, 'Mirna', 'Chami', 'mirna@gmail.com', '71813401', '2944d72b0591914da5220b8be394123aa95b9b5e63305c6b842098848f087c55'),
@@ -489,7 +496,7 @@ ALTER TABLE `temp_codes`
 -- Indexes for table `to_do_list`
 --
 ALTER TABLE `to_do_list`
-  ADD PRIMARY KEY (`item_id_todolist`),
+  ADD PRIMARY KEY (`id`),
   ADD KEY `Foregin_Key` (`user_id`);
 
 --
@@ -589,7 +596,7 @@ ALTER TABLE `temp_codes`
 -- AUTO_INCREMENT for table `to_do_list`
 --
 ALTER TABLE `to_do_list`
-  MODIFY `item_id_todolist` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tutors`

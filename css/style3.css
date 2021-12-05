@@ -19,7 +19,7 @@ body {
   
   .add-section {
     width: 100%;
-    background: #fff;
+    background-color: #fff;
     margin: 0px auto;
     padding: 20px;
     border-radius: 5px;
@@ -165,8 +165,3 @@ body {
 
   }
 
-
-  .add-intro{
-    border-radius: 35px;
-    background-color: red;
-  }
