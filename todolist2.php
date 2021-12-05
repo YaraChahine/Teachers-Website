@@ -102,7 +102,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0 || strcmp($_S
         </div>
         <?php 
             
-          $query="SELECT * FROM todo where user_id = ? ORDER BY id DESC ";
+          $query="SELECT * FROM to_do_list where user_id = ? ORDER BY id DESC ";
           $stmt = $connection->prepare($query);
           $stmt->bind_param("i", $id);
 
