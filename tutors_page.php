@@ -310,9 +310,9 @@ $res = $stmt->get_result();
                 $stmt = $connection->prepare($query);
                 $stmt->bind_param("d", $id);
                 $stmt->execute();
-                $res = $stmt->get_result();
-                while ($r = $res->fetch_assoc()) {
-                  $courses .= $r["course_name"] ." - " .$r["course_level"] . "<br>";
+                $res2 = $stmt->get_result();
+                while ($r2 = $res2->fetch_assoc()) {
+                  $courses .= $r2["course_name"] ." - " .$r2["course_level"] . "<br>";
                 }
             
             ?>
