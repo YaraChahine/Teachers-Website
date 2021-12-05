@@ -11,6 +11,7 @@ $email = $_POST["email"];
 $password = hash("sha256",$_POST["password"]);
 $phone= $_POST["phone"];
 $price= $_POST["price"];
+
 $query= "SELECT * from students INNER JOIN users on students.user_id=users.user_id where email=?;";
 $stmt = $connection->prepare($query);
 $stmt->bind_param("s", $email);
