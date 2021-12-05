@@ -88,7 +88,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0 || strcmp($_S
     </div>
     <!-- <img class="blue-pattern2" src="img/bluepattern1.png"> -->
     <div class="main-section">
-        <div class="add-section add-intro " style="border-radius:20px">
+        <div class="add-section add-intro " style="border-radius:20px;background-color:white;">
             <form action="add_task.php" method="POST" autocomplete="off">
                 <?php if(isset($_GET['mess']) && $_GET['mess'] == 'error'){ ?>
                 <input type="text" name="title" style="border-color: #ff6666" placeholder="This field is required" />
@@ -102,7 +102,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0 || strcmp($_S
         </div>
         <?php 
             
-          $query="SELECT * FROM todo where user_id=? ORDER BY id DESC ";
+          $query="SELECT * FROM to_do_list where user_id = ? ORDER BY id DESC ";
           $stmt = $connection->prepare($query);
           $stmt->bind_param("i", $id);
 

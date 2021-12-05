@@ -12,7 +12,7 @@ if(isset($_POST['title'])){
     if(empty($title)){
         header("Location: ../index.php?mess=error");
     }else {
-        $stmt = $connection->prepare("INSERT INTO todo(user_id,title,date_time) VALUE(?,?,?)");
+        $stmt = $connection->prepare("INSERT INTO to_do_list(user_id,title,date_time) VALUE(?,?,?)");
         $stmt->bind_param("iss",$id, $title, $my_date);
         $stmt->execute();
         $res= $stmt->get_result();

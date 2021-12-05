@@ -3,13 +3,7 @@
 include("connection.php");
 
 //Personal Information
-// if(isset($_POST["first_name"]) && $_POST["first_name"]!="" && preg_match ("/^[a-zA-z]*$/",$_POST["first_name"])){
-//     $first_name = $_POST["first_name"];
-// }else if(isset($_POST["first_name"]) && $_POST["first_name"]!="" && !preg_match ("/^[a-zA-z]*$/",$_POST["first_name"])){
-//     die("First name should only contains alphabets.");
-// }else{
-//     die("Nice try Dr. :D 1");
-// }
+
 if (isset($_POST["first_name"]) && $_POST["first_name"] != "" && preg_match("/^[a-zA-z]*$/", $_POST["first_name"])){
     $first_name = $_POST["first_name"]; //check variable is set and not null && make sure input is composed of only alphabets
 }else if (isset($_POST["first_name"]) && $_POST["first_name"] != "" && !preg_match("/^[a-zA-z]*$/", $_POST["first_name"])) {
@@ -97,14 +91,6 @@ if(isset($_POST["date"]) && $_POST["date"] != "" && preg_match("/$/", $_POST["da
 }else{
     die("We're not stupid 👀 11");
 }
-
-// if(isset($_POST["date"]) && $_POST["date"] != "" ){
-//     $date = $_POST["date"];
-// }else if(isset($_POST["date"]) && $_POST["date"] != "" ){
-//     die("Enter correct date format");
-// }else{
-//     die("We're not stupid 👀 10");
-// }
 
 
 

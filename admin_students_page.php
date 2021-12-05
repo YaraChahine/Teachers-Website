@@ -244,42 +244,6 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
                 }
                 ?>
 
-                <!-- <tr>
-                    <td>2</td>
-                    <td>7</td>
-                    <td>John</td>
-                    <td>A</td>
-                    <td>john@a.com</td>
-                    <td>1234567</td>
-                    <td>50,000</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>9</td>
-                    <td>John</td>
-                    <td>B</td>
-                    <td>john@b.com</td>
-                    <td>2345678</td>
-                    <td>60,000</td>
-                </tr>
-                <tr>
-                    <td>7</td>
-                    <td>13</td>
-                    <td>John</td>
-                    <td>C</td>
-                    <td>john@c.com</td>
-                    <td>3456789</td>
-                    <td>40,000</td>
-                </tr>
-                <tr>
-                    <td>9</td>
-                    <td>23</td>
-                    <td>John</td>
-                    <td>D</td>
-                    <td>john@d.com</td>
-                    <td>4567890</td>
-                    <td>75,000</td>
-                </tr> -->
                 </tbody>
             </table>
         </div>
@@ -293,7 +257,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
           <div class="modal-content">
             <div class="modal-body p-5">
                 <h2 class="text-center">Add student</h1>
-                <form action="">
+                <form action="add_student_manually.php" method="post">
                     <div class="row">
                         <div class="col-4">
                             First name
@@ -320,6 +284,14 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
                     </div>
                     <div class="row">
                         <div class="col-4">
+                            Password
+                        </div>
+                        <div class="col-8">
+                            <input class="form-control" type="Password" name="password">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
                             Phone number
                         </div>
                         <div class="col-8">
@@ -334,12 +306,10 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
                             <input class="form-control" type="text" name="price">
                         </div>
                     </div>
-                </form>
             </div>
             <div class="modal-footer">
-                <form action="">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="$('#editform').submit()">Confirm</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="$('#editform').submit()">Confirm</button>
                 </form>
             </div>
           </div>

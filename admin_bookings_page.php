@@ -133,7 +133,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
 
 
                 $next_to = "2";
-                $records_per_page =3;
+                $records_per_page =4;
                 $offset = ($page_no-1) * $records_per_page;
                 $previous_page = $page_no - 1;
                 $next_page = $page_no + 1;
@@ -232,7 +232,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
                   while($row = $results_students->fetch_assoc()){
                     $tutors_info = "";
                     $correct_dates = "";
-                    $query_tutors = "SELECT users.first_name,users.last_name from tutors INNER JOIN users on tutors.tutor_ID=users.user_id where tutors.tutor_ID = ?";
+                    $query_tutors = "SELECT users.first_name,users.last_name from tutors INNER JOIN users on tutors.user_id=users.user_id where tutors.tutor_ID = ?";
                     $stmt2 = $connection->prepare($query_tutors);
                     $stmt2->bind_param("d", $row['tutor_id']);
                     $stmt2->execute();
@@ -301,7 +301,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
           <div class="modal-content">
             <div class="modal-body p-5">
                 <h2 class="text-center">Edit booking</h1>
-                <form action="" id="editform">
+                <form  id="editform" >
                     <div class="row">
                         <div class="col-4">
                             Student ID
@@ -362,15 +362,11 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
                             </div>
                         </div>
                     </div>
-                </form>
-                <form action="" class="d-flex justify-content-center pb-0"> <!-- delete booking php -->
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Delete Booking</button>
-                </form>
+
             </div>
             <div class="modal-footer">
-                <form action="">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="$('#editform').submit()">Confirm</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="$('#editform').submit()">Confirm</button>
                 </form>
             </div>
           </div>
@@ -379,6 +375,34 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
 
     <!-- End Edit Modal -->
 
+    <div class="d-flex justify-content-center pb-0">
+    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><a  data-bs-toggle="modal" data-bs-target="#delete-modal">Delete Booking</a></button>
+    </div>
+    <div class="modal modal-large fade" id="delete-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-body p-5">
+                <h2 class="text-center">Delete booking</h1>
+                <form action="delete_booking.php" method="post">
+                    <div class="row">
+                        <div class="col-4">
+                            Booking Number
+                        </div>
+                        <div class="col-8">
+                            <input class="form-control" type="number" name="booking_id">
+                        </div>
+                   
+                    </div>
+            </div>
+            <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="$('#editform').submit()">Confirm</button>
+            </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
 
     <!-- Add Modal -->
 
@@ -387,7 +411,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
           <div class="modal-content">
             <div class="modal-body p-5">
                 <h2 class="text-center">Add booking</h1>
-                <form action="">
+                <form action="add_bookings_manually.php" method="post">
                     <div class="row">
                         <div class="col-4">
                             Student ID
@@ -448,14 +472,13 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
                             </div>
                         </div>
                     </div>
-                </form>
             </div>
             <div class="modal-footer">
-                <form action="">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="$('#editform').submit()">Confirm</button>
-                </form>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="$('#editform').submit()">Confirm</button>
             </div>
+            </form>
+
           </div>
         </div>
       </div>

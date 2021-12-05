@@ -10,7 +10,7 @@ if(isset($_POST['id'])){
     if(empty($id)){
        echo 0;
     }else {
-        $stmt = $connection->prepare("DELETE FROM todo WHERE id=?");
+        $stmt = $connection->prepare("DELETE FROM to_do_list WHERE id=?");
       
 
         $stmt->bind_param("i",$id);
