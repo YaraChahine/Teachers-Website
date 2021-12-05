@@ -293,7 +293,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
           <div class="modal-content">
             <div class="modal-body p-5">
                 <h2 class="text-center">Add student</h1>
-                <form action="">
+                <form action="add_student_manually.php" method="post">
                     <div class="row">
                         <div class="col-4">
                             First name
@@ -320,6 +320,14 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
                     </div>
                     <div class="row">
                         <div class="col-4">
+                            Password
+                        </div>
+                        <div class="col-8">
+                            <input class="form-control" type="Password" name="password">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
                             Phone number
                         </div>
                         <div class="col-8">
@@ -334,12 +342,10 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
                             <input class="form-control" type="text" name="price">
                         </div>
                     </div>
-                </form>
             </div>
             <div class="modal-footer">
-                <form action="">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="$('#editform').submit()">Confirm</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="$('#editform').submit()">Confirm</button>
                 </form>
             </div>
           </div>
