@@ -166,6 +166,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0|| strcmp($_SE
   minutesDom : null,
   secondsDom : null,
   fillerDom : null,
+
   init : function(){
     var self = this;
     this.minutesDom = document.querySelector('#minutes');
@@ -199,6 +200,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0|| strcmp($_SE
   },
   startShortBreak : function(){
     this.resetVariables(5, 0, true);
+   
   },
   startLongBreak : function(){
     this.resetVariables(15, 0, true);
@@ -206,6 +208,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0|| strcmp($_SE
   stopTimer : function(){
     this.resetVariables(25, 0, false);
     this.updateDom();
+
   },
   toDoubleDigit : function(num){
     if(num < 10) {
@@ -236,6 +239,8 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0|| strcmp($_SE
   timerComplete : function(){
     this.started = false;
     this.fillerHeight = 0;
+    var audio = new Audio('alarm.mp3');
+    audio.play();
   }
 };
 window.onload = function(){

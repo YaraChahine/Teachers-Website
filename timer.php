@@ -89,6 +89,8 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0 || strcmp($_S
             <button type="button" onclick="start()" class="start-btn">Start</button>
             <button type="button" onclick="pause()">||</button>
             <button type="button" onclick="resume()" >&#9655;</button>
+            <button type="button" onclick="stop()" class="start-btn" >Stop</button>
+
         </div>
         </form>
     </div>
@@ -155,8 +157,10 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0 || strcmp($_S
             var mins    ;
             var time    ;
             var t;
+            var audio = new Audio('alarm.mp3');
 
         function start() {
+            audio.pause();
              hours = parseInt(document.getElementById("hrs").value);//.toString();
              minutes = parseInt(document.getElementById("minutes").value);//toString();
              seconds = parseInt(document.getElementById("seconds").value);//toString();
@@ -183,6 +187,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0 || strcmp($_S
              hrs = hours * 60 *60;
              mins = minutes*60 ;
              time = hrs + mins + seconds;
+
             console.log(time);
             // Set the date we're counting down to
             clearInterval(t);
@@ -198,13 +203,32 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0 || strcmp($_S
                 document.getElementById("demo").innerHTML = hours + "h "
                     + minutes + "m " + seconds + "s ";
                 time--;
-                }
+                if (time<0){
+                    audio.play();
 
-            }}
+                    clearInterval(t);
+                }
+            }
+              
+                }
+            
+           
+
+             
+               
+
+            }
+           
 
 
         
+        function stop() {
+            clearInterval(t);
+            audio.pause();
+            document.getElementById("demo").innerHTML =  "0h 0m 0s";
+            time=0;
 
+        }
 
         function pause(){
             clearInterval(t);
@@ -223,6 +247,8 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0 || strcmp($_S
                     + minutes + "m " + seconds + "s ";
                 time--;
                 if (time<0){
+                    audio.play();
+
                     clearInterval(t);
                 }}
 
