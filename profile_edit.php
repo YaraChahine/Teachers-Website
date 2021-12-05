@@ -4,7 +4,7 @@ include("connection.php");
 session_start();
 if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"3")==0)
 {
- 
+ $id= $_SESSION["user_id"];
  ?>
 
 
@@ -82,15 +82,26 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"3")==0)
     <div class="flex-container">
         <div class="flex-item">
         </div>
+    
         <div class="flex-item">
-            <img src="img/charbel.png">
-        </div>
-        <div class="flex-item">
-            <p>Charbel72</p>
-            <p>First name: <span>Charbel</span> </p>
-            <p>Last name: <span>Daoud</span> </p>
-            <p> Phone number: <span>71 813401</span></p>
-            <p>Email: <span>charbel.daoud@lau.edu.lb</span> </p>
+            <?php $query="SELECT * from users where user_id=?;"; 
+             $stmt = $connection->prepare($query);
+             $stmt->bind_param("i",$id);
+             $stmt->execute();
+             $results = $stmt->get_result();
+             $row = $results->fetch_assoc();?> 
+            <p>First name: <span><?php echo($row["first_name"]); ?></span> </p>
+            <p>Last name: <span><?php echo($row["last_name"]); ?></span> </p>
+            <p> Phone number: <span><?php echo($row["phone_number"]); ?></span></p>
+            <p>Email: <span><?php echo($row["email"]); ?></span> </p>
+            <?php $query="SELECT * from students where user_id=?;"; 
+             $stmt = $connection->prepare($query);
+             $stmt->bind_param("i",$id);
+             $stmt->execute();
+             $results = $stmt->get_result();
+             $row = $results->fetch_assoc();?> 
+            <p>Preferred Price Range: <span><?php echo($row["price_range"]); ?></span> </p>
+
         </div>
         <div class="flex-item">
             <button type="button" style="width:100px;"class="btn btn-primary p-0 ok-btn"  data-bs-toggle="modal" data-bs-target="#edit-modal" data-bs-dismiss="modal" onclick="$('#editform').submit()">Edit Info</button>
@@ -106,29 +117,13 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"3")==0)
         <div class="modal-content">
           <div class="modal-body p-5">
               <h2 class="text-center">Edit Profile Info</h1>
-              <form action="">
-                  <div class="row">
-                      <div class="col-4">
-                          First name
-                      </div>
-                      <div class="col-8">
-                          <input class="form-control" type="text" name="first">
-                      </div>
-                  </div>
-                  <div class="row">
-                      <div class="col-4">
-                          Last name
-                      </div>
-                      <div class="col-8">
-                          <input class="form-control" type="text" name="last">
-                      </div>
-                  </div>
+              <form action="student_edit.php" method="post">
                   <div class="row">
                       <div class="col-4">
                         Phone number
                       </div>
                       <div class="col-8">
-                          <input class="form-control" type="email" name="email">
+                          <input class="form-control" type="text" name="phone">
                       </div>
                   </div>
                   <div class="row">
@@ -136,16 +131,23 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"3")==0)
                         Email address
                       </div>
                       <div class="col-8">
-                          <input class="form-control" type="text" name="phone">
+                          <input class="form-control" type="email" name="email">
                       </div>
                   </div>
+                  <div class="row">
+                      <div class="col-4">
+                          Preferred Price Range
+                      </div>
+                      <div class="col-8">
+                          <input class="form-control" type="text" name="price">
+                      </div>
+                  </div>
+                
+                  <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                          <button type="submit" class="btn btn-primary p-0 ok-btn"  data-bs-toggle="modal" data-bs-target="#msg-modal" data-bs-dismiss="modal" onclick="$('#editform').submit()">Save</button>
+                  </div>
               
-              </form>
-          </div>
-          <div class="modal-footer">
-              <form action="">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                  <button type="button" class="btn btn-primary p-0 ok-btn"  data-bs-toggle="modal" data-bs-target="#msg-modal" data-bs-dismiss="modal" onclick="$('#editform').submit()">Save</button>
               </form>
           </div>
         </div>

@@ -9,7 +9,7 @@ $course_id = $_POST["course"];
 $date = $_POST["date"];
 $days_of_sessions="";
 //first step to see if student is already taking the course
-die($student_id . $tutor_id . $course_id ."hi");
+die("hey" .$student_id . $tutor_id . $course_id ."hi");
 
 $query = "SELECT * FROM bookings where student_id = ? and course_id = ?;";
 $stmt = $connection->prepare($query);

@@ -361,15 +361,15 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
                             </div>
                         </div>
                     </div>
-                <form action="" class="d-flex justify-content-center pb-0"> <!-- delete booking php -->
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Delete Booking</button>
-                </form>
-            </div>
-            <div class="modal-footer">
+                    <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="$('#editform').submit()">Confirm</button>
-                </form>
+                     </div>   
+                </form>       
             </div>
+        
+            </div>
+            
           </div>
         </div>
       </div>
@@ -384,7 +384,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
           <div class="modal-content">
             <div class="modal-body p-5">
                 <h2 class="text-center">Add booking</h1>
-                <form action="">
+                <form action="add_bookings_manually.php" method="post">
                     <div class="row">
                         <div class="col-4">
                             Student ID
@@ -445,14 +445,15 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
                             </div>
                         </div>
                     </div>
+                    <div class="modal-footer">
+             
+             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+             <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="$('#editform').submit()">Confirm</button>
+       
+     </div>
                 </form>
             </div>
-            <div class="modal-footer">
-                <form action="">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="$('#editform').submit()">Confirm</button>
-                </form>
-            </div>
+          
           </div>
         </div>
       </div>
