@@ -145,10 +145,7 @@ include("connection.php");
                   <p class="card-text"><?php echo($row["email"]." - ".$row["phone_number"]); ?></p>
                   <a href="admin_signup.php?id=<?php echo($row["temp_student_id"]);?>" class="btn btn-primary" data-id=<?php echo($row["temp_student_id"]); ?> >View update</a>
                   <hr>                 
-                  <?php } ?> 
-                  <h5 class="card-title">Alice Smith</h5>
-                  <p class="card-text">alice@smith.com - 03 000 888</p>
-                  <a href="admin_signup.php" class="btn btn-primary">View update</a>
+                  <?php } ?>
                 </div>
             </div>
 
@@ -164,7 +161,34 @@ include("connection.php");
         
             <div class="list-group-item card update-item">
                 <h5 class="card-header">Tutor Profile Edit</h5>
+
+                <?php $query_tutor_profile_edits = "SELECT id, user_id, email, phone_number, city, profile_image, description  FROM  tutor_edit_requests";
+                $stmt = $connection->prepare($query_tutor_profile_edits);
+                $stmt->execute();
+                $results_tutor_profile_edits = $stmt->get_result();
+
+                $query_tutor_names = "SELECT user_id ,first_name, last_name, email, phone_number FROM  users"; //we need the names of the tutor for the card title
+                $stmt = $connection->prepare($query_tutor_names);
+                $stmt->execute();
+                $results_tutor_names = $stmt->get_result();
+                ?>
+
+
+                ?>
+
                 <div class="card-body">
+                <?php
+                    // while($row = $results_tutor_profile_edits->fetch_assoc()){
+                      while($row = $results_tutor_names->fetch_assoc()){
+
+                  ?>
+
+                  <h5 class="card-title"><?php echo($row["first_name"]." ".$row["last_name"]); ?></h5>
+                  <p class="card-text"><?php echo($row["email"]." - ".$row["phone_number"]); ?></p>
+                  <a href="profile_edit_tutor.php?id=<?php echo($row["id"]);?>" class="btn btn-primary" data-id=<?php echo($row["id"]); ?> >View update</a>
+                  <hr>                 
+                  <?php } ?> 
+
                   <h5 class="card-title">Emma Williams</h5>
                   <p class="card-text">emma@williams.com - 81 234 567</p>
                   <a href="admin_edit.php" class="btn btn-primary">View update</a>

@@ -82,8 +82,8 @@ else
 {
     
     $query2= "SELECT course_id from courses where course_name=?; ";
-    $stmt2 = $connection->prepare($query);
-    $stmt2->bind_param("s", $row["course_1"]);
+    $stmt2 = $connection->prepare($query2);
+    $stmt2->bind_param("s", $row["course_1"]); 
     $stmt2->execute();
     $results = $stmt2->get_result(); 
     $course_id = $results->fetch_assoc();
