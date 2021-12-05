@@ -80,7 +80,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"3"==0))
     <h5 >To request a new tutor or a new course please fill the form below.</h5>
     <p>Once you submit, you will be contacted by our consultant.</p>
     <br>
-  <form action="student_signup.php" method="POST" class="form">
+  <form action="request_new_tutor_add.php" method="POST" class="form">
 
 
   <fieldset class="course-details">
