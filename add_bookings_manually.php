@@ -10,7 +10,6 @@ $date = $_POST["date"];
 $days_of_sessions="";
 //first step to see if student is already taking the course
 
-
 $query = "SELECT * FROM bookings where student_id = ? and course_id = ?;";
 $stmt = $connection->prepare($query);
 $stmt->bind_param("dd", $student_id, $course_id);
@@ -107,6 +106,7 @@ if (!empty($courses_row) && !empty($tutors_row) && !empty($students_row)){
     $mysql = $connection->prepare("INSERT INTO bookings (student_id,tutor_id,course_id,starting_date,days_of_sessions) VALUES (?, ?, ? , ? ,?);");
     $mysql->bind_param("dddss", $student_id, $tutor_id, $course_id, $date, $days_of_sessions );
     ($mysql->execute());
+    header('Location: admin_bookings_page.php');
 
     }
     else{
