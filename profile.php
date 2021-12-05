@@ -128,7 +128,7 @@ $row = $results->fetch_assoc();
                 <p>Edit Profile Info</p>
             </div>
         </a>
-        <a href="request_new_tutor_course.php">
+        <a href="request_new_tutor.php">
             <div class="grid-item item6">
                 <img src="img/request.png">
                 <p>Request a new tutor/Add Course</p>

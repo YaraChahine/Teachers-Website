@@ -2,8 +2,8 @@
 
 include("connection.php");
 session_start();
-if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"3"==0)
-{
+if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"3"==0)) 
+{  
   ?>
 
 
@@ -118,8 +118,14 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"3"==0)
 <fieldset>
     <h4>Tutor Details</h4>
       <br>
-      <label for="tutor">Type in the name of your preferred tutor:  </label>
-      <input type="text" name="tutor" id="tutor" style="min-width: 200px;margin-left: 30px;" >
+      <label for="tutor">Select your preferred tutor:</label>
+          <select name="tutor" id="tutor" style="margin-left: 20px; min-width: 200px;">
+            <!-- "value" here is the tutor id -->
+            <option value="1">Sarah Abdallah</option>
+            <option value="2">Reem Zubdeh</option>
+            <option value="3">Yara Chahine</option>
+            <option value="4">Ali Knayber</option>
+          </select>
         <br><br>
         <p>You can check our list of tutors <a href=index.html>here</a></p>
       <br><br>
