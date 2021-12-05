@@ -373,9 +373,35 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
       </div>
 
     <!-- End Edit Modal -->
-     <form action="" class="d-flex justify-content-center pb-0">  <!-- delete booking php  -->
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Delete Booking</button>
-                </form> 
+
+    <div class="d-flex justify-content-center pb-0">
+    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><a  data-bs-toggle="modal" data-bs-target="#delete-modal">Delete Booking</a></button>
+    </div>
+    <div class="modal modal-large fade" id="delete-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-body p-5">
+                <h2 class="text-center">Delete booking</h1>
+                <form action="delete_booking.php" method="post">
+                    <div class="row">
+                        <div class="col-4">
+                            Booking Number
+                        </div>
+                        <div class="col-8">
+                            <input class="form-control" type="number" name="booking_id">
+                        </div>
+                   
+                    </div>
+            </div>
+            <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="$('#editform').submit()">Confirm</button>
+            </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
 
     <!-- Add Modal -->
 
