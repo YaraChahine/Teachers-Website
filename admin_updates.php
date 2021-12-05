@@ -146,10 +146,6 @@ include("connection.php");
                   <a href="admin_signup.php?id=<?php echo($row["temp_student_id"]);?>" class="btn btn-primary" data-id=<?php echo($row["temp_student_id"]); ?> >View update</a>
                   <hr>                 
                   <?php } ?> 
-                    </div>
-                    
-
-                <div class="card-body">
                   <h5 class="card-title">Alice Smith</h5>
                   <p class="card-text">alice@smith.com - 03 000 888</p>
                   <a href="admin_signup.php" class="btn btn-primary">View update</a>
