@@ -17,7 +17,7 @@ $stmt = $connection->prepare($query);
 $stmt->bind_param("s", $row["email"]);
 $stmt->execute();
 $results = $stmt->get_result(); 
-$tutor_row = $results->fetch_assoc();
+$student_row = $results->fetch_assoc();
 //if not then add student into users table
 
 if (empty($student_row)){
