@@ -118,13 +118,23 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"3"==0))
 <fieldset>
     <h4>Tutor Details</h4>
       <br>
-      <label for="tutor">Select your preferred tutor:</label>
-          <select name="tutor" id="tutor" style="margin-left: 20px; min-width: 200px;">
+      <label for="tutor" style="vertical-align: top">Select your preferred tutor:</label>
+          <select name="tutor" id="tutor" size = 4 style="margin-left: 20px; min-width: 200px;">
             <!-- "value" here is the tutor id -->
-            <option value="1">Sarah Abdallah</option>
-            <option value="2">Reem Zubdeh</option>
-            <option value="3">Yara Chahine</option>
-            <option value="4">Ali Knayber</option>
+
+            <?php
+            
+            include("connection.php");
+
+            $query = "SELECT * FROM `users` JOIN `tutors` ON `users`.`user_id` = `tutors`.`user_id`";
+            $stmt = $connection->prepare($query);
+            $stmt->execute();
+            $res = $stmt->get_result();
+            while ($r = $res->fetch_assoc()) {
+              echo ("<option value=\"" . $r["tutor_ID"] . "\">".$r["first_name"] . " " . $r["last_name"] ."</option>");
+            }
+
+            ?>
           </select>
         <br><br>
         <p>You can check our list of tutors <a href=index.html>here</a></p>
