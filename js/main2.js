@@ -107,7 +107,6 @@ function clear_filters() {
 function loadBookingData(button) {
 
   let row = $(button.parentElement.parentElement);
-  console.log($(this).find("div"));
   let student = +row.find("[name='student']").text();
   let tutor = +row.find("[name='tutor']").text();
   let course = +row.find("[name='course']").text();
@@ -128,8 +127,6 @@ function loadBookingData(button) {
   daysArr.forEach(day => {
     $("#editform").find(`[name='${day}']`).prop( "checked", true );
   });
-
-  console.log(row);
 
 }
 
