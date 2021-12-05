@@ -9,7 +9,7 @@ $course_id = $_POST["course"];
 $date = $_POST["date"];
 $days_of_sessions="";
 //first step to see if student is already taking the course
-die("hey" .$student_id . $tutor_id . $course_id ."hi");
+
 
 $query = "SELECT * FROM bookings where student_id = ? and course_id = ?;";
 $stmt = $connection->prepare($query);
@@ -42,7 +42,6 @@ $stmt->bind_param("d",  $student_id);
 $stmt->execute();
 $results = $stmt->get_result(); 
 $students_row = $results->fetch_assoc();
-die(var_dump($courses_row) . var_dump($tutors_row) .var_dump($students_row));
 
 if (!empty($courses_row) && !empty($tutors_row) && !empty($students_row)){
 
@@ -108,7 +107,6 @@ if (!empty($courses_row) && !empty($tutors_row) && !empty($students_row)){
     $mysql = $connection->prepare("INSERT INTO bookings (student_id,tutor_id,course_id,starting_date,days_of_sessions) VALUES (?, ?, ? , ? ,?);");
     $mysql->bind_param("dddss", $student_id, $tutor_id, $course_id, $date, $days_of_sessions );
     ($mysql->execute());
-    die($student_id . $tutor_id . $course_id . $date . $days_of_sessions);
 
     }
     else{
