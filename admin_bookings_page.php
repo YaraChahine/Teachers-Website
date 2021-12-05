@@ -272,15 +272,16 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
                          }
 
                         echo "<tr>
-                        <td>".$row['booking_number']."</td>
-                        <td>".$row['student_id']."</td>
+                        <td name=\"id\">".$row['booking_number']."</td>
+                        <td name=\"student\">".$row['student_id']."</td>
                         <td>".$row['first_name']. " ".$row['last_name']."</td>
-                        <td>".$row['tutor_id']."</td>
+                        <td name=\"tutor\">".$row['tutor_id']."</td>
                         <td>".$tutors_info."</td>
-                        <td>".$row['course_id']."</td>
+                        <td name=\"course\">".$row['course_id']."</td>
                         <td>".$courses_info."</td>
-                        <td>".$row['starting_date']."</td>
-                        <td>".$correct_dates."</td>
+                        <td name=\"date\">".$row['starting_date']."</td>
+                        <td name=\"days\">".$correct_dates."</td>
+                        <td> <a class=\"btn btn-primary\" data-bs-toggle=\"modal\" data-bs-target=\"#edit-modal\" onclick=\"loadBookingData(this)\">Edit</a></td>
                         </tr>";
        
               
