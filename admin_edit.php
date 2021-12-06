@@ -3,8 +3,18 @@
 include("connection.php");
 session_start();
 
-if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
-{ ?>
+if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0){
+
+  if (isset($_GET["id"])) {
+    $id = $_GET["id"];
+  } else die ("No tutor edit profile request is selected.");
+  
+
+}
+
+  
+  
+  ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -81,60 +91,88 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
               <span>&ThickSpace; Tutor Profile Edit</span>
             </h5>
             <div class="card-body p-5">
+
+            <?php $query_requests= "SELECT * FROM  tutor_edit_requests where id = ?";
+                $stmt = $connection->prepare($query_requests);
+                $stmt->bind_param("d", $id);
+                $stmt->execute();
+                $results = $stmt->get_result(); 
+                $row = $results->fetch_assoc();
+
+                if (empty($row)) {
+                    die ("invalid id");
+                }
+                ?>
+
+                <!-- figure out how to do the image -->
                 <img src="img/default-user-image.png" class="rounded-circle w-25 d-block my-5 mx-auto border border-primary border-4" alt="Image">
-                <h5 class="card-title"> <strong>Emma</strong> has made changes to <span id="his-her-their">her</span> profile and is awaiting your approval. Fields changed appear in blue.</h5>
+                                                                                              
+                <h5 class="card-title"> 
+                  <?php echo($row["first_name"]); ?></strong> has made changes to 
+                <span>
+                <?php if ( isset($_POST['gender']) ){
+                  $gender = $_POST['gender'];
+                  if ( $gender == 'Male' ){
+                      echo 'his';
+                  }else if ( $gender == 'Female' ){
+                      echo 'her';
+                  }else{
+                      echo 'their';
+                } ?>
+                </span> 
+                profile and is awaiting your approval. Fields changed appear in blue.</h5>
                 <div class="w-75 my-5 mx-auto">
                     <div class="row">
                         <p class="col-4"><strong>Full name</strong></p>
-                        <p class="col-8">Emma Williams</p>
+                        <p class="col-8"><?php echo($row["first_name"]." ".$row["last_name"]); ?></p>
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Email</strong></p>
-                        <p class="col-8">emma@williams.com</p>
+                        <p class="col-8"><?php echo($row["email_address"]);?></p>
                     </div>
                     <div class="row">
                         <p class="col-4 text-primary"><strong>Phone number</strong></p>
-                        <p class="col-8">81 678 876</p>
+                        <p class="col-8"><?php echo($row["phone_number"]);?></p>
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Age</strong></p>
-                        <p class="col-8">34</p>
+                        <p class="col-8"><?php echo($row["year_born"]);?></p>
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Gender</strong></p>
-                        <p class="col-8">Female</p>
+                        <p class="col-8"><?php echo($row["gender"]);?></p>
                     </div>
                     <div class="row">
                         <p class="col-4 text-primary"><strong>City</strong></p>
-                        <p class="col-8">Beirut</p>
+                        <p class="col-8"><?php echo($row["city"]);?></p>
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Education level</strong></p>
-                        <p class="col-8">College Undergraduate</p>
+                        <p class="col-8"><?php echo($row["education_level"]);?></p>
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>College Name</strong></p>
-                        <p class="col-8">Lebanese American University</p>
+                        <p class="col-8"><?php echo($row["college_name"]);?></p>
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Major</strong></p>
-                        <p class="col-8">Chemistry</p>
+                        <p class="col-8"><?php echo($row["major"]);?></p>
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Years of Experience</strong></p>
-                        <p class="col-8">6</p>
+                        <p class="col-8"><?php echo($row["years_of_experience"]);?></p>
                     </div>
                     <div class="row ">
                         <p class="col-4 text-primary"><strong>Courses taught</strong></p>
-                        <p class="col-8">Chemistry - Middle school<br>Chemistry - High school</p>
+                        <p class="col-8"><?php echo($row["course_id"]);?></p>
                     </div>
                     <div class="row">
                         <p class="col-4 text-primary"><strong>CV</strong></p>
-                        <p class="col-8"><a href="">Click to download PDF</a></p>
+                        <p class="col-8"><a href=""><?php echo($row["cv"]);?></a></p>
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Bio paragraph</strong></p>
-                        <p class="col-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, ratione maiores adipisci consequuntur ad consectetur veritatis eaque quasi excepturi non, recusandae similique magni reiciendis nulla fugit magnam eligendi tempora suscipit.</p>
+                        <p class="col-8"><?php echo($row["description"]);?></p>
                     </div>
                 </div>
                 <div class="d-flex justify-content-center">
@@ -154,7 +192,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-body p-5">
-              Are you sure you want to accept <strong>Emma Williams</strong>'s profile edits? These changes will be publicly visible on the website.
+              Are you sure you want to accept <strong><?php echo($row["first_name"]." ".$row["last_name"]);?></strong>'s profile edits? These changes will be publicly visible on the website.
             </div>
             <div class="modal-footer">
                 <form action="">
@@ -174,11 +212,12 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-body p-5">
-                Are you sure you want to reject <strong>Emma Williams</strong>'s profile edits?
+                Are you sure you want to reject <strong><?php echo($row["first_name"]." ".$row["last_name"]);?></strong>'s profile edits?
             </div>
             <div class="modal-footer">
                 <form action="">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <a href="accept_tutor_edits.php?id=<?php echo($row["id"]); ?>">
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="submit">Confirm</button>
                 </form>
             </div>
