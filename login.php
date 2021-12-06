@@ -9,26 +9,26 @@ include("connection.php");
 $email = "";
 $password = "";
 
+$incorrect = false;
+$invalid = false;
+
 if (isset($_POST["login"])){
 
     //LOGIN
 
-    if(isset($_POST["email"]) && $_POST["email"]!="" && filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)){
+    if(isset($_POST["email"]) && $_POST["email"]!=""){
         $email = $_POST["email"];
 
-    }else if(isset($_POST["email"]) && $_POST["email"]!="" && !filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)){
-        die("Incorrect email format.");
     }else{
-        die("Nice try Dr. :D 3");
+        die("Nice try Dr. :D");
     }
 
-    if(isset($_POST["password"]) && $_POST["password"]!="" && preg_match('@[A-Z]@', $_POST["password"]) && preg_match('@[a-z]@',  $_POST["password"]) && preg_match('@[0-9]@',  $_POST["password"]) && preg_match('@[^\w]@',  $_POST["password"]) && strlen($_POST["password"]) > 7 && strlen($_POST["password"]) < 21){
+    if(isset($_POST["password"]) && $_POST["password"]!=""){
         $password = hash("sha256",$_POST["password"]);
 
-    }else if(isset($_POST["password"]) && $_POST["password"]!="" && !preg_match('@[A-Z]@', $_POST["password"]) || !preg_match('@[a-z]@',  $_POST["password"]) || !preg_match('@[0-9]@',  $_POST["password"]) || !preg_match('@[^\w]@',  $_POST["password"]) || strlen($_POST["password"]) < 8 || strlen($_POST["password"]) > 20){
-        die("Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.");
-    }else{
-        die("Nice try Dr. :D 4");
+    }
+    else{
+        $incorrect = true;
     }
 
     $mysql = $connection->prepare("SELECT * FROM users WHERE email = ? AND password = ?");
@@ -38,7 +38,7 @@ if (isset($_POST["login"])){
     $row = $results->fetch_assoc();
 
     if(empty($row)) {
-        header('Location: login.html');
+        $incorrect = true;
     }else {  
         $_SESSION["loggedin"] = true;
         $_SESSION["user_id"] = $row['user_id'];
@@ -62,12 +62,10 @@ else if (isset($_POST["forgot"])) {
 
     //FORGOT PASSWORD
 
-    if(isset($_POST["email"]) && $_POST["email"]!="" && filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)){
+    if(isset($_POST["email"]) && $_POST["email"]!=""){
         $email = $_POST["email"];
-
-    }else if(isset($_POST["email"]) && $_POST["email"]!="" && !filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)){
-        die("Incorrect email format.");
-    }else{
+    }
+    else{
         die("Nice try Dr. :D 3");
     }
 
@@ -78,8 +76,7 @@ else if (isset($_POST["forgot"])) {
     $row = $results->fetch_assoc();
 
     if(empty($row)) {
-        die("wrong email");
-
+        $invalid = true;
     }else {
         $code = sprintf("%06d", mt_rand(1, 999999));
 
@@ -119,9 +116,88 @@ else if (isset($_POST["forgot"])) {
         ";
 
         $subject = "Teachers - Your password reset code";
-        header('Location: verification.html');
+        header('Location: verification.php');
 
     }
 
 }
 ?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Kodinger">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>My Login Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/my-login.css">
+    <link rel="stylesheet" type="text/css" href="css/style2.css">
+
+</head>
+
+<body class="my-login-page">
+	<section class="h-100">
+		<div class="container h-100">
+			<div class="row justify-content-md-center h-100">
+				<div class="card-wrapper">
+					<div class="brand">
+						<img src="img/logo.png" alt="logo">
+					</div>
+					<div class="card fat">
+						<div class="card-body">
+							<h4 class="card-title">Login</h4>
+							<form action="login.php" method="POST">
+								
+							<?php if ($incorrect) { ?> <p class="text-danger">Your email or password is incorrect. Please try again.</p> <?php } ?>
+							<?php if ($invalid) { ?> <p class="text-danger">Please enter the valid email of your account to change your password.</p> <?php } ?>
+
+								<div class="form-group">
+									<label for="email">Email Address</label>
+									<input id="email" type="email" class="form-control" name="email" value="" required autofocus>
+								</div>
+
+								<div class="form-group">
+									<label for="password">Password
+										<input type="submit" name="forgot" value="Forgot password?" class="btn-link float-right bg-transparent border-0">
+									</label>
+									<input id="password" type="password" class="form-control" name="password">
+								</div>
+
+								<div class="form-group m-0">
+                                    <input id="loginSubmit" type="submit" name="login" value="Login" class="btn btn-primary btn-block " 
+									style="background-color: #04c2f9; border-color: #04c2f9;">
+								</div>
+								<div class="mt-4 text-center">
+									Not a member?<br><br> <a href="student_signup.php" >Register as a student</a>
+                                    <br>
+                                    <a href="tutor_application.html">Become a tutor</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        Copyright &copy; 2021 &mdash; Teachers 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	
+	<script>
+		$(window).keydown(function(event){
+			if(event.keyCode == 13) {
+			event.preventDefault();
+			$("#loginSubmit").get(0).click();
+			return false;
+			}
+		});
+	</script>
+</body>
+</html>
+

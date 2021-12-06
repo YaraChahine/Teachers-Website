@@ -213,6 +213,6 @@ if(isset($_POST["price"]) && $_POST["price"] !="" && preg_match("/^[0-9]*$/", $_
         $connection->close();
         
         
-     header("Location: index.html");
+     header("Location: index.php");
 
 ?>

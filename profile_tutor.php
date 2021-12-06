@@ -5,7 +5,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0)
 {
 $id = $_SESSION["user_id"];
 
-$query= "SELECT first_name FROM  users where user_id = ?";
+$query= "SELECT *s FROM  users where user_id = ?";
 $stmt = $connection->prepare($query);
 $stmt->bind_param("i", $id);
 
@@ -60,7 +60,7 @@ $row = $results->fetch_assoc();
     <header id="header" class="header fixed-top header-form">
         <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
-            <a href="index.html" class="logo d-flex align-items-center">
+            <a href="index.php" class="logo d-flex align-items-center">
                 <img src="./img/logo.png" alt="">
                 <span>Teachers</span>
             </a>
@@ -131,6 +131,11 @@ $row = $results->fetch_assoc();
      
     </div>
 
+    <form style="display: block; height: 70px; padding: 10px; width: fit-content; margin: auto" action="login.php" method="post">
+        <input type="hidden" name="email" value="<?php echo $row["email"] ?>">
+        <input type="submit" name="forgot" value="Change my password" class="btn position-static h-75">
+    </form>
+
     <style>
         .item4-tutor {
             grid-column : 1 / span 2;
@@ -152,7 +157,7 @@ $row = $results->fetch_assoc();
       <div class="container">
         <div class="row gy-4">
           <div class="col-lg-6 col-md-12 footer-info">
-            <a href="index.html" class="logo d-flex align-items-center">
+            <a href="index.php" class="logo d-flex align-items-center">
               <img src="./img/logo.png" alt="">
               <span>Teachers</span>
             </a>
@@ -201,4 +206,4 @@ $row = $results->fetch_assoc();
 </html>
 
 
-<?php } else {header("Location: index.html");} ?>
+<?php } else {header("Location: index.php");} ?>
