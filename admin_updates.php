@@ -52,16 +52,16 @@ include("connection.php");
     <header id="header" class="header fixed-top header-form">
         <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
-            <a href="index.html" class="logo d-flex align-items-center">
+            <a href="index.php" class="logo d-flex align-items-center">
                 <img src="./img/logo.png" alt="">
                 <span>Teachers</span>
             </a>
 
             <nav id="navbar" class="navbar">
                 <ul>
-                <li><a class="nav-link scrollto " href="admin_page.html">Main Page</a></li>
+                <li><a class="nav-link scrollto " href="admin_page.php">Main Page</a></li>
                     <li><a class="nav-link scrollto active" href="admin_updates.php">My updates</a></li>
-                    <li><a class="nav-link scrollto" href="admin_page.html">Remove a member</a></li>
+                    <li><a class="nav-link scrollto" href="admin_page.php">Remove a member</a></li>
                     <li><a class="getstarted scrollto" href="logout.php">Log out</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
@@ -72,7 +72,7 @@ include("connection.php");
 
     <br><br><br><br><br><br>
 
-    <a href="admin_page.html" class="btn btn-secondary" style="margin: 0 0 0 20vw">&lt Back</a>
+    <a href="admin_page.php" class="btn btn-secondary" style="margin: 0 0 0 20vw">&lt Back</a>
 
     <div class="container">
 
@@ -206,7 +206,7 @@ include("connection.php");
       <div class="container">
         <div class="row gy-4">
           <div class="col-lg-6 col-md-12 footer-info">
-            <a href="index.html" class="logo d-flex align-items-center">
+            <a href="index.php" class="logo d-flex align-items-center">
               <img src="./img/logo.png" alt="">
               <span>Teachers</span>
             </a>

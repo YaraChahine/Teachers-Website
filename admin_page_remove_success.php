@@ -52,7 +52,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
     <header id="header" class="header fixed-top header-form">
         <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
-            <a href="index.html" class="logo d-flex align-items-center">
+            <a href="index.php" class="logo d-flex align-items-center">
                 <img src="./img/logo.png" alt="">
                 <span>Teachers</span>
             </a>
@@ -135,7 +135,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
                             <div class="modal-footer">
 
                                 <br>
-                                <a href="admin_page.html">
+                                <a href="admin_page.php">
                                     <button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                                 </a>
                                 <button type="submit" class="btn btn-primary p-0 ok-btn"
@@ -189,7 +189,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
 
     <br><br>
     <div class="grid-container">
-        <a href="admin_students_page.html">
+        <a href="admin_students_page.php">
             <div class="grid-item item1">
                 <img src="img/students.png">
                 <p>Manage Students</p>
@@ -201,7 +201,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
                 <p>Manage Tutors</p>
             </div>
         </a>
-        <a href="admin_bookings_page.html">
+        <a href="admin_bookings_page.php">
             <div class="grid-item item3">
                 <img src="img/bookings.jpg">
                 <p>Manage Bookings</p>
@@ -229,7 +229,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
             <div class="container">
                 <div class="row gy-4">
                     <div class="col-lg-6 col-md-12 footer-info">
-                        <a href="index.html" class="logo d-flex align-items-center">
+                        <a href="index.php" class="logo d-flex align-items-center">
                             <img src="./img/logo.png" alt="">
                             <span>Teachers</span>
                         </a>
@@ -281,4 +281,4 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
 </html>
 
 
-<?php } else {header("Location: index.html");} ?>
+<?php } else {header("Location: index.php");} ?>

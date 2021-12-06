@@ -52,4 +52,4 @@ $email = $_SESSION["email"];
 </body>
 </html>
 
-<?php } else {header("Location: index.html");} ?>
+<?php } else {header("Location: index.php");} ?>

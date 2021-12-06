@@ -53,7 +53,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0 || strcmp($_S
     <header id="header" class="header fixed-top header-form">
         <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
-            <a href="index.html" class="logo d-flex align-items-center">
+            <a href="index.php" class="logo d-flex align-items-center">
                 <img src="./img/logo.png" alt="">
                 <span>Teachers</span>
             </a>
@@ -106,7 +106,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0 || strcmp($_S
       <div class="container">
         <div class="row gy-4">
           <div class="col-lg-6 col-md-12 footer-info">
-            <a href="index.html" class="logo d-flex align-items-center">
+            <a href="index.php" class="logo d-flex align-items-center">
               <img src="./img/logo.png" alt="">
               <span>Teachers</span>
             </a>
@@ -218,4 +218,4 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0 || strcmp($_S
 
 </html>
 
-<?php } else {header("Location: index.html");} ?>
+<?php } else {header("Location: index.php");} ?>

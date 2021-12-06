@@ -45,14 +45,14 @@
   <header id="header" class="header fixed-top">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="index.php" class="logo d-flex align-items-center">
         <img src="./img/logo.png" alt="">
         <span>Teachers</span>
       </a>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="index.html">Home</a></li>
+          <li><a class="nav-link scrollto active" href="index.php">Home</a></li>
           <li><a class="nav-link scrollto" href="tutors_page.php">Our tutors</a></li>
           <li class="dropdown"><a href="#" style="display: none;"><span>Drop Down</span> <i
                 class="bi bi-chevron-down"></i></a>
@@ -72,7 +72,7 @@
               <li><a href="#">Drop Down 4</a></li>
             </ul>
           </li>
-          <li><a class="getstarted scrollto" href="login.html">Log in</a></li>
+          <li><a class="getstarted scrollto" href="login.php">Log in</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -626,7 +626,7 @@
       <div class="container">
         <div class="row gy-4">
           <div class="col-lg-6 col-md-12 footer-info">
-            <a href="index.html" class="logo d-flex align-items-center">
+            <a href="index.php" class="logo d-flex align-items-center">
               <img src="./img/logo.png" alt="">
               <span>Teachers</span>
             </a>
