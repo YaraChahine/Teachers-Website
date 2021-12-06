@@ -96,12 +96,11 @@ function change_level() {
 
 }
 
-function filter() {
-  $('#filter-panel').collapse('toggle');
-}
-
 function clear_filters() {
-  $('#filter-panel').collapse('hide');
+  $("#filter option:selected").removeAttr('selected');
+  $("#filter option[value='all'").attr('selected','selected');
+  $("#filter input").val('');
+  $("#filter").submit();
 }
 
 function loadBookingData(button) {

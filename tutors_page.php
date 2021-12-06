@@ -73,7 +73,7 @@ if ($field != "") $fieldQ = $field;
 $years = "";
 $yearsQ = "";
 if (isset($_GET["years"])) $years = $_GET["years"]; 
-switch ($age) {
+switch ($years) {
   case "0-3":
       $yearsQ = "0 AND 3";
       break;
@@ -171,24 +171,6 @@ $res = $stmt->get_result();
         <ul>
           <li><a class="nav-link scrollto" href="index.html">Home</a></li>
           <li><a class="nav-link scrollto active" href="tutors_page.php">Our tutors</a></li>
-          <li style="display: none;"><a href="blog.html">Blog</a></li>
-          <li class="dropdown"><a href="#" style="display: none;"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
-            </ul>
-          </li>
           <li><a class="getstarted scrollto" href="login.html">Log in</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -214,13 +196,12 @@ $res = $stmt->get_result();
           <div class="row my-1 p-0">
             <div class="col-11"></div>
             <div class="col-1 d-flex justify-content-around p-0">
-              <button class="filter-button" onclick="clear_filters()"><i class="bi bi-x"></i></button>
-              <button class="filter-button" onclick="filter()"><i class="bi bi-filter" ></i></button>
+              <button class="filter-button" onclick="clear_filters()"><i class="bi bi-x" ></i> <small style="vertical-align:top; font-variant: small-caps">clear</small></button>
             </div>
           </div>
 
-          <div class="collapse show container my-1" id="filter-panel">
-            <form action="tutors_page.php">
+          <div class="container my-1" id="filter-panel">
+            <form action="tutors_page.php" id="filter">
               <div class="thin-container row card card-body d-flex flex-row justify-content-around p-5">
                 <div class="col-12 col-md-6 p-3">
                   <span>Age</span>
@@ -260,7 +241,7 @@ $res = $stmt->get_result();
                   <br>
                   <span>Years of experience</span>
                   <select name="years" id="years" onchange="this.form.submit()" class="form-select w-auto d-inline-block m-2">
-                    <option value="all" <?php if ($years == "all" || $years = "") { ?> selected <?php }?> >All</option>
+                    <option value="all" <?php if ($years == "all" || $years == "") { ?> selected <?php }?> >All</option>
                     <option value="0-3" <?php if ($years == "0-3") { ?> selected <?php }?> >0-3</option>
                     <option value="4-6" <?php if ($years == "4-6") { ?> selected <?php }?> >4-6</option>
                     <option value="7-9" <?php if ($years == "7-9") { ?> selected <?php }?> >7-9</option>
@@ -317,7 +298,7 @@ $res = $stmt->get_result();
             
             ?>
 
-              <div class="col-lg-3 col-md-6 d-flex align-items-stretch my-5" data-aos="fade-up" data-aos-delay="10">
+              <div class="col-lg-3 col-md-6 d-flex align-items-stretch my-5">
                 <div class="member">
                   <div class="member-img">
                     <img src="<?php echo $image ?>" class="img-fluid" alt="">
@@ -343,87 +324,6 @@ $res = $stmt->get_result();
 
 
           <?php }?>
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch my-5" data-aos="fade-up" data-aos-delay="100">
-            <div class="member">
-              <div class="member-img">
-                <img src="./img/team/team-1.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>Sarah Abdallah</h4>
-                <span>Piano Teacher</span>
-                <p>Sarah has been playing the piano for 12 years. She believes that any person can learn to play the
-                  piano! They just need to find the learning style that suits them best, and she happens ot be great at
-                  exploring a student's learning style! </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch my-5" data-aos="fade-up" data-aos-delay="200">
-            <div class="member">
-              <div class="member-img">
-                <img src="./img/team/team-2.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>Ali Knayber</h4>
-                <span>Python tutor</span>
-                <p>Ali is a computer science graduate from the Lebanese American Univesity. He has worked for several
-                  companies overseas, specialized in machine learning and artificial intelligence.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch my-5" data-aos="fade-up" data-aos-delay="300">
-            <div class="member">
-              <div class="member-img">
-                <img src="./img/team/team-3.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>Reem Zubdeh</h4>
-                <span>Mobile Developer</span>
-                <p>Reem has been teaching mobile development for over 5 years now. With her, you will be able to deploy
-                  your first application in less that a month!</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch my-5" data-aos="fade-up" data-aos-delay="400">
-            <div class="member">
-              <div class="member-img">
-                <img src="./img/team/team-4.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>Amanda Jepson</h4>
-                <span>Accountant</span>
-                <p>Rerum voluptate non adipisci animi distinctio et deserunt amet voluptas. Quia aut aliquid doloremque
-                  ut possimus ipsum officia.</p>
-              </div>
-            </div>
-          </div>
 
         </div>
 
