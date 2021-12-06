@@ -162,7 +162,7 @@ include("connection.php");
             <div class="list-group-item card update-item">
                 <h5 class="card-header">Tutor Profile Edit</h5>
 
-                <?php $query_tutor_profile_edits = "SELECT id, user_id, email, phone_number, city, profile_image, description  FROM  tutor_edit_requests";
+                <?php $query_tutor_profile_edits = "SELECT email, phone_number, city, profile_image, description  FROM  tutor_edit_requests";
                 $stmt = $connection->prepare($query_tutor_profile_edits);
                 $stmt->execute();
                 $results_tutor_profile_edits = $stmt->get_result();
@@ -179,9 +179,9 @@ include("connection.php");
                       while($row = $results_tutor_names->fetch_assoc() && $row1 = $results_tutor_profile_edits->fetch_assoc() ){
 
                   ?>
-
+                  <img src="<?php echo $row1['profile_image']; ?> ">
                   <h5 class="card-title"><?php echo($row["first_name"]." ".$row["last_name"]); ?></h5>
-                  <p class="card-text"><?php echo($row["email"]." - ".$row["phone_number"]); ?></p>
+                  <p class="card-text"><?php echo($row1["email"]." - ".$row1["phone_number"]." - ".$row1["city"]." - ".$row1["description"] ); ?></p>
                   <a href="admin_edit.php?id=<?php echo($row["id"]);?>" class="btn btn-primary" data-id=<?php echo($row["id"]); ?> >View update</a>
                   <hr>                 
                   <?php } ?>
