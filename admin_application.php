@@ -7,7 +7,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
 {
   if (isset($_GET["id"])) {
   $id = $_GET["id"];
-  } else die ("no tutor application selected");
+  } else die ("No tutor application is selected.");
 ?>
 
 <!DOCTYPE html>

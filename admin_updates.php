@@ -173,21 +173,19 @@ include("connection.php");
                 $results_tutor_names = $stmt->get_result();
                 ?>
 
-
-                ?>
-
                 <div class="card-body">
                 <?php
                     // while($row = $results_tutor_profile_edits->fetch_assoc()){
-                      while($row = $results_tutor_names->fetch_assoc()){
+                      while($row = $results_tutor_names->fetch_assoc() && $row1 = $results_tutor_profile_edits->fetch_assoc() ){
 
                   ?>
 
                   <h5 class="card-title"><?php echo($row["first_name"]." ".$row["last_name"]); ?></h5>
                   <p class="card-text"><?php echo($row["email"]." - ".$row["phone_number"]); ?></p>
-                  <a href="profile_edit_tutor.php?id=<?php echo($row["id"]);?>" class="btn btn-primary" data-id=<?php echo($row["id"]); ?> >View update</a>
+                  <a href="admin_edit.php?id=<?php echo($row["id"]);?>" class="btn btn-primary" data-id=<?php echo($row["id"]); ?> >View update</a>
                   <hr>                 
-                  <?php } ?> 
+                  <?php } ?>
+            
 
                   <h5 class="card-title">Emma Williams</h5>
                   <p class="card-text">emma@williams.com - 81 234 567</p>
