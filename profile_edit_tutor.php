@@ -148,26 +148,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0){
           <div class="modal-body p-5">
               <h2 class="text-center">Edit Profile Info</h1>
               <form action="admin_edit.php" method = "POST" autocomplete="off">
-                  <div class="row">
-                      <div class="col-4">
-                          First name
-                      </div>
-                      <div class="col-8">
-
-                          <?php if(isset($_POST["first"]) && $_POST["first"]!="" ) ?>
-                          <input class="form-control" type="text" name="first">
-                      </div>
-                  </div>
-                  <div class="row">
-                      <div class="col-4">
-                          Last name
-                      </div>
-                      <div class="col-8">
-
-                          <?php if(isset($_POST["last"]) && $_POST["last"]!="" ) ?>
-                          <input class="form-control" type="text" name="last">
-                      </div>
-                  </div>
+                      
                   <div class="row">
                       <div class="col-4">
                         Email address 
@@ -189,6 +170,27 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0){
                           <input class="form-control" type="text" name="phone">
                       </div>
                   </div>
+                  <div class="row">
+                      <div class="col-4">
+                          City
+                      </div>
+                      <div class="col-8">
+
+                          <?php if(isset($_POST["city"]) && $_POST["city"]!="" ) ?>
+                          <input class="form-control" type="text" name="city">
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-4">
+                          Description
+                      </div>
+                      <div class="col-8">
+
+                          <?php if(isset($_POST["description"]) && $_POST["description"]!="" ) ?>
+                          <input class="form-control" type="text" name="description">
+                      </div>
+                  </div>
+              
               
               </form>
           </div>
