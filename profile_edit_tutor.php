@@ -2,12 +2,10 @@
 
 include("connection.php");
 session_start();
-if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0)
-{
- 
+if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0){
+
+  $id = $_SESSION["user_id"]
  ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -80,17 +78,44 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0)
         it up to date.</h5>
 
     <div class="flex-container">
-        <div class="flex-item">
+
+    <div class="flex-item">
+    <form action="admin_updates.php" method="POST" enctype="multipart/form-data">
+
+    <?php   
+            $query="SELECT * from tutors where tutor_ID = ?;"; 
+            $stmt = $connection->prepare($query);
+            $stmt->bind_param("i",$id);
+            $stmt->execute();
+            $results = $stmt->get_result();
+            $row = $results->fetch_assoc();?> 
+            
         </div>
         <div class="flex-item">
-            <img src="img/charbel.png">
+
+        <?php $query="SELECT * from users where user_id=?;"; 
+             $stmt = $connection->prepare($query);
+             $stmt->bind_param("i",$id);
+             $stmt->execute();
+             $results = $stmt->get_result();
+             $row = $results->fetch_assoc();?> 
+
+
+            <
+            <!-- <img src="<?php echo $data['images']; ?> -->
+            <p>First name: <span><?php echo($row["first_name"]); ?></span> </p>
+            <p>Last name: <span><?php echo($row["last_name"]); ?></span> </p>
+            <p> Phone number: <span><?php echo($row["phone_number"]); ?></span></p>
+            <p>Email: <span><?php echo($row["email"]); ?></span> </p>
+
+
         </div>
         <div class="flex-item">
-            <p>Charbel72</p>
+            <!-- <p>Charbel72</p>
             <p>First name: <span>Charbel</span> </p>
             <p>Last name: <span>Daoud</span> </p>
             <p> Phone number: <span>71 813401</span></p>
-            <p>Email: <span>charbel.daoud@lau.edu.lb</span> </p>
+            <p>Email: <span>charbel.daoud@lau.edu.lb</span> </p> -->
         </div>
         <div class="flex-item">
             <button type="button" style="width:100px;"class="btn btn-primary p-0 ok-btn"  data-bs-toggle="modal" data-bs-target="#edit-modal" data-bs-dismiss="modal" onclick="$('#editform').submit()">Edit Info</button>
@@ -142,6 +167,9 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0)
                         Phone number
                       </div>
                       <div class="col-8">
+
+                      <?php if(isset($_POST["phone"]) && $_POST["phone"]!="" ) ?>
+
                           <input class="form-control" type="text" name="phone">
                       </div>
                   </div>
