@@ -56,6 +56,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0){
 
             <a href="index.html" class="logo d-flex align-items-center">
                 <img src="./img/logo.png" alt="">
+                
                 <span>Teachers</span>
             </a>
 
@@ -92,22 +93,37 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0){
             
         </div>
         <div class="flex-item">
+            <?php 
+            $queryimage ="SELECT * from tutors where user_id = ?;"; 
+            $stmt = $connection->prepare($queryimage);
+            $stmt->bind_param("i",$id);
+            $stmt->execute();
+            $results_image = $stmt->get_result();
+            $row_image = $results_image->fetch_assoc();?> 
 
-        <?php $query="SELECT * from users where user_id=?;"; 
-             $stmt = $connection->prepare($query);
-             $stmt->bind_param("i",$id);
-             $stmt->execute();
-             $results = $stmt->get_result();
-             $row = $results->fetch_assoc();?> 
+            <?php 
+            $query="SELECT * from users where user_id=?;"; 
+            $stmt = $connection->prepare($query);
+            $stmt->bind_param("i",$id);
+            $stmt->execute();
+            $results = $stmt->get_result();
+            $row = $results->fetch_assoc();?> 
 
 
-            <
-            <!-- <img src="<?php echo $data['images']; ?> -->
+            <img src="<?php echo $row_image['profile_image']; ?>" >
             <p>First name: <span><?php echo($row["first_name"]); ?></span> </p>
             <p>Last name: <span><?php echo($row["last_name"]); ?></span> </p>
-            <p> Phone number: <span><?php echo($row["phone_number"]); ?></span></p>
+            <p>Phone number: <span><?php echo($row["phone_number"]); ?></span></p>
+            <p>City: <span><?php echo($row_image["city"]); ?></span> </p>
             <p>Email: <span><?php echo($row["email"]); ?></span> </p>
+            <p>Description <span><?php echo($row_image["description"]); ?></span> </p>
 
+            <?php
+            
+            $mysql = $connection ->prepare("INSERT INTO tutor_edit_requests(email, phone_number,city, profile_image,description) VALUES (?,?,?,?,?)");
+            $mysql->bind_param("sdsss", $email, $phone_number, $city, $profile_image, $description);
+            
+            ?>
 
         </div>
         <div class="flex-item">
@@ -185,7 +201,6 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0){
         </div>
       </div>
     </div>
-
 
 
 
