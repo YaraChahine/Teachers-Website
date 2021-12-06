@@ -5,7 +5,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0)
 {
 $id = $_SESSION["user_id"];
 
-$query= "SELECT first_name FROM  users where user_id = ?";
+$query= "SELECT *s FROM  users where user_id = ?";
 $stmt = $connection->prepare($query);
 $stmt->bind_param("i", $id);
 
@@ -130,6 +130,11 @@ $row = $results->fetch_assoc();
         </a>
      
     </div>
+
+    <form style="display: block; height: 70px; padding: 10px; width: fit-content; margin: auto" action="login.php" method="post">
+        <input type="hidden" name="email" value="<?php echo $row["email"] ?>">
+        <input type="submit" name="forgot" value="Change my password" class="btn position-static h-75">
+    </form>
 
     <style>
         .item4-tutor {

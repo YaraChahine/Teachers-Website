@@ -5,7 +5,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0 || strcmp($_S
 {
 $id = $_SESSION["user_id"];
 
-$query= "SELECT first_name FROM  users where user_id = ?";
+$query= "SELECT * FROM  users where user_id = ?";
 $stmt = $connection->prepare($query);
 $stmt->bind_param("i", $id);
 
@@ -84,9 +84,7 @@ $row = $results->fetch_assoc();
     <div class="greeting">
         <h1>Hello, <span id="user-name"> 
           <?php 
-          // if (isset($_POST["first_name"])){
             echo($row["first_name"]);
-          // }
           ?>
         </span>
       </h1>
@@ -136,11 +134,10 @@ $row = $results->fetch_assoc();
         </a>
     </div>
 
-
-    
-
-
-
+    <form style="display: block; height: 70px; padding: 10px; width: fit-content; margin: auto" action="login.php" method="post">
+        <input type="hidden" name="email" value="<?php echo $row["email"] ?>">
+        <input type="submit" name="forgot" value="Change my password" class="btn position-static h-75">
+    </form>
 
     <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">

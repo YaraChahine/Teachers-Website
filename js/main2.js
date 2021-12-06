@@ -103,6 +103,15 @@ function clear_filters() {
   $("#filter").submit();
 }
 
+
+function forgotSubmit() {
+  //check if email empty
+}
+
+function loginSubmit() {
+  //check if email and pass empty
+}
+
 function loadBookingData(button) {
 
   let row = $(button.parentElement.parentElement);
