@@ -168,7 +168,8 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>CV</strong></p>
-                        <p class="col-8"><a href="">Click to download PDF</a></p>
+                        <p class="col-8"><a href="pending\<?php echo($row["cv"]);?>" download>Click to download PDF</a></p>
+
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Bio paragraph</strong></p>

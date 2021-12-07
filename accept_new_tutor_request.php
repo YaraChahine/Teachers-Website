@@ -1,6 +1,8 @@
 <?php
 
 include("connection.php");
+if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
+{
 $id = $_GET["id"];
 
 $query = "INSERT INTO bookings(starting_date, days_of_sessions) VALUES (?,?);";
@@ -21,4 +23,5 @@ $stmt->execute();
 
 
 header("Location: admin_updates.php");
+} else {header("Location: index.php");}
 ?>
