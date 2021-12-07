@@ -2,7 +2,8 @@
 
 include("connection.php");
 session_start();
-
+if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
+{
   if (isset($_GET["id"])) {
   $id = $_GET["id"];
     
@@ -52,5 +53,5 @@ $stmt4->execute();
 
 
   } else die ("no tutor application selected");
-
+} else {header("Location: index.php");}
 ?>

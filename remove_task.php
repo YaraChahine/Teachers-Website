@@ -1,6 +1,9 @@
 <?php
 include("connection.php");
 session_start();
+if (isset($_SESSION["user_id"]) && $_SESSION["user_id"] != "" && strcmp($_SESSION["type"],"2")==0 || strcmp($_SESSION["type"],"3")==0)
+{
+
 $id = $_SESSION["user_id"];
 if(isset($_POST['id'])){
     include("connection.php");
@@ -28,3 +31,4 @@ if(isset($_POST['id'])){
 }else {
     header("Location: todolist2.php");
 }
+} else {header("Location: index.php");}

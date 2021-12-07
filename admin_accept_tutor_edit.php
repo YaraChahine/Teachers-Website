@@ -3,6 +3,12 @@
 include("connection.php");
 session_start();
 
+if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
+{
+
+    
+session_start();
+
   if (isset($_GET["id"])) {
   $id = $_GET["id"];
     
@@ -52,5 +58,6 @@ $stmt4->execute();
 header("Location: admin_updates.php");
 
   } 
+} else {header("Location: index.php");}
 
 ?>

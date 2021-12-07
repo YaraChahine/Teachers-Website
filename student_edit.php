@@ -3,6 +3,10 @@
 
 include("connection.php");
 session_start();
+
+if (isset($_SESSION["user_id"]) && $_SESSION["user_id"] != "" && strcmp($_SESSION["type"],"3")==0)
+{
+    
 $id= $_SESSION["user_id"];
 $email = $_POST["email"];
 $phone_number = $_POST["phone"];
@@ -61,3 +65,5 @@ else
 
 }
 header("Location: profile_edit.php");
+
+ } else {header("Location: index.php");} ?>

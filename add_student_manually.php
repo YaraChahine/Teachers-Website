@@ -2,7 +2,10 @@
 
 
 include("connection.php");
+session_start();
 
+if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
+{
 
 
 $firstname = $_POST["first"];
@@ -44,6 +47,7 @@ if(empty($student)){
 else{
     die("Student account already exists");
 }
-
+}
+else {header("Location: index.php");}
 
 ?>
