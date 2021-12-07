@@ -282,7 +282,7 @@ $res = $stmt->get_result();
             $age = date("Y") - $r["year_born"];
             $city = $r["city"];
             $school = $r["college_name"];
-            $image = "/tutor_image/" . $r["profile_image"];
+            $image = "tutor_image/".$r["profile_image"];
             $description = $r["description"];
             $courses = "";
 
@@ -301,7 +301,7 @@ $res = $stmt->get_result();
               <div class="col-lg-3 col-md-6 d-flex align-items-stretch my-5">
                 <div class="member">
                   <div class="member-img">
-                    <img src="<?php echo $image ?>" class="img-fluid" alt="">
+                    <img src="<?php echo ($image); ?>" class="img-fluid" alt="">
                   </div>
                   <div class="member-info">
                     <h4><?php echo $name ?></h4>

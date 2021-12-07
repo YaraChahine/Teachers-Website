@@ -191,7 +191,7 @@ include("connection.php");
                 $stmt->execute();
                 $results_tutor_profile_edits = $stmt->get_result();
 
-                <?php
+             
                 $query_add_tutor = "SELECT user_id ,first_name, last_name, email, phone_number FROM  users"; //we need the names of the users for the card title
                 $stmt = $connection->prepare($query_add_tutor);
                 $stmt->execute();
