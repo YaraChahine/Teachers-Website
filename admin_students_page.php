@@ -81,39 +81,6 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
         <div class="m-5 d-flex justify-content-between">
             <div></div>
             <ul class="pagination">
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                  <span aria-hidden="true">&laquo;</span>
-                </a>
-              </li>
-              <li class="page-item active"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                  <span aria-hidden="true">&raquo;</span>
-                </a>
-              </li>
-            </ul>
-            <a class="btn btn-primary p-0" data-bs-toggle="modal" data-bs-target="#add-modal"><i class="bi bi-plus fs-1 lh-1"></i></a>
-
-        </div>
-
-        <div class="table-responsive m-5">
-        
-            <table class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                    <th scope="col" onclick="sortBookingsBy(this)" name="user_id">User ID</th>
-                    <th scope="col" onclick="sortBookingsBy(this)" name="student_id">Student ID</th>
-                    <th scope="col" onclick="sortBookingsBy(this)" name="student_first">First Name</th>
-                    <th scope="col" onclick="sortBookingsBy(this)" name="student_last">Last Name</th>
-                    <th scope="col" onclick="sortBookingsBy(this)" name="email">Email</th>
-                    <th scope="col" onclick="sortBookingsBy(this)" name="phone">Phone</th>
-                    <th scope="col" onclick="sortBookingsBy(this)" name="price">Preferred<br>Price Range</th>
-                </tr>
-                </thead>
-                <tbody>
 
 
                 <?php 
@@ -133,7 +100,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
 
 
                 $next_to = "2";
-                $records_per_page =10;
+                $records_per_page =1;
                 $offset = ($page_no-1) * $records_per_page;
                 $previous_page = $page_no - 1;
                 $next_page = $page_no + 1;
@@ -226,6 +193,29 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
                 </ul>
 
                 </div>
+
+            </ul>
+            <a class="btn btn-primary p-0" data-bs-toggle="modal" data-bs-target="#add-modal"><i class="bi bi-plus fs-1 lh-1"></i></a>
+
+        </div>
+
+        <div class="table-responsive m-5">
+        
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="user_id">User ID</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="student_id">Student ID</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="student_first">First Name</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="student_last">Last Name</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="email">Email</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="phone">Phone</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="price">Preferred<br>Price Range</th>
+                </tr>
+                </thead>
+                <tbody>
+
+
                 <?php
 
                 while($row = $results_students->fetch_assoc()){

@@ -82,49 +82,8 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
         <div class="m-5 d-flex justify-content-between">
             <div></div>
             <ul class="pagination">
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                  <span aria-hidden="true">&laquo;</span>
-                </a>
-              </li>
-              <li class="page-item active"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                  <span aria-hidden="true">&raquo;</span>
-                </a>
-              </li>
-            </ul>
-            <a class="btn btn-primary p-0" data-bs-toggle="modal" data-bs-target="#add-modal"><i class="bi bi-plus fs-1 lh-1"></i></a>
 
-        </div>
-
-        <div class="table-responsive m-5">
-        
-            <table class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                    <th scope="col" onclick="sortBookingsBy(this)" name="user_id">User ID</th>
-                    <th scope="col" onclick="sortBookingsBy(this)" name="tutor_id">Tutor ID</th>
-                    <th scope="col" onclick="sortBookingsBy(this)" name="tutor_first">First Name</th>
-                    <th scope="col" onclick="sortBookingsBy(this)" name="tutor_last">Last Name</th>
-                    <th scope="col" onclick="sortBookingsBy(this)" name="email">Email</th>
-                    <th scope="col" onclick="sortBookingsBy(this)" name="age">Age</th>
-                    <th scope="col" onclick="sortBookingsBy(this)" name="gender">Gender</th>
-                    <th scope="col" onclick="sortBookingsBy(this)" name="phone">Phone</th>
-                    <th scope="col" onclick="sortBookingsBy(this)" name="city">City</th>
-                    <th scope="col" onclick="sortBookingsBy(this)" name="level">Education Level</th>
-                    <th scope="col" onclick="sortBookingsBy(this)" name="school">Institution Name</th>
-                    <th scope="col" onclick="sortBookingsBy(this)" name="field">Field</th>
-                    <th scope="col" onclick="sortBookingsBy(this)" name="years">Years of Experience</th>
-                    <th scope="col" onclick="sortBookingsBy(this)" name="years">Can teach</th>
-
-                </tr>
-                </thead>
-                <tbody>
-                <!--  $query_tutors_application = "SELECT users.user_id ,tutors.tutor_id, first_name,last_name,email,age,gender,phone_number,city,education_level,college_name,major,years_of_experience,course_name FROM  users JOIN tutors JOIN courses JOIN tutor_courses where users.user_id=tutors.user_id LIMIT 10 OFFSET 80"; -->
-                <?php 
+            <?php 
                 if (isset($_GET['page_no']) && $_GET['page_no']!="") {
                   $page_no = $_GET['page_no'];
                   } else {
@@ -234,6 +193,37 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
                 </ul>
 
                 </div>
+
+            </ul>
+            <a class="btn btn-primary p-0" data-bs-toggle="modal" data-bs-target="#add-modal"><i class="bi bi-plus fs-1 lh-1"></i></a>
+
+        </div>
+
+        <div class="table-responsive m-5">
+        
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="user_id">User ID</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="tutor_id">Tutor ID</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="tutor_first">First Name</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="tutor_last">Last Name</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="email">Email</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="age">Age</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="gender">Gender</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="phone">Phone</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="city">City</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="level">Education Level</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="school">Institution Name</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="field">Field</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="years">Years of Experience</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="years">Can teach</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <!--  $query_tutors_application = "SELECT users.user_id ,tutors.tutor_id, first_name,last_name,email,age,gender,phone_number,city,education_level,college_name,major,years_of_experience,course_name FROM  users JOIN tutors JOIN courses JOIN tutor_courses where users.user_id=tutors.user_id LIMIT 10 OFFSET 80"; -->
+
                 <?php
 
                 while($row = $results_tutors->fetch_assoc()){
