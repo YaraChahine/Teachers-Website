@@ -118,16 +118,16 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
                         <p class="col-8">
                           <?php 
                           switch ($row["education_level_student"]) {
-                            case "0":
+                            case "primary":
                                 echo "Primary School";
                                 break;
-                            case "1":
+                            case "middle":
                                 echo "Middle School";
                                 break;
-                            case "2":
+                            case "highschool":
                                 echo "Highschool";
                                 break;
-                            case "3":
+                            case "college":
                                 echo "College";
                                 break;
                           }
