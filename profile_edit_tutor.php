@@ -83,13 +83,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0){
     <div class="flex-item">
     <form action="admin_updates.php" method="POST" enctype="multipart/form-data">
 
-    <?php   
-            $query="SELECT * from tutors where tutor_ID = ?;"; 
-            $stmt = $connection->prepare($query);
-            $stmt->bind_param("i",$id);
-            $stmt->execute();
-            $results = $stmt->get_result();
-            $row = $results->fetch_assoc();?> 
+    
             
         </div>
         <div class="flex-item">
@@ -150,7 +144,9 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0){
                       </div>
                       <div class="col-8">
 
-                          <?php if(isset($_POST["profile_image"]) && $_POST["profile_image"]!="" ) ?>
+                          <?php if(isset($_POST["profile_image"]) && $_POST["profile_image"]!="" ) 
+                          $profile_image = $_POST["profile_image"];
+                          ?>
                           <input class="form-control" type="file" name="profile_image">
                       </div>
                   </div>
@@ -163,7 +159,9 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0){
                       </div>
                       <div class="col-8">
 
-                          <?php if(isset($_POST["email"]) && $_POST["email"]!="" ) ?>
+                          <?php if(isset($_POST["email"]) && $_POST["email"]!="" ) 
+                           $email = $_POST["email"];
+                          ?>
                           <input class="form-control" type="email" name="email">
                       </div>
                   </div>
@@ -173,7 +171,9 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0){
                       </div>
                       <div class="col-8">
 
-                      <?php if(isset($_POST["phone_number"]) && $_POST["phone_number"]!="" ) ?>
+                      <?php if(isset($_POST["phone_number"]) && $_POST["phone_number"]!="" ) 
+                      $phone= $_POST["phone_number"];
+                      ?>
 
                           <input class="form-control" type="text" name="phone_number">
                       </div>
@@ -184,7 +184,9 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0){
                       </div>
                       <div class="col-8">
 
-                          <?php if(isset($_POST["city"]) && $_POST["city"]!="" ) ?>
+                          <?php if(isset($_POST["city"]) && $_POST["city"]!="" )
+                          $city = $_POST["city"];
+                          ?>
                           <input class="form-control" type="text" name="city">
                       </div>
                   </div>
@@ -194,7 +196,9 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0){
                       </div>
                       <div class="col-8">
 
-                          <?php if(isset($_POST["description"]) && $_POST["description"]!="" ) ?>
+                          <?php if(isset($_POST["description"]) && $_POST["description"]!="" ) 
+                          $description= $_POST["description"];
+                          ?>
                           <input class="form-control" type="text" name="description">
                       </div>
                   </div>
@@ -204,7 +208,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0){
           <div class="modal-footer">
               <form action="">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                  <a href="accept_tutor_edits.php?id=<?php echo($row["id"]); ?>"><button type="button" class="btn btn-primary p-0 ok-btn"  data-bs-toggle="modal" data-bs-target="#msg-modal" data-bs-dismiss="modal" onclick="$('#editform').submit()">Save</button>
+                  <a href="accept_tutor_edits.php?id=<?php echo($row["user_id"]); ?>"><button type="button" class="btn btn-primary p-0 ok-btn"  data-bs-toggle="modal" data-bs-target="#msg-modal" data-bs-dismiss="modal" onclick="$('#editform').submit()">Save</button>
               </form>
 
               <?php
