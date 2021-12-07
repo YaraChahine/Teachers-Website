@@ -80,43 +80,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
         <div class="m-5 d-flex justify-content-between">
             <div></div>
             <ul class="pagination">
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                  <span aria-hidden="true">&laquo;</span>
-                </a>
-              </li>
-              <li class="page-item active"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                  <span aria-hidden="true">&raquo;</span>
-                </a>
-              </li>
-            </ul>
-            <a class="btn btn-primary p-0" data-bs-toggle="modal" data-bs-target="#add-modal"><i class="bi bi-plus fs-1 lh-1"></i></a>
-
-        </div>
-
-        <div class="table-responsive m-5">
-        
-            <table class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                    <th scope="col" onclick="sortBookingsBy(this)" name="booking">Booking ID</th>
-                    <th scope="col" onclick="sortBookingsBy(this)" name="student_id">Student ID</th>
-                    <th scope="col" onclick="sortBookingsBy(this)" name="student_name">Student Name</th>
-                    <th scope="col" onclick="sortBookingsBy(this)" name="tutor_id">Tutor ID</th>
-                    <th scope="col" onclick="sortBookingsBy(this)" name="tutor_name">Tutor Name</th>
-                    <th scope="col" onclick="sortBookingsBy(this)" name="course_id">Course ID</th>
-                    <th scope="col" onclick="sortBookingsBy(this)" name="course_name">Course Name</th>
-                    <th scope="col" onclick="sortBookingsBy(this)" name="date">Sessions start date</th>
-                    <th scope="col" onclick="sortBookingsBy(this)" name="days">Session days</th>
-                    <th scope="col">Edit</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php 
+            <?php 
                 if (isset($_GET['page_no']) && $_GET['page_no']!="") {
                   $page_no = $_GET['page_no'];
                   } else {
@@ -133,7 +97,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
 
 
                 $next_to = "2";
-                $records_per_page =4;
+                $records_per_page =10;
                 $offset = ($page_no-1) * $records_per_page;
                 $previous_page = $page_no - 1;
                 $next_page = $page_no + 1;
@@ -227,6 +191,32 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
                 </ul>
 
                 </div>
+
+
+            </ul>
+            <a class="btn btn-primary p-0" data-bs-toggle="modal" data-bs-target="#add-modal"><i class="bi bi-plus fs-1 lh-1"></i></a>
+
+        </div>
+
+        <div class="table-responsive m-5">
+        
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="booking">Booking ID</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="student_id">Student ID</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="student_name">Student Name</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="tutor_id">Tutor ID</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="tutor_name">Tutor Name</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="course_id">Course ID</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="course_name">Course Name</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="date">Sessions start date</th>
+                    <th scope="col" onclick="sortBookingsBy(this)" name="days">Session days</th>
+                    <th scope="col">Edit</th>
+                </tr>
+                </thead>
+                <tbody>
+                
                 <?php
 
                   while($row = $results_students->fetch_assoc()){
@@ -307,7 +297,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
                             Booking ID
                         </div>
                         <div class="col-8">
-                            <input disabled class="form-control" type="number" name="id">
+                            <input readonly class="form-control" type="number" name="id">
                         </div>
                     </div>    
                     <div class="row">

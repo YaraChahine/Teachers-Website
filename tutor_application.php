@@ -73,7 +73,7 @@ if(isset($_POST["city"]) && $_POST["city"]!="" && preg_match ("/^[a-zA-z]*$/",$_
 }else{
     die("Nice try Dr. :D 8");
 }
-if(isset($_POST["education_level"]) && $_POST["education_level"]!="" && preg_match("/^[0-9]*$/", $_POST["education_level"]) && $_POST["education_level"]>=0 &&  $_POST["education_level"]<=3){
+if(isset($_POST["education_level"]) && $_POST["education_level"]!="" && preg_match("/^[a-zA-z]*$/", $_POST["education_level"])){
     $education_level_tutor = $_POST["education_level"];
 }else{
     die("Nice try Dr. :D 9");
@@ -293,12 +293,13 @@ if(empty($row1)) {
   $exists=true;
   $msg="Email already exists.";
    }
+  
    if ($exists==false){
    if(empty($row3) ) {
 
     $mysql = $connection->prepare("INSERT INTO pending_tutors(first_name,last_name,email,password,year_born,gender,phone_number,city,education_level_tutor,educational_institution_name,field,years_of_experience,course_1,course_level_1,course_2,course_level_2,course_3,course_level_3,course_4,course_level_4,cv,image,description) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
     $mysql->bind_param("ssssdssssssdsssssssssss",$first_name,$last_name,$email_address,$password,$year_born,$gender,$phone_number,$city,$education_level_tutor,$educational_institution_name,$field,$years_of_experience,$course_1,$course_level_1,$course_2,$course_level_2,$course_3,$course_level_3,$course_4,$course_level_4,$cv_file,$img_file,$bio);
-    
+    $mysql->execute();
     $to_email = "yara.chahine@lau.edu";
     $subject = "Teachers Tutor Application";
     $body = "Hello Admin! You have a new Tutor Application sent by $first_name  $last_name.";
@@ -309,8 +310,8 @@ if(empty($row1)) {
 
 
     }
-
   }
+  
   }
 
 
@@ -510,10 +511,10 @@ if(empty($row1)) {
 
         <select name="education_level" id="education-level" class="form-select" oninput="change_tutor_education()"
         style="display: inline-block; width: 200px;">
-          <option value="0" selected>Highschool degree</option>
-          <option value="1">College Undergraduate</option>
-          <option value="2">College Graduate</option>
-          <option value="3">Other..</option>
+          <option value="highschool" selected>Highschool degree</option>
+          <option value="undergrad">College Undergraduate</option>
+          <option value="grad">College Graduate</option>
+          <option value="other">Other..</option>
         </select>
         <br><br>
         <label for="school" id="school-label">High School Name </label>
