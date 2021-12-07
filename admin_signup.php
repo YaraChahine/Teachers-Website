@@ -114,7 +114,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
                         <p class="col-8"><?php echo($row["phone_number"]); ?></p>
                     </div>
                     <div class="row">
-                        <p class="col-4"><strong>Education level</strong></p>
+                        <p class="col-4"><strong>Course requested</strong></p>
                         <p class="col-8">
                           <?php 
                           switch ($row["education_level_student"]) {

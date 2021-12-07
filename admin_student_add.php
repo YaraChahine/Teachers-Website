@@ -5,6 +5,10 @@ session_start();
 
 if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
 {
+  if (isset($_GET["id"])) {
+    $id = $_GET["id"];
+    } else die ("no student or application selected");
+  ?>
 
   ?>
 <!DOCTYPE html>
@@ -83,51 +87,107 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
               <span>&ThickSpace; New Tutor Request</span>
             </h5>
 
-            <?php $query = "SELECT * FROM  pending_students where temp_student_id=?";
-                $stmt = $connection->prepare($query);
-                $stmt->bind_param("d", $id);
-                $stmt->execute();
-                $res = $stmt->get_result(); 
-                $row = $res->fetch_assoc();
+            <?php 
+            
+                $mysql = $connection->prepare("SELECT * FROM new_tutor_requests 
+                JOIN students ON `new_tutor_requests`.`student_id` = `students`.`student_id` 
+                JOIN users ON `users`.`user_id` = `students`.`user_id`
+                WHERE `id` = ?");
+                $mysql->bind_param("d", $id);
+                $mysql->execute();
+                $results = $mysql->get_result();
+
+                $row = $results->fetch_assoc();
                 if (empty($row)) {
                     die ("invalid id");
                 }
-                ?>
+            ?>
 
             <div class="card-body p-5">
-                <h5 class="card-title"> <strong>Bob</strong>, a student at <em>Teachers</em>, is requesting an additional tutor.</h5>
+                <h5 class="card-title"> <strong><?php echo($row["first_name"]); ?> </strong>, a student at <em>Teachers</em>, is requesting an additional tutor.</h5>
                 <div class="w-75 my-5 mx-auto">
                     <div class="row">
                         <p class="col-4"><strong>Full name</strong></p>
-                        <p class="col-8">Bob Smith</p>
+                        <p class="col-8"><?php echo($row["first_name"] . " " . $row["last_name"]); ?></p>
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Email</strong></p>
-                        <p class="col-8">bob@smith.com</p>
+                        <p class="col-8"><?php echo($row["email"]); ?></p>
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Phone number</strong></p>
-                        <p class="col-8">71 222 666</p>
+                        <p class="col-8"><?php echo($row["phone_number"]); ?></p>
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Course requested</strong></p>
-                        <p class="col-8">High school - Chemistry</p>
+                        <?php 
+                          switch ($row["education_level_student"]) {
+                            case "primary":
+                                echo "Primary School";
+                                break;
+                            case "middle":
+                                echo "Middle School";
+                                break;
+                            case "highschool":
+                                echo "Highschool";
+                                break;
+                            case "college":
+                                echo "College";
+                                break;
+                          }
+                          echo(" - ");
+                          echo $row["course"];
+
+                          ?>
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Preferred tutor</strong></p>
-                        <p class="col-8">Sarah Abdallah</p>
+                        <p class="col-8">
+                        <?php 
+                              $queryTutor = "SELECT * FROM tutors INNER JOIN users on users.user_id=tutors.user_id where tutor_id=?";
+                              $stmt2 = $connection->prepare($queryTutor);
+                              $stmt2->bind_param("d", $row["preferred_tutor"]);
+                              $stmt2->execute();
+                              $results = $stmt2->get_result();
+                              while($row2 = $results->fetch_assoc()){
+                              echo($row2["first_name"] . " " . $row2["last_name"]); }?>
+                        </p>
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Session start</strong></p>
-                        <p class="col-8">21/12/2021</p>
+                        <p class="col-8">
+                        <?php 
+                        echo($row["starting_date"]);?>
+                        </p>
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Session days</strong></p>
-                        <p class="col-8">Tuesday<br>Saturday</p>
-                    </div>
-                    <div class="row">
-                        <p class="col-4"><strong>Preferred price range</strong></p>
-                        <p class="col-8">45 000</p>
+                        <p class="col-8">
+                        <?php 
+                         $correct_dates ="";
+                         if (substr($row['days_of_sessions'], 0,1)==1){
+                            $correct_dates .= "Mon ";
+                         }
+                         if (substr($row['days_of_sessions'],1,-5)==1){
+                            $correct_dates .= "Tue ";
+                        }
+                        if (substr($row['days_of_sessions'],2,-4)==1){
+                            $correct_dates .= "Wed ";
+                         }
+                         if (substr($row['days_of_sessions'],3,-3)==1){
+                            $correct_dates .= "Thu ";
+                         }
+                         if (substr($row['days_of_sessions'],4,-2)==1){
+                            $correct_dates .= "Fri ";
+                         }
+                         if (substr($row['days_of_sessions'],5,-1)==1){
+                            $correct_dates .= "Sat ";
+                         }
+                         if (substr($row['days_of_sessions'],6)==1){
+                            $correct_dates .= "Sun ";
+                         }
+                        echo($correct_dates);?>
+                        </p>
                     </div>
                 </div>
                 <div class="d-flex justify-content-center">
@@ -147,12 +207,12 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-body p-5">
-              Are you sure you want to accept <strong>Bob Smith</strong>'s new tutor request? Bob will be linked with their selected tutor at <em>Teachers</em>.
+              Are you sure you want to accept <strong> <?php echo($row["first_name"]." ".$row["last_name"]); ?></strong>'s new tutor request? <?php echo($row["first_name"]);?> will be linked with their selected tutor at <em>Teachers</em>.
             </div>
             <div class="modal-footer">
                 <form action="">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="submit">Confirm</button>
+                    <a href="accept_student_add.php?id=<?php echo($row["id"]); ?>"><button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="submit">Confirm</button></a>
                 </form>
             </div>
           </div>
@@ -167,12 +227,12 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-body p-5">
-                Are you sure you want to reject <strong>Bob Smith</strong>'s new tutor request?
+                Are you sure you want to reject <strong><?php echo($row["first_name"]." ".$row["last_name"]); ?></strong>'s new tutor request?
             </div>
             <div class="modal-footer">
                 <form action="">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="submit">Confirm</button>
+                    <a href="reject_student_add.php?id=<?php echo($row["id"]); ?>"><button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="submit">Confirm</button></a>
                 </form>
             </div>
           </div>
