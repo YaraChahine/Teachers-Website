@@ -151,14 +151,28 @@ include("connection.php");
 
             <div class="list-group-item card update-item">
                 <h5 class="card-header">New Tutor Request</h5>
-                <div class="card-body">
-                  <h5 class="card-title">Bob Smith</h5>
-                  <p class="card-text">bob@smith.com - 71 222 666</p>
-                  <a href="admin_student_add.php" class="btn btn-primary">View update</a>
-                </div>
-            </div>
 
-        
+                <?php
+                $query_add_tutor = "SELECT user_id ,first_name, last_name, email, phone_number FROM  users"; //we need the names of the users for the card title
+                $stmt = $connection->prepare($query_add_tutor);
+                $stmt->execute();
+                $results_add_tutor = $stmt->get_result();
+                ?>
+
+                <div class="card-body">
+                <?php
+                    while($row = $results_add_tutor->fetch_assoc() ){
+                    ?>
+
+                  <h5 class="card-title"><?php echo($row["first_name"]." ".$row["last_name"]); ?></h5>
+                  <p class="card-text"><?php echo($row["email"]." - ".$row["phone_number"] ); ?></p>
+                  <a href="admin_student_add.php" class="btn btn-primary">View update</a>
+                  <hr>
+                  <?php } ?>
+                </div>
+            </div>               
+                
+            
             <div class="list-group-item card update-item">
                 <h5 class="card-header">Tutor Profile Edit</h5>
 
