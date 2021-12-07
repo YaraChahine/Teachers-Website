@@ -22,7 +22,7 @@ if(isset($_POST["last_name"]) && $_POST["last_name"]!="" && preg_match ("/^[a-zA
     $last_name = $_POST["last_name"];
 }else {
   $invalid=true;
-  $msg="Last name should only contain alphabet & no empty entries are allowed"";
+  $msg="Last name should only contain alphabet & no empty entries are allowed";
 }
 if(isset($_POST["email_address"]) && $_POST["email_address"]!="" && filter_var($_POST["email_address"], FILTER_VALIDATE_EMAIL)){
     $email_address = $_POST["email_address"];
