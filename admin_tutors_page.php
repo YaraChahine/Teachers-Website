@@ -276,54 +276,6 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
               
                 }
                 ?>
-                <!-- <tr>
-                    <td>2</td>
-                    <td>7</td>
-                    <td>John</td>
-                    <td>A</td>
-                    <td>john@a.com</td>
-                    <td>23</td>
-                    <td>Male</td>
-                    <td>1234567</td>
-                    <td>Beirut</td>
-                    <td>College Undergraduate</td>
-                    <td>School1</td>
-                    <td>Math</td>
-                    <td>3</td>
-                    <td>Math<br>Physics<br>Chemistry</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>8</td>
-                    <td>John</td>
-                    <td>B</td>
-                    <td>john@b.com</td>
-                    <td>26</td>
-                    <td>Female</td>
-                    <td>2345678</td>
-                    <td>Beirut</td>
-                    <td>College Graduate</td>
-                    <td>School2</td>
-                    <td>Biology</td>
-                    <td>3</td>
-                    <td>Biology<br>Chemistry</td>
-                </tr>
-                <tr>
-                    <td>9</td>
-                    <td>17</td>
-                    <td>John</td>
-                    <td>C</td>
-                    <td>john@d.com</td>
-                    <td>20</td>
-                    <td>Male</td>
-                    <td>3456789</td>
-                    <td>Beirut</td>
-                    <td>High school</td>
-                    <td>School3</td>
-                    <td>Math</td>
-                    <td>3</td>
-                    <td>General Science</td>
-                </tr> -->
                 </tbody>
             </table>
         </div>
