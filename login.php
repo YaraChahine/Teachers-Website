@@ -20,7 +20,7 @@ if (isset($_POST["login"])){
         $email = $_POST["email"];
 
     }else{
-        die("Nice try Dr. :D");
+         $incorrect=true;   
     }
 
     if(isset($_POST["password"]) && $_POST["password"]!=""){
@@ -116,6 +116,13 @@ else if (isset($_POST["forgot"])) {
         ";
 
         $subject = "Teachers - Your password reset code";
+          
+    $to_email = $email;
+    $subject = "Teachers Verification Code";
+    $body = $message;
+    $headers = "From: yarachahine77@gmail.com";
+    
+    mail($to_email, $subject, $body, $headers);
         header('Location: verification.php');
 
     }
@@ -162,7 +169,7 @@ else if (isset($_POST["forgot"])) {
 									<label for="password">Password
 										<input type="submit" name="forgot" value="Forgot password?" class="btn-link float-right bg-transparent border-0">
 									</label>
-									<input id="password" type="password" class="form-control" name="password">
+									<input id="password" type="password" class="form-control" name="password" required>
 								</div>
 
 								<div class="form-group m-0">
