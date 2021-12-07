@@ -22,14 +22,11 @@ $stmt->execute();
 
 $to_email = "yara.chahine@lau.edu";
 $subject = "Teachers Consultation Request";
-$body = "Hello Admin! A new consultation request from $firstname $lastname is waiting for you.";
+$body = "Hello Admin! You have a new consultation request from $firstname $lastname.";
 $headers = "From: yarachahine77@gmail.com";
  
-if (mail($to_email, $subject, $body, $headers)) {
-    echo "Email successfully sent to $to_email...";
-} else {
-    echo "Email sending failed...";
-}
+mail($to_email, $subject, $body, $headers);
+
 
 //header("Location: success.html");
 
