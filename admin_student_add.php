@@ -134,6 +134,10 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0){
                         <p class="col-8"><?php echo($rowinfo["phone_number"]);?></p>
                     </div>
                     <div class="row">
+                        <p class="col-4"><strong>Education Level</strong></p>
+                        <p class="col-8"><?php echo($rowprice["education_level_student"]);?></p>
+                    </div>
+                    <div class="row">
                         <p class="col-4"><strong>Course requested</strong></p>
                         <p class="col-8"><?php echo($rowAdd["course"]);?></p>
                     </div>
