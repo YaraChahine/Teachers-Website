@@ -1,6 +1,12 @@
 <?php
 
 include("connection.php");
+session_start();
+
+if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
+{
+
+    
 $id = $_GET["id"];
 
 
@@ -259,6 +265,7 @@ else
 {
     die("<br>Tutor already in database");
 }
+} else {header("Location: index.php");}
 ?>
 
 

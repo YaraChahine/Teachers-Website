@@ -2,7 +2,10 @@
 
 
 include("connection.php");
+session_start();
 
+if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
+{
 $booking_id=$_POST["id"];
 $student_id = $_POST["student"];
 $tutor_id = $_POST["tutor"];
@@ -114,4 +117,5 @@ if (empty($bookings_row)){
     else{
         die("student is already taking the course");
 }
+else {header("Location: index.php");}
 ?>

@@ -2,7 +2,10 @@
 
 
 include("connection.php");
+session_start();
 
+if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
+{
 $booking_id = $_POST["booking_id"];
 
 $query = "SELECT * FROM bookings where booking_number=?;";
@@ -21,5 +24,5 @@ if (!empty($bookings_row)){
 }
 else{
     die("Booking number not available");
-}
+}else {header("Location: index.php");}
 ?>
