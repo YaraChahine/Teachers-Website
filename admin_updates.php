@@ -9,36 +9,36 @@ include("connection.php");
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>FlexStart Bootstrap Template - Index</title>
-    <meta content="" name="description">
+  <title>FlexStart Bootstrap Template - Index</title>
+  <meta content="" name="description">
 
-    <meta content="" name="keywords">
+  <meta content="" name="keywords">
 
-    <!-- Favicons -->
-    <link href="./img/favicon.png" rel="icon">
-    <link href="./img/apple-touch-icon.png" rel="apple-touch-icon">
+  <!-- Favicons -->
+  <link href="./img/favicon.png" rel="icon">
+  <link href="./img/apple-touch-icon.png" rel="apple-touch-icon">
 
-    <!-- Google Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-        rel="stylesheet">
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
 
-    <!-- Vendor CSS Files -->
-    <link href="./vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="./vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="./vendor/aos/aos.css" rel="stylesheet">
-    <link href="./vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="./vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-    <link href="./vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <!-- Vendor CSS Files -->
+  <link href="./vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="./vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="./vendor/aos/aos.css" rel="stylesheet">
+  <link href="./vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="./vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="./vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
 
-    <!-- Template Main CSS File -->
-    <link href="./css/style.css" rel="stylesheet">
-    <link href="./css/style2.css" rel="stylesheet">
+  <!-- Template Main CSS File -->
+  <link href="./css/style.css" rel="stylesheet">
+  <link href="./css/style2.css" rel="stylesheet">
 
-    <!-- =======================================================
+  <!-- =======================================================
   * Template Name: FlexStart - v1.7.0
   * Template URL: https://bootstrapmade.com/flexstart-bootstrap-startup-template/
   * Author: BootstrapMade.com
@@ -174,38 +174,6 @@ include("connection.php");
                   <?php } ?>
                 </div>
 
-
-            </div>
-
-        
-            <div class="list-group-item card update-item">
-                <h5 class="card-header">Tutor Profile Edit</h5>
-
-                <?php $query_tutor_profile_edits = "SELECT email, phone_number, city, profile_image, description  FROM  tutor_edit_requests";
-                $stmt = $connection->prepare($query_tutor_profile_edits);
-                $stmt->execute();
-                $results_tutor_profile_edits = $stmt->get_result();
-
-             
-                $query_add_tutor = "SELECT user_id ,first_name, last_name, email, phone_number FROM  users"; //we need the names of the users for the card title
-                $stmt = $connection->prepare($query_add_tutor);
-                $stmt->execute();
-                $results_add_tutor = $stmt->get_result();
-                ?>
-
-                <div class="card-body">
-                <?php
-                    while($row = $results_add_tutor->fetch_assoc() ){
-                    ?>
-
-                  <h5 class="card-title"><?php echo($row["first_name"]." ".$row["last_name"]); ?></h5>
-                  <p class="card-text"><?php echo($row["email"]." - ".$row["phone_number"] ); ?></p>
-                  <a href="admin_student_add.php" class="btn btn-primary">View update</a>
-                  <hr>
-                  <?php } ?>
-                </div>
-            </div>               
-                
             
          
             <div class="list-group-item card update-item">
@@ -279,13 +247,16 @@ include("connection.php");
             class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
-    <script src="./vendor/jquery/jquery-3.6.0.min.js"></script>
     <script src="./vendor/bootstrap/js/bootstrap.bundle.js"></script>
-    <script src="./vendor/aos/aos.js"></script>
-    <script src="./vendor/swiper/swiper-bundle.min.js"></script>
-    <script src="./vendor/purecounter/purecounter.js"></script>
-    <script src="./vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="./vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="./vendor/aos/aos.js"></script>
+  <script src="./vendor/php-email-form/validate.js"></script>
+  <script src="./vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="./vendor/purecounter/purecounter.js"></script>
+  <script src="./vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="./vendor/glightbox/js/glightbox.min.js"></script>
+
+  <script src="./js/main.js"></script>
+
 </body>
 
 

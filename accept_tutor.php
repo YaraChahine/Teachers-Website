@@ -232,12 +232,6 @@ if ((strcasecmp($row["course_4"], "none") != 0)){
 
 }
 //removing from pending tutors 
-$query= "SELECT image from pending_tutors where temp_user_id= ?;";
-$stmt = $connection->prepare($query);
-$stmt->bind_param("s", $row["temp_user_id"]);
-$stmt->execute();
-$results = $stmt->get_result();
-$row = $results->fetch_assoc();  
 
 $query= "DELETE FROM pending_tutors where temp_user_id= ?;";
 $stmt = $connection->prepare($query);

@@ -67,7 +67,7 @@ $headers = "From: yarachahine77@gmail.com";
  
 mail($to_email, $subject, $body, $headers);
 
-header("Location: tutor_edit_success.php");
+header("Location: tutor_edit_succes.php");
 
 }
 else

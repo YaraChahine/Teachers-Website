@@ -179,7 +179,7 @@ else if (isset($_POST["forgot"])) {
 								<div class="mt-4 text-center">
 									Not a member?<br><br> <a href="student_signup.php" >Register as a student</a>
                                     <br>
-                                    <a href="tutor_application.html">Become a tutor</a>
+                                    <a href="tutor_application.php">Become a tutor</a>
                                 </div>
                             </form>
                         </div>

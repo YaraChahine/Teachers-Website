@@ -342,7 +342,7 @@
 
 
     <!-- ======= F.A.Q Section ======= -->
-    <section id="faq" class="faq">
+    <section id="faq" class="faq" style="display:none;">
 
       <div class="container" data-aos="fade-up">
 
@@ -670,6 +670,7 @@
   <script src="./vendor/purecounter/purecounter.js"></script>
   <script src="./vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="./vendor/glightbox/js/glightbox.min.js"></script>
+  
 
   <!-- Template Main JS File -->
   <script src="./js/main.js"></script>

@@ -150,6 +150,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0 || strcmp($_S
     <script src="./vendor/isotope-layout/isotope.pkgd.min.js"></script>
     <script src="./vendor/glightbox/js/glightbox.min.js"></script>
 
+    <script src="./js/main.js"></script>
 
 
 
