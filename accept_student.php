@@ -1,6 +1,11 @@
 <?php
 
 include("connection.php");
+session_start();
+if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
+{
+
+
 $id = $_GET["id"];
 
 $query = "SELECT * FROM pending_students where temp_student_id = $id";
@@ -76,19 +81,13 @@ if (empty($student_row["email"])){
         $stmt = $connection->prepare($query);
         $stmt->bind_param("ss", $row["course"], $row["education_level_student"]);
         $stmt->execute();
-    
-        $query2= "SELECT course_id from courses where course_name=?; ";
+
+        $query2= "SELECT course_id FROM courses WHERE course_name=? AND course_level=?; ";
         $stmt2 = $connection->prepare($query2);
-        $stmt2->bind_param("s", $row["course"]);
+        $stmt2->bind_param("ss", $row["course"], $row["education_level_student"]);
         $stmt2->execute();
         $results = $stmt2->get_result(); 
         $course_id = $results->fetch_assoc();
-    
-    
-        $query3= "INSERT into tutor_courses(course_id, tutor_id) values(?,?);";
-        $stmt2 = $connection->prepare($query3);
-        $stmt2->bind_param("ii", $course_id["course_id"], $row["preferred_tutor"]);
-        $stmt2->execute();
 
         
         $query3= "INSERT into bookings(student_id,tutor_id,course_id,starting_date,days_of_sessions) values(?,?,?,?,?);";
@@ -101,17 +100,12 @@ if (empty($student_row["email"])){
     else
     {
         
-        $query2= "SELECT course_id from courses where course_name=?; ";
-        $stmt2 = $connection->prepare($query2);
-        $stmt2->bind_param("s", $row["course"]);
-        $stmt2->execute();
-        $results = $stmt2->get_result(); 
-        $course_id = $results->fetch_assoc();
+        $course_id = $courses_row["course_id"];
     
     
         $query3= "INSERT into bookings(student_id,tutor_id,course_id,starting_date,days_of_sessions) values(?,?,?,?,?);";
         $stmt2 = $connection->prepare($query3);
-        $stmt2->bind_param("iiiss",$student_ID["student_id"],$row["preferred_tutor"], $course_id["course_id"], $row["starting_date"], $row["days_of_sessions"]);
+        $stmt2->bind_param("iiiss",$student_ID["student_id"],$row["preferred_tutor"], $course_id, $row["starting_date"], $row["days_of_sessions"]);
         $stmt2->execute();
     }
 
@@ -131,5 +125,5 @@ else{
 }
 
 
-
+} else {header("Location: index.php");}
 ?>

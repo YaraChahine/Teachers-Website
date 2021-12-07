@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 05, 2021 at 01:28 PM
+-- Generation Time: Dec 08, 2021 at 12:02 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -45,7 +45,9 @@ INSERT INTO `bookings` (`booking_number`, `student_id`, `tutor_id`, `course_id`,
 (2, 9, 1, 1, '2021-11-12', '1000000'),
 (3, 10, 1, 1, '2021-12-22', '0001000'),
 (4, 12, 1, 1, '2021-12-22', '0000100'),
-(5, 13, 1, 1, '2021-11-12', '0000100');
+(5, 13, 1, 1, '2021-11-12', '0000100'),
+(6, 14, 26, 1, '2021-12-30', '0110000'),
+(7, 15, 33, 19, '2022-01-05', '1010010');
 
 -- --------------------------------------------------------
 
@@ -84,6 +86,17 @@ CREATE TABLE `consultations` (
   `information` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `consultations`
+--
+
+INSERT INTO `consultations` (`id`, `first_name`, `last_name`, `email_address`, `phone_number`, `information`) VALUES
+(5, 'Henry', 'TheThird', 'henry.thethird@hotmail.com', '03190190', 'I would like to find a tutor able to tutor my kid who requires special attention.'),
+(6, 'Jeffrey', 'Bezos', 'jeff.bezos@hotmail.com', '78123456', 'I heard of this company and would like to take business tutoring if available.'),
+(7, 'Jack', 'Beanstalk', 'jack.bean@hotmail.com', '03232323', 'Would like to have tutoring lessons about beanstalks.'),
+(8, 'Ahmad', 'Chahine', 'ahmad_chahine@gmail.com', '79123123', 'Would like some math tutoring.'),
+(9, 'Aya', 'Abdallah', 'aya.abdallah03@lau.edu', '76123421', 'Was recommended this website from a friend.');
+
 -- --------------------------------------------------------
 
 --
@@ -113,7 +126,10 @@ INSERT INTO `courses` (`course_id`, `course_name`, `course_level`) VALUES
 (13, 'Math', 'primary'),
 (14, 'Math', 'primary'),
 (15, 'Math', 'primary'),
-(16, 'Math', 'middle');
+(16, 'Math', 'middle'),
+(17, 'Physics', 'high'),
+(18, 'Math', 'high'),
+(19, 'Networks', 'college');
 
 -- --------------------------------------------------------
 
@@ -130,6 +146,18 @@ CREATE TABLE `new_tutor_requests` (
   `starting_date` date NOT NULL,
   `days_of_sessions` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `new_tutor_requests`
+--
+
+INSERT INTO `new_tutor_requests` (`id`, `student_id`, `education_level_student`, `course`, `preferred_tutor`, `starting_date`, `days_of_sessions`) VALUES
+(1, 15, 'middle', 'Math', 1, '2021-12-29', '0011000'),
+(2, 15, 'college', 'Calculus 3', 34, '2021-12-29', '0000111'),
+(3, 15, 'highschool', 'Biology', 25, '2021-12-29', '0011000'),
+(4, 15, 'highschool', 'Biology', 34, '2022-01-04', '0110000'),
+(5, 15, 'middle', 'Chemistry', 25, '2021-12-30', '0110000'),
+(6, 15, 'college', 'Calculus 2', 34, '2022-01-03', '0001100');
 
 -- --------------------------------------------------------
 
@@ -151,6 +179,22 @@ CREATE TABLE `pending_students` (
   `days_of_sessions` varchar(250) NOT NULL,
   `price` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `pending_students`
+--
+
+INSERT INTO `pending_students` (`temp_student_id`, `first_name`, `last_name`, `phone_number`, `email`, `password`, `education_level_student`, `course`, `preferred_tutor`, `starting_date`, `days_of_sessions`, `price`) VALUES
+(16, 'Nizar', 'Ibrahim', '76681351', 'nizar.abuibrahim@lau.edu', '05191626e076478b24cf7543f5fdaa42b5fb965b8317deef5839e62113173a07', 'college', 'Calculus 3', 26, '2022-01-08', '0001100', 50000),
+(17, 'Sarah', 'Abdallahone', '76353080', 'sara.abdallah01@lau.edu', '74dd5ba83a992377d1adee261f7a2e06f261e69b38d2792bd3f7236e32129592', 'primary', 'Math', 1, '2021-12-24', '0110000', 500000),
+(18, 'Kevin', 'Jonas', '76123456', 'kevin.jonas@hotmail.com', 'fc98cdecb626468d52785e5c20ef146b71f6a60b8d2e286c943e4bf7a103634c', 'highschool', 'Chemistry', 34, '2022-02-16', '0110000', 350000),
+(19, 'Nick', 'Jonas', '76961351', 'nick.jonas@hotmail.com', 'fc98cdecb626468d52785e5c20ef146b71f6a60b8d2e286c943e4bf7a103634c', 'highschool', 'Arabic', 34, '2022-02-23', '1111110', 5000000),
+(20, 'Joe', 'Jonas', '76971312', 'joe.jonas@hotmail.com', 'fc98cdecb626468d52785e5c20ef146b71f6a60b8d2e286c943e4bf7a103634c', 'college', 'Calculus 3', 1, '2021-12-31', '0100000', 400000),
+(21, 'Sarah', 'Jonas', '98771351', 'sarah.jonas@hotmail.com', 'fc98cdecb626468d52785e5c20ef146b71f6a60b8d2e286c943e4bf7a103634c', 'middle', 'French', 34, '2022-01-08', '0010100', 100000),
+(22, 'Ahmad', 'Abdallah', '79876543', 'ahmad.robbie@hotmail.com', 'cfb79b8143f37117456ffaa3b8052421f9ad8f99aa834d9544f338f05d7d82ce', 'highschool', 'Chemistry', 25, '2021-12-29', '0000110', 50000),
+(23, 'Ahmad', 'Jonas', '79876542', 'ahmad.knayber@lau.edu', 'fc98cdecb626468d52785e5c20ef146b71f6a60b8d2e286c943e4bf7a103634c', 'college', 'Calculus 2', 25, '2021-12-23', '1010100', 750000),
+(24, 'Leonardo', 'Abdallah', '76671351', 'leo.abdallah@hotmail.com', '74dd5ba83a992377d1adee261f7a2e06f261e69b38d2792bd3f7236e32129592', 'highschool', 'English', 34, '2021-12-28', '0101010', 400010),
+(25, 'Sarah', 'Robbie', '76681534', 'sarah.robbie@hotmail.com', 'da04988941190d9ee5d00531a99dc0bcaa74ea02f7fce62990f24d8732b7535a', 'college', 'Linear 2', 34, '2022-01-08', '0001100', 50000);
 
 -- --------------------------------------------------------
 
@@ -192,7 +236,15 @@ CREATE TABLE `pending_tutors` (
 INSERT INTO `pending_tutors` (`temp_user_id`, `first_name`, `last_name`, `email`, `password`, `year_born`, `gender`, `phone_number`, `city`, `education_level_tutor`, `educational_institution_name`, `field`, `years_of_experience`, `course_1`, `course_level_1`, `course_2`, `course_level_2`, `course_3`, `course_level_3`, `course_4`, `course_level_4`, `cv`, `image`, `description`) VALUES
 (40, 'Rim', 'Abdallah', 'rim@gmail.com', 'a3d5627a234a42af752b22fca14a25419763dfbb80c27d39c487850c88be28e5', 2001, 'Male', '71813401', 'Beirut', '0', 'Sabbah', 'General Sciences', 2, 'Math', 'primary', 'none', 'none', 'none', 'none', 'none', 'none', '16386531374425.pdf', '16386531374466.jpg', 'hey'),
 (41, 'Farah', 'Mchaimech', 'farah@gmail.com', 'bd2a37fcb6d1c328cb000d764b195dbbcf7ea54ea5f3a239013cdbeb40f6327a', 2000, 'Female', '71813401', 'Beirut', '0', 'Sabbah', 'General Sciences', 3, 'Math', 'primary', 'none', 'none', 'none', 'none', 'none', 'none', '16386567193257.pdf', '16386567193546.png', 'hey im farah'),
-(42, 'Farah', 'Mchaimech', 'farah1@gmail.com', 'bd2a37fcb6d1c328cb000d764b195dbbcf7ea54ea5f3a239013cdbeb40f6327a', 2000, 'Female', '71813401', 'Beirut', '0', 'Sabbah', 'General Sciences', 3, 'French', 'primary', 'Arabic', 'middle', 'none', 'none', 'none', 'none', '16386567902915.pdf', '16386567902943.png', 'hey im farah');
+(42, 'Farah', 'Mchaimech', 'farah1@gmail.com', 'bd2a37fcb6d1c328cb000d764b195dbbcf7ea54ea5f3a239013cdbeb40f6327a', 2000, 'Female', '71813401', 'Beirut', '0', 'Sabbah', 'General Sciences', 3, 'French', 'primary', 'Arabic', 'middle', 'none', 'none', 'none', 'none', '16386567902915.pdf', '16386567902943.png', 'hey im farah'),
+(43, 'Sarah', 'Abdallah', 'sara.abdallah@lau.edu', '74dd5ba83a992377d1adee261f7a2e06f261e69b38d2792bd3f7236e32129592', 2001, 'Female', '76681531', 'Beirut', 'undergrad', 'LAU', 'Computer science', 2, 'Physics', 'high', 'Math', 'high', 'none', 'none', 'none', 'none', '16389124720445.pdf', '16389124720504.png', 'hi again its me ya girl'),
+(44, 'Leonardo', 'DiCaprio', 'leo.titanic@hotmail.com', '05191626e076478b24cf7543f5fdaa42b5fb965b8317deef5839e62113173a07', 1978, 'Male', '76971351435', 'LosAngeles', 'undergrad', 'MIT', 'Acting', 20, 'Acting 101', 'college', 'none', 'none', 'none', 'none', 'none', 'none', '16389127613614.pdf', '16389127613624.jpg', 'I\'m a famous actor.'),
+(45, 'Leo', 'Caprio', 'leo.titanic1@hotmail.com', '5aafc8da7a184ac1f3f039eccaa8b5dda673ee621aa9359182d9bbbb471ca101', 2000, 'Male', '769713511', 'London', 'highschool', 'SMOC', 'Life Sciences', 3, 'Math', 'primary', 'none', 'none', 'none', 'none', 'none', 'none', '16389129131978.pdf', '16389129131991.jpg', 'actor and heart stealer'),
+(46, 'Margot', 'Robbie', 'margot.robbie@hotmail.com', 'cfb79b8143f37117456ffaa3b8052421f9ad8f99aa834d9544f338f05d7d82ce', 1994, 'Female', '12341351435', 'California', 'grad', 'MIT', 'Acting', 5, 'Acting 101', 'college', 'none', 'none', 'none', 'none', 'none', 'none', '16389130572655.pdf', '16389130572671.jpg', 'actress'),
+(47, 'Margo', 'Robbs', 'margo.robbs@hotmail.com', '8642cd4422c56bd8ec22a732b46df764e554ba6e22f68f54d73eb254a6c4c3dc', 1991, 'Female', '01234323', 'California', 'highschool', 'SMOC', 'General Science', 5, 'Physics', 'primary', 'none', 'none', 'none', 'none', 'none', 'none', '16389131597654.pdf', '16389131597675.jpg', 'Physics tutor'),
+(48, 'Margot', 'Robbie', 'margot.robbie1@hotmail.com', 'fc98cdecb626468d52785e5c20ef146b71f6a60b8d2e286c943e4bf7a103634c', 1995, 'Other', '76971353', 'England', 'grad', 'MIT', 'Physics', 2, 'Physics 201', 'college', 'none', 'none', 'none', 'none', 'none', 'none', '16389133147358.pdf', '16389133147372.jpg', 'i love physics'),
+(49, 'Fatima', 'Maarouf', 'fatima.maarouf7@lau.edu', '49eccc3b96559cf4940fae02ade9d9b3169e6aba9b4e27b42872ecf3de946062', 2001, 'Female', '76353880', 'Tripoli', 'undergrad', 'LAU', 'Computer science', 2, 'Math', 'middle', 'none', 'none', 'none', 'none', 'none', 'none', '16389175024774.pdf', '16389175024791.jpg', 'I\'m fatima and I would like to work here.'),
+(50, 'Fatima', 'Ibrahim', 'fatima.abuibrahim@lau.edu', '05191626e076478b24cf7543f5fdaa42b5fb965b8317deef5839e62113173a07', 1989, 'Other', '76356080', 'Chehim', 'highschool', 'IC', 'General Science', 2, 'English', 'middle', 'none', 'none', 'none', 'none', 'none', 'none', '1638917654669.pdf', '16389176546708.jpg', 'Math and English tutor');
 
 -- --------------------------------------------------------
 
@@ -223,7 +275,9 @@ INSERT INTO `students` (`student_id`, `user_id`, `price_range`) VALUES
 (10, 62, 50000),
 (11, 62, 50000),
 (12, 64, 50000),
-(13, 65, 50000);
+(13, 65, 50000),
+(14, 67, 5000000),
+(15, 68, 90000);
 
 -- --------------------------------------------------------
 
@@ -264,7 +318,10 @@ CREATE TABLE `to_do_list` (
 --
 
 INSERT INTO `to_do_list` (`id`, `user_id`, `title`, `date_time`, `checked`) VALUES
-(2, 61, 'sleep', '2021-12-05 13:23:13.0', 0);
+(2, 61, 'sleep', '2021-12-05 13:23:13.0', 0),
+(3, 68, 'Sleep', '2021-12-07 23:57:06.0', 0),
+(4, 68, 'eat', '2021-12-07 23:57:09.0', 0),
+(5, 68, 'ask questions', '2021-12-07 23:57:15.0', 0);
 
 -- --------------------------------------------------------
 
@@ -301,7 +358,8 @@ INSERT INTO `tutors` (`tutor_ID`, `user_id`, `gender`, `years_of_experience`, `e
 (30, 49, 'Male', '2', '0', 'General Sciences', 2001, 'nabatieh', 'sabbah', '16386300502051.pdf', '16386321413608.jpg', 'hohoho'),
 (31, 50, 'Male', '3', '0', 'General Sciences', 1998, 'Beirut', 'sabah', '16386453484507.pdf', '16386453484529.jpg', 'ry'),
 (32, 56, 'Female', '3', '0', 'General Sciences', 2000, 'Beirut', 'Sabbah', '16386567193257.pdf', '16386567193546.png', 'hey im farah'),
-(33, 57, 'Female', '3', '0', 'General Sciences', 2000, 'Beirut', 'Sabbah', '16386567902915.pdf', '16386567902943.png', 'hey im farah');
+(33, 57, 'Female', '3', '0', 'General Sciences', 2000, 'Beirut', 'Sabbah', '16386567902915.pdf', '16386567902943.png', 'hey im farah'),
+(34, 66, 'Female', '2', 'undergrad', 'Computer science', 2001, 'Beirut', 'LAU', '16389124720445.pdf', '16389124720504.png', 'hi again its me ya girl');
 
 -- --------------------------------------------------------
 
@@ -338,7 +396,10 @@ INSERT INTO `tutor_courses` (`id`, `course_id`, `tutor_id`) VALUES
 (38, 1, 1),
 (39, 1, 1),
 (40, 1, 1),
-(41, 1, 1);
+(41, 1, 1),
+(42, 5, 34),
+(43, 1, 34),
+(44, 19, 33);
 
 -- --------------------------------------------------------
 
@@ -401,9 +462,11 @@ INSERT INTO `users` (`user_id`, `type`, `first_name`, `last_name`, `email`, `pho
 (60, 3, 'Rami', 'Allouch', 'rami@gmail.com', '71813401', 'f56ab1549f0cb9e2acb9c81fe0bc2dd9583e623a0b1659cdad409402e0b8a75b'),
 (61, 3, 'JouJou', 'Haidar', 'jojouh@gmail.com', '71813402', '8baf11304b9085eef194aca1ca651dc062c255309f4efb0195e067c37a691152'),
 (62, 3, 'hadi', 'atallah', 'hadi@gmail.com', '71813401', '40671281b75167b6a127349dbd7dd31ee76c533b2829eca591907425784c0369'),
-(63, 3, 'hadi', 'atallah', 'hadi@gmail.com', '71813401', '40671281b75167b6a127349dbd7dd31ee76c533b2829eca591907425784c0369'),
 (64, 3, 'Mirna', 'Chami', 'mirna@gmail.com', '71813401', '2944d72b0591914da5220b8be394123aa95b9b5e63305c6b842098848f087c55'),
-(65, 3, 'Nada', 'Fawaz', 'nada@gmail.com', '71813401', '584572f176d3891ce3d1f26debb73d3ba75ba4192a5a5d0ae6110b13e23cfd66');
+(65, 3, 'Nada', 'Fawaz', 'nada@gmail.com', '71813401', '584572f176d3891ce3d1f26debb73d3ba75ba4192a5a5d0ae6110b13e23cfd66'),
+(66, 2, 'Sarah', 'Abdallah', 'sara.abdallah@lau.edu', '76681531', '74dd5ba83a992377d1adee261f7a2e06f261e69b38d2792bd3f7236e32129592'),
+(67, 3, 'Fatima', 'Abdallah', 'fatima.abdallah@lau.edu', '76358980', 'fc98cdecb626468d52785e5c20ef146b71f6a60b8d2e286c943e4bf7a103634c'),
+(68, 3, 'Fatima', 'Maarouf', 'fatima.maarouf@lau.edu', '79876542', 'fc98cdecb626468d52785e5c20ef146b71f6a60b8d2e286c943e4bf7a103634c');
 
 -- --------------------------------------------------------
 
@@ -542,7 +605,7 @@ ALTER TABLE `user_types`
 -- AUTO_INCREMENT for table `bookings`
 --
 ALTER TABLE `bookings`
-  MODIFY `booking_number` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `booking_number` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `calendar`
@@ -554,37 +617,37 @@ ALTER TABLE `calendar`
 -- AUTO_INCREMENT for table `consultations`
 --
 ALTER TABLE `consultations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `course_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `course_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `new_tutor_requests`
 --
 ALTER TABLE `new_tutor_requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `pending_students`
 --
 ALTER TABLE `pending_students`
-  MODIFY `temp_student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `temp_student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `pending_tutors`
 --
 ALTER TABLE `pending_tutors`
-  MODIFY `temp_user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `temp_user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `temp_codes`
@@ -596,19 +659,19 @@ ALTER TABLE `temp_codes`
 -- AUTO_INCREMENT for table `to_do_list`
 --
 ALTER TABLE `to_do_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tutors`
 --
 ALTER TABLE `tutors`
-  MODIFY `tutor_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `tutor_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `tutor_courses`
 --
 ALTER TABLE `tutor_courses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `tutor_edit_requests`
@@ -620,7 +683,7 @@ ALTER TABLE `tutor_edit_requests`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- Constraints for dumped tables
