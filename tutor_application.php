@@ -73,7 +73,7 @@ if(isset($_POST["city"]) && $_POST["city"]!="" && preg_match ("/^[a-zA-z]*$/",$_
 }else{
     die("Nice try Dr. :D 8");
 }
-if(isset($_POST["education_level"]) && $_POST["education_level"]!="" && preg_match("/^[0-9]*$/", $_POST["education_level"]) && $_POST["education_level"]>=0 &&  $_POST["education_level"]<=3){
+if(isset($_POST["education_level"]) && $_POST["education_level"]!="" && preg_match("/^[a-zA-z]*$/", $_POST["education_level"])){
     $education_level_tutor = $_POST["education_level"];
 }else{
     die("Nice try Dr. :D 9");
@@ -511,10 +511,10 @@ if(empty($row1)) {
 
         <select name="education_level" id="education-level" class="form-select" oninput="change_tutor_education()"
         style="display: inline-block; width: 200px;">
-          <option value="0" selected>Highschool degree</option>
-          <option value="1">College Undergraduate</option>
-          <option value="2">College Graduate</option>
-          <option value="3">Other..</option>
+          <option value="highschool" selected>Highschool degree</option>
+          <option value="undergrad">College Undergraduate</option>
+          <option value="grad">College Graduate</option>
+          <option value="other">Other..</option>
         </select>
         <br><br>
         <label for="school" id="school-label">High School Name </label>
