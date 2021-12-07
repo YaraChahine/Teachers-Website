@@ -99,7 +99,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0){
                 $results = $stmt->get_result(); 
                 $row_edits = $results->fetch_assoc();
 
-                if (empty($row)) {
+                if (empty($row_edits)) {
                     die ("invalid id");
                 }
                 ?>
