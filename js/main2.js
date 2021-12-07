@@ -115,17 +115,16 @@ function loginSubmit() {
 function loadBookingData(button) {
 
   let row = $(button.parentElement.parentElement);
+  let id = +row.find("[name='id']").text();
   let student = +row.find("[name='student']").text();
   let tutor = +row.find("[name='tutor']").text();
   let course = +row.find("[name='course']").text();
   let date = row.find("[name='date']").text();
   let days = row.find("[name='days']").text();
 
-  dateArr = date.split("/");
-  date = dateArr[2] + "-" + dateArr[1] + "-" + dateArr[0];
-
   daysArr = days.split(" ");
 
+  $("#editform").find("[name='id']").val(id);
   $("#editform").find("[name='student']").val(student);
   $("#editform").find("[name='tutor']").val(tutor);
   $("#editform").find("[name='course']").val(course);
