@@ -98,7 +98,7 @@
               </a>
             </div>
             <div class="text-center text-lg-start">
-              <a href="tutor_application.html" style="width: 300px"
+              <a href="tutor_application.php" style="width: 300px"
                 class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
                 <span>Become a tutor</span>
                 <i class="bi bi-arrow-right"></i>
