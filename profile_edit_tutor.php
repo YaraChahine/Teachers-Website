@@ -93,7 +93,8 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0)
            $row2 = $results2->fetch_assoc(); 
 
           ?>
-            <img src="tutor_image\<?php echo($row2["profile_image"]);?>">
+            <img src="tutor_image\16389092406968.jpg">
+
         </div>
         <div class="flex-item">
         <?php $query = "SELECT  first_name, last_name,email,phone_number FROM  users where user_id=?";

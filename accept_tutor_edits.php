@@ -1,29 +1,56 @@
 <?php
 
 include("connection.php");
-$id = $_GET["id"];
+session_start();
+
+  if (isset($_GET["id"])) {
+  $id = $_GET["id"];
+    
+    echo($id);
+  $query= "SELECT * from tutor_edit_requests where user_id=?;";
+  $stmt= $connection->prepare($query);
+  $stmt->bind_param("i",$id);
+  $stmt->execute();
+  $results = $stmt->get_result();
+$row = $results->fetch_assoc();
 
 
-$gender = $_POST["gender"];
-$years_of_experience = $_POST["years_of_experience"];
-$major = $_POST["major"];
-$year_born= $_POST["year_born"];
-$college_name= $_POST["college_name"];
-$cv = $_POST["cv"];
-
-//Will fix later
-$query_add = "INSERT INTO tutors(gender, years_of_experience, major, year_born, city, college_name, cv, profile_image,description) VALUES (?,?,?,?,?)";
-$stmt = $connection->prepare($query_add);
-$stmt->bind_param("ddssssdsssss", $email,$years_of_experience,$major, $year_born,$city,$college_name, $phone_number, $profile_image,$description);
-$stmt->execute();
-
-// REPLACE INTO tutors (email, phone_number, city, profile_image, description  )
+$query2= "UPDATE  users 
+SET 
+    email = ?,
+    phone_number = ?
+WHERE
+    user_id=? ;";
+$stmt2= $connection->prepare($query2);
+$stmt2->bind_param("ssi",$row["email"],$row["phone_number"],$id);
+$stmt2->execute();
 
 
-$query = "DELETE FROM tutor_edit_requests where id = $id";
-$stmt = $connection->prepare($query);
-$stmt->execute();
+$query3= "UPDATE  tutors 
+SET 
+    city = ?,
+    description = ?,
+    profile_image = ?
+WHERE
+    user_id=?;";
+$stmt3= $connection->prepare($query3);
+$stmt3->bind_param("sssi",$row["city"],$row["description"],$row["profile_image"],$id);
+$stmt3->execute();
+
+$folder_old =__DIR__."\\pending\\".$row['profile_image'];
+$folder_new =__DIR__."\\tutor_image\\".$row['profile_image'];
+rename($folder_old,$folder_new);
+
+$query4= "DELETE FROM tutor_edit_requests WHERE
+    user_id=?;";
+$stmt4= $connection->prepare($query4);
+$stmt4->bind_param("i",$id);
+$stmt4->execute();
 
 
-header("Location: admin_updates.php");
+
+
+
+  } else die ("no tutor application selected");
+
 ?>

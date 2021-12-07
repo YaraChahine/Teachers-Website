@@ -39,7 +39,9 @@ $mysql = $connection->prepare("INSERT INTO tutors ( user_id, gender,years_of_exp
  VALUES (?, ?, ?, ?,?,?,?,?,?,?,?);");
 $mysql->bind_param("issssisssss", $tutor_id["user_id"], $row["gender"], $row["years_of_experience"], $row["education_level_tutor"], $row["field"],$row["year_born"],$row["city"],$row["educational_institution_name"], $row["cv"],$row["image"],$row["description"]);
 ($mysql->execute());
-
+$folder_old =__DIR__."\\pending\\".$row["image"];
+$folder_new =__DIR__."\\tutor_image\\".$row["image"];
+rename($folder_old,$folder_new);
 
 $query_id="SELECT tutor_ID from tutors where user_id=?;";
 $stmt = $connection->prepare($query_id);
@@ -230,10 +232,22 @@ if ((strcasecmp($row["course_4"], "none") != 0)){
 
 }
 //removing from pending tutors 
+$query= "SELECT image from pending_tutors where temp_user_id= ?;";
+$stmt = $connection->prepare($query);
+$stmt->bind_param("s", $row["temp_user_id"]);
+$stmt->execute();
+$results = $stmt->get_result();
+$row = $results->fetch_assoc();  
+
 $query= "DELETE FROM pending_tutors where temp_user_id= ?;";
 $stmt = $connection->prepare($query);
 $stmt->bind_param("s", $row["temp_user_id"]);
 $stmt->execute();
+
+
+
+
+
 
 header('Location: admin_updates.php');
 
