@@ -90,6 +90,15 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
                 $stmt->bind_param("i",$id);
                 $stmt->execute();
                 $results = $stmt->get_result();
+                
+                $query3 = "SELECT  profile_image FROM  tutors where user_id=?";
+                $stmt3 = $connection->prepare($query3);
+                $stmt3->bind_param("i", $id);
+                $stmt3->execute();
+                $results3 = $stmt3->get_result();
+                $row3 = $results3->fetch_assoc(); 
+
+          
                 while($row = $results->fetch_assoc()){
                   $query2= "SELECT first_name,last_name from users where user_id=?;";
                   $stmt2= $connection->prepare($query2);
@@ -99,7 +108,8 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
                   while($row2 = $results2->fetch_assoc()){
 
                   ?>
-                <img src="img/default-user-image.png" class="rounded-circle w-25 d-block my-5 mx-auto border border-primary border-4" alt="Image">
+                              <img >
+                <img src="tutor_image\<?php echo($row3["profile_image"]); ?>" class="rounded-circle w-25 d-block my-5 mx-auto border border-primary border-4" alt="Image">
                 <h5 class="card-title"> <strong><?php echo($row2["first_name"]." ".$row2["last_name"]);?></strong> has made changes to <span id="his-her-their">her</span> profile and is awaiting your approval. 
               </h5>
                 <div class="w-75 my-5 mx-auto">
