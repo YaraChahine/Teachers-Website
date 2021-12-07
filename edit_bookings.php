@@ -3,24 +3,21 @@
 
 include("connection.php");
 
-
+$booking_id=$_POST["id"];
 $student_id = $_POST["student"];
 $tutor_id = $_POST["tutor"];
 $course_id = $_POST["course"];
 $date = $_POST["date"];
 $days_of_sessions="";
 
-
 //first step to see if student is already taking the course
-$query = "SELECT COUNT(*) as count FROM bookings where student_id = ? and course_id = ?;";
+$query = "SELECT * FROM bookings where booking_number!=? and student_id = ? and course_id = ? ;";
 $stmt = $connection->prepare($query);
-$stmt->bind_param("dd", $student_id, $course_id);
+$stmt->bind_param("ddd", $booking_id,$student_id, $course_id);
 $stmt->execute();
 $results = $stmt->get_result(); 
 $bookings_row = $results->fetch_assoc();
-if(strcmp($bookings_row["count"],1)==0){
-
-if (!empty($bookings_row)){
+if (empty($bookings_row)){
 
     //check to see if there is such a course
     $query = "SELECT * FROM courses where  course_id = ?;";
@@ -103,13 +100,11 @@ if (!empty($bookings_row)){
             }
             else{
             $days_of_sessions .= 0;
-    
             }
-            $mysql = $connection->prepare("UPDATE bookings (student_id,tutor_id,course_id,starting_date,days_of_sessions) VALUES (?, ?, ? , ? ,?);");
-            $mysql->bind_param("dddss", $student_id, $tutor_id, $course_id, $date, $days_of_sessions);
+            $mysql = $connection->prepare("UPDATE bookings SET student_id=?,tutor_id=?,course_id=?,starting_date=?,days_of_sessions=? where booking_number=?;");
+            $mysql->bind_param("dddssd", $student_id, $tutor_id, $course_id, $date, $days_of_sessions,$booking_id);
             ($mysql->execute());
             header('Location: admin_bookings_page.php');
-
     }
     else{
         die("Student,tutor or course is not in the database");
