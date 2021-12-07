@@ -3,18 +3,12 @@
 include("connection.php");
 session_start();
 
-if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0){
-
+if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
+{
   if (isset($_GET["id"])) {
-    $id = $_GET["id"];
-  } else die ("No tutor edit profile request is selected.");
-  
-
-}
-
-  
-  
-  ?>
+  $id = $_GET["id"];
+  } else die ("no tutor application selected");
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -62,7 +56,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0){
     <header id="header" class="header fixed-top header-form">
         <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
-            <a href="index.php" class="logo d-flex align-items-center">
+            <a href="index.html" class="logo d-flex align-items-center">
                 <img src="./img/logo.png" alt="">
                 <span>Teachers</span>
             </a>
@@ -91,90 +85,45 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0){
               <span>&ThickSpace; Tutor Profile Edit</span>
             </h5>
             <div class="card-body p-5">
-
-            <?php $query_requests= "SELECT * FROM  tutor_edit_requests where id = ?";
-                $stmt = $connection->prepare($query_requests);
-                $stmt->bind_param("d", $id);
+              <?php  $query= "SELECT * FROM  tutor_edit_requests where user_id=?";
+                $stmt = $connection->prepare($query);
+                $stmt->bind_param("i",$id);
                 $stmt->execute();
-                $results = $stmt->get_result(); 
-                $row_edits = $results->fetch_assoc();
+                $results = $stmt->get_result();
+                while($row = $results->fetch_assoc()){
+                  $query2= "SELECT first_name,last_name from users where user_id=?;";
+                  $stmt2= $connection->prepare($query2);
+                  $stmt2->bind_param("i",$id);
+                  $stmt2->execute();
+                  $results2 = $stmt2->get_result();
+                  while($row2 = $results2->fetch_assoc()){
 
-                if (empty($row_edits)) {
-                    die ("invalid id");
-                }
-                ?>
-
-                <!-- figure out how to do the image -->
+                  ?>
                 <img src="img/default-user-image.png" class="rounded-circle w-25 d-block my-5 mx-auto border border-primary border-4" alt="Image">
-                                                                                              
-                <h5 class="card-title"> 
-                  <?php echo($row["first_name"]); ?></strong> has made changes to 
-                <span>
-                <?php if ( isset($_POST['gender']) ){
-                  $gender = $_POST['gender'];
-                  if ( $gender == 'Male' ){
-                      echo 'his';
-                  }else if ( $gender == 'Female' ){
-                      echo 'her';
-                  }else{
-                      echo 'their';
-                } ?>
-                </span> 
-                profile and is awaiting your approval. Fields changed appear in blue.</h5>
+                <h5 class="card-title"> <strong><?php echo($row2["first_name"]." ".$row2["last_name"]);?></strong> has made changes to <span id="his-her-their">her</span> profile and is awaiting your approval. 
+              </h5>
                 <div class="w-75 my-5 mx-auto">
-                    <div class="row">
-                        <p class="col-4"><strong>Full name</strong></p>
-                        <p class="col-8"><?php echo($row["first_name"]." ".$row["last_name"]); ?></p>
-                    </div>
+                   
                     <div class="row">
                         <p class="col-4"><strong>Email</strong></p>
-                        <p class="col-8"><?php echo($row_edits["email_address"]);?></p>
+                        <p class="col-8"><?php echo($row["email"]); ?></p>
                     </div>
                     <div class="row">
-                        <p class="col-4 text-primary"><strong>Phone number</strong></p>
-                        <p class="col-8"><?php echo($row_edits["phone_number"]);?></p>
+                        <p class="col-4 "><strong>Phone number</strong></p>
+                        <p class="col-8"><?php echo($row["phone_number"]); ?></p>
                     </div>
+              
                     <div class="row">
-                        <p class="col-4"><strong>Age</strong></p>
-                        <p class="col-8"><?php echo($row["year_born"]);?></p>
+                        <p class="col-4 "><strong>City</strong></p>
+                        <p class="col-8"><?php echo($row["city"]); ?></p>
                     </div>
-                    <div class="row">
-                        <p class="col-4"><strong>Gender</strong></p>
-                        <p class="col-8"><?php echo($row["gender"]);?></p>
-                    </div>
-                    <div class="row">
-                        <p class="col-4 text-primary"><strong>City</strong></p>
-                        <p class="col-8"><?php echo($row_edits["city"]);?></p>
-                    </div>
-                    <div class="row">
-                        <p class="col-4"><strong>Education level</strong></p>
-                        <p class="col-8"><?php echo($row["education_level"]);?></p>
-                    </div>
-                    <div class="row">
-                        <p class="col-4"><strong>College Name</strong></p>
-                        <p class="col-8"><?php echo($row["college_name"]);?></p>
-                    </div>
-                    <div class="row">
-                        <p class="col-4"><strong>Major</strong></p>
-                        <p class="col-8"><?php echo($row["major"]);?></p>
-                    </div>
-                    <div class="row">
-                        <p class="col-4"><strong>Years of Experience</strong></p>
-                        <p class="col-8"><?php echo($row["years_of_experience"]);?></p>
-                    </div>
-                    <div class="row ">
-                        <p class="col-4 text-primary"><strong>Courses taught</strong></p>
-                        <p class="col-8"><?php echo($row["course_id"]);?></p>
-                    </div>
-                    <div class="row">
-                        <p class="col-4 text-primary"><strong>CV</strong></p>
-                        <p class="col-8"><a href=""><?php echo($row["cv"]);?></a></p>
-                    </div>
+                 
                     <div class="row">
                         <p class="col-4"><strong>Bio paragraph</strong></p>
-                        <p class="col-8"><?php echo($row_edits["description"]);?></p>
+                        <p class="col-8"><?php echo($row["description"]); ?></p>
                     </div>
                 </div>
+                <?php } } ?>
                 <div class="d-flex justify-content-center">
                     <a class="m-3 btn btn-danger" data-bs-toggle="modal" data-bs-target="#reject-modal">Reject</a>
                     <a class="m-3 btn btn-primary" data-bs-toggle="modal" data-bs-target="#accept-modal">Accept</a>
@@ -192,26 +141,18 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0){
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-body p-5">
-
-
-            <?php $query_requests= "SELECT * FROM  tutors where id = ?";
-                $stmt = $connection->prepare($query_requests);
-                $stmt->bind_param("d", $id);
-                $stmt->execute();
-                $results = $stmt->get_result(); 
-                $row_name = $results->fetch_assoc();
-
-                if (empty($row)) {
-                    die ("invalid id");
-                }
-                ?>
-
-              Are you sure you want to accept <strong><?php echo($row_name["first_name"]." ".$row_name["last_name"]);?></strong>'s profile edits? These changes will be publicly visible on the website.
+            <?php $query2= "SELECT first_name,last_name from users where user_id=?;";
+                  $stmt2= $connection->prepare($query2);
+                  $stmt2->bind_param("i",$id);
+                  $stmt2->execute();
+                  $results2 = $stmt2->get_result();
+                 $row2 = $results2->fetch_assoc();?>
+              Are you sure you want to accept <strong><?php echo($row2["first_name"]." ".$row2["last_name"]);?></strong>'s profile edits? These changes will be publicly visible on the website.
             </div>
             <div class="modal-footer">
                 <form action="">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="submit">Confirm</button>
+                    <a href="admin_accept_tutor_edit.php?id=<?php echo($id); ?>" ><button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="submit">Confirm</button>
                 </form>
             </div>
           </div>
@@ -226,13 +167,12 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0){
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-body p-5">
-                Are you sure you want to reject <strong><?php echo($row["first_name"]." ".$row["last_name"]);?></strong>'s profile edits?
+                Are you sure you want to reject <strong><?php echo($row2["first_name"]." ".$row2["last_name"]);?></strong>'s profile edits?
             </div>
             <div class="modal-footer">
                 <form action="">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <a href="accept_tutor_edits.php?id=<?php echo($row["id"]); ?>">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="submit">Confirm</button>
+                    <a href="admin_reject_tutor_edit.php?id=<?php echo($id); ?>" ><button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="submit">Confirm</button></a>
                 </form>
             </div>
           </div>
@@ -250,7 +190,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0){
       <div class="container">
         <div class="row gy-4">
           <div class="col-lg-6 col-md-12 footer-info">
-            <a href="index.php" class="logo d-flex align-items-center">
+            <a href="index.html" class="logo d-flex align-items-center">
               <img src="./img/logo.png" alt="">
               <span>Teachers</span>
             </a>
