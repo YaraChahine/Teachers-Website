@@ -151,7 +151,6 @@ include("connection.php");
 
             <div class="list-group-item card update-item">
                 <h5 class="card-header">New Tutor Request</h5>
-<<<<<<< Updated upstream
                 
                 <?php
 
@@ -186,8 +185,6 @@ include("connection.php");
                 $stmt = $connection->prepare($query_tutor_profile_edits);
                 $stmt->execute();
                 $results_tutor_profile_edits = $stmt->get_result();
-=======
->>>>>>> Stashed changes
 
              
                 $query_add_tutor = "SELECT user_id ,first_name, last_name, email, phone_number FROM  users"; //we need the names of the users for the card title
