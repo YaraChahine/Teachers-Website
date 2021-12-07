@@ -3,8 +3,8 @@
 include("connection.php");
 $id = $_GET["id"];
 
-
-$query_add = "INSERT INTO tutors where id = $id";
+//Will fix later
+$query_add = "INSERT INTO tutors() VALUES (?,?,?,?,?)";
 $stmt = $connection->prepare($query_add);
 $stmt->execute();
 

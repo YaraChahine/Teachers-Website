@@ -56,6 +56,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0){
 
             <a href="index.php" class="logo d-flex align-items-center">
                 <img src="./img/logo.png" alt="">
+                
                 <span>Teachers</span>
             </a>
 
@@ -92,23 +93,32 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0){
             
         </div>
         <div class="flex-item">
+            <?php 
+            $queryimage ="SELECT * from tutors where user_id = ?;"; 
+            $stmt = $connection->prepare($queryimage);
+            $stmt->bind_param("i",$id);
+            $stmt->execute();
+            $results_image = $stmt->get_result();
+            $row_image = $results_image->fetch_assoc();?> 
 
-        <?php $query="SELECT * from users where user_id=?;"; 
-             $stmt = $connection->prepare($query);
-             $stmt->bind_param("i",$id);
-             $stmt->execute();
-             $results = $stmt->get_result();
-             $row = $results->fetch_assoc();?> 
+            <?php 
+            $query="SELECT * from users where user_id=?;"; 
+            $stmt = $connection->prepare($query);
+            $stmt->bind_param("i",$id);
+            $stmt->execute();
+            $results = $stmt->get_result();
+            $row = $results->fetch_assoc();?> 
 
 
-            <
-            <!-- <img src="<?php echo $data['images']; ?> -->
+            <img src="<?php echo $row_image['profile_image']; ?>" >
             <p>First name: <span><?php echo($row["first_name"]); ?></span> </p>
             <p>Last name: <span><?php echo($row["last_name"]); ?></span> </p>
-            <p> Phone number: <span><?php echo($row["phone_number"]); ?></span></p>
+            <p>Phone number: <span><?php echo($row["phone_number"]); ?></span></p>
+            <p>City: <span><?php echo($row_image["city"]); ?></span> </p>
             <p>Email: <span><?php echo($row["email"]); ?></span> </p>
+            <p>Description <span><?php echo($row_image["description"]); ?></span> </p>
 
-
+            
         </div>
         <div class="flex-item">
             <!-- <p>Charbel72</p>
@@ -121,6 +131,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0){
             <button type="button" style="width:100px;"class="btn btn-primary p-0 ok-btn"  data-bs-toggle="modal" data-bs-target="#edit-modal" data-bs-dismiss="modal" onclick="$('#editform').submit()">Edit Info</button>
         </div>
 
+        
     </div>
 
 
@@ -132,26 +143,20 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0){
           <div class="modal-body p-5">
               <h2 class="text-center">Edit Profile Info</h1>
               <form action="admin_edit.php" method = "POST" autocomplete="off">
-                  <div class="row">
+                      
+              <div class="row">
                       <div class="col-4">
-                          First name
+                        Profile Picture
                       </div>
                       <div class="col-8">
 
-                          <?php if(isset($_POST["first"]) && $_POST["first"]!="" ) ?>
-                          <input class="form-control" type="text" name="first">
+                          <?php if(isset($_POST["profile_image"]) && $_POST["profile_image"]!="" ) ?>
+                          <input class="form-control" type="file" name="profile_image">
                       </div>
                   </div>
-                  <div class="row">
-                      <div class="col-4">
-                          Last name
-                      </div>
-                      <div class="col-8">
 
-                          <?php if(isset($_POST["last"]) && $_POST["last"]!="" ) ?>
-                          <input class="form-control" type="text" name="last">
-                      </div>
-                  </div>
+
+
                   <div class="row">
                       <div class="col-4">
                         Email address 
@@ -168,27 +173,59 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0){
                       </div>
                       <div class="col-8">
 
-                      <?php if(isset($_POST["phone"]) && $_POST["phone"]!="" ) ?>
+                      <?php if(isset($_POST["phone_number"]) && $_POST["phone_number"]!="" ) ?>
 
-                          <input class="form-control" type="text" name="phone">
+                          <input class="form-control" type="text" name="phone_number">
                       </div>
                   </div>
-              
+                  <div class="row">
+                      <div class="col-4">
+                          City
+                      </div>
+                      <div class="col-8">
+
+                          <?php if(isset($_POST["city"]) && $_POST["city"]!="" ) ?>
+                          <input class="form-control" type="text" name="city">
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-4">
+                          Description
+                      </div>
+                      <div class="col-8">
+
+                          <?php if(isset($_POST["description"]) && $_POST["description"]!="" ) ?>
+                          <input class="form-control" type="text" name="description">
+                      </div>
+                  </div>
               </form>
+              
           </div>
           <div class="modal-footer">
               <form action="">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                  <button type="button" class="btn btn-primary p-0 ok-btn"  data-bs-toggle="modal" data-bs-target="#msg-modal" data-bs-dismiss="modal" onclick="$('#editform').submit()">Save</button>
+                  <a href="accept_tutor_edits.php?id=<?php echo($row["id"]); ?>"><button type="button" class="btn btn-primary p-0 ok-btn"  data-bs-toggle="modal" data-bs-target="#msg-modal" data-bs-dismiss="modal" onclick="$('#editform').submit()">Save</button>
               </form>
+
+              <?php
+            // $profile_image = $_POST["profile_image"];
+            // $email = $_POST["email"];
+            // $phone= $_POST["phone_number"];
+            // $city = $_POST["city"];
+            // $description= $_POST["description"];
+            $mysql = $connection ->prepare("INSERT INTO tutor_edit_requests(email, phone_number,city, profile_image,description) VALUES (?,?,?,?,?)");
+            $mysql->bind_param("sssss", $email, $phone_number, $city, $profile_image, $description);
+            $mysql->execute();
+            ?>
+
+              
           </div>
         </div>
       </div>
     </div>
 
 
-
-
+    
 
 
     

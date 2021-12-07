@@ -5,7 +5,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0)
 {
 $id = $_SESSION["user_id"];
 
-$query= "SELECT *s FROM  users where user_id = ?";
+$query= "SELECT * FROM  users where user_id = ?";
 $stmt = $connection->prepare($query);
 $stmt->bind_param("i", $id);
 

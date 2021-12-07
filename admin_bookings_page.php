@@ -301,7 +301,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
           <div class="modal-content">
             <div class="modal-body p-5">
                 <h2 class="text-center">Edit booking</h1>
-                <form  id="editform" >
+                <form  id="editform" action="edit_bookings.php" method="post" >
                     <div class="row">
                         <div class="col-4">
                             Student ID

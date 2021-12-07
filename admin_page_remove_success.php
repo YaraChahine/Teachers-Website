@@ -46,7 +46,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
   ======================================================== -->
 </head>
 
-<body onload="remove-form.reset();">
+<body >
 
     <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top header-form">

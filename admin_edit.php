@@ -97,7 +97,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0){
                 $stmt->bind_param("d", $id);
                 $stmt->execute();
                 $results = $stmt->get_result(); 
-                $row = $results->fetch_assoc();
+                $row_edits = $results->fetch_assoc();
 
                 if (empty($row)) {
                     die ("invalid id");
@@ -128,11 +128,11 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0){
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Email</strong></p>
-                        <p class="col-8"><?php echo($row["email_address"]);?></p>
+                        <p class="col-8"><?php echo($row_edits["email_address"]);?></p>
                     </div>
                     <div class="row">
                         <p class="col-4 text-primary"><strong>Phone number</strong></p>
-                        <p class="col-8"><?php echo($row["phone_number"]);?></p>
+                        <p class="col-8"><?php echo($row_edits["phone_number"]);?></p>
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Age</strong></p>
@@ -144,7 +144,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0){
                     </div>
                     <div class="row">
                         <p class="col-4 text-primary"><strong>City</strong></p>
-                        <p class="col-8"><?php echo($row["city"]);?></p>
+                        <p class="col-8"><?php echo($row_edits["city"]);?></p>
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Education level</strong></p>
@@ -172,7 +172,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0){
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Bio paragraph</strong></p>
-                        <p class="col-8"><?php echo($row["description"]);?></p>
+                        <p class="col-8"><?php echo($row_edits["description"]);?></p>
                     </div>
                 </div>
                 <div class="d-flex justify-content-center">
@@ -192,7 +192,21 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0){
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-body p-5">
-              Are you sure you want to accept <strong><?php echo($row["first_name"]." ".$row["last_name"]);?></strong>'s profile edits? These changes will be publicly visible on the website.
+
+
+            <?php $query_requests= "SELECT * FROM  tutors where id = ?";
+                $stmt = $connection->prepare($query_requests);
+                $stmt->bind_param("d", $id);
+                $stmt->execute();
+                $results = $stmt->get_result(); 
+                $row_name = $results->fetch_assoc();
+
+                if (empty($row)) {
+                    die ("invalid id");
+                }
+                ?>
+
+              Are you sure you want to accept <strong><?php echo($row_name["first_name"]." ".$row_name["last_name"]);?></strong>'s profile edits? These changes will be publicly visible on the website.
             </div>
             <div class="modal-footer">
                 <form action="">
