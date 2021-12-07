@@ -304,6 +304,14 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
                 <form  id="editform" action="edit_bookings.php" method="post" >
                     <div class="row">
                         <div class="col-4">
+                            Booking ID
+                        </div>
+                        <div class="col-8">
+                            <input disabled class="form-control" type="number" name="id">
+                        </div>
+                    </div>    
+                    <div class="row">
+                        <div class="col-4">
                             Student ID
                         </div>
                         <div class="col-8">
