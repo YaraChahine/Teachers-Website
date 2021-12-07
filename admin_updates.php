@@ -173,40 +173,29 @@ include("connection.php");
             </div>               
                 
             
+         
             <div class="list-group-item card update-item">
                 <h5 class="card-header">Tutor Profile Edit</h5>
-
-                <?php $query_tutor_profile_edits = "SELECT email, phone_number, city, profile_image, description  FROM  tutor_edit_requests";
-                $stmt = $connection->prepare($query_tutor_profile_edits);
+                <?php $query= "SELECT user_id FROM  tutor_edit_requests";
+                $stmt = $connection->prepare($query);
                 $stmt->execute();
-                $results_tutor_profile_edits = $stmt->get_result();
+                $results = $stmt->get_result();
+                while($row = $results->fetch_assoc()){
+                  $query2= "SELECT first_name,last_name, email,phone_number from users where user_id=?;";
+                  $stmt2= $connection->prepare($query2);
+                  $stmt2->bind_param("i",$row["user_id"]);
+                  $stmt2->execute();
+                  $results2 = $stmt2->get_result();
+                  while($row2 = $results2->fetch_assoc()){
 
-                $query_tutor_names = "SELECT user_id ,first_name, last_name, email, phone_number FROM  users"; //we need the names of the tutor for the card title
-                $stmt = $connection->prepare($query_tutor_names);
-                $stmt->execute();
-                $results_tutor_names = $stmt->get_result();
                 ?>
-
                 <div class="card-body">
-                <?php
-                    // while($row = $results_tutor_profile_edits->fetch_assoc()){
-                      while($row = $results_tutor_names->fetch_assoc() && $row1 = $results_tutor_profile_edits->fetch_assoc() ){
-
-                  ?>
-                  <img src="<?php echo $row1['profile_image']; ?> ">
-                  <h5 class="card-title"><?php echo($row["first_name"]." ".$row["last_name"]); ?></h5>
-                  <p class="card-text"><?php echo($row1["email"]." - ".$row1["phone_number"]." - ".$row1["city"]." - ".$row1["description"] ); ?></p>
-                  <a href="admin_edit.php?id=<?php echo($row["id"]);?>" class="btn btn-primary" data-id=<?php echo($row["id"]); ?> >View update</a>
-                  <hr>                 
-                  <?php } ?>
-            
-
-                  <h5 class="card-title">Emma Williams</h5>
-                  <p class="card-text">emma@williams.com - 81 234 567</p>
-                  <a href="admin_edit.php" class="btn btn-primary">View update</a>
+                  <h5 class="card-title"><?php echo($row2["first_name"]." ".$row2["last_name"]); ?></h5>
+                  <p class="card-text"><?php echo($row2["email"]." - ".$row2["phone_number"]); ?></p>
+                  <a href="admin_edit.php?id=<?php echo($row["user_id"]);?>" class="btn btn-primary">View update</a>
                 </div>
+                <?php } } ?>
             </div>
-
         </div>
 
     </div>
