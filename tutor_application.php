@@ -14,7 +14,7 @@ if(isset($_POST["first_name"]) && $_POST["first_name"]!="" && preg_match ("/^[a-
     $first_name = $_POST["first_name"];
 }else if(isset($_POST["first_name"]) && $_POST["first_name"]==""  || !preg_match ("/^[a-zA-z]*$/",$_POST["first_name"])){
     $invalid=true;
-    $msg="First name should only contain alphabet";
+    $msg="First name should only contain alphabet & no empty entries are allowed";
 }else{
     die("Nice try Dr. :D 1");
 }
@@ -22,7 +22,7 @@ if(isset($_POST["last_name"]) && $_POST["last_name"]!="" && preg_match ("/^[a-zA
     $last_name = $_POST["last_name"];
 }else {
   $invalid=true;
-  $msg="Invalid or missing: Last name should only contain alphabet";
+  $msg="Last name should only contain alphabet & no empty entries are allowed"";
 }
 if(isset($_POST["email_address"]) && $_POST["email_address"]!="" && filter_var($_POST["email_address"], FILTER_VALIDATE_EMAIL)){
     $email_address = $_POST["email_address"];
