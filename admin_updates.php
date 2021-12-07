@@ -152,16 +152,7 @@ include("connection.php");
             <div class="list-group-item card update-item">
                 <h5 class="card-header">New Tutor Request</h5>
                 
-
-                <?php $query_student_signup = "SELECT temp_student_id, first_name, last_name, email, phone_number FROM  pending_students";
-                $stmt = $connection->prepare($query_student_signup);
-                $stmt->execute();
-                $results_students = $stmt->get_result();
-                ?>
-
-
-                <div class="card-body">    
-                  <?php
+                <?php
 
                   $mysql = $connection->prepare("SELECT * FROM new_tutor_requests 
                   JOIN students ON `new_tutor_requests`.`student_id` = `students`.`student_id` 
@@ -169,6 +160,10 @@ include("connection.php");
                   $mysql->execute();
                   $results = $mysql->get_result();
 
+                  ?>
+
+                <div class="card-body">    
+                  <?php
                   while($row = $results->fetch_assoc()){
                   ?>
                   
