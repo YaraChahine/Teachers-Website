@@ -3,8 +3,10 @@
 include("connection.php");
 session_start();
 
-if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
-{
+if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0){
+  if (isset($_GET["id"])) {
+    $id = $_GET["id"];
+  } else die ("No add new tutor request is selected");
 
   ?>
 <!DOCTYPE html>
@@ -83,39 +85,73 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
               <span>&ThickSpace; New Tutor Request</span>
             </h5>
             <div class="card-body p-5">
-                <h5 class="card-title"> <strong>Bob</strong>, a student at <em>Teachers</em>, is requesting an additional tutor.</h5>
+
+            <?php $queryreqs = "SELECT * FROM users where id=?";
+                $stmt = $connection->prepare($queryreqs);
+                $stmt->bind_param("d", $id);
+                $stmt->execute();
+                $results = $stmt->get_result(); 
+                $rowinfo = $results->fetch_assoc();
+                if (empty($rowinfo)) {
+                    die ("invalid id");
+                }
+                ?>
+
+            <?php $queryreqs2 = "SELECT * FROM new_tutor_requests where id=?";
+                $stmt = $connection->prepare($queryreqs2);
+                $stmt->bind_param("d", $id);
+                $stmt->execute();
+                $results = $stmt->get_result(); 
+                $rowAdd = $results->fetch_assoc();
+                if (empty($rowAdd)) {
+                    die ("invalid id");
+                }
+                ?>
+                <?php $queryreqs3 = "SELECT * FROM new_tutor_requests where id=?";
+                $stmt = $connection->prepare($queryreqs3);
+                $stmt->bind_param("d", $id);
+                $stmt->execute();
+                $results = $stmt->get_result(); 
+                $rowprice = $results->fetch_assoc();
+                if (empty($rowprice)) {
+                    die ("invalid id");
+                }
+                ?>
+
+
+                <h5 class="card-title"> <strong><?php echo($rowinfo["first_name"]); ?></strong>, a student at <em>Teachers</em>, is requesting an additional tutor.</h5>
                 <div class="w-75 my-5 mx-auto">
                     <div class="row">
                         <p class="col-4"><strong>Full name</strong></p>
-                        <p class="col-8">Bob Smith</p>
+                        <p class="col-8"><?php echo($rowinfo["first_name"]." ".$rowinfo["last_name"]); ?></p>
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Email</strong></p>
-                        <p class="col-8">bob@smith.com</p>
+                        <p class="col-8"><?php echo($rowinfo["email"]);?></p>
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Phone number</strong></p>
-                        <p class="col-8">71 222 666</p>
+                        <p class="col-8"><?php echo($rowinfo["phone_number"]);?></p>
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Course requested</strong></p>
-                        <p class="col-8">High school - Chemistry</p>
+                        <p class="col-8"><?php echo($rowAdd["course"]);?></p>
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Preferred tutor</strong></p>
-                        <p class="col-8">Sarah Abdallah</p>
+                        <p class="col-8"><?php echo($rowAdd["preferred_tutor"]);?></p>
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Session start</strong></p>
-                        <p class="col-8">21/12/2021</p>
+                        <p class="col-8"><?php echo($rowAdd["starting_date"]);?></p>
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Session days</strong></p>
-                        <p class="col-8">Tuesday<br>Saturday</p>
+                        <p class="col-8"><?php echo($rowAdd["days_of_session"]);?></p>
                     </div>
                     <div class="row">
                         <p class="col-4"><strong>Preferred price range</strong></p>
-                        <p class="col-8">45 000</p>
+                        <p class="col-8"><?php echo($rowprice["price"]);?></p>
                     </div>
                 </div>
                 <div class="d-flex justify-content-center">
@@ -135,12 +171,12 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-body p-5">
-              Are you sure you want to accept <strong>Bob Smith</strong>'s new tutor request? Bob will be linked with their selected tutor at <em>Teachers</em>.
+              Are you sure you want to accept <strong><?php echo($rowinfo["first_name"]." ".$rowinfo["last_name"]);?></strong>'s new tutor request? Bob will be linked with their selected tutor at <em>Teachers</em>.
             </div>
             <div class="modal-footer">
                 <form action="">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="submit">Confirm</button>
+                    <a href="acknowledge_consultation.php?id=<?php echo($row["id"]); ?>"><button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="submit">Confirm</button>
                 </form>
             </div>
           </div>
@@ -155,12 +191,12 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-body p-5">
-                Are you sure you want to reject <strong>Bob Smith</strong>'s new tutor request?
+                Are you sure you want to reject <strong><?php echo($rowinfo["first_name"]." ".$rowinfo["last_name"]);?></strong>'s new tutor request?
             </div>
             <div class="modal-footer">
                 <form action="">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="submit">Confirm</button>
+                    <a href="reject_new_tutor_request.php?id=<?php echo($row["id"]); ?>"><button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="submit">Confirm</button>
                 </form>
             </div>
           </div>
