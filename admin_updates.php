@@ -151,11 +151,35 @@ include("connection.php");
 
             <div class="list-group-item card update-item">
                 <h5 class="card-header">New Tutor Request</h5>
-                <div class="card-body">
-                  <h5 class="card-title">Bob Smith</h5>
-                  <p class="card-text">bob@smith.com - 71 222 666</p>
-                  <a href="admin_student_add.php" class="btn btn-primary">View update</a>
+                
+
+                <?php $query_student_signup = "SELECT temp_student_id, first_name, last_name, email, phone_number FROM  pending_students";
+                $stmt = $connection->prepare($query_student_signup);
+                $stmt->execute();
+                $results_students = $stmt->get_result();
+                ?>
+
+
+                <div class="card-body">    
+                  <?php
+
+                  $mysql = $connection->prepare("SELECT * FROM new_tutor_requests 
+                  JOIN students ON `new_tutor_requests`.`student_id` = `students`.`student_id` 
+                  JOIN users ON `users`.`user_id` = `students`.`user_id`");
+                  $mysql->execute();
+                  $results = $mysql->get_result();
+
+                  while($row = $results->fetch_assoc()){
+                  ?>
+                  
+                  <h5 class="card-title"><?php echo($row["first_name"]." ".$row["last_name"]); ?></h5>
+                  <p class="card-text"><?php echo($row["email"]." - ".$row["phone_number"]); ?></p>
+                  <a href="admin_student_add.php?id=<?php echo($row["id"]);?>" class="btn btn-primary" data-id=<?php echo($row["id"]); ?> >View update</a>
+                  <hr>                 
+                  <?php } ?>
                 </div>
+
+
             </div>
 
         

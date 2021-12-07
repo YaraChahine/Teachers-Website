@@ -100,9 +100,6 @@ if(isset($_POST["date"]) && $_POST["date"] != "" && preg_match("/$/", $_POST["da
 }
 
 
-
-//come back to do the dates
-
 $days_of_session = "";
 
 if(isset($_POST["monday"]) && $_POST["monday"]!=""){
@@ -165,9 +162,9 @@ else{
 }
 
 
-if ($_POST["sunday"]="" && $_POST["saturday"]="" && $_POST["friday"]="" && $_POST["thursday"]="" && $_POST["tuesday"]="" &&$_POST["monday"]=""){
-    //Blank string, add error to $errors array.        
-    $errors['nodate'] = "Please let us know your prefered tutoring dates!";
+if (!isset($_POST["sunday"]) && !isset($_POST["saturday"]) && !isset($_POST["friday"]) && isset($_POST["thursday"]) && !($_POST["tuesday"]) && !($_POST["monday"]="")){
+    $invalid=true;
+    $msg="Please enter the course name.";
 }       
 
 if(isset($_POST["price"]) && $_POST["price"] !="" && preg_match("/^[0-9]*$/", $_POST["price"])){
