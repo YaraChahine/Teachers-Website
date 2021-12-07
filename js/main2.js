@@ -21,7 +21,7 @@ function change_student_education(){
 function change_tutor_education() {
     let val = document.getElementById("education-level").value;
 
-    if (val == "highschool-degree") {
+    if (val == "0") {
       document.getElementById("school-label").innerHTML = "High School Name "
       document.getElementById("school").placeholder = "High School Name "
       document.getElementById("field-label").innerHTML = "Field/degree";
