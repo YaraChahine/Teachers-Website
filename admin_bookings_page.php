@@ -133,7 +133,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
 
 
                 $next_to = "2";
-                $records_per_page =4;
+                $records_per_page =10;
                 $offset = ($page_no-1) * $records_per_page;
                 $previous_page = $page_no - 1;
                 $next_page = $page_no + 1;
