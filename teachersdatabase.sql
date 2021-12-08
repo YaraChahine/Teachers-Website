@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 08, 2021 at 01:29 AM
+-- Generation Time: Dec 08, 2021 at 02:08 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -46,8 +46,7 @@ INSERT INTO `bookings` (`booking_number`, `student_id`, `tutor_id`, `course_id`,
 (3, 10, 1, 1, '2021-12-22', '0001000'),
 (4, 12, 1, 1, '2021-12-22', '0000100'),
 (5, 13, 1, 1, '2021-11-12', '0000100'),
-(6, 14, 26, 1, '2021-12-30', '0110000'),
-(7, 15, 33, 19, '2022-01-05', '1010010');
+(6, 14, 26, 1, '2021-12-30', '0110000');
 
 -- --------------------------------------------------------
 
@@ -146,18 +145,6 @@ CREATE TABLE `new_tutor_requests` (
   `starting_date` date NOT NULL,
   `days_of_sessions` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `new_tutor_requests`
---
-
-INSERT INTO `new_tutor_requests` (`id`, `student_id`, `education_level_student`, `course`, `preferred_tutor`, `starting_date`, `days_of_sessions`) VALUES
-(1, 15, 'middle', 'Math', 1, '2021-12-29', '0011000'),
-(2, 15, 'college', 'Calculus 3', 34, '2021-12-29', '0000111'),
-(3, 15, 'highschool', 'Biology', 25, '2021-12-29', '0011000'),
-(4, 15, 'highschool', 'Biology', 34, '2022-01-04', '0110000'),
-(5, 15, 'middle', 'Chemistry', 25, '2021-12-30', '0110000'),
-(6, 15, 'college', 'Calculus 2', 34, '2022-01-03', '0001100');
 
 -- --------------------------------------------------------
 
@@ -276,8 +263,7 @@ INSERT INTO `students` (`student_id`, `user_id`, `price_range`) VALUES
 (11, 62, 50000),
 (12, 64, 50000),
 (13, 65, 50000),
-(14, 67, 5000000),
-(15, 68, 90000);
+(14, 67, 5000000);
 
 -- --------------------------------------------------------
 
@@ -318,10 +304,7 @@ CREATE TABLE `to_do_list` (
 --
 
 INSERT INTO `to_do_list` (`id`, `user_id`, `title`, `date_time`, `checked`) VALUES
-(2, 61, 'sleep', '2021-12-05 13:23:13.0', 0),
-(3, 68, 'Sleep', '2021-12-07 23:57:06.0', 0),
-(4, 68, 'eat', '2021-12-07 23:57:09.0', 0),
-(5, 68, 'ask questions', '2021-12-07 23:57:15.0', 0);
+(2, 61, 'sleep', '2021-12-05 13:23:13.0', 0);
 
 -- --------------------------------------------------------
 
@@ -438,7 +421,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `type`, `first_name`, `last_name`, `email`, `phone_number`, `password`) VALUES
-(1, 1, 'ali', 'knayber', 'ali.knayber@lau.edu', '76622141', '4f15e62e98d0eb3f530af0c46bd319235df916c2dda16824bb7d92dd07275196'),
+(1, 1, 'Charbel', 'Daoud', 'charbel.daoud@lau.edu', '76622141', 'ed5d4bec22d6a3ab64a4b7270182325e377173acdb128f8a32e37c8aef6c83e9'),
 (2, 2, 'sarah', 'abdallah', 'sarah.abdallah@edu.edu', '3232', '4f15e62e98d0eb3f530af0c46bd319235df916c2dda16824bb7d92dd07275196'),
 (3, 3, 'yara', 'chahine', 'yara.chahine@edu.edu', '3232', '12'),
 (10, 2, 'reem', 'zubdeh', 'reem.zubdeh@lau.edu', '87686', 'reem'),
@@ -465,8 +448,7 @@ INSERT INTO `users` (`user_id`, `type`, `first_name`, `last_name`, `email`, `pho
 (64, 3, 'Mirna', 'Chami', 'mirna@gmail.com', '71813401', '2944d72b0591914da5220b8be394123aa95b9b5e63305c6b842098848f087c55'),
 (65, 3, 'Nada', 'Fawaz', 'nada@gmail.com', '71813401', '584572f176d3891ce3d1f26debb73d3ba75ba4192a5a5d0ae6110b13e23cfd66'),
 (66, 2, 'Sarah', 'Abdallah', 'sara.abdallah@lau.edu', '76681531', '74dd5ba83a992377d1adee261f7a2e06f261e69b38d2792bd3f7236e32129592'),
-(67, 3, 'Fatima', 'Abdallah', 'fatima.abdallah@lau.edu', '76358980', 'fc98cdecb626468d52785e5c20ef146b71f6a60b8d2e286c943e4bf7a103634c'),
-(68, 3, 'Fatima', 'Maarouf', 'fatima.maarouf@lau.edu', '79876542', 'fc98cdecb626468d52785e5c20ef146b71f6a60b8d2e286c943e4bf7a103634c');
+(67, 3, 'Fatima', 'Abdallah', 'fatima.abdallah@lau.edu', '76358980', 'fc98cdecb626468d52785e5c20ef146b71f6a60b8d2e286c943e4bf7a103634c');
 
 -- --------------------------------------------------------
 
