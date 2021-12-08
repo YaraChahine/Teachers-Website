@@ -32,6 +32,25 @@ $mysql = $connection->prepare("INSERT INTO users (type, first_name, last_name,em
 $mysql->bind_param("sssss", $row["first_name"], $row["last_name"], $row["email"], $row["phone_number"], $row["password"]);
 $mysql->execute();
 
+$to_email = $row["email"];
+$subject = "Welcome to Teachers!";
+$body = "
+Dear ".$row["first_name"]." ".$row["last_name"]. ",
+
+Congratulations and welcome to Teachers!
+
+We are happy to inform you that you have been accepted as a tutor at Teachers. The selection process at Teachers is highly selective, so you should be proud! Please stay tuned this week as you will be receving an email with your orientation session details.
+
+Please note that you can now login to your profile on our website with the credentials that you have applied with. Do not forget to use your productivity tools to boost your workflow!
+
+Happy Teaching!
+Best,
+Teachers.";
+    $headers = "From: yarachahine77@gmail.com";
+    
+    mail($to_email, $subject, $body, $headers);
+
+
 //we need to get user id before we add to tutors table
 $query= "SELECT user_id FROM users where email= ?;";
 $stmt = $connection->prepare($query);
