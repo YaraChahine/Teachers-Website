@@ -1,3 +1,16 @@
+<?php
+include("connection.php");
+session_start();
+$loggedin = isset($_SESSION["user_id"]);
+if (isset($_SESSION["type"])) {
+$type = $_SESSION["type"];
+if ($type == 1) $target = "admin_page.php";
+elseif ($type == 2) $target = "profile_tutor.php";
+elseif ($type == 3) $target = "profile.php";
+else $target = "admin_page.php";
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -72,7 +85,12 @@
               <li><a href="#">Drop Down 4</a></li>
             </ul>
           </li>
-          <li><a class="getstarted scrollto" href="login.php">Log in</a></li>
+          <?php if (!$loggedin) { echo "<li><a class=\"getstarted scrollto\" href=\"login.php\">Log in</a></li>";}
+          else { echo "<li><a class=\"getstarted scrollto\" href=\"" . $target . "\">My page</a></li>"; 
+            echo "<li><a class=\"getstarted scrollto\" href=\"logout.php\">Log out</a></li>"; 
+          }
+          
+          ?>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
