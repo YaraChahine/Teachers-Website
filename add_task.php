@@ -1,10 +1,7 @@
 <?php
 
 include("connection.php");
-session_start();
 
-if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
-{
 session_start();
 $id = $_SESSION["user_id"];
 $my_date = date("Y-m-d H:i:s");
@@ -32,4 +29,3 @@ if(isset($_POST['title'])){
 }else {
     header("Location: todolist2.php");
 }
-} else {header("Location: index.php");}

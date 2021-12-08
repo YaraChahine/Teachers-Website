@@ -3,8 +3,6 @@
 include("connection.php");
 session_start();
 
-if (isset($_SESSION["user_id"]) && $_SESSION["user_id"] != "" && strcmp($_SESSION["type"],"1")==0)
-{
 $id=$_SESSION["user_id"];
 
 
@@ -77,6 +75,5 @@ else
     header("Location: tutor_edit_fail.php");
 
 }
-} else {header("Location: index.php");}
 
 ?>

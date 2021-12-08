@@ -67,7 +67,6 @@ if (isset($_GET["id"])) {
                 <ul>
                   <li><a class="nav-link scrollto active" href="admin_page.php">Main Page</a></li>
                   <li><a class="nav-link scrollto" href="admin_updates.php">My updates</a></li>
-                  <li><a class="nav-link scrollto" href="admin_page.php">Remove a member</a></li>
                   <li><a class="getstarted scrollto" href="logout.php">Log out</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>

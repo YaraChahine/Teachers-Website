@@ -36,7 +36,6 @@ if (isset($_POST["login"])){
     $mysql->execute();
     $results = $mysql->get_result();
     $row = $results->fetch_assoc();
-
     if(empty($row)) {
         $incorrect = true;
     }else {  
@@ -49,8 +48,11 @@ if (isset($_POST["login"])){
         elseif (strcmp($row['type'],"2")==0) {
             header('Location: profile_tutor.php');
         }
-        else{
+        elseif (strcmp($row['type'],"3")==0) {
             header('Location: profile.php');
+        }
+        else {
+            header('Location: index.php');
         }
     }
 }

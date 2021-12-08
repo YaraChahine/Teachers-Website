@@ -64,7 +64,6 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
                 <ul>
                 <li><a class="nav-link scrollto active" href="admin_page.php">Main Page</a></li>
                     <li><a class="nav-link scrollto" href="admin_updates.php">My updates</a></li>
-                    <li><a class="nav-link scrollto" href="admin_page.php">Remove a member</a></li>
                     <li><a class="getstarted scrollto" href="logout.php">Log out</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
@@ -195,7 +194,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
                 </div>
 
             </ul>
-            <a class="btn btn-primary p-0" data-bs-toggle="modal" data-bs-target="#add-modal"><i class="bi bi-plus fs-1 lh-1"></i></a>
+            <div></div>
 
         </div>
 

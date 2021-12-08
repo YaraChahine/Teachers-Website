@@ -3,8 +3,6 @@
 include("connection.php");
 session_start();
 
-if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
-{
 $firstname= $_POST["first"];
 $lastname= $_POST["last"];
 $email= $_POST["email"];
@@ -27,12 +25,7 @@ $query="DELETE FROM students where user_id=?;";
 $stmt = $connection->prepare($query);
 $stmt->bind_param("d", $id);
 
-if($stmt->execute()){
-    die("hi");
-}
-else{
-    die("hello");
-}
+$stmt->execute();
 }
 elseif (strcasecmp($type,"tutor")==0) {
     $query="DELETE FROM tutors where user_id=?;";
@@ -53,5 +46,4 @@ else
 {
     header('Location: admin_page_remove_error.php');
 }
-else {header("Location: index.php");}
 ?>
