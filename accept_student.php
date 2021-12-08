@@ -50,10 +50,16 @@ if (empty($student_row["email"])){
         
     $to_email = $row["email"];
     $subject = "Welcome to Teachers!";
-    $body = "Dear ".$row["first_name"]." ".$row["last_name"]. "Welcome to Teachers!\n\n We are happy to be a part of
-     your educational journey, and we hope that you find the perfect tutor for you here at Teachers. You can now access your account
-     by going to the 'Log in' page found on our website. \n\n Do not forget to use your studying tools to increase your productivity! \n
-     Happy Studying!\n Best,\n\nTeachers.";
+    $body = "
+Dear ".$row["first_name"]." ".$row["last_name"]. ",
+
+Welcome to Teachers! We are happy to be a part of your educational journey, and we hope that you find the perfect tutor for you here at Teachers. You can now access your account by going to the 'Log in' page found on our website.
+
+Do not forget to use your studying tools to increase your productivity!
+Happy Studying!
+
+Best,
+Teachers.";
     $headers = "From: yarachahine77@gmail.com";
     
     mail($to_email, $subject, $body, $headers);
