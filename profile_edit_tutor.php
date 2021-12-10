@@ -17,7 +17,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0)
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>FlexStart Bootstrap Template - Index</title>
+    <title>Edit your profile</title>
     <meta content="" name="description">
 
     <meta content="" name="keywords">
@@ -43,12 +43,6 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0)
     <link href="./css/style.css" rel="stylesheet">
     <link href="./css/style2.css" rel="stylesheet">
 
-    <!-- =======================================================
-  * Template Name: FlexStart - v1.7.0
-  * Template URL: https://bootstrapmade.com/flexstart-bootstrap-startup-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body>
@@ -57,7 +51,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0)
     <header id="header" class="header fixed-top header-form">
         <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
-            <a href="index.html" class="logo d-flex align-items-center">
+            <a href="index.php" class="logo d-flex align-items-center">
                 <img src="./img/logo.png" alt="">
                 <span>Teachers</span>
             </a>
@@ -203,7 +197,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0)
       <div class="container">
         <div class="row gy-4">
           <div class="col-lg-6 col-md-12 footer-info">
-            <a href="index.html" class="logo d-flex align-items-center">
+            <a href="index.php" class="logo d-flex align-items-center">
               <img src="./img/logo.png" alt="">
               <span>Teachers</span>
             </a>
@@ -254,4 +248,4 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0)
 </html>
 
 
-<?php } else {header("Location: index.html");} ?>
+<?php } else {header("Location: index.php");} ?>

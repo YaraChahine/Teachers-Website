@@ -152,7 +152,9 @@ else if (isset($_POST["forgot"])) {
 			<div class="row justify-content-md-center h-100">
 				<div class="card-wrapper">
 					<div class="brand">
+                        <a href="index.php">
 						<img src="img/logo.png" alt="logo">
+                        </a>
 					</div>
 					<div class="card fat">
 						<div class="card-body">

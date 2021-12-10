@@ -2,6 +2,16 @@
 
 include("connection.php");
 
+session_start();
+$loggedin = isset($_SESSION["user_id"]);
+if (isset($_SESSION["type"])) {
+$type = $_SESSION["type"];
+if ($type == 1) $target = "admin_page.php";
+elseif ($type == 2) $target = "profile_tutor.php";
+elseif ($type == 3) $target = "profile.php";
+else $target = "admin_page.php";
+}
+
 $currentYear = date("Y");
 $age = "";
 $ageQ = "";
@@ -122,7 +132,7 @@ $res = $stmt->get_result();
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>FlexStart Bootstrap Template - Index</title>
+  <title>Our Tutors</title>
   <meta content="" name="description">
 
   <meta content="" name="keywords">
@@ -148,12 +158,6 @@ $res = $stmt->get_result();
   <link href="./css/style.css" rel="stylesheet">
   <link href="./css/style2.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: FlexStart - v1.7.0
-  * Template URL: https://bootstrapmade.com/flexstart-bootstrap-startup-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body>
@@ -171,7 +175,12 @@ $res = $stmt->get_result();
         <ul>
           <li><a class="nav-link scrollto" href="index.php">Home</a></li>
           <li><a class="nav-link scrollto active" href="tutors_page.php">Our tutors</a></li>
-          <li><a class="getstarted scrollto" href="login.php">Log in</a></li>
+          <?php if (!$loggedin) { echo "<li><a class=\"getstarted scrollto\" href=\"login.php\">Log in</a></li>";}
+          else { echo "<li><a class=\"getstarted scrollto\" href=\"" . $target . "\">My page</a></li>"; 
+            echo "<li><a class=\"getstarted scrollto\" href=\"logout.php\">Log out</a></li>"; 
+          }
+          ?>
+          
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->

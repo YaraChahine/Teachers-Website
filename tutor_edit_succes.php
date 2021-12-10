@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>FlexStart Bootstrap Template - Index</title>
+  <title>Edit your profile: Success</title>
   <meta content="" name="description">
 
   <meta content="" name="keywords">
@@ -31,12 +31,6 @@
   <link href="./css/style.css" rel="stylesheet">
   <link href="./css/style2.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: FlexStart - v1.7.0
-  * Template URL: https://bootstrapmade.com/flexstart-bootstrap-startup-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 
@@ -44,14 +38,14 @@
  <header id="header" class="header fixed-top">
   <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
-    <a href="index.html" class="logo d-flex align-items-center">
+    <a href="index.php" class="logo d-flex align-items-center">
       <img src="./img/logo.png" alt="">
       <span>Teachers</span>
     </a>
 
     <nav id="navbar" class="navbar">
       <ul>
-        <li><a class="nav-link scrollto active" href="index.html">Home</a></li>
+        <li><a class="nav-link scrollto active" href="index.php">Home</a></li>
         <li><a class="nav-link scrollto" href="tutors_page.php">Our tutors</a></li>
         <li class="dropdown"><a href="#" style="display: none;"><span>Drop Down</span> <i
               class="bi bi-chevron-down"></i></a>
@@ -126,7 +120,7 @@ background-color: white;
     <div class="container">
       <div class="row gy-4">
         <div class="col-lg-6 col-md-12 footer-info">
-          <a href="index.html" class="logo d-flex align-items-center">
+          <a href="index.php" class="logo d-flex align-items-center">
             <img src="./img/logo.png" alt="">
             <span>Teachers</span>
           </a>

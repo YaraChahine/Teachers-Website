@@ -72,7 +72,7 @@ $results = htmlentities("{\"events\" : " . json_encode($json, JSON_NUMERIC_CHECK
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>FlexStart Bootstrap Template - Index</title>
+    <title>Calendar</title>
     <meta content="" name="description">
 
     <meta content="" name="keywords">
@@ -100,13 +100,6 @@ $results = htmlentities("{\"events\" : " . json_encode($json, JSON_NUMERIC_CHECK
     <link rel="stylesheet" href="./vendor/calendar/fonts.css">
     <link rel="stylesheet" href="./vendor/calendar/styles.css">
     
-
-    <!-- =======================================================
-  * Template Name: FlexStart - v1.7.0
-  * Template URL: https://bootstrapmade.com/flexstart-bootstrap-startup-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body>

@@ -15,7 +15,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>FlexStart Bootstrap Template - Index</title>
+  <title>Admin Updates</title>
   <meta content="" name="description">
 
   <meta content="" name="keywords">
@@ -41,12 +41,6 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
   <link href="./css/style.css" rel="stylesheet">
   <link href="./css/style2.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: FlexStart - v1.7.0
-  * Template URL: https://bootstrapmade.com/flexstart-bootstrap-startup-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body>
@@ -199,6 +193,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
                   <a href="admin_edit.php?id=<?php echo($row["user_id"]);?>" class="btn btn-primary">View update</a>
                 </div>
                 <?php } } ?>
+            </div>
             </div>
         </div>
         </div>
