@@ -117,5 +117,5 @@ if (empty($bookings_row)){
     else{
         die("student is already taking the course");
 }
-else {header("Location: index.php");}
+}else {header("Location: index.php");}
 ?>

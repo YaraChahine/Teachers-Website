@@ -237,7 +237,8 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0 || strcmp($_S
                 if(time>=0){
 
                 var hours = Math.floor(time / (60 * 60));
-                var minutes = Math.floor(time / 60);
+                var t=time-(hours*60*60);
+                var minutes = Math.floor(t / 60);
                 var seconds = time % 60;
 
                 document.getElementById("demo").innerHTML = hours + "h "

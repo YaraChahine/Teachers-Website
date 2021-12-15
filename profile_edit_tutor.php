@@ -130,6 +130,9 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"2")==0)
               <h2 class="text-center">Edit Profile Info</h1>
               <form action="tutor_edit_request.php" method="POST" enctype="multipart/form-data">
                   <div class="row">
+                    <div class="row text-muted m-3">
+                      Please fill in all the fields before you submit.
+                    </div>
                       <div class="col-4">
                           Email
                       </div>

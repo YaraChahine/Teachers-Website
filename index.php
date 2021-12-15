@@ -84,20 +84,25 @@ else $target = "admin_page.php";
           <h2 data-aos="fade-up" data-aos-delay="400">We offer top quality tutors, in every field, for every student, at
             the best prices.</h2>
           <div data-aos="fade-up" data-aos-delay="600">
-            <div class="text-center text-lg-start">
-              <a href="student_signup.php" style="width: 300px"
-                class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
-                <span>Become a student</span>
-                <i class="bi bi-arrow-right"></i>
-              </a>
-            </div>
-            <div class="text-center text-lg-start">
-              <a href="tutor_application.php" style="width: 300px"
-                class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
-                <span>Become a tutor</span>
-                <i class="bi bi-arrow-right"></i>
-              </a>
-            </div>
+            <?php if(!$loggedin) { ?>
+
+              <div class="text-center text-lg-start">
+                <a href="student_signup.php" style="width: 300px"
+                  class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+                  <span>Become a student</span>
+                  <i class="bi bi-arrow-right"></i>
+                </a>
+              </div>
+            
+              <div class="text-center text-lg-start">
+                <a href="tutor_application.php" style="width: 300px"
+                  class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+                  <span>Become a tutor</span>
+                  <i class="bi bi-arrow-right"></i>
+                </a>
+              </div>
+
+            <?php } ?>
           </div>
         </div>
         <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">

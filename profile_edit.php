@@ -113,12 +113,15 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"3")==0)
           <div class="modal-body p-5">
               <h2 class="text-center">Edit Profile Info</h1>
               <form action="student_edit.php" method="post">
-                  <div class="row">
+                <div class="row text-muted m-3">
+                    Please fill in all the fields before you submit.
+                </div>
+                <div class="row">
                       <div class="col-4">
                         Phone number
                       </div>
                       <div class="col-8">
-                          <input class="form-control" type="text" name="phone">
+                          <input class="form-control" type="text" name="phone" required>
                       </div>
                   </div>
                   <div class="row">
@@ -126,7 +129,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"3")==0)
                         Email address
                       </div>
                       <div class="col-8">
-                          <input class="form-control" type="email" name="email">
+                          <input class="form-control" type="email" name="email" required>
                       </div>
                   </div>
                   <div class="row">
@@ -134,7 +137,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"3")==0)
                           Preferred Price Range
                       </div>
                       <div class="col-8">
-                          <input class="form-control" type="text" name="price">
+                          <input class="form-control" type="text" name="price" required>
                       </div>
                   </div>
                 

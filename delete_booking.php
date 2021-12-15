@@ -24,5 +24,5 @@ if (!empty($bookings_row)){
 }
 else{
     die("Booking number not available");
-}else {header("Location: index.php");}
+}}else {header("Location: index.php");}
 ?>

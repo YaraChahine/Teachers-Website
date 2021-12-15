@@ -92,7 +92,7 @@ if (isset($_SESSION["user_id"])&& strcmp($_SESSION["type"],"1")==0)
                 ?>
                    
                 <img src="img/default-user-image.png" class="rounded-circle w-25 d-block my-5 mx-auto" alt="Image">
-                <h5 class="card-title"> <strong><?php echo($row["first_name"]); ?> </strong> is applying to become a tutor at <em>Teachers and is awaiting your response.</em></h5>
+                <h5 class="card-title"> <strong><?php echo($row["first_name"]); ?> </strong> is applying to become a student at <em>Teachers</em> and is awaiting your response.</em></h5>
                 <div class="w-75 my-5 mx-auto">
                     <div class="row">
                         <p class="col-4"><strong>Full name</strong></p>

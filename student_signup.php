@@ -162,9 +162,9 @@ else{
 }
 
 
-if (!isset($_POST["sunday"]) && !isset($_POST["saturday"]) && !isset($_POST["friday"]) && isset($_POST["thursday"]) && !($_POST["tuesday"]) && !($_POST["monday"]="")){
+if (!isset($_POST["sunday"]) && !isset($_POST["saturday"]) && !isset($_POST["friday"]) && !isset($_POST["thursday"]) && !isset($_POST["wednesday"]) && !isset($_POST["tuesday"]) && !isset($_POST["monday"])){
     $invalid=true;
-    $msg="Please enter the course name.";
+    $msg="Please select the days of your sessions.";
 }       
 
 if(isset($_POST["price"]) && $_POST["price"] !="" && preg_match("/^[0-9]*$/", $_POST["price"])){

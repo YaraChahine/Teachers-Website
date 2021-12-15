@@ -14,5 +14,5 @@ $stmt->execute();
 
 
 header("Location: admin_updates.php");
-else {header("Location: index.php");}
+}else {header("Location: index.php");}
 ?>

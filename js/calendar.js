@@ -177,7 +177,7 @@
 
         $.ajax({
         type: "POST",
-        url: "/calendar.php",
+        url: "./calendar.php",
         data: {
             "item_name_calendar" : name,
             "importance" : flag,
@@ -229,7 +229,7 @@
 
         $.ajax({
             type: "POST",
-            url: "/calendar.php",
+            url: "./calendar.php",
             data: {
                 "delete" : true,
                 "id" : id
